@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>软件安全与质量保证的模糊测试 |  Kery</title>
+      <title>CodeAlchemist |  Kery</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -58,7 +58,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-软件安全与质量保证的模糊测试"
+  id="post-CodeAlchemist"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -69,7 +69,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  软件安全与质量保证的模糊测试
+  CodeAlchemist
 </h1>
  
 
@@ -77,11 +77,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/12/29/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E4%B8%8E%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2021-12-28T17:23:32.000Z" itemprop="datePublished">2021-12-29</time>
+      <a href="/2022/04/22/CodeAlchemist/" class="article-date">
+  <time datetime="2022-04-21T16:00:00.000Z" itemprop="datePublished">2022-04-22</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%B9%A6%E7%B1%8D%E7%BF%BB%E8%AF%91/">书籍翻译</a>
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
   </div>
   
 <div class="word_count">
@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.5k</span>
+            <span class="post-count">952</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">8 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -113,28 +113,37 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="软件安全与质量保证的模糊测试（翻译）"><a href="#软件安全与质量保证的模糊测试（翻译）" class="headerlink" title="软件安全与质量保证的模糊测试（翻译）"></a>软件安全与质量保证的模糊测试（翻译）</h1><h2 id="第一章-介绍"><a href="#第一章-介绍" class="headerlink" title="第一章 介绍"></a>第一章 介绍</h2><p>欢迎来到模糊测试的世界！</p>
-<p>总的来说，模糊测试的目的是输入一个自动生成的数据到一个系统中，并尝试破坏掉这个系统，由此来揭露程序的可靠性问题。尽管有些人依然对于模糊测试的能力、有效性、实用性有所误解，模糊测试还是被广泛用于安全和质量保证的研究。模糊测试可以被理解为</p>
-<p>一种高度自动化的测试技术。它使用非法数据作为程序的输入覆盖了众多的边界情况，以此来更好地确认没有容易被进攻的危险点。fuzzing这个名字来自现代程序常常因为电话线上随机化的线路噪声而崩溃。</p>
-<p>在你探索模糊测试更远之前，我们希望你知道你为什么对模糊测试感兴趣。鉴于你正在读这本书，有一点是明确的：你喜欢寻找软件的错误，喜欢那些对软件安全造成影响的漏洞。为什么你想找到这些漏洞？总的来说，寻找这些漏洞是为了三个不同的目标：</p>
-<p>1.质量保证：测试和保卫你的内部开发的软件</p>
-<p>2.系统管理：测试和保卫软件依赖的使用环境</p>
-<p>3.脆弱性评估：测试并尝试侵入他人的软件或系统</p>
-<p>在这本书里，我们会从所有这些视角来考虑模糊测试。我们会从开发者的角度考虑模糊测试，也会从企业端用户的角度观察。我们也会考虑第三方评估团队的需求，无论他们是测试顾问还是黑客。本书的目的在于让软件公司（测试者）和漏洞分析家（黑客）有相同的起点。软件测试者可以向有天赋的黑客学习，反之亦然。</p>
-<p>模糊测试是最强大的用于发现软件安全问题的自动化测试工具。一个人可以认为代码审计工具能从代码中找到更多的漏洞，但在比较智能模糊测试和代码审计的成果之后，结果显然模糊测试更胜一筹。在代码审计工具中发现的很多漏洞都是假阳性的，对此进行警告并不会对安全有什么正面影响。模糊测试则没有这样的问题。模糊测试不会报告假阳性的漏洞。漏洞就是漏洞，错误就是错误。大多数模糊测试所发现的漏洞在一定程度上都是可以被利用的，至少会导致拒绝服务。鉴于模糊测试通常是黑盒测试，很明显，每个漏洞都是可以远程利用的、依赖于你测试的接口的，并且一定程度上在你对利用的定义中。模糊测试在测试闭源的、现成的程序和私有系统中是非常有用的，因为在大部分情况下模糊测试不需要接触任何源码。</p>
-<p>在本章中，我们会对模糊测试以及有关的技术进行综述。我们关注安全问题发生的原因以及为什么当前的安全方法面对这些安全问题时并不能保护我们。我们会通过介绍这种有前瞻性的、每个人都可以使用其发现与剔除安全漏洞的工具探索其如何对于安全问题有所帮助。接着，我们看哪里已经了使用模糊测试，并考虑原因。最后，我们会收获一些技术并回顾模糊测试的历史，在此过程中，我们专注于理解有多么多的模糊测试技术得以存在。不变的是，记住我们这一章的目的仅仅是提供一个概述，让你为这本书之后介绍的做好准备。随后的章节会为这些简述提供更多的细节。</p>
-<h3 id="1-1-软件安全"><a href="#1-1-软件安全" class="headerlink" title="1.1 软件安全"></a>1.1 软件安全</h3><p>对于在软件中发现安全漏洞，模糊测试是一种快速并低耗能的工具。不幸的是，模糊测试并不经常在需要它的地方被用到，因此，从安全的视角来看，很多我们依赖的系统都是不成熟的。安全领域有一件事是很清晰的：软件总是有安全问题的。几乎所有的软件都可以被很容易地入侵。但是有如果你对于软件安全问题以及相关技术很熟悉，你可能会能够知道实际上软件中到底寄生了多少安全问题。这就是软件安全研究的问题。</p>
-<p>今天，很少有人真的知道什么是软件安全，即使他们被称为安全专家。就像古时候地图用于警示，地图外的危险区域，有时候最好不要去干涉。没有被记载的领土被称为“此处有恶龙”，意思是你不应该到此处冒险。这太可怕了，或者说太具有挑战性了。幸运的是，在软件安全领域，黑暗的岁月结束了，因为最初的探索者为探索侵入的神秘领地奉献了毕生心血。他们尝试为普通的软件开发者解释软件安全。最开始， 因为他们的新技术，他们受到人们的敬畏；之后他们就被指责有了太多的危险发现。即使是今天，他们还在被认为拥有很多让他们变得特殊的艺术品。然而，毕竟他们发现的没有那么复杂。</p>
-<p>软件安全测试可以被使用在各种组织中，从研发到测试实验室环境，再到企业。<br>    <img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/1.png" alt="1"></p>
-<pre><code>&lt;center&gt;
-模糊测试的使用场景：开发，第三方测试实验室和企业运营
-&lt;/center&gt;
-</code></pre>
-<p>在研发过程中，模糊测试可以被用于多数编程过程的的早期的原型阶段和实施阶段。事实上，在最开始的原型做好之后，就可以立刻使用模糊测试。自动化测试经常集成到持续集成、自动化构建程序、回归测试的过程中。源代码审计工具经常在软件开发时被用于剔除编程错误导致的简单的漏洞。研发过程包括测试，特别是在系统集成之前进行的测试。</p>
-<p>在一个系统继承完毕后，通常测试实验室中的专门的测试团队会执行大部分剩余的测试工作。限于软件开发进程，一些测试会更加贴近于集成在开发之中。剩余的在测试实验室中完成的测试工作会与在研发环境中进行的测试工作有很大不同。在系统开发中，测试实验室非常常见，例如在电信、金融和工业网络中都会涉及，并且其规模十分庞大。在一个安全实验室中，一个系统可能被任何有效的工具测试，而测试结果会被使用所有可能的被选择的软件度量来分析。一个测试实验室可能控制着昂贵的、专门性的工具来进行装载和性能以及模糊测试。实际上，一些商业的模糊测试工具在传统的测试实验室环境中已经被作为一种固定测试设备来部署了。</p>
-<p>在企业中，使用很多后期部署的技术来提高软件安全性。像Nessus一样的漏洞扫描器和安全扫描器在实际环境中经常被用到。对于测试工具，一个很重要的准则就是测试正常运转的系统时，不能妨碍其正常服务。渗透测试服务仍然经常对抗在线系统，因为他们需要通过真实的入侵威胁来确认实际环境的安全有效性。这是因为不是所有的问题都能在实验室环境下被发现。相似的，模糊测试也应该谨慎地考虑企业环境。有可能在实际环境中会比实验室环境中发现更多的漏洞，但也有可能会妨碍当前的服务。</p>
-<p>永远不要忘记安全领域是没有必杀武器的：即使是模糊测试也不能保证软件中没有遗留任何漏洞。不管怎样，快节奏下的社会下，技术正在改变、发展，并不断地进化变得更好。这对于测试者来说是个好消息：人们在可预见的未来会写出新的软件。而新的软件不可避免地会带有一些漏洞。你未来的职业生涯获得了担保。软件不断地变复杂，软件中的漏洞数量也会和代码行数成正比地增加。而你所拥有的安全测试工具也在不断提升，就像你看到的，过去20年中模糊测试工具也一直在不断地进化。</p>
-<h4 id="1-1-1-安全事故"><a href="#1-1-1-安全事故" class="headerlink" title="1.1.1 安全事故"></a>1.1.1 安全事故</h4><p>对于软件安全最主要的目的是避免安全事故：比如有人可以通过主动攻击损害系统安全性，以及由于人们的错误或由于洪水或龙卷风等自然灾害而引起的泄露或破坏数据的事件。</p>
+  <h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol>
+<li><p>LangFuzz</p>
+<p>通过解析最初的作为种子的JS文件，将其中的语句拆分成代码段，任何重新组合片段生成测试用例。</p>
+<p>由于LangFuzz在关联代码的时候不考虑JS的语义，所以会很快发生运行时错误。</p>
+</li>
+<li><p>jsfunfuzz</p>
+<p>不需要初始的JS文件，而是通过引用手动编写的JS语料库随机产生语法正确的JS语句。</p>
+<p>超过99%的生成用例会在执行三条语句后就发生运行错误。</p>
+</li>
+<li><p>Skyfire/TreeFuzz</p>
+<p>通过从JS种子文件的语料库构建概率语言模型，来学习JS语义，再使用模型来生成用例。</p>
+<p>但这种方式依赖于语言模型的准确性。鉴于JS的复杂类型系统，这种方式也不能完全解决语义问题</p>
+</li>
+<li><p>CodeAlchemist</p>
+<p>将种子文件中的代码分解，并约束每个碎片，使之仅在特定的情况下可以被使用</p>
+<p>使用数据流分析，计算每个代码块中，使用和定义的变量，并动态获取他们的类型，只有当对应的类型可以匹配上的时候，才会进行拼接</p>
+<p>在一些情况下，也会引发语义错误，但已经大幅降低了</p>
+<p>CodeAlchemist会按照JavaScript 语句的粒度分解种子文件, 针对每个块语句生成多种变体提升代码块的丰富性, 通过对多个代码块组合产生嵌套循环等结构。</p>
+<p>CodeAlchemist提出使用数据流分析技术确定未定义变量和已定义变量, 并结合运行时插桩技术探测已执行变量的类型。 CodeAlchemist在JavaScript代码生成过程中, 不断向代码尾部扩展代码片段, 每次扩展代码片段都会确保其中的变量在之前已经被定义并且具备正确的 类 型</p>
+</li>
+</ol>
+<h2 id="2-JS语言问题"><a href="#2-JS语言问题" class="headerlink" title="2. JS语言问题"></a>2. JS语言问题</h2><h3 id="1-面向原型的语言"><a href="#1-面向原型的语言" class="headerlink" title="1. 面向原型的语言"></a>1. 面向原型的语言</h3><p>一个对象实例A只需要将另一个对象实例B设置为自己的原型，就可以在运行是继承B的属性。可以通过<code>_proto_</code>属性来确定对象实例在运行时使用哪个原型。而由于一个对象的类型可以动态更改，所以很有可能会发生语义错误</p>
+<h3 id="2-错误类型"><a href="#2-错误类型" class="headerlink" title="2. 错误类型"></a>2. 错误类型</h3><p>五种运行时错误类型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;break&#x27;</span>);      			<span class="comment">//语法错误</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> <span class="title class_">Array</span> (<span class="number">4294967296</span>); <span class="comment">//范围错误</span></span><br><span class="line">u;								<span class="comment">//引用错误</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="number">10</span>; <span class="title function_">t</span>();				<span class="comment">//类型错误</span></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%&#x27;</span>);		<span class="comment">//URI错误</span></span><br></pre></td></tr></table></figure>
+
+<p>对于第一行的eval函数，语句本身在语法上是正确的，但在实际运行时会引发语法错误</p>
+<h2 id="3-CodeAlchemist架构"><a href="#3-CodeAlchemist架构" class="headerlink" title="3. CodeAlchemist架构"></a>3. CodeAlchemist架构</h2><img src="https://img1.3s78.com/codercto/97d8a767902c2febf1786c0e63b5506a" alt="CodeAlchemist：用于在JavasScript引擎中查找漏洞的代码生成工具" style="zoom:150%;">
+
+<p>其主要包含三个部分：Seed Parser 模块将 JS seeds 分解为不同的代码块，Constraint analyzer 模块为每个代码块推断出其组合约束条件，Engine fuzzer 则根据组件约束条件池中的代码块，生成测试用例并针对目标 JS 引擎执行生成的测试用例。如果引擎崩溃，它会在文件系统上存储相应的测试用例。</p>
+<h2 id="4-语义感知组件"><a href="#4-语义感知组件" class="headerlink" title="4. 语义感知组件"></a>4. 语义感知组件</h2><p>是一种用于JS引擎的测试用例生成算法，将JS种子碎片化成若干可以组合的代码块，一个代码块就是一小段有效的JS抽象语法树.</p>
+<p>具体而言，组合约束条件包含两种：先决条件和后置条件。先决条件是一组变量及其类型，需要预先定义这些符号从而可以在没有运行时错误的情况下执行代码块。后置条件描述了在代码块的末尾定义了哪种变量，并在后面可被其他代码块使用。</p>
  
       <!-- reward -->
       
@@ -205,12 +214,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/12/29/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E4%B8%8E%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/22/CodeAlchemist/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fuzzing/" rel="tag">Fuzzing</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CodeAlchenmist/" rel="tag">CodeAlchenmist</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fuzzing/" rel="tag">Fuzzing</a></li></ul>
 
     </footer>
   </div>
@@ -218,19 +227,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/01/13/DOM%E5%90%AF%E8%92%99/" class="article-nav-link">
+      <a href="/2022/04/22/hello-world/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            DOM启蒙
+            Hello
           
         </div>
       </a>
     
     
-      <a href="/2021/12/14/Coverage-based-Greybox-Fuzzing-as-Markov-Chain/" class="article-nav-link">
+      <a href="/2022/04/22/FuzzIL/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Coverage-based Greybox Fuzzing as Markov Chain</div>
+        <div class="article-nav-title">FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</div>
       </a>
     
   </nav>
