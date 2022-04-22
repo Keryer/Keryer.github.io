@@ -128,7 +128,7 @@
 <p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
 <h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
 <p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
-<p><img src="/.com//1.png" alt="1"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
 <p>数字表示基本顺序，但也不是严格一致。</p>
 <p>具体的过程如下：</p>
 <ol>
@@ -142,7 +142,7 @@
 <li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
 </ol>
 <p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
-<p><img src="/.com//2.png" alt="2"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
 <p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
 <p>这一段的具体过程如下：</p>
 <ol>
@@ -152,7 +152,7 @@
 </ol>
 <p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
 <p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
-<p><img src="/.com//3.png" alt="3"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
 <p>这一阶段对应的具体过程如下：</p>
 <ol>
 <li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
@@ -161,7 +161,7 @@
 </ol>
 <p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
 <h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a target="_blank" rel="noopener" href="http://www.webkit.org/">www.webkit.org</a></p>
-<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="/.com//4.png" alt="4"></p>
+<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
 <p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
  
       <!-- reward -->
@@ -246,11 +246,11 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/04/22/hello-world/" class="article-nav-link">
+      <a href="/2022/04/22/%E4%BD%BF%E7%94%A8Fuzzilli%E6%B5%8B%E8%AF%95JavaScriptCore/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Hello
+            使用Fuzzilli测试JavaScriptCore
           
         </div>
       </a>

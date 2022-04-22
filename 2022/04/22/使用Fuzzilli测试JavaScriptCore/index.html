@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>使用Fuzzilli测试JavaScriptCore |  Kery</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Kery" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-使用Fuzzilli测试JavaScriptCore"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  使用Fuzzilli测试JavaScriptCore
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/22/%E4%BD%BF%E7%94%A8Fuzzilli%E6%B5%8B%E8%AF%95JavaScriptCore/" class="article-date">
+  <time datetime="2022-04-21T16:00:00.000Z" itemprop="datePublished">2022-04-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">漏洞挖掘</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">8 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="使用Fuzzilli测试JavaScriptCore"><a href="#使用Fuzzilli测试JavaScriptCore" class="headerlink" title="使用Fuzzilli测试JavaScriptCore"></a>使用Fuzzilli测试JavaScriptCore</h1><h2 id="准备Webkit"><a href="#准备Webkit" class="headerlink" title="准备Webkit"></a>准备Webkit</h2><p>首先通过命令</p>
+<p><code>git clone https://github.com/Webkit/Webkit.git Webkit</code></p>
+<p>下载源码</p>
+<p>一共大概需要下载13个G的文件，所以需要把httpBuffer改大一点，我这个直接改成了5242880000，命令就是</p>
+<p><code>git config --global http.postBuffer 524288000</code></p>
+<p>clone完成以后还需要经历一个漫长的updating 的过程，据说需要2-3天，但updating一次以后，再次clone的时候就不会经历这么长的时间了，我就直接找了组里下过的同学，帮忙下载了一份。</p>
+<p>然后是根据Fuzzilli的文件打patch，Fuzzilli官方已经发布了JSC的patch，但是只能对特定的版本使用，查看一下<code>fuzzilli/Targets/JavaScriptCore/REVISION</code>中的commit号（我的版本使用的是<code>4110e1b44a345737cdb807d36572c8714e90c5d0</code>）</p>
+<p>根据指导在Webkit根目录下使用命令</p>
+<p><code>git checkout 4110e1b44a345737cdb807d36572c8714e90c5d0 -b fuzz</code></p>
+<p>进行checkout，大概十几分钟后会显示已经创建了fuzz分支</p>
+<p>然后先在webkit根目录下将<code>fuzzilli/Targets/JavaScriptCore/Patches</code>路径下面的webkit.patch拷贝过来，注意cp命令最后有个点，最开始以为是屏幕脏了没注意（xs</p>
+<p>拷贝过来以后打上patch就可以了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cp</span>  path/to/fuzzilli/Targets/JavaScriptCore/Patches/webkit.patch .</span><br><span class="line">$ patch -p1 &lt; webkit.patch</span><br></pre></td></tr></table></figure>
+
+<p>成功后会显示</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/f1.png" alt="1"></p>
+<p>然后再将<code>path/to/fuzzilli/Targets/JavaScriptCore</code>目录底下的fuzzbuild.sh也拷贝过来，执行<code>./fuzzbuild</code>开始编译JSC</p>
+<p>编译过程中可能会报这样一个错，说是找不到编译器，是因为fuzzbuild.sh默认使用clang-12编译，但我的机器里只有clang-11，直接把fuzzbuild.sh里面的clang-12改成clang-11就可以了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/2.png" alt="2"></p>
+<p>改完之后继续执行<code>./fuzzbuild</code>编译，编译过程中会报几个warning，不用去管，编译一共大约需要十分钟的样子，编译完这一步就完成了。</p>
+<h2 id="准备Fuzzilli"><a href="#准备Fuzzilli" class="headerlink" title="准备Fuzzilli"></a>准备Fuzzilli</h2><p>接下来要准备Fuzzilli</p>
+<p>还是直接从github上面下载</p>
+<p><code>git clone https://github.com/googleprojectzero/fuzzilli.git</code></p>
+<p>由于fuzzilli需要使用swift进行编译，所以我们接下来下载swift依赖</p>
+<p>首先从swift官网下载对应Ubuntu版本的swift</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/3.png" alt="3"></p>
+<p>比如我使用的是Ubuntu20.04就使用</p>
+<p><code>wget https://download.swift.org/swift-5.6.1-release/ubuntu2004/swift-5.6.1-RELEASE/swift-5.6.1-RELEASE-ubuntu20.04.tar.gz</code></p>
+<p>下载了5.6.1版本的swift，具体可以去<a target="_blank" rel="noopener" href="https://www.swift.org/download/#releases">swift官网</a>查看自己适用的版本</p>
+<p>下载完成后使用<code>tar -zxvf 文件名</code>解压 </p>
+<p>如果在解压时遇到这个问题</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/4.png" alt="4"></p>
+<p>可能是因为下载了一个网页下来，可以cat一下这个压缩文件，如果显示了html代码，就需要重新下载一下</p>
+<p>正常解压大概需要几分钟</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/5.png" alt="5"></p>
+<p>解压完成后进入<code>swift-5.6.1-RELEASE-ubuntu20.04/usr/bin</code>目录下，有一个叫swift的可执行文件就是用来编译fuzzilli的</p>
+<p>然后我们记住swift所在的路径，进入fuzzilli的根目录</p>
+<p>使用<code>path/to/swift build</code>对fuzzilli进行编译，其中<code>path/to/swift</code>用自己的swift路径替换</p>
+<p>开始编译之后可能会有几个报错，说某个仓库是不安全的，这个他会告诉你运行什么命令来信任，复制执行就行了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/6.png" alt="6"></p>
+<p>执行后重新build，大概十几分钟的样子就能编译好了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/7.png" alt="7"></p>
+<p>在<code>fuzzilli/.build/debug</code>路径下有一个FuzzilliCli的文件就是我们要使用的fuzzilli的可执行文件了</p>
+<h2 id="开始fuzz"><a href="#开始fuzz" class="headerlink" title="开始fuzz"></a>开始fuzz</h2><p>首先我们先使用命令看一下fuzzilli的参数</p>
+<p><code>path/to/swift run FuzzilliCli --help</code></p>
+<p>参数还是很多的，挑几个了解一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">Options:</span><br><span class="line">	<span class="comment">#被测引擎的名字</span></span><br><span class="line">    --profile=name              : Select one of several preconfigured profiles.</span><br><span class="line">                                  Available profiles: [<span class="string">&quot;spidermonkey&quot;</span>, <span class="string">&quot;duktape&quot;</span>, <span class="string">&quot;jerryscript&quot;</span>, <span class="string">&quot;qjs&quot;</span>, <span class="string">&quot;v8&quot;</span>, <span class="string">&quot;xs&quot;</span>, <span class="string">&quot;jsc&quot;</span>].</span><br><span class="line">    <span class="comment">#创建用来fuzz的线程数                              </span></span><br><span class="line">    --<span class="built_in">jobs</span>=n                    : Total number of fuzzing <span class="built_in">jobs</span>. This will start one master thread and n-1 worker threads. Experimental!</span><br><span class="line">    --engine=name               : The fuzzing engine to use. Available engines: <span class="string">&quot;mutation&quot;</span> (default), <span class="string">&quot;hybrid&quot;</span>, <span class="string">&quot;multi&quot;</span>.</span><br><span class="line">                                  Only the mutation engine should be regarded stable at this point.</span><br><span class="line">    --corpus=name               : The corpus scheduler to use. Available schedulers: <span class="string">&quot;basic&quot;</span> (default), <span class="string">&quot;markov&quot;</span></span><br><span class="line">    --minDeterminismExecs=n     : The minimum number of <span class="built_in">times</span> a new sample will be executed when checking determinism (default: 3)</span><br><span class="line">    --maxDeterminismExecs=n     : The maximum number of <span class="built_in">times</span> a new sample will be executed when checking determinism (default: 50)</span><br><span class="line">    --noDeterministicCorpus     : Don<span class="string">&#x27;t ensure that samples added to the corpus behave deterministically.</span></span><br><span class="line"><span class="string">    --maxResetCount=n           : The number of times a non-deterministic edge is reset before it is ignored in subsequent executions.</span></span><br><span class="line"><span class="string">                                  Only used as part of --deterministicCorpus.</span></span><br><span class="line"><span class="string">    --logLevel=level            : The log level to use. Valid values: &quot;verbose&quot;, info&quot;, &quot;warning&quot;, &quot;error&quot;, &quot;fatal&quot;</span></span><br><span class="line"><span class="string">                                  (default: &quot;info&quot;).</span></span><br><span class="line"><span class="string">    --numIterations=n           : Run for the specified number of iterations (default: unlimited).</span></span><br><span class="line"><span class="string">    --timeout=n                 : Timeout in ms after which to interrupt execution of programs (default: 250).</span></span><br><span class="line"><span class="string">    --minMutationsPerSample=n   : Discard samples from the corpus after they have been mutated at least this</span></span><br><span class="line"><span class="string">                                  many times (default: 16).</span></span><br><span class="line"><span class="string">    #至少在样本变异多少次后才丢弃样本(default: 16)</span></span><br><span class="line"><span class="string">    --minCorpusSize=n           : Keep at least this many samples in the corpus regardless of the number of times</span></span><br><span class="line"><span class="string">                                  they have been mutated (default: 1024).</span></span><br><span class="line"><span class="string">    --maxCorpusSize=n           : Only allow the corpus to grow to this many samples. Otherwise the oldest samples</span></span><br><span class="line"><span class="string">                                  will be discarded (default: unlimited).</span></span><br><span class="line"><span class="string">    --markovDropoutRate=n       : Rate at which low edge samples are not selected, in the Markov Corpus Scheduler,</span></span><br><span class="line"><span class="string">                                  per round of sample selection. Used to ensure diversity between fuzzer instances</span></span><br><span class="line"><span class="string">                                  (default: 0.10)</span></span><br><span class="line"><span class="string">    --consecutiveMutations=n    : Perform this many consecutive mutations on each sample (default: 5).</span></span><br><span class="line"><span class="string">    --minimizationLimit=n       : When minimizing corpus samples, keep at least this many instructions in the</span></span><br><span class="line"><span class="string">                                  program. See Minimizer.swift for an overview of this feature (default: 0).</span></span><br><span class="line"><span class="string">    --storagePath=path          : Path at which to store output files (crashes, corpus, etc.) to.</span></span><br><span class="line"><span class="string">    #存储运行时产生的文件（crashes, corpus, etc）</span></span><br><span class="line"><span class="string">    --resume                    : If storage path exists, import the programs from the corpus/ subdirectory</span></span><br><span class="line"><span class="string">    --overwrite                 : If storage path exists, delete all data in it and start a fresh fuzzing session</span></span><br><span class="line"><span class="string">    --exportStatistics          : If enabled, fuzzing statistics will be collected and saved to disk every 10 minutes.</span></span><br><span class="line"><span class="string">                                  Requires --storagePath.</span></span><br><span class="line"><span class="string">    --importCorpusAll=path      : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  All provided programs are included, even if they do not increase coverage.</span></span><br><span class="line"><span class="string">                                  This is useful for searching for variants of existing bugs.</span></span><br><span class="line"><span class="string">                                  Can be used alongside wtih importCorpusNewCov, and will run first</span></span><br><span class="line"><span class="string">    #在启动fuzz之前导入现有语料库</span></span><br><span class="line"><span class="string">    --importCorpusNewCov=path   : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  This only includes programs that increase coverage.</span></span><br><span class="line"><span class="string">                                  This is useful for jump starting coverage for a wide range of JavaScript samples.</span></span><br><span class="line"><span class="string">                                  Can be used alongside importCorpusAll, and will run second.</span></span><br><span class="line"><span class="string">                                  Since all imported samples are asynchronously minimized, the corpus will show a smaller</span></span><br><span class="line"><span class="string">                                  than expected size until minimization completes.</span></span><br><span class="line"><span class="string">    --importCorpusMerge=path    : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  This only keeps programs that increase coverage but does not attempt to minimize</span></span><br><span class="line"><span class="string">                                  the samples. This is mostly useful to merge existing corpora from previous fuzzing</span></span><br><span class="line"><span class="string">                                  sessions that will have redundant samples but which will already be minimized.</span></span><br><span class="line"><span class="string">    --networkMaster=host:port   : Run as master and accept connections from workers over the network. Note: it is</span></span><br><span class="line"><span class="string">                                  *highly* recommended to run network fuzzers in an isolated network!</span></span><br><span class="line"><span class="string">    --networkWorker=host:port   : Run as worker and connect to the specified master instance.</span></span><br><span class="line"><span class="string">    --dontFuzz                  : If used, this instace will not perform fuzzing. Can be useful for master instances.</span></span><br><span class="line"><span class="string">    --noAbstractInterpretation  : Disable abstract interpretation of FuzzIL programs during fuzzing. See</span></span><br><span class="line"><span class="string">                                  Configuration.swift for more details.</span></span><br><span class="line"><span class="string">    --collectRuntimeTypes       : Collect runtime type information for programs that are added to the corpus.</span></span><br><span class="line"><span class="string">    --diagnostics               : Enable saving of programs that failed or timed-out during execution. Also tracks</span></span><br><span class="line"><span class="string">                                  executions on the current REPRL instance.</span></span><br><span class="line"><span class="string">    --inspect=opt1,opt2,...     : Enable inspection options. The following options are available:</span></span><br><span class="line"><span class="string">                                      history: Additional .fuzzil.history files are written to disk for every program.</span></span><br><span class="line"><span class="string">                                               These describe in detail how the program was generated through mutations,</span></span><br><span class="line"><span class="string">                                               code generation, and minimization</span></span><br><span class="line"><span class="string">                                        types: Programs written to disk also contain variable type information as</span></span><br><span class="line"><span class="string">                                               determined by Fuzzilli as comments</span></span><br><span class="line"><span class="string">                                          all: All of the above</span></span><br></pre></td></tr></table></figure>
+
+<p>然后直接按官方readme里面的命令跑就好</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/8.png" alt="8"></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/22/%E4%BD%BF%E7%94%A8Fuzzilli%E6%B5%8B%E8%AF%95JavaScriptCore/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fuzzing/" rel="tag">Fuzzing</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/04/22/hello-world/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Hello
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/01/16/WebKit/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">WebKit</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2021-2022
+        <i class="ri-heart-fill heart_icon"></i> Kery
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Kery"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":0,"vOffset":-30},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
