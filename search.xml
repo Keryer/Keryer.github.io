@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello</title>
+    <url>/2022/04/22/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Coverage-based Greybox Fuzzing as Markov Chain</title>
+    <url>/2021/12/14/Coverage-based-Greybox-Fuzzing-as-Markov-Chain/</url>
+    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们发现多数测试检测相同且小量的“高频”路径，发展很多策略，通过向低频路径倾斜，用相同数量的测试样例来探索更多“低频”路径</p>
+<p>马尔可夫链模型指出模糊测试一个执行路径i的种子生成执行路径j的输入的可能性。</p>
+<p>每个种子有“能量”用于指出这个种子生成的输入数</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>最主要的问题就是测试程序的不同路径</p>
+<p>如果发现了新路径，就在此基础上进行修改，否则丢弃</p>
+<p>我们让每一个seed都有一个energy，然后energy指定下一次生成的输入</p>
+<p>将低能量分配给执行高频路径的种子，而把高能量分配给执行低频路径的种子</p>
+<p><a href="https://blog.csdn.net/u014578266/article/details/89042473">https://blog.csdn.net/u014578266/article/details/89042473</a></p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>AFLFAST</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DOM启蒙</title>
+    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
+    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
+<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
+<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
+    <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
+    <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>方法：使用80台移动设备、包含56种强磁计进行试验，</p>
+<p>实验结果：在实验的设备上，90%的设备被正确检测出打开的应用和网站</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>智能手机上的CPU的峰值活动会对磁传感器造成干扰，由此通过对峰值状态下和空闲状态下的CPU对磁传感器造成的干扰进行分析，建立隐蔽通道。</p>
+<p>强磁计被扰动程度与CPU的工作量密切相关，因此这样可以对浏览器和应用程序进行唯一识别。而且该方法不需要任何额外的用户权限，可以通过任意应用程序实现，而通过通用传感器API在网页种访问强磁计，这样攻击者不需要使用恶意应用程序，而是通过网页直接获取其他应用的指纹</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Magnetometers"><a href="#Magnetometers" class="headerlink" title="Magnetometers"></a>Magnetometers</h3><p>强磁计即磁传感器，可以用于指向</p>
+<h3 id="Sensitivity-of-magnetometers-to-CPU-activity"><a href="#Sensitivity-of-magnetometers-to-CPU-activity" class="headerlink" title="Sensitivity of magnetometers to CPU activity"></a>Sensitivity of magnetometers to CPU activity</h3><p>高负载的CPU需要更大的功率，从而产生更高的电磁场</p>
+<p>高负载的CPU会导致强磁计测量值出现明显的峰值</p>
+<p>对于每个应用程序，CPU和传感器测量的数据所绘制的图像相互关联，并且对于CPU运行不同的应用程序图像有显著差异。</p>
+<p>同时，不同的应用程序或网站在运行时需要不同数量的CPU资源。因此，CPU利用率跟踪以及相应的传感器受干扰程度可以唯一标识正在运行的应用、网页。</p>
+<h2 id="Attack-Scenario"><a href="#Attack-Scenario" class="headerlink" title="Attack Scenario"></a>Attack Scenario</h2><p>在应用程序场景下，恶意程序可以通过沙盒处理，只能访问零权限传感器信息</p>
+<p>在浏览器场景下，网页要么完全属于攻击者，要么包含来自攻击者控制的服务器的组件。</p>
+<p>攻击者需要执行一个培训阶段，为每个网站和应用收集足够的标记，还可以发送受害者的设备型号，以提高成功率</p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>侧信道攻击</tag>
+        <tag>移动设备</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WebKit</title>
+    <url>/2022/01/16/WebKit/</url>
+    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
+<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
+<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
+<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
+<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
+<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
+<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
+<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
+<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
+<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
+<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
+<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
+<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
+<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
+<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
+<p><img src="/.com//1.png" alt="1"></p>
+<p>数字表示基本顺序，但也不是严格一致。</p>
+<p>具体的过程如下：</p>
+<ol>
+<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
+<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
+<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
+<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
+<li>解释器根据词语构建节点（Node），形成DOM树</li>
+<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
+<li>JavaScript代码可能会修改DOM树结构</li>
+<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
+</ol>
+<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
+<p><img src="/.com//2.png" alt="2"></p>
+<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
+<p>这一段的具体过程如下：</p>
+<ol>
+<li>CSS文件被CSS解释器解释成内部表示结构</li>
+<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
+<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
+</ol>
+<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
+<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
+<p><img src="/.com//3.png" alt="3"></p>
+<p>这一阶段对应的具体过程如下：</p>
+<ol>
+<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
+<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
+<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
+</ol>
+<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
+<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
+<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="/.com//4.png" alt="4"></p>
+<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Smart Greybox Fuzzing</title>
+    <url>/2021/12/13/Smart-Greybox-Fuzzing/</url>
+    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
+<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>SGF通过现实文件级别的变异操作来保证文件的有效性，这样产生的文件更加容易通过程序的解析阶段，可以暴露更深层的问题</p>
+<h3 id="P3"><a href="#P3" class="headerlink" title="P3"></a>P3</h3><p>探索了更多的路径，并暴露了更多的问题</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="P1-1"><a href="#P1-1" class="headerlink" title="P1"></a>P1</h3><p>灰盒测试只需使用轻量级的instrumentation</p>
+<h3 id="P2-1"><a href="#P2-1" class="headerlink" title="P2"></a>P2</h3><p>被变异的输入执行的控制流通过考察来确定他们是否是有趣的，而CGF帮助进行评价控制流的新颖性，随后，被认为值得继续探索的输入会产生更多的输入</p>
+<h3 id="P3-1"><a href="#P3-1" class="headerlink" title="P3"></a>P3</h3><p>而CGF的问题在于缺乏对于文件结构的认识，位级变异会在被处理之前就被程序拒绝</p>
+<h3 id="P4"><a href="#P4" class="headerlink" title="P4"></a>P4</h3><p>有两个方法可以解决这个问题，一个是基于字典，另一个是基于动态污点分析。</p>
+<p>对于字典，可能牺牲AFL的效率和可用性，当AFL要探索新路径时字典是很好的选择</p>
+<p>但两种方法都不能变异出高度结构化的文件</p>
+<h3 id="P5"><a href="#P5" class="headerlink" title="P5"></a>P5</h3><p>智能黑盒测试工具比如peach已经有了文件结构意识，而且能基于有效文件构建新的有效文件</p>
+<p>peach通过一个输入模型来反汇编有效文件，再重汇编成为新的文件</p>
+<h3 id="P6"><a href="#P6" class="headerlink" title="P6"></a>P6</h3><p>SGF可以基于高度结构化的种子文件产生新的文件，这使得其可以在保证文件有效的前提下探索全新的输入领域，可以花费更多时间在探索更深的漏洞</p>
+<h3 id="P7"><a href="#P7" class="headerlink" title="P7"></a>P7</h3><p>24小时内，AFLSMART发现的0day漏洞增加了一倍；还提高了20%的代码覆盖率；</p>
+<h3 id="P8"><a href="#P8" class="headerlink" title="P8"></a>P8</h3><p>文件格式规格可以被跨程序使用，也可以在不同版本的程序使用</p>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>之前用过一小段时间的peach，peach的测试方式是编写好一个pit文件，该文件中已经设计好需要的格式，只需要将需要测试的数据进行标记，变异时，peach会自动地随机填充数据，所以以前以为所有的seed都是这样的结构，但从这篇论文来看，AFL的seed结构本身并不具备文件的结构，对于这一点，可以尝试基于AFLSMART进一步提高变异出的文件的过解析率</p>
+<p>刚刚又看了<a href="https://www.sohu.com/a/305377300_354899%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%8F%90%E5%88%B0">https://www.sohu.com/a/305377300_354899这篇文章，其中提到</a></p>
+<p>在 AFL 的 bit 级别的变异的基础上，AFLSmart 增加了对 chunk 级别的变异操作，主要包括三种操作：</p>
+<p><strong>smart deletion：</strong></p>
+<p>在这种方法中，会对给定的种子文件，随机选取 chunk 进行删除。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/1fc4f80b9d3147d88ef4c4a0fc39d3ec.jpeg" alt="img"></p>
+<p><strong>smart addition：</strong></p>
+<p>在这种方法中，给定一个种子文件 S1，随机选取一个种子文件 S2，在 S2 中随机选取一个 chunk C2，将 C2 插入到 S1 中和 C2 具有相同父节点的 chunk C1 的后面（C1.parent.type ==C2.parent.type）</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/508bc05fbfca4395a860c49e42df6d74.jpeg" alt="img"></p>
+<p><strong>smart splicing：</strong></p>
+<p>这种方法中，对于给定的种子文件 S1，随机选取 chunk C1，随机选取种子文件 S2，找到 S2 中与 C1 类型相同的 chunk C2，将 C2 替换到 C1 的位置上。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/c45624de24b04d7289f775a978af9863.jpeg" alt="img"></p>
+<p>关于peach pit的博客<a href="http://blog.nsfocus.net/peach-fuzz/">http://blog.nsfocus.net/peach-fuzz/</a></p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>AFLSMART</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript学习记录</title>
+    <url>/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="交互式网络"><a href="#交互式网络" class="headerlink" title="交互式网络"></a>交互式网络</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>要通过事件来触发函数，要添加事件处理器，比如载入网页时触发，使用<code>onload</code>，然后通过<code>alert()</code>函数列出信息。</p>
+<p>事件由用户触发，但最终还是来源于浏览器，是一个被用户触发的事件，但浏览器必须包装关于事件的信息，再传递给负责相应这个事件的函数</p>
+<p>无论事件会不会被相应，都不会影响网页的载入</p>
+<p>Javascript的代码可以放在<code>&lt;script&gt;</code>标签里，也可以直接放在事件处理器中</p>
+<p>事件以JavaScript代码相应网页里发生的动静</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="prompt函数"><a href="#prompt函数" class="headerlink" title="prompt函数"></a>prompt函数</h3><p><code>prompt()</code>负责制作弹出窗口，用于显示可提示用户进行输入的对话框。函数返回值为字符串。当用户输入为数字或布尔类型时，一律返回string型，若想使类型不变，则需要进行类型转换。</p>
+<h3 id="document-getElementById函数"><a href="#document-getElementById函数" class="headerlink" title="document.getElementById函数"></a>document.getElementById函数</h3><p>顾明思义，get-Element-By-Id，就是通过ID来设置/返回HTML标签的属性及调用其事件与方法。用这个方法基本上可以控制页面所有标签，条件很简单就是给每个标签分配一个ID号</p>
+<h1 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h1><p>三种基本数据类型：text、number、boolean</p>
+<p>number用于存储数值数据、text用于存储字符串、boolean用于存储逻辑值</p>
+<p>alart框只能显示文本，不能显示数字，所以要进行类型转换</p>
+<p>在重新载入网页时，脚本的数据被重新设为初始值</p>
+<h2 id="函数-1"><a href="#函数-1" class="headerlink" title="函数"></a>函数</h2><h3 id="parseInt-函数"><a href="#parseInt-函数" class="headerlink" title="parseInt()函数"></a>parseInt()函数</h3><p>把字符串传给函数，函数把字符串转化为整数</p>
+<h3 id="parseFloat-函数"><a href="#parseFloat-函数" class="headerlink" title="parseFloat()函数"></a>parseFloat()函数</h3><p>把字符串传给函数，函数把字符串转化为浮点数</p>
+<p>使用这两个函数应该只包含数字的字符串</p>
+<p>NaN表示非数字，也用于某段数据不是数字，但被期待是数字的时候</p>
+<h3 id="indexOf-函数"><a href="#indexOf-函数" class="headerlink" title="indexOf()函数"></a>indexOf()函数</h3><p>indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。<br>indexOf() 方法对大小写敏感！</p>
+<p>string.indexOf(“xxx”)表示在string中搜索字符串xxx</p>
+<h1 id="探索客户端"><a href="#探索客户端" class="headerlink" title="探索客户端"></a>探索客户端</h1><h2 id="函数-2"><a href="#函数-2" class="headerlink" title="函数"></a>函数</h2><h3 id="refresh-函数"><a href="#refresh-函数" class="headerlink" title="refresh()函数"></a>refresh()函数</h3><p>重新整理网页</p>
+<h3 id="setTimeout-函数"><a href="#setTimeout-函数" class="headerlink" title="setTimeout()函数"></a>setTimeout()函数</h3><p>单次定时器函数</p>
+<p>函数有两段参数，分别是时间延迟和想要运行的程序代码，两个参数顺序无所谓</p>
+<p>时间单位为毫秒</p>
+<h3 id="setInterval-函数"><a href="#setInterval-函数" class="headerlink" title="setInterval()函数"></a>setInterval()函数</h3><p>间隔定时器函数，格式与setTimeout函数相同，以对应的时间间隔重复执行代码</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>污点分析技术（一）基本原理</title>
+    <url>/2021/12/13/%E6%B1%A1%E7%82%B9%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[<p>这两天在AFLSMART的论文时发现提到了动态污点分析这项技术，正好前两天在VUL337课题组里面也发现有大佬提到过这个，但是还是不太明白，趁着今天有时间给自己科普一下。</p>
+<p>参考博客：<a href="https://www.cnblogs.com/LittleHann/p/13034079.html">https://www.cnblogs.com/LittleHann/p/13034079.html</a></p>
+<h2 id="0x1-污点分析定义"><a href="#0x1-污点分析定义" class="headerlink" title="0x1  污点分析定义"></a>0x1  污点分析定义</h2><p>根据这篇博客，污点分析由三部分组成：污点源（source）、污点汇集点（sink）和数据流处理（processor）</p>
+<p>其中，source指的是最开始引入外部数据的操作；sink代表直接产生安全敏感操作（违反数据完整性）或者泄露隐私数据到外界（违反数据保密性）的操作。（我也理解为最后一次处理被污染的数据的操作）；processor代表数据加密或者转义的过程，是一个把数据无害化的过程</p>
+<p>在我看来，污点分析有点像是高中生物学的同位素示踪法，通过引入同位素，然后检测受污染的区域，以达到显示整个处理流程的目的，然后来分析可能出现的问题。</p>
+<h2 id="0x2-识别污点源和污点汇聚点"><a href="#0x2-识别污点源和污点汇聚点" class="headerlink" title="0x2  识别污点源和污点汇聚点"></a>0x2  识别污点源和污点汇聚点</h2><blockquote>
+<p>识别污点源和污点汇聚点是污点分析的前提。目前，在不同的应用程序中识别污点源和汇聚点的方法各不相同，这其实是一个泛概念，在不同的场景下，污点源和汇聚点污点分析会表现出不同的形式，这里的场景例如：</p>
+<ul>
+<li>不同的系统模型</li>
+<li>编程语言之间的差异</li>
+<li>待跟踪分析的对象的差异</li>
+</ul>
+<p>对于污点汇聚点来说，可以从概念上大致分为3类：</p>
+<ul>
+<li><strong>使用启发式的策略进行标记</strong>。例如在webshell检测中，将来自程序外部输入的数据统称为“污点”数据，保守地认为这些数据有可能包含恶意的攻击数据 </li>
+<li><strong>根据具体应用程序调用的 API 或者重要的数据类型，手工标记源和汇聚点</strong>。例如在webshell检测中，将file_get_contents这一类危险函数的执行结果标记为污点，继续后续的跟踪</li>
+<li>使用统计或机器学习技术自动地识别和标记污点源及汇聚点.</li>
+</ul>
+</blockquote>
+<h2 id="0x3-污点传播分析"><a href="#0x3-污点传播分析" class="headerlink" title="0x3  污点传播分析"></a>0x3  污点传播分析</h2><p>污点传播分析就是分析污点标记数据在程序中的传播途径。按照分析过程中关注的程序依赖关系的不同, 可以将污点传播分析分为以下两种：</p>
+<ul>
+<li>显式流分析</li>
+<li>隐式流分析</li>
+</ul>
+<h3 id="1-显式流分析"><a href="#1-显式流分析" class="headerlink" title="1.显式流分析"></a>1.显式流分析</h3><p><strong>污点传播分析中的显式流分析就是分析污点标记如何随程序中变量之间的【数据依赖关系】传播</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="built_in">source</span>(),           <span class="comment">//污点源</span></span><br><span class="line">	<span class="type">int</span> b = <span class="built_in">source</span>(); 			<span class="comment">//污点源</span></span><br><span class="line">	<span class="type">int</span> x,y;</span><br><span class="line">	x = a * <span class="number">2</span>;</span><br><span class="line">	y = b + <span class="number">4</span>;</span><br><span class="line">	<span class="built_in">sink</span>(x);					<span class="comment">//污点汇聚点</span></span><br><span class="line">	<span class="built_in">sink</span>(y);					<span class="comment">//污点汇聚点</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//代码逻辑输入的值会乘2或者加4被泄露</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面这段代码中，a和b被污点源函数source标记为污点源，设标记为taint_a和taint_b，在第5、6行的对x、y赋值的过程中，其数据内容直接依赖于变量a、b，显式流分析会分别将taint_a和taint_b传播给x、y，由于x，y在第7、8行到达污染汇聚点，我们就可以按照预设的策略得出结论，例如上面代码存在的信息泄露问题。</p>
+<h3 id="2-隐式流分析"><a href="#2-隐式流分析" class="headerlink" title="2.隐式流分析"></a>2.隐式流分析</h3><p><strong>污点传播分析中的隐式流分析是分析污点标记如何随程序中变量之间的【控制依赖关系】传播，也就是分析污点标记如何从条件指令传播到其所控制的语句</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">	string X = <span class="built_in">source</span>();					<span class="comment">//污点源</span></span><br><span class="line">	string Y = <span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; X.<span class="built_in">length</span>();i++)&#123;</span><br><span class="line">		<span class="type">int</span> x = (<span class="type">int</span>) X.<span class="built_in">charAt</span>(i);</span><br><span class="line">		<span class="type">int</span> y = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; x;j++)&#123;</span><br><span class="line">			y = y + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Y = Y + (<span class="type">char</span>) y;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sink</span>(Y);								<span class="comment">//污点汇聚点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上图所示的代码中，变量 X 是被污点标记的字符串类型变量，变量 Y 和变量 X 之间并没有直接或间接的数据依赖关系（显式流关系），但 X 上的污点标记可以经过控制依赖隐式地传播到 Y。</p>
+<p>具体来说，由第 4 行的循环条件控制的外层循环顺序地取出 X 中的每一个字符，转化成整型后赋给变量 x，再由第 7 行的循环条件控制的内层循环以累加的方式将 x 的值赋给 y，内层循环执行完毕后，x == y。最后由外层循环将 y 逐一传给 Y。</p>
+<p>最终，第 12 行的 Y 值和 X 值相同，程序存在信息泄漏问题。</p>
+<p>但是，如果不进行隐式流污点传播分析，第 12 行 的变量 Y 将不会被赋予污点标记，程序的信息泄漏问题被掩盖。</p>
+<h3 id="3-欠污染和过污染问题"><a href="#3-欠污染和过污染问题" class="headerlink" title="3.欠污染和过污染问题"></a>3.欠污染和过污染问题</h3><blockquote>
+<p>隐式流污点传播一直以来都是一个重要的问题，和显式流一样，如果不被正确处理，会使污点分析的结果不精确。</p>
+<ul>
+<li>由于对隐式流污点传播处理不当导致本应被标记的变量没有被标记的问题称为<strong>欠污染（under-taint）问题</strong></li>
+<li>由于污点标记的数量过多而导致污点变量大量扩散的问题称为<strong>过污染（over-taint）问题</strong></li>
+</ul>
+<p>欠污染和过污染问题，都会导致在汇聚点污点检测的时候产生误报或者漏报，这也是目前隐式流问题研究的重点。</p>
+</blockquote>
+<h2 id="0x4-无害处理"><a href="#0x4-无害处理" class="headerlink" title="0x4  无害处理"></a>0x4  无害处理</h2><p>污点数据在传播的过程中可能会经过无害处理模块，无害处理模块是指污点数据经过该模块的处理后，数据本身不再携带敏感信息或者针对该数据的操作不会再对系统产生危害。换言之，带污点标记的数据在经过无害处理模块后，污点标记可以被移除。</p>
+<p>正确地使用无害处理可以降低系统中污点标记的数量，提高污点分析的效率，并且避免由于污点扩散导致的分析结果不精确的问题。</p>
+<h3 id="1-加密处理"><a href="#1-加密处理" class="headerlink" title="1.加密处理"></a>1.加密处理</h3><p>开发者将敏感数据进行加密处理，加密库函数就是processor模块，加密后，攻击者就无法计算出密码的可能范围</p>
+<h3 id="2-输入验证"><a href="#2-输入验证" class="headerlink" title="2.输入验证"></a>2.输入验证</h3><p>为了防止外界输入带有危险操作或者对系统关键区域产生危害，通常会对输入数据进行验证，输入验证是一个无害处理模块</p>
+<h3 id="3-输入转义"><a href="#3-输入转义" class="headerlink" title="3.输入转义"></a>3.输入转义</h3><p>比如防注入的转义，字符串经过转义后就不会携带可能产生威胁的代码</p>
+]]></content>
+      <categories>
+        <category>Fuzzing技术学习</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>taint</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>软件安全与质量保证的模糊测试</title>
+    <url>/2021/12/29/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E4%B8%8E%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="软件安全与质量保证的模糊测试（翻译）"><a href="#软件安全与质量保证的模糊测试（翻译）" class="headerlink" title="软件安全与质量保证的模糊测试（翻译）"></a>软件安全与质量保证的模糊测试（翻译）</h1><h2 id="第一章-介绍"><a href="#第一章-介绍" class="headerlink" title="第一章 介绍"></a>第一章 介绍</h2><p>欢迎来到模糊测试的世界！</p>
+<p>总的来说，模糊测试的目的是输入一个自动生成的数据到一个系统中，并尝试破坏掉这个系统，由此来揭露程序的可靠性问题。尽管有些人依然对于模糊测试的能力、有效性、实用性有所误解，模糊测试还是被广泛用于安全和质量保证的研究。模糊测试可以被理解为</p>
+<p>一种高度自动化的测试技术。它使用非法数据作为程序的输入覆盖了众多的边界情况，以此来更好地确认没有容易被进攻的危险点。fuzzing这个名字来自现代程序常常因为电话线上随机化的线路噪声而崩溃。</p>
+<p>在你探索模糊测试更远之前，我们希望你知道你为什么对模糊测试感兴趣。鉴于你正在读这本书，有一点是明确的：你喜欢寻找软件的错误，喜欢那些对软件安全造成影响的漏洞。为什么你想找到这些漏洞？总的来说，寻找这些漏洞是为了三个不同的目标：</p>
+<p>1.质量保证：测试和保卫你的内部开发的软件</p>
+<p>2.系统管理：测试和保卫软件依赖的使用环境</p>
+<p>3.脆弱性评估：测试并尝试侵入他人的软件或系统</p>
+<p>在这本书里，我们会从所有这些视角来考虑模糊测试。我们会从开发者的角度考虑模糊测试，也会从企业端用户的角度观察。我们也会考虑第三方评估团队的需求，无论他们是测试顾问还是黑客。本书的目的在于让软件公司（测试者）和漏洞分析家（黑客）有相同的起点。软件测试者可以向有天赋的黑客学习，反之亦然。</p>
+<p>模糊测试是最强大的用于发现软件安全问题的自动化测试工具。一个人可以认为代码审计工具能从代码中找到更多的漏洞，但在比较智能模糊测试和代码审计的成果之后，结果显然模糊测试更胜一筹。在代码审计工具中发现的很多漏洞都是假阳性的，对此进行警告并不会对安全有什么正面影响。模糊测试则没有这样的问题。模糊测试不会报告假阳性的漏洞。漏洞就是漏洞，错误就是错误。大多数模糊测试所发现的漏洞在一定程度上都是可以被利用的，至少会导致拒绝服务。鉴于模糊测试通常是黑盒测试，很明显，每个漏洞都是可以远程利用的、依赖于你测试的接口的，并且一定程度上在你对利用的定义中。模糊测试在测试闭源的、现成的程序和私有系统中是非常有用的，因为在大部分情况下模糊测试不需要接触任何源码。</p>
+<p>在本章中，我们会对模糊测试以及有关的技术进行综述。我们关注安全问题发生的原因以及为什么当前的安全方法面对这些安全问题时并不能保护我们。我们会通过介绍这种有前瞻性的、每个人都可以使用其发现与剔除安全漏洞的工具探索其如何对于安全问题有所帮助。接着，我们看哪里已经了使用模糊测试，并考虑原因。最后，我们会收获一些技术并回顾模糊测试的历史，在此过程中，我们专注于理解有多么多的模糊测试技术得以存在。不变的是，记住我们这一章的目的仅仅是提供一个概述，让你为这本书之后介绍的做好准备。随后的章节会为这些简述提供更多的细节。</p>
+<h3 id="1-1-软件安全"><a href="#1-1-软件安全" class="headerlink" title="1.1 软件安全"></a>1.1 软件安全</h3><p>对于在软件中发现安全漏洞，模糊测试是一种快速并低耗能的工具。不幸的是，模糊测试并不经常在需要它的地方被用到，因此，从安全的视角来看，很多我们依赖的系统都是不成熟的。安全领域有一件事是很清晰的：软件总是有安全问题的。几乎所有的软件都可以被很容易地入侵。但是有如果你对于软件安全问题以及相关技术很熟悉，你可能会能够知道实际上软件中到底寄生了多少安全问题。这就是软件安全研究的问题。</p>
+<p>今天，很少有人真的知道什么是软件安全，即使他们被称为安全专家。就像古时候地图用于警示，地图外的危险区域，有时候最好不要去干涉。没有被记载的领土被称为“此处有恶龙”，意思是你不应该到此处冒险。这太可怕了，或者说太具有挑战性了。幸运的是，在软件安全领域，黑暗的岁月结束了，因为最初的探索者为探索侵入的神秘领地奉献了毕生心血。他们尝试为普通的软件开发者解释软件安全。最开始， 因为他们的新技术，他们受到人们的敬畏；之后他们就被指责有了太多的危险发现。即使是今天，他们还在被认为拥有很多让他们变得特殊的艺术品。然而，毕竟他们发现的没有那么复杂。</p>
+<p>软件安全测试可以被使用在各种组织中，从研发到测试实验室环境，再到企业。<br>​    <img src="/.com//1.png"><br>    <center><br>    模糊测试的使用场景：开发，第三方测试实验室和企业运营<br>    </center></p>
+<p>在研发过程中，模糊测试可以被用于多数编程过程的的早期的原型阶段和实施阶段。事实上，在最开始的原型做好之后，就可以立刻使用模糊测试。自动化测试经常集成到持续集成、自动化构建程序、回归测试的过程中。源代码审计工具经常在软件开发时被用于剔除编程错误导致的简单的漏洞。研发过程包括测试，特别是在系统集成之前进行的测试。</p>
+<p>在一个系统继承完毕后，通常测试实验室中的专门的测试团队会执行大部分剩余的测试工作。限于软件开发进程，一些测试会更加贴近于集成在开发之中。剩余的在测试实验室中完成的测试工作会与在研发环境中进行的测试工作有很大不同。在系统开发中，测试实验室非常常见，例如在电信、金融和工业网络中都会涉及，并且其规模十分庞大。在一个安全实验室中，一个系统可能被任何有效的工具测试，而测试结果会被使用所有可能的被选择的软件度量来分析。一个测试实验室可能控制着昂贵的、专门性的工具来进行装载和性能以及模糊测试。实际上，一些商业的模糊测试工具在传统的测试实验室环境中已经被作为一种固定测试设备来部署了。</p>
+<p>在企业中，使用很多后期部署的技术来提高软件安全性。像Nessus一样的漏洞扫描器和安全扫描器在实际环境中经常被用到。对于测试工具，一个很重要的准则就是测试正常运转的系统时，不能妨碍其正常服务。渗透测试服务仍然经常对抗在线系统，因为他们需要通过真实的入侵威胁来确认实际环境的安全有效性。这是因为不是所有的问题都能在实验室环境下被发现。相似的，模糊测试也应该谨慎地考虑企业环境。有可能在实际环境中会比实验室环境中发现更多的漏洞，但也有可能会妨碍当前的服务。</p>
+<p>永远不要忘记安全领域是没有必杀武器的：即使是模糊测试也不能保证软件中没有遗留任何漏洞。不管怎样，快节奏下的社会下，技术正在改变、发展，并不断地进化变得更好。这对于测试者来说是个好消息：人们在可预见的未来会写出新的软件。而新的软件不可避免地会带有一些漏洞。你未来的职业生涯获得了担保。软件不断地变复杂，软件中的漏洞数量也会和代码行数成正比地增加。而你所拥有的安全测试工具也在不断提升，就像你看到的，过去20年中模糊测试工具也一直在不断地进化。</p>
+<h4 id="1-1-1-安全事故"><a href="#1-1-1-安全事故" class="headerlink" title="1.1.1 安全事故"></a>1.1.1 安全事故</h4><p>对于软件安全最主要的目的是避免安全事故：比如有人可以通过主动攻击损害系统安全性，以及由于人们的错误或由于洪水或龙卷风等自然灾害而引起的泄露或破坏数据的事件。</p>
+]]></content>
+      <categories>
+        <category>书籍翻译</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+      </tags>
+  </entry>
+</search>
