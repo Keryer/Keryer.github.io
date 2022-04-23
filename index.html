@@ -159,6 +159,59 @@
     
     
     <article
+  id="post-周报"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+     
+    <div class="article-meta">
+      <a href="/2022/04/22/%E5%91%A8%E6%8A%A5/" class="article-date">
+  <time datetime="2022-04-22T13:24:24.533Z" itemprop="datePublished">2022-04-22</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
+<p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
+<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
+<p>开了改进AFL的组会</p>
+<p>开始阅读《<a target="_blank" rel="noopener" href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p>
+<h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p>
+<p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a target="_blank" rel="noopener" href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p>
+<p>进而查到了这样一种方式<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p>
+<p>晚上出去喝酒</p>
+<h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p>
+<p>晚上做网络实验，继续看论文</p>
+<h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p>
+<h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p>
+<p>晚上上安全系统实验，正常背单词</p>
+<h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
+<p>晚上挺凉快的</p>
+<h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-hello-world"
   class="article article-type-post"
   itemscope
@@ -421,7 +474,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2022/04/22/%E4%BD%BF%E7%94%A8Fuzzilli%E6%B5%8B%E8%AF%95JavaScriptCore/"
-    >使用Fuzzilli测试JavaScriptCore</a> 
+    >使用Fuzzilli测试JS引擎</a> 
 </h2>
  
 
@@ -440,7 +493,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="使用Fuzzilli测试JavaScriptCore"><a href="#使用Fuzzilli测试JavaScriptCore" class="headerlink" title="使用Fuzzilli测试JavaScriptCore"></a>使用Fuzzilli测试JavaScriptCore</h1><h2 id="准备Webkit"><a href="#准备Webkit" class="headerlink" title="准备Webkit"></a>准备Webkit</h2><p>首先通过命令</p>
+  <h1 id="使用Fuzzilli测试JS引擎"><a href="#使用Fuzzilli测试JS引擎" class="headerlink" title="使用Fuzzilli测试JS引擎"></a>使用Fuzzilli测试JS引擎</h1><h2 id="Webkit（JSC）篇"><a href="#Webkit（JSC）篇" class="headerlink" title="Webkit（JSC）篇"></a>Webkit（JSC）篇</h2><h3 id="准备Webkit"><a href="#准备Webkit" class="headerlink" title="准备Webkit"></a>准备Webkit</h3><p>首先通过命令</p>
 <p><code>git clone https://github.com/Webkit/Webkit.git Webkit</code></p>
 <p>下载源码</p>
 <p>一共大概需要下载13个G的文件，所以需要把httpBuffer改大一点，我这个直接改成了5242880000，命令就是</p>
@@ -460,7 +513,7 @@
 <p>编译过程中可能会报这样一个错，说是找不到编译器，是因为fuzzbuild.sh默认使用clang-12编译，但我的机器里只有clang-11，直接把fuzzbuild.sh里面的clang-12改成clang-11就可以了</p>
 <p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/2.png" alt="2"></p>
 <p>改完之后继续执行<code>./fuzzbuild</code>编译，编译过程中会报几个warning，不用去管，编译一共大约需要十分钟的样子，编译完这一步就完成了。</p>
-<h2 id="准备Fuzzilli"><a href="#准备Fuzzilli" class="headerlink" title="准备Fuzzilli"></a>准备Fuzzilli</h2><p>接下来要准备Fuzzilli</p>
+<h3 id="准备Fuzzilli"><a href="#准备Fuzzilli" class="headerlink" title="准备Fuzzilli"></a>准备Fuzzilli</h3><p>接下来要准备Fuzzilli</p>
 <p>还是直接从github上面下载</p>
 <p><code>git clone https://github.com/googleprojectzero/fuzzilli.git</code></p>
 <p>由于fuzzilli需要使用swift进行编译，所以我们接下来下载swift依赖</p>
@@ -483,13 +536,22 @@
 <p>执行后重新build，大概十几分钟的样子就能编译好了</p>
 <p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/7.png" alt="7"></p>
 <p>在<code>fuzzilli/.build/debug</code>路径下有一个FuzzilliCli的文件就是我们要使用的fuzzilli的可执行文件了</p>
-<h2 id="开始fuzz"><a href="#开始fuzz" class="headerlink" title="开始fuzz"></a>开始fuzz</h2><p>首先我们先使用命令看一下fuzzilli的参数</p>
+<h3 id="开始fuzz"><a href="#开始fuzz" class="headerlink" title="开始fuzz"></a>开始fuzz</h3><p>首先我们先使用命令看一下fuzzilli的参数</p>
 <p><code>path/to/swift run FuzzilliCli --help</code></p>
 <p>参数还是很多的，挑几个了解一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">Options:</span><br><span class="line">	<span class="comment">#被测引擎的名字</span></span><br><span class="line">    --profile=name              : Select one of several preconfigured profiles.</span><br><span class="line">                                  Available profiles: [<span class="string">&quot;spidermonkey&quot;</span>, <span class="string">&quot;duktape&quot;</span>, <span class="string">&quot;jerryscript&quot;</span>, <span class="string">&quot;qjs&quot;</span>, <span class="string">&quot;v8&quot;</span>, <span class="string">&quot;xs&quot;</span>, <span class="string">&quot;jsc&quot;</span>].</span><br><span class="line">    <span class="comment">#创建用来fuzz的线程数                              </span></span><br><span class="line">    --<span class="built_in">jobs</span>=n                    : Total number of fuzzing <span class="built_in">jobs</span>. This will start one master thread and n-1 worker threads. Experimental!</span><br><span class="line">    --engine=name               : The fuzzing engine to use. Available engines: <span class="string">&quot;mutation&quot;</span> (default), <span class="string">&quot;hybrid&quot;</span>, <span class="string">&quot;multi&quot;</span>.</span><br><span class="line">                                  Only the mutation engine should be regarded stable at this point.</span><br><span class="line">    --corpus=name               : The corpus scheduler to use. Available schedulers: <span class="string">&quot;basic&quot;</span> (default), <span class="string">&quot;markov&quot;</span></span><br><span class="line">    --minDeterminismExecs=n     : The minimum number of <span class="built_in">times</span> a new sample will be executed when checking determinism (default: 3)</span><br><span class="line">    --maxDeterminismExecs=n     : The maximum number of <span class="built_in">times</span> a new sample will be executed when checking determinism (default: 50)</span><br><span class="line">    --noDeterministicCorpus     : Don<span class="string">&#x27;t ensure that samples added to the corpus behave deterministically.</span></span><br><span class="line"><span class="string">    --maxResetCount=n           : The number of times a non-deterministic edge is reset before it is ignored in subsequent executions.</span></span><br><span class="line"><span class="string">                                  Only used as part of --deterministicCorpus.</span></span><br><span class="line"><span class="string">    --logLevel=level            : The log level to use. Valid values: &quot;verbose&quot;, info&quot;, &quot;warning&quot;, &quot;error&quot;, &quot;fatal&quot;</span></span><br><span class="line"><span class="string">                                  (default: &quot;info&quot;).</span></span><br><span class="line"><span class="string">    --numIterations=n           : Run for the specified number of iterations (default: unlimited).</span></span><br><span class="line"><span class="string">    --timeout=n                 : Timeout in ms after which to interrupt execution of programs (default: 250).</span></span><br><span class="line"><span class="string">    --minMutationsPerSample=n   : Discard samples from the corpus after they have been mutated at least this</span></span><br><span class="line"><span class="string">                                  many times (default: 16).</span></span><br><span class="line"><span class="string">    #至少在样本变异多少次后才丢弃样本(default: 16)</span></span><br><span class="line"><span class="string">    --minCorpusSize=n           : Keep at least this many samples in the corpus regardless of the number of times</span></span><br><span class="line"><span class="string">                                  they have been mutated (default: 1024).</span></span><br><span class="line"><span class="string">    --maxCorpusSize=n           : Only allow the corpus to grow to this many samples. Otherwise the oldest samples</span></span><br><span class="line"><span class="string">                                  will be discarded (default: unlimited).</span></span><br><span class="line"><span class="string">    --markovDropoutRate=n       : Rate at which low edge samples are not selected, in the Markov Corpus Scheduler,</span></span><br><span class="line"><span class="string">                                  per round of sample selection. Used to ensure diversity between fuzzer instances</span></span><br><span class="line"><span class="string">                                  (default: 0.10)</span></span><br><span class="line"><span class="string">    --consecutiveMutations=n    : Perform this many consecutive mutations on each sample (default: 5).</span></span><br><span class="line"><span class="string">    --minimizationLimit=n       : When minimizing corpus samples, keep at least this many instructions in the</span></span><br><span class="line"><span class="string">                                  program. See Minimizer.swift for an overview of this feature (default: 0).</span></span><br><span class="line"><span class="string">    --storagePath=path          : Path at which to store output files (crashes, corpus, etc.) to.</span></span><br><span class="line"><span class="string">    #存储运行时产生的文件（crashes, corpus, etc）</span></span><br><span class="line"><span class="string">    --resume                    : If storage path exists, import the programs from the corpus/ subdirectory</span></span><br><span class="line"><span class="string">    --overwrite                 : If storage path exists, delete all data in it and start a fresh fuzzing session</span></span><br><span class="line"><span class="string">    --exportStatistics          : If enabled, fuzzing statistics will be collected and saved to disk every 10 minutes.</span></span><br><span class="line"><span class="string">                                  Requires --storagePath.</span></span><br><span class="line"><span class="string">    --importCorpusAll=path      : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  All provided programs are included, even if they do not increase coverage.</span></span><br><span class="line"><span class="string">                                  This is useful for searching for variants of existing bugs.</span></span><br><span class="line"><span class="string">                                  Can be used alongside wtih importCorpusNewCov, and will run first</span></span><br><span class="line"><span class="string">    #在启动fuzz之前导入现有语料库</span></span><br><span class="line"><span class="string">    --importCorpusNewCov=path   : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  This only includes programs that increase coverage.</span></span><br><span class="line"><span class="string">                                  This is useful for jump starting coverage for a wide range of JavaScript samples.</span></span><br><span class="line"><span class="string">                                  Can be used alongside importCorpusAll, and will run second.</span></span><br><span class="line"><span class="string">                                  Since all imported samples are asynchronously minimized, the corpus will show a smaller</span></span><br><span class="line"><span class="string">                                  than expected size until minimization completes.</span></span><br><span class="line"><span class="string">    --importCorpusMerge=path    : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  This only keeps programs that increase coverage but does not attempt to minimize</span></span><br><span class="line"><span class="string">                                  the samples. This is mostly useful to merge existing corpora from previous fuzzing</span></span><br><span class="line"><span class="string">                                  sessions that will have redundant samples but which will already be minimized.</span></span><br><span class="line"><span class="string">    --networkMaster=host:port   : Run as master and accept connections from workers over the network. Note: it is</span></span><br><span class="line"><span class="string">                                  *highly* recommended to run network fuzzers in an isolated network!</span></span><br><span class="line"><span class="string">    --networkWorker=host:port   : Run as worker and connect to the specified master instance.</span></span><br><span class="line"><span class="string">    --dontFuzz                  : If used, this instace will not perform fuzzing. Can be useful for master instances.</span></span><br><span class="line"><span class="string">    --noAbstractInterpretation  : Disable abstract interpretation of FuzzIL programs during fuzzing. See</span></span><br><span class="line"><span class="string">                                  Configuration.swift for more details.</span></span><br><span class="line"><span class="string">    --collectRuntimeTypes       : Collect runtime type information for programs that are added to the corpus.</span></span><br><span class="line"><span class="string">    --diagnostics               : Enable saving of programs that failed or timed-out during execution. Also tracks</span></span><br><span class="line"><span class="string">                                  executions on the current REPRL instance.</span></span><br><span class="line"><span class="string">    --inspect=opt1,opt2,...     : Enable inspection options. The following options are available:</span></span><br><span class="line"><span class="string">                                      history: Additional .fuzzil.history files are written to disk for every program.</span></span><br><span class="line"><span class="string">                                               These describe in detail how the program was generated through mutations,</span></span><br><span class="line"><span class="string">                                               code generation, and minimization</span></span><br><span class="line"><span class="string">                                        types: Programs written to disk also contain variable type information as</span></span><br><span class="line"><span class="string">                                               determined by Fuzzilli as comments</span></span><br><span class="line"><span class="string">                                          all: All of the above</span></span><br></pre></td></tr></table></figure>
 
 <p>然后直接按官方readme里面的命令跑就好</p>
+<p>注意如果你的目录在<del>/下，要把</del>展开，就是用/home+…的形式，否则无法识别</p>
 <p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/8.png" alt="8"></p>
+<h2 id="Gecko-dev（SpiderMonkey）篇"><a href="#Gecko-dev（SpiderMonkey）篇" class="headerlink" title="Gecko-dev（SpiderMonkey）篇"></a>Gecko-dev（SpiderMonkey）篇</h2><h3 id="准备Gecko-dev"><a href="#准备Gecko-dev" class="headerlink" title="准备Gecko-dev"></a>准备Gecko-dev</h3><p>老规矩，还是从官方的GitHub上面clone就可以，这个时间会比Webkit短很多，都完成的话也就是几个小时就可以，不想一直看着命令行发呆的话挂后台等着就行</p>
+<p>按照fuzzilli的Targets/SpiderMonkey下面的readme文件所说的，先checkout，我使用的版本是<code>73330bf7355c0aef844c41d0d7eed2848e53c82f</code>，等两分钟更新完以后从根目录进入到js/src目录底下，把fuzzilli/Targets/SpiderMonkey底下的fuzzbuild.sh复制过来后执行</p>
+<p>执行的时候可能会报一个错，大概是说找不到rustc和cargo编译器，如果有这个问题参照<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23857461/article/details/120296108">这篇博客</a>下载一下就可以了</p>
+<p>安装完以后，再执行一遍fuzzbuild.sh，大概等5分钟左右就编译好了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220423191320995.png" alt="image-20220423191320995"></p>
+<p>编译好之后，安装fuzzilli的说明，可执行文件应该在<code>fuzzbuild_OPT.OBJ/dist/bin/</code>这个目录下，这个目录不在gecko-dev的根目录下，而是在刚刚进入的js/src这个目录底下，我们顺着路径去找一下就能找到了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220423191641494.png" alt="image-20220423191641494"></p>
+<h3 id="开始fuzz-1"><a href="#开始fuzz-1" class="headerlink" title="开始fuzz"></a>开始fuzz</h3><p>前两天的JSC还没测完，这个部分过两天再写吧</p>
  
       <!-- reward -->
       
@@ -873,86 +935,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AFLFAST/" rel="tag">AFLFAST</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fuzzing/" rel="tag">Fuzzing</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-Smart-Greybox-Fuzzing"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/12/13/Smart-Greybox-Fuzzing/"
-    >Smart Greybox Fuzzing</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/12/13/Smart-Greybox-Fuzzing/" class="article-date">
-  <time datetime="2021-12-13T00:15:25.000Z" itemprop="datePublished">2021-12-13</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
-<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>SGF通过现实文件级别的变异操作来保证文件的有效性，这样产生的文件更加容易通过程序的解析阶段，可以暴露更深层的问题</p>
-<h3 id="P3"><a href="#P3" class="headerlink" title="P3"></a>P3</h3><p>探索了更多的路径，并暴露了更多的问题</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="P1-1"><a href="#P1-1" class="headerlink" title="P1"></a>P1</h3><p>灰盒测试只需使用轻量级的instrumentation</p>
-<h3 id="P2-1"><a href="#P2-1" class="headerlink" title="P2"></a>P2</h3><p>被变异的输入执行的控制流通过考察来确定他们是否是有趣的，而CGF帮助进行评价控制流的新颖性，随后，被认为值得继续探索的输入会产生更多的输入</p>
-<h3 id="P3-1"><a href="#P3-1" class="headerlink" title="P3"></a>P3</h3><p>而CGF的问题在于缺乏对于文件结构的认识，位级变异会在被处理之前就被程序拒绝</p>
-<h3 id="P4"><a href="#P4" class="headerlink" title="P4"></a>P4</h3><p>有两个方法可以解决这个问题，一个是基于字典，另一个是基于动态污点分析。</p>
-<p>对于字典，可能牺牲AFL的效率和可用性，当AFL要探索新路径时字典是很好的选择</p>
-<p>但两种方法都不能变异出高度结构化的文件</p>
-<h3 id="P5"><a href="#P5" class="headerlink" title="P5"></a>P5</h3><p>智能黑盒测试工具比如peach已经有了文件结构意识，而且能基于有效文件构建新的有效文件</p>
-<p>peach通过一个输入模型来反汇编有效文件，再重汇编成为新的文件</p>
-<h3 id="P6"><a href="#P6" class="headerlink" title="P6"></a>P6</h3><p>SGF可以基于高度结构化的种子文件产生新的文件，这使得其可以在保证文件有效的前提下探索全新的输入领域，可以花费更多时间在探索更深的漏洞</p>
-<h3 id="P7"><a href="#P7" class="headerlink" title="P7"></a>P7</h3><p>24小时内，AFLSMART发现的0day漏洞增加了一倍；还提高了20%的代码覆盖率；</p>
-<h3 id="P8"><a href="#P8" class="headerlink" title="P8"></a>P8</h3><p>文件格式规格可以被跨程序使用，也可以在不同版本的程序使用</p>
-<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>之前用过一小段时间的peach，peach的测试方式是编写好一个pit文件，该文件中已经设计好需要的格式，只需要将需要测试的数据进行标记，变异时，peach会自动地随机填充数据，所以以前以为所有的seed都是这样的结构，但从这篇论文来看，AFL的seed结构本身并不具备文件的结构，对于这一点，可以尝试基于AFLSMART进一步提高变异出的文件的过解析率</p>
-<p>刚刚又看了<a target="_blank" rel="noopener" href="https://www.sohu.com/a/305377300_354899%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%8F%90%E5%88%B0">https://www.sohu.com/a/305377300_354899这篇文章，其中提到</a></p>
-<p>在 AFL 的 bit 级别的变异的基础上，AFLSmart 增加了对 chunk 级别的变异操作，主要包括三种操作：</p>
-<p><strong>smart deletion：</strong></p>
-<p>在这种方法中，会对给定的种子文件，随机选取 chunk 进行删除。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/1fc4f80b9d3147d88ef4c4a0fc39d3ec.jpeg" alt="img"></p>
-<p><strong>smart addition：</strong></p>
-<p>在这种方法中，给定一个种子文件 S1，随机选取一个种子文件 S2，在 S2 中随机选取一个 chunk C2，将 C2 插入到 S1 中和 C2 具有相同父节点的 chunk C1 的后面（C1.parent.type ==C2.parent.type）</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/508bc05fbfca4395a860c49e42df6d74.jpeg" alt="img"></p>
-<p><strong>smart splicing：</strong></p>
-<p>这种方法中，对于给定的种子文件 S1，随机选取 chunk C1，随机选取种子文件 S2，找到 S2 中与 C1 类型相同的 chunk C2，将 C2 替换到 C1 的位置上。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/c45624de24b04d7289f775a978af9863.jpeg" alt="img"></p>
-<p>关于peach pit的博客<a target="_blank" rel="noopener" href="http://blog.nsfocus.net/peach-fuzz/">http://blog.nsfocus.net/peach-fuzz/</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AFLSMART/" rel="tag">AFLSMART</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fuzzing/" rel="tag">Fuzzing</a></li></ul>
 
     </footer>
   </div>

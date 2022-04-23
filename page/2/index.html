@@ -159,6 +159,86 @@
     
     
     <article
+  id="post-Smart-Greybox-Fuzzing"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/13/Smart-Greybox-Fuzzing/"
+    >Smart Greybox Fuzzing</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/12/13/Smart-Greybox-Fuzzing/" class="article-date">
+  <time datetime="2021-12-13T00:15:25.000Z" itemprop="datePublished">2021-12-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
+<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>SGF通过现实文件级别的变异操作来保证文件的有效性，这样产生的文件更加容易通过程序的解析阶段，可以暴露更深层的问题</p>
+<h3 id="P3"><a href="#P3" class="headerlink" title="P3"></a>P3</h3><p>探索了更多的路径，并暴露了更多的问题</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="P1-1"><a href="#P1-1" class="headerlink" title="P1"></a>P1</h3><p>灰盒测试只需使用轻量级的instrumentation</p>
+<h3 id="P2-1"><a href="#P2-1" class="headerlink" title="P2"></a>P2</h3><p>被变异的输入执行的控制流通过考察来确定他们是否是有趣的，而CGF帮助进行评价控制流的新颖性，随后，被认为值得继续探索的输入会产生更多的输入</p>
+<h3 id="P3-1"><a href="#P3-1" class="headerlink" title="P3"></a>P3</h3><p>而CGF的问题在于缺乏对于文件结构的认识，位级变异会在被处理之前就被程序拒绝</p>
+<h3 id="P4"><a href="#P4" class="headerlink" title="P4"></a>P4</h3><p>有两个方法可以解决这个问题，一个是基于字典，另一个是基于动态污点分析。</p>
+<p>对于字典，可能牺牲AFL的效率和可用性，当AFL要探索新路径时字典是很好的选择</p>
+<p>但两种方法都不能变异出高度结构化的文件</p>
+<h3 id="P5"><a href="#P5" class="headerlink" title="P5"></a>P5</h3><p>智能黑盒测试工具比如peach已经有了文件结构意识，而且能基于有效文件构建新的有效文件</p>
+<p>peach通过一个输入模型来反汇编有效文件，再重汇编成为新的文件</p>
+<h3 id="P6"><a href="#P6" class="headerlink" title="P6"></a>P6</h3><p>SGF可以基于高度结构化的种子文件产生新的文件，这使得其可以在保证文件有效的前提下探索全新的输入领域，可以花费更多时间在探索更深的漏洞</p>
+<h3 id="P7"><a href="#P7" class="headerlink" title="P7"></a>P7</h3><p>24小时内，AFLSMART发现的0day漏洞增加了一倍；还提高了20%的代码覆盖率；</p>
+<h3 id="P8"><a href="#P8" class="headerlink" title="P8"></a>P8</h3><p>文件格式规格可以被跨程序使用，也可以在不同版本的程序使用</p>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>之前用过一小段时间的peach，peach的测试方式是编写好一个pit文件，该文件中已经设计好需要的格式，只需要将需要测试的数据进行标记，变异时，peach会自动地随机填充数据，所以以前以为所有的seed都是这样的结构，但从这篇论文来看，AFL的seed结构本身并不具备文件的结构，对于这一点，可以尝试基于AFLSMART进一步提高变异出的文件的过解析率</p>
+<p>刚刚又看了<a target="_blank" rel="noopener" href="https://www.sohu.com/a/305377300_354899%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%8F%90%E5%88%B0">https://www.sohu.com/a/305377300_354899这篇文章，其中提到</a></p>
+<p>在 AFL 的 bit 级别的变异的基础上，AFLSmart 增加了对 chunk 级别的变异操作，主要包括三种操作：</p>
+<p><strong>smart deletion：</strong></p>
+<p>在这种方法中，会对给定的种子文件，随机选取 chunk 进行删除。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/1fc4f80b9d3147d88ef4c4a0fc39d3ec.jpeg" alt="img"></p>
+<p><strong>smart addition：</strong></p>
+<p>在这种方法中，给定一个种子文件 S1，随机选取一个种子文件 S2，在 S2 中随机选取一个 chunk C2，将 C2 插入到 S1 中和 C2 具有相同父节点的 chunk C1 的后面（C1.parent.type ==C2.parent.type）</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/508bc05fbfca4395a860c49e42df6d74.jpeg" alt="img"></p>
+<p><strong>smart splicing：</strong></p>
+<p>这种方法中，对于给定的种子文件 S1，随机选取 chunk C1，随机选取种子文件 S2，找到 S2 中与 C1 类型相同的 chunk C2，将 C2 替换到 C1 的位置上。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/c45624de24b04d7289f775a978af9863.jpeg" alt="img"></p>
+<p>关于peach pit的博客<a target="_blank" rel="noopener" href="http://blog.nsfocus.net/peach-fuzz/">http://blog.nsfocus.net/peach-fuzz/</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AFLSMART/" rel="tag">AFLSMART</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fuzzing/" rel="tag">Fuzzing</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-污点技术"
   class="article article-type-post"
   itemscope
