@@ -1,66 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CodeAlchemist</title>
-    <url>/2022/04/22/CodeAlchemist/</url>
-    <content><![CDATA[<h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol>
-<li><p>LangFuzz</p>
-<p>通过解析最初的作为种子的JS文件，将其中的语句拆分成代码段，任何重新组合片段生成测试用例。</p>
-<p>由于LangFuzz在关联代码的时候不考虑JS的语义，所以会很快发生运行时错误。</p>
-</li>
-<li><p>jsfunfuzz</p>
-<p>不需要初始的JS文件，而是通过引用手动编写的JS语料库随机产生语法正确的JS语句。</p>
-<p>超过99%的生成用例会在执行三条语句后就发生运行错误。</p>
-</li>
-<li><p>Skyfire/TreeFuzz</p>
-<p>通过从JS种子文件的语料库构建概率语言模型，来学习JS语义，再使用模型来生成用例。</p>
-<p>但这种方式依赖于语言模型的准确性。鉴于JS的复杂类型系统，这种方式也不能完全解决语义问题</p>
-</li>
-<li><p>CodeAlchemist</p>
-<p>将种子文件中的代码分解，并约束每个碎片，使之仅在特定的情况下可以被使用</p>
-<p>使用数据流分析，计算每个代码块中，使用和定义的变量，并动态获取他们的类型，只有当对应的类型可以匹配上的时候，才会进行拼接</p>
-<p>在一些情况下，也会引发语义错误，但已经大幅降低了</p>
-<p>CodeAlchemist会按照JavaScript 语句的粒度分解种子文件, 针对每个块语句生成多种变体提升代码块的丰富性, 通过对多个代码块组合产生嵌套循环等结构。</p>
-<p>CodeAlchemist提出使用数据流分析技术确定未定义变量和已定义变量, 并结合运行时插桩技术探测已执行变量的类型。 CodeAlchemist在JavaScript代码生成过程中, 不断向代码尾部扩展代码片段, 每次扩展代码片段都会确保其中的变量在之前已经被定义并且具备正确的 类 型</p>
-</li>
-</ol>
-<h2 id="2-JS语言问题"><a href="#2-JS语言问题" class="headerlink" title="2. JS语言问题"></a>2. JS语言问题</h2><h3 id="1-面向原型的语言"><a href="#1-面向原型的语言" class="headerlink" title="1. 面向原型的语言"></a>1. 面向原型的语言</h3><p>一个对象实例A只需要将另一个对象实例B设置为自己的原型，就可以在运行是继承B的属性。可以通过<code>_proto_</code>属性来确定对象实例在运行时使用哪个原型。而由于一个对象的类型可以动态更改，所以很有可能会发生语义错误</p>
-<h3 id="2-错误类型"><a href="#2-错误类型" class="headerlink" title="2. 错误类型"></a>2. 错误类型</h3><p>五种运行时错误类型</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;break&#x27;</span>);      			<span class="comment">//语法错误</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> <span class="title class_">Array</span> (<span class="number">4294967296</span>); <span class="comment">//范围错误</span></span><br><span class="line">u;								<span class="comment">//引用错误</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="number">10</span>; <span class="title function_">t</span>();				<span class="comment">//类型错误</span></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%&#x27;</span>);		<span class="comment">//URI错误</span></span><br></pre></td></tr></table></figure>
-
-<p>对于第一行的eval函数，语句本身在语法上是正确的，但在实际运行时会引发语法错误</p>
-<h2 id="3-CodeAlchemist架构"><a href="#3-CodeAlchemist架构" class="headerlink" title="3. CodeAlchemist架构"></a>3. CodeAlchemist架构</h2><img src="https://img1.3s78.com/codercto/97d8a767902c2febf1786c0e63b5506a" alt="CodeAlchemist：用于在JavasScript引擎中查找漏洞的代码生成工具" style="zoom:150%;">
-
-<p>其主要包含三个部分：Seed Parser 模块将 JS seeds 分解为不同的代码块，Constraint analyzer 模块为每个代码块推断出其组合约束条件，Engine fuzzer 则根据组件约束条件池中的代码块，生成测试用例并针对目标 JS 引擎执行生成的测试用例。如果引擎崩溃，它会在文件系统上存储相应的测试用例。</p>
-<h2 id="4-语义感知组件"><a href="#4-语义感知组件" class="headerlink" title="4. 语义感知组件"></a>4. 语义感知组件</h2><p>是一种用于JS引擎的测试用例生成算法，将JS种子碎片化成若干可以组合的代码块，一个代码块就是一小段有效的JS抽象语法树.</p>
-<p>具体而言，组合约束条件包含两种：先决条件和后置条件。先决条件是一组变量及其类型，需要预先定义这些符号从而可以在没有运行时错误的情况下执行代码块。后置条件描述了在代码块的末尾定义了哪种变量，并在后面可被其他代码块使用。</p>
-]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>CodeAlchenmist</tag>
-        <tag>Fuzzing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DOM启蒙</title>
-    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
-    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
-<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
-<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Coverage-based Greybox Fuzzing as Markov Chain</title>
     <url>/2021/12/14/Coverage-based-Greybox-Fuzzing-as-Markov-Chain/</url>
     <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们发现多数测试检测相同且小量的“高频”路径，发展很多策略，通过向低频路径倾斜，用相同数量的测试样例来探索更多“低频”路径</p>
@@ -103,6 +43,66 @@
       <tags>
         <tag>侧信道攻击</tag>
         <tag>移动设备</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CodeAlchemist</title>
+    <url>/2022/04/22/CodeAlchemist/</url>
+    <content><![CDATA[<h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol>
+<li><p>LangFuzz</p>
+<p>通过解析最初的作为种子的JS文件，将其中的语句拆分成代码段，任何重新组合片段生成测试用例。</p>
+<p>由于LangFuzz在关联代码的时候不考虑JS的语义，所以会很快发生运行时错误。</p>
+</li>
+<li><p>jsfunfuzz</p>
+<p>不需要初始的JS文件，而是通过引用手动编写的JS语料库随机产生语法正确的JS语句。</p>
+<p>超过99%的生成用例会在执行三条语句后就发生运行错误。</p>
+</li>
+<li><p>Skyfire/TreeFuzz</p>
+<p>通过从JS种子文件的语料库构建概率语言模型，来学习JS语义，再使用模型来生成用例。</p>
+<p>但这种方式依赖于语言模型的准确性。鉴于JS的复杂类型系统，这种方式也不能完全解决语义问题</p>
+</li>
+<li><p>CodeAlchemist</p>
+<p>将种子文件中的代码分解，并约束每个碎片，使之仅在特定的情况下可以被使用</p>
+<p>使用数据流分析，计算每个代码块中，使用和定义的变量，并动态获取他们的类型，只有当对应的类型可以匹配上的时候，才会进行拼接</p>
+<p>在一些情况下，也会引发语义错误，但已经大幅降低了</p>
+<p>CodeAlchemist会按照JavaScript 语句的粒度分解种子文件, 针对每个块语句生成多种变体提升代码块的丰富性, 通过对多个代码块组合产生嵌套循环等结构。</p>
+<p>CodeAlchemist提出使用数据流分析技术确定未定义变量和已定义变量, 并结合运行时插桩技术探测已执行变量的类型。 CodeAlchemist在JavaScript代码生成过程中, 不断向代码尾部扩展代码片段, 每次扩展代码片段都会确保其中的变量在之前已经被定义并且具备正确的 类 型</p>
+</li>
+</ol>
+<h2 id="2-JS语言问题"><a href="#2-JS语言问题" class="headerlink" title="2. JS语言问题"></a>2. JS语言问题</h2><h3 id="1-面向原型的语言"><a href="#1-面向原型的语言" class="headerlink" title="1. 面向原型的语言"></a>1. 面向原型的语言</h3><p>一个对象实例A只需要将另一个对象实例B设置为自己的原型，就可以在运行是继承B的属性。可以通过<code>_proto_</code>属性来确定对象实例在运行时使用哪个原型。而由于一个对象的类型可以动态更改，所以很有可能会发生语义错误</p>
+<h3 id="2-错误类型"><a href="#2-错误类型" class="headerlink" title="2. 错误类型"></a>2. 错误类型</h3><p>五种运行时错误类型</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;break&#x27;</span>);      			<span class="comment">//语法错误</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> <span class="title class_">Array</span> (<span class="number">4294967296</span>); <span class="comment">//范围错误</span></span><br><span class="line">u;								<span class="comment">//引用错误</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="number">10</span>; <span class="title function_">t</span>();				<span class="comment">//类型错误</span></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%&#x27;</span>);		<span class="comment">//URI错误</span></span><br></pre></td></tr></table></figure>
+
+<p>对于第一行的eval函数，语句本身在语法上是正确的，但在实际运行时会引发语法错误</p>
+<h2 id="3-CodeAlchemist架构"><a href="#3-CodeAlchemist架构" class="headerlink" title="3. CodeAlchemist架构"></a>3. CodeAlchemist架构</h2><img src="https://img1.3s78.com/codercto/97d8a767902c2febf1786c0e63b5506a" alt="CodeAlchemist：用于在JavasScript引擎中查找漏洞的代码生成工具" style="zoom:150%;">
+
+<p>其主要包含三个部分：Seed Parser 模块将 JS seeds 分解为不同的代码块，Constraint analyzer 模块为每个代码块推断出其组合约束条件，Engine fuzzer 则根据组件约束条件池中的代码块，生成测试用例并针对目标 JS 引擎执行生成的测试用例。如果引擎崩溃，它会在文件系统上存储相应的测试用例。</p>
+<h2 id="4-语义感知组件"><a href="#4-语义感知组件" class="headerlink" title="4. 语义感知组件"></a>4. 语义感知组件</h2><p>是一种用于JS引擎的测试用例生成算法，将JS种子碎片化成若干可以组合的代码块，一个代码块就是一小段有效的JS抽象语法树.</p>
+<p>具体而言，组合约束条件包含两种：先决条件和后置条件。先决条件是一组变量及其类型，需要预先定义这些符号从而可以在没有运行时错误的情况下执行代码块。后置条件描述了在代码块的末尾定义了哪种变量，并在后面可被其他代码块使用。</p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>CodeAlchenmist</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DOM启蒙</title>
+    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
+    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
+<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
+<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -256,32 +256,65 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello</title>
-    <url>/2022/04/22/hello-world/</url>
-    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
+    <title>WebKit</title>
+    <url>/2022/01/16/WebKit/</url>
+    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
+<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
+<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
+<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
+<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
+<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
+<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
+<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
+<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
+<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
+<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
+<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
+<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
+<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
+<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
+<p>数字表示基本顺序，但也不是严格一致。</p>
+<p>具体的过程如下：</p>
+<ol>
+<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
+<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
+<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
+<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
+<li>解释器根据词语构建节点（Node），形成DOM树</li>
+<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
+<li>JavaScript代码可能会修改DOM树结构</li>
+<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
+</ol>
+<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
+<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
+<p>这一段的具体过程如下：</p>
+<ol>
+<li>CSS文件被CSS解释器解释成内部表示结构</li>
+<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
+<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
+</ol>
+<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
+<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
+<p>这一阶段对应的具体过程如下：</p>
+<ol>
+<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
+<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
+<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
+</ol>
+<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
+<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
+<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
+<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2022/04/22/%E5%91%A8%E6%8A%A5/</url>
-    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
-<p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
-<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
-<p>开了改进AFL的组会</p>
-<p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p>
-<h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p>
-<p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p>
-<p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p>
-<p>晚上出去喝酒</p>
-<h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p>
-<p>晚上做网络实验，继续看论文</p>
-<h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p>
-<h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p>
-<p>晚上上安全系统实验，正常背单词</p>
-<h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
-<p>晚上挺凉快的</p>
-<h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
-]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
+      </tags>
   </entry>
   <entry>
     <title>使用Fuzzilli测试JS引擎</title>
@@ -354,6 +387,79 @@
       </tags>
   </entry>
   <entry>
+    <title>植物大战僵尸外挂笔记</title>
+    <url>/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="植物大战僵尸外挂笔记"><a href="#植物大战僵尸外挂笔记" class="headerlink" title="植物大战僵尸外挂笔记"></a>植物大战僵尸外挂笔记</h1><h2 id="0x00-CE初步"><a href="#0x00-CE初步" class="headerlink" title="0x00 CE初步"></a>0x00 CE初步</h2><blockquote>
+<p>CE修改器(Cheat Engine)是一款内存修改编辑工具,CE修改器它允许你修改你的游戏,所以你将总是赢.它包括16进制编辑,反汇编程序,内存查找工具.CE修改器与同类修改工具相比,它具有强大的反汇编功能,且自身附带了修改器制作工具,可以用它直接生成修改器。</p>
+</blockquote>
+<p>总之，CE可以帮助我们搜索看到的程序效果在内存中的表示，比如搜索一个数据存在哪块内存上，而写游戏外挂的本质就是修改游戏中的数据，来实现一些爽操作</p>
+<h2 id="0x01-找阳光"><a href="#0x01-找阳光" class="headerlink" title="0x01 找阳光"></a>0x01 找阳光</h2><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630105800050.png" alt="image-20220630105800050" style="zoom:50%;">
+
+<p>从这里我们可以看到，目前的阳光值是50，所以直接在CE里面first scan</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630105915395.png" alt="image-20220630105915395" style="zoom: 50%;">
+
+<p>这是在对植物大战僵尸所有的内存块进行搜索，寻找当前值为50的内存块，左边是搜索结果，目前来看有很多，其中黑色地址的是动态地址，绿色地址的是静态地址，区别在于每次打开游戏时，动态地址会变，而静态地址是不变的</p>
+<p>这时我们为了找到究竟哪一个地址存放着阳光，对阳光进行一次改变，</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110211461.png" alt="image-20220630110211461" style="zoom: 50%;">
+
+<p>改变的时候有个 小技巧，尽量不要让阳光为0，因为一个程序里面为0的值很多，筛选效率比较低</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110318023.png" alt="image-20220630110318023" style="zoom:50%;">
+
+<p>我们收集一个阳光，令阳光达到75，再次scan就直接找到了阳光的动态地址0x1BFF3550</p>
+<p>但是找到动态地址还不够，这个地址每次打开游戏都不一样，不能用外挂程序直接操控，所以我们要去找静态地址</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110718825.png" alt="image-20220630110718825" style="zoom:50%;">
+
+<p>右键点击这个地址，选择“Find out what writes to the address”，</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630111032492.png" alt="image-20220630111032492" style="zoom:50%;">
+
+<p>在下次收集到阳光时，CE会找到修改了这个值的汇编语句，从这条语句我们发现，eax+0x00005578这个位置的值加上了ecx的值，我们选中这条语句，点击“more information”</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630111243260.png" alt="image-20220630111243260" style="zoom:50%;">
+
+<p>发现ecx=0x19，也就是十进制的25，刚好是一个阳光的数量，那么被加的地址应该就是存储阳光的地址了，也就是刚刚我们看到的阳光的动态地址0x1BFF3550的来历，看一下eax的值是0x1BFEDFD8</p>
+<p>但是这个值依然不是一个静态地址，我们要找到这个地址是怎么来的，于是继续搜索这个地址</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630115525849.png" alt="image-20220630115525849" style="zoom:50%;">
+
+<p>可以看到搜出来有很多地址，其中0x0019开头的都是堆栈的地址，找到下面的0x03EAB958</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120119461.png" alt="image-20220630120119461" style="zoom:50%;">
+
+<p>右键点击这个地址，选择“Find out what accesses this address”，</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120214904.png" alt="image-20220630120214904" style="zoom:50%;">
+
+<p>可以看到改变eax的值的语句</p>
+<p>我们分别看一下两条改变eax的语句</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120544438.png" alt="image-20220630120544438" style="zoom:50%;">
+
+<p>发现无论从ecx改还是从esi改，实际上都是用的0x03EAB0F0这个地址＋0x868</p>
+<p>于是继续搜索0x03EAB0F0</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120708455.png" alt="image-20220630120708455" style="zoom:50%;">
+
+<p>终于看到了绿色的静态地址，随便选一个就行</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630121011471.png" alt="image-20220630121011471" style="zoom:50%;">
+
+<p>双击这个地址，设置一下指针，注意两个偏移值顺序不能换，因为实际上这是两层的指针</p>
+<p>即静态地址是第一层指针p1，其中存的值为0x03EAB0F0</p>
+<p>p1指向的地址是第二层指针的基址，所以+0x868得到了第二层指针p2</p>
+<p>图中可以看到p2应该是的0x1BFEDFD8，这个指针再加0x5578得到了最终实际存储阳光的地址</p>
+<p>这个时候找基址的部分就结束了，然后就需要进行自动化修改</p>
+<h2 id="0x02-自动化修改阳光"><a href="#0x02-自动化修改阳光" class="headerlink" title="0x02 自动化修改阳光"></a>0x02 自动化修改阳光</h2><p>参考这篇博客<a href="https://blog.csdn.net/weixin_43752471/article/details/84445871?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-2-84445871-blog-117117813.pc_relevant_vip_default&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-2-84445871-blog-117117813.pc_relevant_vip_default&amp;utm_relevant_index=3%E5%AD%A6%E4%B9%A0%E4%BA%86%E4%B8%80%E4%B8%8BC++%E4%BF%AE%E6%94%B9%E5%85%B6%E4%BB%96%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98">https://blog.csdn.net/weixin_43752471/article/details/84445871?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2-84445871-blog-117117813.pc_relevant_vip_default&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2-84445871-blog-117117813.pc_relevant_vip_default&amp;utm_relevant_index=3学习了一下C++修改其他程序内存</a></p>
+<p>然后把相关的参数改一下，大概就拿这篇代码直接用了，顺便还一块做了修改金币的功能，道理是一样的，只不过金币的存储是数量/10存储的，直接搜金币数搜不出来，要/10才能搜出来，最后获取的静态地址和阳光的一样就不用两个地址了</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> gameaddress = <span class="number">0x00731C50</span>; <span class="comment">//游戏基址；</span></span><br><span class="line">HANDLE gameprocess; <span class="comment">//句柄类型 获取</span></span><br><span class="line"><span class="comment">//2次偏移</span></span><br><span class="line"><span class="function"><span class="type">int</span> *<span class="title">get5point</span><span class="params">(<span class="type">int</span> gameaddress,<span class="type">int</span> p1,<span class="type">int</span> p2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> iBase, iP1, *iP2;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">ReadProcessMemory</span>(gameprocess, (LPVOID)gameaddress, &amp;iBase, <span class="number">4</span>, <span class="literal">NULL</span>))<span class="comment">//初地址赋值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">ReadProcessMemory</span>(gameprocess, (LPVOID)(iBase + p1), &amp;iP1, <span class="number">4</span>, <span class="literal">NULL</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    iP2=(<span class="type">int</span> *)(iP1+p2);</span><br><span class="line">	<span class="keyword">return</span> iP2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//修改阳光</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rwyg</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *pwx=<span class="built_in">get5point</span>(gameaddress,<span class="number">0x868</span>,<span class="number">0x5578</span>);</span><br><span class="line">	<span class="type">int</span>  wx = <span class="number">0x2710</span>;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;pwd=&quot;</span>&lt;&lt;pwx&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(gameprocess, pwx,&amp;wx, <span class="number">4</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rwjb</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *pwx=<span class="built_in">get5point</span>(gameaddress,<span class="number">0x94c</span>,<span class="number">0x54</span>);</span><br><span class="line">	<span class="type">int</span>  wx = <span class="number">0x186a0</span>;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;pwd=&quot;</span>&lt;&lt;pwx&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(gameprocess, pwx,&amp;wx, <span class="number">4</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//获取游戏窗口所在进程的进程ID，也就是PID</span></span><br><span class="line">    HWND hWnd = <span class="built_in">FindWindow</span>(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">&quot;Plants vs. Zombies&quot;</span>));</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == hWnd)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;查找窗口失败\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    DWORD dwProcessId;</span><br><span class="line">    <span class="built_in">GetWindowThreadProcessId</span>(hWnd, &amp;dwProcessId);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;进程ID:%d\n&quot;</span>, dwProcessId);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取进程句柄</span></span><br><span class="line">    gameprocess = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS, FALSE, dwProcessId);</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == gameprocess)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;打开进程失败\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">rwyg</span>();</span><br><span class="line">    <span class="built_in">rwjb</span>();</span><br><span class="line">    <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>逆向实践</category>
+      </categories>
+      <tags>
+        <tag>Reverse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello</title>
+    <url>/2022/04/22/hello-world/</url>
+    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
+]]></content>
+  </entry>
+  <entry>
     <title>污点分析技术（一）基本原理</title>
     <url>/2021/12/13/%E6%B1%A1%E7%82%B9%E6%8A%80%E6%9C%AF/</url>
     <content><![CDATA[<p>这两天在AFLSMART的论文时发现提到了动态污点分析这项技术，正好前两天在VUL337课题组里面也发现有大佬提到过这个，但是还是不太明白，趁着今天有时间给自己科普一下。</p>
@@ -414,6 +520,28 @@
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/2022/04/22/%E5%91%A8%E6%8A%A5/</url>
+    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
+<p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
+<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
+<p>开了改进AFL的组会</p>
+<p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p>
+<h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p>
+<p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p>
+<p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p>
+<p>晚上出去喝酒</p>
+<h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p>
+<p>晚上做网络实验，继续看论文</p>
+<h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p>
+<h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p>
+<p>晚上上安全系统实验，正常背单词</p>
+<h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
+<p>晚上挺凉快的</p>
+<h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
+]]></content>
+  </entry>
+  <entry>
     <title>软件安全与质量保证的模糊测试</title>
     <url>/2021/12/29/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E4%B8%8E%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="软件安全与质量保证的模糊测试（翻译）"><a href="#软件安全与质量保证的模糊测试（翻译）" class="headerlink" title="软件安全与质量保证的模糊测试（翻译）"></a>软件安全与质量保证的模糊测试（翻译）</h1><h2 id="第一章-介绍"><a href="#第一章-介绍" class="headerlink" title="第一章 介绍"></a>第一章 介绍</h2><p>欢迎来到模糊测试的世界！</p>
@@ -444,67 +572,6 @@
       </categories>
       <tags>
         <tag>Fuzzing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WebKit</title>
-    <url>/2022/01/16/WebKit/</url>
-    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
-<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
-<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
-<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
-<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
-<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
-<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
-<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
-<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
-<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
-<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
-<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
-<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
-<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
-<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
-<p>数字表示基本顺序，但也不是严格一致。</p>
-<p>具体的过程如下：</p>
-<ol>
-<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
-<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
-<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
-<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
-<li>解释器根据词语构建节点（Node），形成DOM树</li>
-<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
-<li>JavaScript代码可能会修改DOM树结构</li>
-<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
-</ol>
-<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
-<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
-<p>这一段的具体过程如下：</p>
-<ol>
-<li>CSS文件被CSS解释器解释成内部表示结构</li>
-<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
-<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
-</ol>
-<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
-<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
-<p>这一阶段对应的具体过程如下：</p>
-<ol>
-<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
-<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
-<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
-</ol>
-<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
-<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
-<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
-<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
-]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>浏览器</tag>
       </tags>
   </entry>
 </search>

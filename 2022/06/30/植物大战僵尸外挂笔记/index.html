@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>植物大战僵尸外挂笔记 |  Kery</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Kery" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-植物大战僵尸外挂笔记"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  植物大战僵尸外挂笔记
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2022-06-30T04:27:09.000Z" itemprop="datePublished">2022-06-30</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/">逆向实践</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="植物大战僵尸外挂笔记"><a href="#植物大战僵尸外挂笔记" class="headerlink" title="植物大战僵尸外挂笔记"></a>植物大战僵尸外挂笔记</h1><h2 id="0x00-CE初步"><a href="#0x00-CE初步" class="headerlink" title="0x00 CE初步"></a>0x00 CE初步</h2><blockquote>
+<p>CE修改器(Cheat Engine)是一款内存修改编辑工具,CE修改器它允许你修改你的游戏,所以你将总是赢.它包括16进制编辑,反汇编程序,内存查找工具.CE修改器与同类修改工具相比,它具有强大的反汇编功能,且自身附带了修改器制作工具,可以用它直接生成修改器。</p>
+</blockquote>
+<p>总之，CE可以帮助我们搜索看到的程序效果在内存中的表示，比如搜索一个数据存在哪块内存上，而写游戏外挂的本质就是修改游戏中的数据，来实现一些爽操作</p>
+<h2 id="0x01-找阳光"><a href="#0x01-找阳光" class="headerlink" title="0x01 找阳光"></a>0x01 找阳光</h2><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630105800050.png" alt="image-20220630105800050" style="zoom:50%;">
+
+<p>从这里我们可以看到，目前的阳光值是50，所以直接在CE里面first scan</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630105915395.png" alt="image-20220630105915395" style="zoom: 50%;">
+
+<p>这是在对植物大战僵尸所有的内存块进行搜索，寻找当前值为50的内存块，左边是搜索结果，目前来看有很多，其中黑色地址的是动态地址，绿色地址的是静态地址，区别在于每次打开游戏时，动态地址会变，而静态地址是不变的</p>
+<p>这时我们为了找到究竟哪一个地址存放着阳光，对阳光进行一次改变，</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110211461.png" alt="image-20220630110211461" style="zoom: 50%;">
+
+<p>改变的时候有个 小技巧，尽量不要让阳光为0，因为一个程序里面为0的值很多，筛选效率比较低</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110318023.png" alt="image-20220630110318023" style="zoom:50%;">
+
+<p>我们收集一个阳光，令阳光达到75，再次scan就直接找到了阳光的动态地址0x1BFF3550</p>
+<p>但是找到动态地址还不够，这个地址每次打开游戏都不一样，不能用外挂程序直接操控，所以我们要去找静态地址</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110718825.png" alt="image-20220630110718825" style="zoom:50%;">
+
+<p>右键点击这个地址，选择“Find out what writes to the address”，</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630111032492.png" alt="image-20220630111032492" style="zoom:50%;">
+
+<p>在下次收集到阳光时，CE会找到修改了这个值的汇编语句，从这条语句我们发现，eax+0x00005578这个位置的值加上了ecx的值，我们选中这条语句，点击“more information”</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630111243260.png" alt="image-20220630111243260" style="zoom:50%;">
+
+<p>发现ecx=0x19，也就是十进制的25，刚好是一个阳光的数量，那么被加的地址应该就是存储阳光的地址了，也就是刚刚我们看到的阳光的动态地址0x1BFF3550的来历，看一下eax的值是0x1BFEDFD8</p>
+<p>但是这个值依然不是一个静态地址，我们要找到这个地址是怎么来的，于是继续搜索这个地址</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630115525849.png" alt="image-20220630115525849" style="zoom:50%;">
+
+<p>可以看到搜出来有很多地址，其中0x0019开头的都是堆栈的地址，找到下面的0x03EAB958</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120119461.png" alt="image-20220630120119461" style="zoom:50%;">
+
+<p>右键点击这个地址，选择“Find out what accesses this address”，</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120214904.png" alt="image-20220630120214904" style="zoom:50%;">
+
+<p>可以看到改变eax的值的语句</p>
+<p>我们分别看一下两条改变eax的语句</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120544438.png" alt="image-20220630120544438" style="zoom:50%;">
+
+<p>发现无论从ecx改还是从esi改，实际上都是用的0x03EAB0F0这个地址＋0x868</p>
+<p>于是继续搜索0x03EAB0F0</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120708455.png" alt="image-20220630120708455" style="zoom:50%;">
+
+<p>终于看到了绿色的静态地址，随便选一个就行</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630121011471.png" alt="image-20220630121011471" style="zoom:50%;">
+
+<p>双击这个地址，设置一下指针，注意两个偏移值顺序不能换，因为实际上这是两层的指针</p>
+<p>即静态地址是第一层指针p1，其中存的值为0x03EAB0F0</p>
+<p>p1指向的地址是第二层指针的基址，所以+0x868得到了第二层指针p2</p>
+<p>图中可以看到p2应该是的0x1BFEDFD8，这个指针再加0x5578得到了最终实际存储阳光的地址</p>
+<p>这个时候找基址的部分就结束了，然后就需要进行自动化修改</p>
+<h2 id="0x02-自动化修改阳光"><a href="#0x02-自动化修改阳光" class="headerlink" title="0x02 自动化修改阳光"></a>0x02 自动化修改阳光</h2><p>参考这篇博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43752471/article/details/84445871?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-2-84445871-blog-117117813.pc_relevant_vip_default&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-2-84445871-blog-117117813.pc_relevant_vip_default&amp;utm_relevant_index=3%E5%AD%A6%E4%B9%A0%E4%BA%86%E4%B8%80%E4%B8%8BC++%E4%BF%AE%E6%94%B9%E5%85%B6%E4%BB%96%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98">https://blog.csdn.net/weixin_43752471/article/details/84445871?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2-84445871-blog-117117813.pc_relevant_vip_default&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2-84445871-blog-117117813.pc_relevant_vip_default&amp;utm_relevant_index=3学习了一下C++修改其他程序内存</a></p>
+<p>然后把相关的参数改一下，大概就拿这篇代码直接用了，顺便还一块做了修改金币的功能，道理是一样的，只不过金币的存储是数量/10存储的，直接搜金币数搜不出来，要/10才能搜出来，最后获取的静态地址和阳光的一样就不用两个地址了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> gameaddress = <span class="number">0x00731C50</span>; <span class="comment">//游戏基址；</span></span><br><span class="line">HANDLE gameprocess; <span class="comment">//句柄类型 获取</span></span><br><span class="line"><span class="comment">//2次偏移</span></span><br><span class="line"><span class="function"><span class="type">int</span> *<span class="title">get5point</span><span class="params">(<span class="type">int</span> gameaddress,<span class="type">int</span> p1,<span class="type">int</span> p2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> iBase, iP1, *iP2;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">ReadProcessMemory</span>(gameprocess, (LPVOID)gameaddress, &amp;iBase, <span class="number">4</span>, <span class="literal">NULL</span>))<span class="comment">//初地址赋值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">ReadProcessMemory</span>(gameprocess, (LPVOID)(iBase + p1), &amp;iP1, <span class="number">4</span>, <span class="literal">NULL</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    iP2=(<span class="type">int</span> *)(iP1+p2);</span><br><span class="line">	<span class="keyword">return</span> iP2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//修改阳光</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rwyg</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *pwx=<span class="built_in">get5point</span>(gameaddress,<span class="number">0x868</span>,<span class="number">0x5578</span>);</span><br><span class="line">	<span class="type">int</span>  wx = <span class="number">0x2710</span>;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;pwd=&quot;</span>&lt;&lt;pwx&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(gameprocess, pwx,&amp;wx, <span class="number">4</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rwjb</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *pwx=<span class="built_in">get5point</span>(gameaddress,<span class="number">0x94c</span>,<span class="number">0x54</span>);</span><br><span class="line">	<span class="type">int</span>  wx = <span class="number">0x186a0</span>;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;pwd=&quot;</span>&lt;&lt;pwx&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(gameprocess, pwx,&amp;wx, <span class="number">4</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//获取游戏窗口所在进程的进程ID，也就是PID</span></span><br><span class="line">    HWND hWnd = <span class="built_in">FindWindow</span>(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">&quot;Plants vs. Zombies&quot;</span>));</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == hWnd)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;查找窗口失败\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    DWORD dwProcessId;</span><br><span class="line">    <span class="built_in">GetWindowThreadProcessId</span>(hWnd, &amp;dwProcessId);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;进程ID:%d\n&quot;</span>, dwProcessId);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取进程句柄</span></span><br><span class="line">    gameprocess = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS, FALSE, dwProcessId);</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == gameprocess)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;打开进程失败\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">rwyg</span>();</span><br><span class="line">    <span class="built_in">rwjb</span>();</span><br><span class="line">    <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Reverse/" rel="tag">Reverse</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/04/22/%E5%91%A8%E6%8A%A5/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title"></div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2021-2022
+        <i class="ri-heart-fill heart_icon"></i> Kery
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Kery"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":0,"vOffset":-30},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
