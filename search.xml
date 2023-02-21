@@ -21,6 +21,23 @@
       </tags>
   </entry>
   <entry>
+    <title>DOM启蒙</title>
+    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
+    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
+<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
+<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
     <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
     <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
@@ -86,23 +103,6 @@
       <tags>
         <tag>Fuzzing</tag>
         <tag>CodeAlchenmist</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DOM启蒙</title>
-    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
-    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
-<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
-<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -183,37 +183,252 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript学习记录</title>
-    <url>/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="交互式网络"><a href="#交互式网络" class="headerlink" title="交互式网络"></a>交互式网络</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>要通过事件来触发函数，要添加事件处理器，比如载入网页时触发，使用<code>onload</code>，然后通过<code>alert()</code>函数列出信息。</p>
-<p>事件由用户触发，但最终还是来源于浏览器，是一个被用户触发的事件，但浏览器必须包装关于事件的信息，再传递给负责相应这个事件的函数</p>
-<p>无论事件会不会被相应，都不会影响网页的载入</p>
-<p>Javascript的代码可以放在<code>&lt;script&gt;</code>标签里，也可以直接放在事件处理器中</p>
-<p>事件以JavaScript代码相应网页里发生的动静</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="prompt函数"><a href="#prompt函数" class="headerlink" title="prompt函数"></a>prompt函数</h3><p><code>prompt()</code>负责制作弹出窗口，用于显示可提示用户进行输入的对话框。函数返回值为字符串。当用户输入为数字或布尔类型时，一律返回string型，若想使类型不变，则需要进行类型转换。</p>
-<h3 id="document-getElementById函数"><a href="#document-getElementById函数" class="headerlink" title="document.getElementById函数"></a>document.getElementById函数</h3><p>顾明思义，get-Element-By-Id，就是通过ID来设置/返回HTML标签的属性及调用其事件与方法。用这个方法基本上可以控制页面所有标签，条件很简单就是给每个标签分配一个ID号</p>
-<h1 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h1><p>三种基本数据类型：text、number、boolean</p>
-<p>number用于存储数值数据、text用于存储字符串、boolean用于存储逻辑值</p>
-<p>alart框只能显示文本，不能显示数字，所以要进行类型转换</p>
-<p>在重新载入网页时，脚本的数据被重新设为初始值</p>
-<h2 id="函数-1"><a href="#函数-1" class="headerlink" title="函数"></a>函数</h2><h3 id="parseInt-函数"><a href="#parseInt-函数" class="headerlink" title="parseInt()函数"></a>parseInt()函数</h3><p>把字符串传给函数，函数把字符串转化为整数</p>
-<h3 id="parseFloat-函数"><a href="#parseFloat-函数" class="headerlink" title="parseFloat()函数"></a>parseFloat()函数</h3><p>把字符串传给函数，函数把字符串转化为浮点数</p>
-<p>使用这两个函数应该只包含数字的字符串</p>
-<p>NaN表示非数字，也用于某段数据不是数字，但被期待是数字的时候</p>
-<h3 id="indexOf-函数"><a href="#indexOf-函数" class="headerlink" title="indexOf()函数"></a>indexOf()函数</h3><p>indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。<br>indexOf() 方法对大小写敏感！</p>
-<p>string.indexOf(“xxx”)表示在string中搜索字符串xxx</p>
-<h1 id="探索客户端"><a href="#探索客户端" class="headerlink" title="探索客户端"></a>探索客户端</h1><h2 id="函数-2"><a href="#函数-2" class="headerlink" title="函数"></a>函数</h2><h3 id="refresh-函数"><a href="#refresh-函数" class="headerlink" title="refresh()函数"></a>refresh()函数</h3><p>重新整理网页</p>
-<h3 id="setTimeout-函数"><a href="#setTimeout-函数" class="headerlink" title="setTimeout()函数"></a>setTimeout()函数</h3><p>单次定时器函数</p>
-<p>函数有两段参数，分别是时间延迟和想要运行的程序代码，两个参数顺序无所谓</p>
-<p>时间单位为毫秒</p>
-<h3 id="setInterval-函数"><a href="#setInterval-函数" class="headerlink" title="setInterval()函数"></a>setInterval()函数</h3><p>间隔定时器函数，格式与setTimeout函数相同，以对应的时间间隔重复执行代码</p>
+    <title>New 160 Crackme 1-5</title>
+    <url>/2023/02/21/New%20160%20Crackme%201-5/</url>
+    <content><![CDATA[<h1 id="New-160-Crackme-1-abex’-5th-crackme"><a href="#New-160-Crackme-1-abex’-5th-crackme" class="headerlink" title="New 160 Crackme-1 abex’ 5th crackme"></a>New 160 Crackme-1 abex’ 5th crackme</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>OllyDbg</p>
+<p>先运行一下软件，发现是一个验证序列号的软件，如果输入序列号不正确就会自动退出</p>
+<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><ol>
+<li><p>使用Ollydbg打开要进行爆破的软件得到以下的界面</p>
+<p>按道理说应该先查壳，但是鉴于比较简单，就不查了，事实上也没有加壳<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717124717778.png" alt="image-20220717124717778" style="zoom: 50%;"></p>
+</li>
+<li><p>先查询字符串。右键点击第一行，找到查找字符串<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717124951265.png" alt="image-20220717124951265"></p>
+</li>
+<li><p>发现一共有6个字符串，其中前两个很像序列号格式的不知道是什么，猜测是正确答案，于是输进去试一试，结果不是，那就先不管。然后后面四个字符串分别是输入错误和正确时，弹出的MessageBox的标题和内容。因为错误的部分要比正确的位置靠前，所以先双击错误的字符串，看一下具体逻辑。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717125219570.png" alt="image-20220717125219570"></p>
+</li>
+<li><p>点进去发现0x4010FF位置有一个跳转，这个跳转决定到底是错误输出还是正确输出。可以看到这个跳转由上面的<code>CMP EAX, 0</code>的结果控制，也就是说如果相等，就会执行这个跳转，跳到正确的位置（0x401117），否则就是错误的。那作为爆破部分比较简单，直接把这个JE给改成JNE（输入错误会跳转）或者JMP（强制跳转）就可以了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717125622726.png" alt="image-20220717125622726"></p>
+</li>
+<li><p>双击JE那条语句，改成JMP以后assemble</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717131059444.png"></p>
+</li>
+<li><p>最后执行一下，发现well done了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717130547475.png" alt="image-20220717130547475"></p>
+</li>
+</ol>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>虽然爆破能让我们不用序列号就通过，但我们依然不知道正确的序列号是什么，以及其中的审查机制，要知道这些，就需要对整个程序进行算法分析</p>
+<ol>
+<li><p>要进行算法分析，我们要先在Ollydbg里面把程序跑起来</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717131703017.png" alt="image-20220717131703017" style="zoom: 80%;">
+
+<p>按F7单步执行，发现程序从第一行开始执行，到0x40101D会弹出输入序列号的对话框，然后会跳转到0x40106C，于是在0x40106C处按F2下断点</p>
+</li>
+<li><p>往后看，发现调用了一个函数叫GetDlgItemTextA，这个函数是用来接收刚刚在对话框中输入的字符串的。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132048801.png" alt="image-20220717132048801"></p>
+</li>
+<li><p>继续F7执行，执行到GetDlgItemTextA时，我们就不进去细看获取的过程了，按F8直接获取执行的结果</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132354299.png" alt="image-20220717132354299"></p>
+<p>在函数的堆栈处，发现刚刚输入的字符串已经被存在了0x402324的位置了（我没有改默认的字符串）</p>
+<p>这个时候可以右键点击这个地址</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132749398.png" alt="image-20220717132749398" style="zoom:50%;">
+
+<p>点击Follow in Dump，就可以在左边的数据窗口看到了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132833019.png" alt="image-20220717132833019"></p>
+</li>
+<li><p>接下来继续执行，马上又遇到了第二个函数，这个函数百度查一下发现是一个获取硬盘信息的函数，用来获取磁盘驱动卷编号的</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132932806.png" alt="image-20220717132932806"></p>
+<p>直接F8执行过去看结果</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717133249053.png" alt="image-20220717133249053"></p>
+<p>在下面已经获得结果了，此处我的磁盘名称就是test</p>
+<p>另外在这里我们看到了最开始查找字符串时候的4562-ABEX，看起来的确不是答案序列号</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135035633.png" alt="image-20220717135035633"></p>
+<p>但我们会发现，在经过lstrcatA函数后，程序把我们的卷编号和这个字符串拼到了一起</p>
+</li>
+<li><p>接下来我们继续运行，发现这样一段逻辑，先将DL赋值为2，然后执行下面的一系列加法操作，那我们首先来看，被加的地址0x40225C是什么</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135523739.png"></p>
+<p>发现刚好是刚刚拼起来的字符串，如果有一点汇编基础的话，应该知道，接下来的0x40225D、0x40225E、0x40225F分别对应着e、s、t三个字符，也就是说，这段指令就是把这几个字符的ASCII码加一</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135307042.png" alt="image-20220717135307042"></p>
+<p>都加完一遍以后，DEC DL的意思是DL的值减一，然后进行比较JNZ比较的是ZF标志位，当ZF标志位为0时，发生跳转，而DEC只有当被减数与减数相等时会将ZF置为0，于是这段代码将会循环一次。总的来说就是前四位每位一共被加了2.</p>
+</li>
+<li><p>继续往下运行，发现之前搜出来的另一个字符串也出现了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141237038.png"></p>
+<p>并且又是lstrcatA函数，先和空字符串合并，不变，又把这个字符串拼接到了我们刚刚处理过的字符串前面，得到真正的序列号</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141529307.png" alt="image-20220717141529307"></p>
+</li>
+<li><p>接下来，把这个序列号和我们输入的序列号进行比较</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141607771.png" alt="image-20220717141607771"></p>
+<p>如果不相等eax就会返回1，之后的就是在爆破中提到的跳转，就会跳转到错误分支上</p>
+<p>那么这里就有几种方式解决这个程序</p>
+<ol>
+<li><p>既然eax会返回0x1，那么我们可以把比较的对象也改为0x1</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717142002680.png" alt="image-20220717142002680"></p>
+</li>
+<li><p>我们现在已经知道了序列号，并且我们知道序列号只和卷编号有关，所以直接把目标序列号复制下来输进去也可以</p>
+</li>
+<li><p>注意在比较前，程序先将我们输入的数据push进栈，那么我们也可以直接改变push进栈的字符串地址，直接push两个答案进去，自然就一样了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717142229535.png" alt="image-20220717142229535"></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>至此这个程序的分析就结束了</p>
+<h1 id="New-160-Crackme-2-CrackMe-V3-0"><a href="#New-160-Crackme-2-CrackMe-V3-0" class="headerlink" title="New 160 Crackme-2 CrackMe V3.0"></a>New 160 Crackme-2 CrackMe V3.0</h1><p>算法 ：★★</p>
+<p>爆破 ：★★★</p>
+<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2><p>直接打开，发现就是一个纯粹的CrackMe软件，没有什么有用的信息</p>
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><ol>
+<li><p>使用Ollydbg打开</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717224817550.png" alt="image-20220717224817550"></p>
+<p>然后发现有FileName、ReadFile等字样，所以猜测应该是要读取一个文件，文件名应该叫CRACKME3.KEY</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717225026015.png" alt="image-20220717225026015"></p>
+<p>所以我们在相同的目录底下新建一个CRACKME3.KEY文件，内容随便输入就可以</p>
+</li>
+<li><p>然后我们直接在Ollydbg里面第一行下个断点开始单步执行</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718000140890.png"></p>
+<p>可以发现后面遇到一个CreateFileA函数，查一下这个函数应该是创建一个文件指针，本质上是为了打开文件的，如果打开成功就会将EAX赋值，否则EAX为-1（0xFFFFFFFF），不会执行之后的跳转，会将程序引入没有输入的路径</p>
+</li>
+<li><p>随后进行跳转后，会将EAX中的值赋值给0x4020F5这个地址，然后会在之后的ReadFile函数中读取文件</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718004046214.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">ReadFile</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">　　HANDLE hFile, <span class="comment">//文件的句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPVOID lpBuffer, <span class="comment">//用于保存读入数据的一个缓冲区</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　DWORD nNumberOfBytesToRead, <span class="comment">//要读入的字符数</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPDWORD lpNumberOfBytesRead, <span class="comment">//指向实际读取字节数的指针</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPOVERLAPPED lpOverlapped <span class="comment">//如文件打开时指定了FILE_FLAG_OVERLAPPED，那么必须，用这个参数引用一个特殊的结构。该结构定义了一次异步读取操作。否则，应将这个参数设为NULL</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>查一下ReadFile的函数原型，发现这个ReadFile函数前面的几行实际上是在给函数传参，比如PUSH EAX（0x12）就是说函数只会从文件中读取前0x12（18）个字符，读取的缓冲区在0x402008这个地址，可以看出来刚刚CreateFileA函数返回的EAX则是文件的句柄</p>
+</li>
+<li><p>然后继续执行，程序获取了我们文件中的内容后进入了位于0x401311的另一个函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718004745267.png" alt="image-20220718004745267"></p>
+<p>按F7进入这个函数查看里面的逻辑</p>
+</li>
+<li><p>进入以后首先的两个XOR是为了清空ECX和EAX，然后将ESP+4的值赋值给ESI</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005016359.png" alt="image-20220718005016359"></p>
+<p>观察寄存器地址发现ESP的值是0x19FF70，加4后就是0x19FF74，那再去看堆栈地址</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005314306.png" alt="image-20220718005314306"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005422158.png" alt="image-20220718005422158"></p>
+<p>发现正好就是我们刚刚读进来的字符串，也就是说这一行指令就是把我们刚刚读进来的字符串赋值给ESI</p>
+</li>
+<li><p>接下来，给BL赋值为0x41，再把ESI中的第一个字符提取出来赋值给AL，再让AL和BL进行异或，从这里我们想到，BL的0x41可能也是一个字符的ASCII码，查表得到0x41对应‘A’。然后将异或得到的结果放回ESI（0x40131F），再将ESI+1（0x401321）。注意这里的ESI实际上是起到指针的效果，ESI+1并不是让字符串中的字符+1，而是指向的地址增加，所以就是相当于后移一位。然后再将BL+1，也就是’B‘（0x401322）</p>
+</li>
+<li><p>接下来，比较AL是否为0，为0则跳转，否则不跳，这里第一轮是不跳的，然后让CL也+1，由于最开始ECX被清空了，所以此时ECX=0x1，然后再让BL和4F比较，不相等则跳转到前面重复执行，从之前的过程中我们知道每次执行上面的指令时，BL会+1，所以刚刚的指令一共会执行0x4F-0x41=0xe=14次，也就是会对前14个字符分别进行与“ABCDEFGHIJKLMN”的异或，然后出循环</p>
+</li>
+<li><p>最后将ECX，也就是一个计数器，保存在0x402149，返回函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011407360.png" alt="image-20220718011407360"></p>
+</li>
+<li><p>函数返回后要将0x4020F9位置的值与0x12345678异或</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011530549.png" alt="image-20220718011530549"></p>
+<p>查看一下发现这个位置的值为0x00000270</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011832457.png" alt="image-20220718011832457"></p>
+<p>但这个值是怎么来的呢？回溯一下会发现，是刚刚在第6步和第7步之间省略掉的一行指令，当时我们不知道这个有什么用，就省略掉了，现在再回去看，这行指令是把每个字符异或的结果都加在一起，存在0x4020F9的位置，所以我们看到的0x0270就是所有的异或后的值相加的结果。</p>
+</li>
+<li><p>异或之后，接下来把ESP+4，把处理过的字符串入栈，传给0x0040133C位置的函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718013848264.png" alt="image-20220718013848264"></p>
+<p>这个函数很简单，第一行是把处理过的字符串赋值给ESI指向的地址，然后地址+0xE，这时ESI就指向了最后四位没有进行过异或操作的字符，然后赋值给EAX，就返回了</p>
+</li>
+<li><p>回来以后，先给ESP+4，然后又是0x4020F9这个位置的值，这次要把他和EAX进行比较，刚刚我们分析函数可以知道EAX中是我们的后四位的字符的ASCII码</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718014208962.png" alt="image-20220718014208962"></p>
+<p>这里我们先写一下让0x4020F9里面的值等于EAX的值的算法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> result[<span class="number">18</span>];						<span class="comment">//最后生成的答案字符串</span></span><br><span class="line"><span class="type">char</span> input[<span class="number">18</span>]=&#123;<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;@&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;p&#x27;</span>,<span class="string">&#x27;q&#x27;</span>,<span class="string">&#x27;r&#x27;</span>&#125;;							<span class="comment">//输入的字符串</span></span><br><span class="line"><span class="type">int</span> sum;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">14</span>; i ++)&#123;			</span><br><span class="line">    result[i] = input[i] ^ (<span class="number">65</span> + i);	<span class="comment">//前14个字符对大写字母进行异或,注意得到的结果是十进制的</span></span><br><span class="line">    sum += result[i];					<span class="comment">//对异或结果求和</span></span><br><span class="line">	result[i] = result[i]%<span class="number">16</span>+result[i]/<span class="number">16</span>*<span class="number">10</span>; <span class="comment">//这一步让输出的结果直接就是16进制数</span></span><br><span class="line">&#125;</span><br><span class="line">sum = sum ^ <span class="number">0x12345678</span>;					<span class="comment">//求得的和与0x12345678进行异或</span></span><br><span class="line"><span class="type">char</span> tmp[<span class="number">8</span>];</span><br><span class="line"><span class="built_in">sprintf</span>(tmp, <span class="string">&quot;%x&quot;</span>, sum);				<span class="comment">//将求得的结果转化为字符串16进制</span></span><br><span class="line"><span class="comment">//由于系统采用小端法，所以求得的结果要从后往前存在result中，注意</span></span><br><span class="line">result[<span class="number">17</span>] = <span class="built_in">int</span>(tmp[<span class="number">0</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">1</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">16</span>] = <span class="built_in">int</span>(tmp[<span class="number">2</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">3</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">15</span>] = <span class="built_in">int</span>(tmp[<span class="number">4</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">5</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">14</span>] = <span class="built_in">int</span>(tmp[<span class="number">6</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">7</span>] - <span class="number">48</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">18</span>; i ++)&#123;</span><br><span class="line">    cout&lt;&lt;<span class="built_in">int</span>(result[i])&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>用010editor打开CRACKME3.KEY，把输出的<code>36232D252A063E29212524622E2024543412</code>按十六进制输入后保存就可以了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220819143624785.png" alt="image-20220819143624785"></p>
+</li>
+<li><p>再次打开软件，发现已经破解成功了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220819143711292.png" alt="image-20220819143711292"></p>
+</li>
+</ol>
+<h2 id="爆破-1"><a href="#爆破-1" class="headerlink" title="爆破"></a>爆破</h2><p>爆破的话比较简单，基本上就是把通往正确道路上的跳转都改掉就可以了</p>
+<p><code>00401035 的jnz改为jmp</code>强制在没有key文件时候不会跳转到程序结束</p>
+<p><code>0040106D 的jnz改为nop</code>无论读取到什么内容，无论有没有18个字符都可以继续运行</p>
+<p><code>0040109F 的je改为nop</code>无论之前的结果，运算过后与后四个字符是否相同，都继续</p>
+<p><code>0040118A 的jnz改为nop</code>在没有key文件时候不会结束，如果有Key文件，似乎不用改这个</p>
+<h1 id="New-160-Crackme-3-AcidBytes2"><a href="#New-160-Crackme-3-AcidBytes2" class="headerlink" title="New 160 Crackme-3 AcidBytes2"></a>New 160 Crackme-3 AcidBytes2</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<p>脱壳 ：★</p>
+<h2 id="准备工作-2"><a href="#准备工作-2" class="headerlink" title="准备工作"></a>准备工作</h2><p>这是这个系列第一个涉及到脱壳的程序，因此需要提前准备好一系列的工具</p>
+<ul>
+<li>PEiD</li>
+<li>exeinfope</li>
+<li>ImportREC</li>
+<li>其中前两个工具是用来查壳的，最后的是用来修补脱壳后的程序的（据说使用win xp和win7系统，不需要对其进行修复，但更新的win都需要在脱壳后对程序进行修复。</li>
+</ul>
+<p>此外我们大概运行一下这个程序，发现还是一个序列号性质的，就是你输入正确的值，就能过关。</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211137632.png" alt="image-20230220211137632" style="zoom:50%;">
+
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211148710.png" alt="image-20230220211148710" style="zoom:50%;">
+
+<h2 id="脱壳"><a href="#脱壳" class="headerlink" title="脱壳"></a>脱壳</h2><p>脱壳部分我本身其实并不是很理解原理，<a href="https://blog.csdn.net/qq_43082315/article/details/127200630">于是百度大致学习了一下</a>，在这篇文章中我们可以发现，一个加壳的程序，在反汇编以后我们看到的都是dd这样的伪指令。而什么是伪指令呢？伪指令是指在汇编的过程中，程序发给汇编器的指令，而不会最终编程机器码，可以理解为是一些给汇编器的参数，会被汇编器截取下来。</p>
+<p>但这篇文章讲的比较浅，于是又搜到<a href="https://zhuanlan.zhihu.com/p/404215416?utm_medium=social&utm_oi=877948885966938112&utm_id=0">这篇</a>。从中我们可以发现，壳可以理解为一个压缩软件，只不过和我们一般见到的压缩软件的不同之处在于，这个压缩软件和压缩包是一体的。</p>
+<p>这篇文章后面提到了我们要使用的手工脱壳的方法。我们使用的是ESP定律法，利用堆栈平衡的特点来进行。堆栈平衡可以看这个<a href="https://bbs.kanxue.com/thread-250784.htm">贴子</a>，大概的意思就是说一段代码在调用函数前应该有自己的堆栈，而在调用结束后，应该将堆栈空间恢复成调用前的样子，而ESP作为栈顶寄存器，会在调用函数后作为新函数的栈底，调用函数结束后恢复为栈顶，由此我们知道，一旦原来的ESP归位了，就代表函数执行完毕了。通过这个特性，我们可以跟踪“壳”何时将原代码“解压”成功。而我们如何得知原来的ESP何时归位呢？这就需要硬件断点。硬件断点可以对某个地址下断点，一旦程序进行了与这个地址有关的操作，就会产生中断。</p>
+<p>硬件断点</p>
+<blockquote>
+<p>硬件断点比软件断点的功能更强，除了函数断点外，还可以数据断点，可以指定当数据被读或写时中断。</p>
+<p>硬件断点的本质就是在指定内存下断点，内存可以位于代码段（函数断点）也可以是数据段（数据断点）。可以设置事件有执行、写入、读写时中断。</p>
+</blockquote>
+<p>至此我们的理论工作就全部结束了，可以开始操作了。</p>
+<p>首先先用PEID查壳</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203712852.png" alt="image-20230220203712852" style="zoom:50%;">
+
+<p>发现有UPX加壳</p>
+<p>于是加载程序进OllyDBG</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203830295.png" alt="image-20230220203830295" style="zoom:80%;">
+
+<p>看到如图的区域</p>
+<p>因为有壳，所以不难想到这应该是壳的代码，进行一下字符串搜索，果然什么都没有</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203930071.png" alt="image-20230220203930071"></p>
+<p>然后我们先执行一步，发现ESP中存的地址是0x0019FF58，OK也就是说这就是壳自己所在的堆栈的ESP，所以我们直接对这个地址打硬件断点，观测这个地址什么时候会发生一次“恢复”</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220204612431.png" alt="image-20230220204612431"></p>
+<p>右键点击这个地址，选择HW break，然后我们的断点就打好了，接下来直接让程序自己运行</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220204816735.png" alt="image-20230220204816735"></p>
+<p>然后程序在运行到这一步的时候停下来了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220205025317.png" alt="image-20230220205025317"></p>
+<p>说明这就是我们要找的壳的结尾，可以看到接下来程序跳转到了0x00442E44这个位置，所以我们继续运行程序去这个位置找</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220205811727.png" alt="image-20230220205811727"></p>
+<p>找到以后右键点击这个指令，选择用OllyDump脱壳调试进行，然后直接点脱壳就可以了，然后会让保存成另一个exe</p>
+<p>打开新保存的exe发现会有报错，看到网上说要用Import REC注入一下<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210007071.png" alt="image-20230220210007071"></p>
+<p>我们先打开一个脱壳前的程序，然后用Import REC选中这个进程</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210307243.png" alt="image-20230220210307243"></p>
+<p>然后会发现，此时的映像基址是0x00400000，而我们刚刚看到入口点应该是0x00442E44，所以我们在下面的OEP中把这个差值0x42E44补上</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210524991.png" alt="image-20230220210524991"></p>
+<p>然后点击右侧的自动搜索IAT，最后底下的获取导入表，会发现上面多了很多导入表函数，接下来直接点下面的修复转储，选择我们刚刚脱壳后获得的那个报错的程序进行转储，然后会自动生成一个新的程序，这个新的程序就是最终的脱壳结果了。</p>
+<h2 id="算法分析-1"><a href="#算法分析-1" class="headerlink" title="算法分析"></a>算法分析</h2><p>脱壳结束后还是老规矩，先搜索字符串，然后我们发现了我们在准备工作中遇到的一系列字符串</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211227910.png" alt="image-20230220211227910"></p>
+<p>一眼就看见了Congrats，于是我们之间双击跟进</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221151956907.png" alt="image-20230221151956907"></p>
+<p>跟进之后发现两句破解成功的提示上面有一个跳转，应该是不满足的时候就直接跳转到两个提示底下了，因此我们要想办法不让他跳转。</p>
+<p>我们在这个函数入口（0x00442B2C）打上断点，然后让程序自己运行，需要输入的话，我们就随便输入一个123456，然后当程序执行到函数入口我们开始步进。前面十行一堆push指令是用来平衡堆栈的，我们不用管，直接看到0x442B42，发现程序将[local.1]这个地址给了edx，我们执行之后发现是0x0019F838，正好是ebp-0x4，于是我们正常实行过下面的函数，发现执行后0x0019F838这个位置存储了我们输入的123456，而后面的eax我们发现是6，应该对应的是输入数据的长度。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221194422557.png" alt="image-20230221194422557"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221194433222.png" alt="image-20230221194433222"></p>
+<p>接下来又是类似的操作，我们注意到这次程序先将我们输入的字符串作为参数，又将一串数字作为下面的参数，所以我们猜测接下来的函数应该是一个比对，于是我们可以猜到这个密码应该就是12011982</p>
+<h2 id="爆破-2"><a href="#爆破-2" class="headerlink" title="爆破"></a>爆破</h2><p>爆破比较简单，在脱壳的基础上，把0x00442B5D位置的跳转用nop覆盖掉就可以了，这时候无论我们输入什么，比对结果如何都会直接进到后面的成功部分。</p>
+<h1 id="New-160-Crackme-4-Andrnalin1"><a href="#New-160-Crackme-4-Andrnalin1" class="headerlink" title="New 160 Crackme-4 Andrnalin1"></a>New 160 Crackme-4 Andrnalin1</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作-3"><a href="#准备工作-3" class="headerlink" title="准备工作"></a>准备工作</h2><p>老规矩，先运行，看到是一个输入框，大概知道又是序列码类型的题，拿PEID查个壳</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201107854.png" alt="image-20230221201107854"></p>
+<p>发现没有，是VB5.0编写的程序（有年头了）这也是这个系列的第一个VB程序。</p>
+<h2 id="算法分析-2"><a href="#算法分析-2" class="headerlink" title="算法分析"></a>算法分析</h2><p>老规矩，把程序扔进OllyDBG后直接中文搜索引擎智能搜索，然后发现如图的一些字符串<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201303763.png" alt="image-20230221201303763"></p>
+<p>看起来不太像英文，有道词典搜了一下发现是德文，不过即使不知道是德文，有个SuCCESFul字符串应该也能看出来是成功的意思，所以我们还是直接跟进。</p>
+<p>跟进以后发现成功的代码段附近是这样的</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201505131.png" alt="image-20230221201505131"></p>
+<p>于是我们从这个字符串开始往上找跳转首先就看到了0x00401D9D位置的跳转，目标位置在底下，过去看了一下，发现如果跳过去应该就失败了，所以可以推出0x00401D9D这个位置不能跳转<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201629085.png" alt="image-20230221201629085"></p>
+<p>于是我们回去继续网上看发现右侧注释部分有个特殊的字符串“SynTaX 2oo1”</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201854664.png" alt="image-20230221201854664"></p>
+<p>而这个字符串底下注释中函数名写的vbaStrCmp，这就告诉我们下面这个函数应该是进行字符串比对的，那比对的另一方是谁呢？我们猜测应该是我们输入的字符串，所以我们在这打个断点，然后随便输入个123456试试</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202228446.png" alt="image-20230221202228446"></p>
+<p>果然，执行到push ecx时ecx存的值就是“123456”了，所以接下来程序把我们输入的字符串和给定的字符串都入栈进行比对，比对函数执行完后寄存器情况如下</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202436898.png" alt="image-20230221202436898"></p>
+<p>接下来的指令先把eax复制给edi（此时edi为FFFFFFFF），然后将一个地址复制给ecx，我们去内存里看一下会发现这个地址正好是存储我们输入字符串的地址。接下来让edi取补码，但是这里注意一下，因为这里edi是FFFFFFFF，neg指令取补码的原理和用0减操作数一样，是会产生借位的因此此时的cz为1，而接下来的指令sbb的意思是前面的操作数=前面的操作数-后面的操作数-cz，因此执行后edi为-1（0xFFFFFFFF），然后对edi加一，edi归0，再取反，依然是0。</p>
+<p>然后接下来两个函数我们不太用管，名字上来看应该是回收中间开辟的字符串和对象空间的。与之后的di和si的比较没什么关系。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202844893.png" alt="image-20230221202844893"></p>
+<p>但是我们注意，esi寄存器一直都是0，因此cmp后会触发跳转，于是我们逆向分析，如何才能让edi的值不为0。逆推发现，若最后结果不0，则最后取反前不能是0，则加一前不能是-1，则sbb时不能得-1，但sbb edi edi指令下，edi减自己一定为0，所以我们要求此时cz不能是1，所以取反前的edi一定是0，才不会有借位或进位。由此我们猜测输入与比对的字符串相同的字符串可以使edi为0。尝试后解决。</p>
+<h2 id="爆破-3"><a href="#爆破-3" class="headerlink" title="爆破"></a>爆破</h2><p>这题爆破起来方法很多，可以直接把je用nop填充，也可以在比较前把edi的值改了</p>
+<h1 id="New-160-Crackme-5-ArturDents-CM-2"><a href="#New-160-Crackme-5-ArturDents-CM-2" class="headerlink" title="New 160 Crackme-5 ArturDents_CM#2"></a>New 160 Crackme-5 ArturDents_CM#2</h1><p>算法 ：★★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作-4"><a href="#准备工作-4" class="headerlink" title="准备工作"></a>准备工作</h2><p>首先扔到PEID里面查壳，发现倒是没有壳，不过是用没见过的语言写的程序</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205321539.png" alt="image-20230221205321539"></p>
+<p>然后运行一下发现好像是一个登录程序</p>
+<h2 id="算法分析-3"><a href="#算法分析-3" class="headerlink" title="算法分析"></a>算法分析</h2><p>虽然编程语言没见过，但是没关系，直接往OllyDBG里面扔，反正汇编语言都是一样的。进去以后老规矩先搜字符串，直接搜到了成功的字符串，那就废话少说直接跟进</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205825707.png" alt="image-20230221205825707"></p>
+<p>跟进之后大概看了一下，发现比之前的要复杂一些</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205956701.png" alt="image-20230221205956701"></p>
+<p>在成功的对话框出现之前要经过一个循环，而这个循环内每次都有可能直接跳转到函数出口，跳过成功的对话框，说明在跳出循环之前不能让跳转发生</p>
+<p>所以我们在循环开始前下个断点，然后输入abcde和123456尝试一下。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221210422098.png" alt="image-20230221210422098"></p>
+<p>到这里，程序已经把我们的输入加载成功了</p>
+<p>然后我们往下执行，进入循环，第一步是把eax中的值也就是我们输入的name的第一个字母存到dl中，然后dl减去cl中的值，此时cl中的值是5，接下来要我们比对我们输入的serial第一个的第一个字符是否和相减后的dl中的值相同。到这里我们大概知道这道题需要两个输入字段配合着来。继续往后看，当比较跳转后还要分别给eax和ebx的地址加一，也就是把开头的字符取掉。然后开始下次循环。经过每次循环cl中的值都会减少1，所以我们可以逆推出name和serial之间的关系。</p>
+<p>可以的一组答案是 fghij acegi</p>
+<h2 id="爆破-4"><a href="#爆破-4" class="headerlink" title="爆破"></a>爆破</h2><p>爆破的话很简单一种是把跳转nop掉，还有一种是我在实验中使用的，就是在每次比较前，把寄存器中的数改为相同的值</p>
 ]]></content>
       <categories>
-        <category>啃书笔记</category>
+        <category>自学笔记</category>
       </categories>
       <tags>
-        <tag>web</tag>
-        <tag>JavaScript</tag>
+        <tag>Reverse</tag>
       </tags>
   </entry>
   <entry>
@@ -317,6 +532,46 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaScript学习记录</title>
+    <url>/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="交互式网络"><a href="#交互式网络" class="headerlink" title="交互式网络"></a>交互式网络</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>要通过事件来触发函数，要添加事件处理器，比如载入网页时触发，使用<code>onload</code>，然后通过<code>alert()</code>函数列出信息。</p>
+<p>事件由用户触发，但最终还是来源于浏览器，是一个被用户触发的事件，但浏览器必须包装关于事件的信息，再传递给负责相应这个事件的函数</p>
+<p>无论事件会不会被相应，都不会影响网页的载入</p>
+<p>Javascript的代码可以放在<code>&lt;script&gt;</code>标签里，也可以直接放在事件处理器中</p>
+<p>事件以JavaScript代码相应网页里发生的动静</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="prompt函数"><a href="#prompt函数" class="headerlink" title="prompt函数"></a>prompt函数</h3><p><code>prompt()</code>负责制作弹出窗口，用于显示可提示用户进行输入的对话框。函数返回值为字符串。当用户输入为数字或布尔类型时，一律返回string型，若想使类型不变，则需要进行类型转换。</p>
+<h3 id="document-getElementById函数"><a href="#document-getElementById函数" class="headerlink" title="document.getElementById函数"></a>document.getElementById函数</h3><p>顾明思义，get-Element-By-Id，就是通过ID来设置/返回HTML标签的属性及调用其事件与方法。用这个方法基本上可以控制页面所有标签，条件很简单就是给每个标签分配一个ID号</p>
+<h1 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h1><p>三种基本数据类型：text、number、boolean</p>
+<p>number用于存储数值数据、text用于存储字符串、boolean用于存储逻辑值</p>
+<p>alart框只能显示文本，不能显示数字，所以要进行类型转换</p>
+<p>在重新载入网页时，脚本的数据被重新设为初始值</p>
+<h2 id="函数-1"><a href="#函数-1" class="headerlink" title="函数"></a>函数</h2><h3 id="parseInt-函数"><a href="#parseInt-函数" class="headerlink" title="parseInt()函数"></a>parseInt()函数</h3><p>把字符串传给函数，函数把字符串转化为整数</p>
+<h3 id="parseFloat-函数"><a href="#parseFloat-函数" class="headerlink" title="parseFloat()函数"></a>parseFloat()函数</h3><p>把字符串传给函数，函数把字符串转化为浮点数</p>
+<p>使用这两个函数应该只包含数字的字符串</p>
+<p>NaN表示非数字，也用于某段数据不是数字，但被期待是数字的时候</p>
+<h3 id="indexOf-函数"><a href="#indexOf-函数" class="headerlink" title="indexOf()函数"></a>indexOf()函数</h3><p>indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。<br>indexOf() 方法对大小写敏感！</p>
+<p>string.indexOf(“xxx”)表示在string中搜索字符串xxx</p>
+<h1 id="探索客户端"><a href="#探索客户端" class="headerlink" title="探索客户端"></a>探索客户端</h1><h2 id="函数-2"><a href="#函数-2" class="headerlink" title="函数"></a>函数</h2><h3 id="refresh-函数"><a href="#refresh-函数" class="headerlink" title="refresh()函数"></a>refresh()函数</h3><p>重新整理网页</p>
+<h3 id="setTimeout-函数"><a href="#setTimeout-函数" class="headerlink" title="setTimeout()函数"></a>setTimeout()函数</h3><p>单次定时器函数</p>
+<p>函数有两段参数，分别是时间延迟和想要运行的程序代码，两个参数顺序无所谓</p>
+<p>时间单位为毫秒</p>
+<h3 id="setInterval-函数"><a href="#setInterval-函数" class="headerlink" title="setInterval()函数"></a>setInterval()函数</h3><p>间隔定时器函数，格式与setTimeout函数相同，以对应的时间间隔重复执行代码</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello</title>
+    <url>/2022/04/22/hello-world/</url>
+    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
+]]></content>
+  </entry>
+  <entry>
     <title>使用Fuzzilli测试JS引擎</title>
     <url>/2022/04/22/%E4%BD%BF%E7%94%A8Fuzzilli%E6%B5%8B%E8%AF%95JavaScriptCore/</url>
     <content><![CDATA[<h1 id="使用Fuzzilli测试JS引擎"><a href="#使用Fuzzilli测试JS引擎" class="headerlink" title="使用Fuzzilli测试JS引擎"></a>使用Fuzzilli测试JS引擎</h1><h2 id="Webkit（JSC）篇"><a href="#Webkit（JSC）篇" class="headerlink" title="Webkit（JSC）篇"></a>Webkit（JSC）篇</h2><h3 id="准备Webkit"><a href="#准备Webkit" class="headerlink" title="准备Webkit"></a>准备Webkit</h3><p>首先通过命令</p>
@@ -387,6 +642,28 @@
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/2022/04/22/%E5%91%A8%E6%8A%A5/</url>
+    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
+<p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
+<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
+<p>开了改进AFL的组会</p>
+<p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p>
+<h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p>
+<p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p>
+<p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p>
+<p>晚上出去喝酒</p>
+<h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p>
+<p>晚上做网络实验，继续看论文</p>
+<h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p>
+<h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p>
+<p>晚上上安全系统实验，正常背单词</p>
+<h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
+<p>晚上挺凉快的</p>
+<h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
+]]></content>
+  </entry>
+  <entry>
     <title>植物大战僵尸外挂笔记</title>
     <url>/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="植物大战僵尸外挂笔记"><a href="#植物大战僵尸外挂笔记" class="headerlink" title="植物大战僵尸外挂笔记"></a>植物大战僵尸外挂笔记</h1><h2 id="0x00-CE初步"><a href="#0x00-CE初步" class="headerlink" title="0x00 CE初步"></a>0x00 CE初步</h2><blockquote>
@@ -454,12 +731,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello</title>
-    <url>/2022/04/22/hello-world/</url>
-    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
-]]></content>
-  </entry>
-  <entry>
     <title>污点分析技术（一）基本原理</title>
     <url>/2021/12/13/%E6%B1%A1%E7%82%B9%E6%8A%80%E6%9C%AF/</url>
     <content><![CDATA[<p>这两天在AFLSMART的论文时发现提到了动态污点分析这项技术，正好前两天在VUL337课题组里面也发现有大佬提到过这个，但是还是不太明白，趁着今天有时间给自己科普一下。</p>
@@ -518,28 +789,6 @@
         <tag>Fuzzing</tag>
         <tag>taint</tag>
       </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2022/04/22/%E5%91%A8%E6%8A%A5/</url>
-    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
-<p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
-<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
-<p>开了改进AFL的组会</p>
-<p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p>
-<h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p>
-<p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p>
-<p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p>
-<p>晚上出去喝酒</p>
-<h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p>
-<p>晚上做网络实验，继续看论文</p>
-<h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p>
-<h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p>
-<p>晚上上安全系统实验，正常背单词</p>
-<h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
-<p>晚上挺凉快的</p>
-<h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
-]]></content>
   </entry>
   <entry>
     <title>软件安全与质量保证的模糊测试</title>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>New 160 Crackme 1-5 |  Kery</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Kery" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-New 160 Crackme 1-5"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  New 160 Crackme 1-5
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/02/21/New%20160%20Crackme%201-5/" class="article-date">
+  <time datetime="2023-02-21T13:43:53.000Z" itemprop="datePublished">2023-02-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/">自学笔记</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">5.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">21 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="New-160-Crackme-1-abex’-5th-crackme"><a href="#New-160-Crackme-1-abex’-5th-crackme" class="headerlink" title="New 160 Crackme-1 abex’ 5th crackme"></a>New 160 Crackme-1 abex’ 5th crackme</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>OllyDbg</p>
+<p>先运行一下软件，发现是一个验证序列号的软件，如果输入序列号不正确就会自动退出</p>
+<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><ol>
+<li><p>使用Ollydbg打开要进行爆破的软件得到以下的界面</p>
+<p>按道理说应该先查壳，但是鉴于比较简单，就不查了，事实上也没有加壳<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717124717778.png" alt="image-20220717124717778" style="zoom: 50%;"></p>
+</li>
+<li><p>先查询字符串。右键点击第一行，找到查找字符串<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717124951265.png" alt="image-20220717124951265"></p>
+</li>
+<li><p>发现一共有6个字符串，其中前两个很像序列号格式的不知道是什么，猜测是正确答案，于是输进去试一试，结果不是，那就先不管。然后后面四个字符串分别是输入错误和正确时，弹出的MessageBox的标题和内容。因为错误的部分要比正确的位置靠前，所以先双击错误的字符串，看一下具体逻辑。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717125219570.png" alt="image-20220717125219570"></p>
+</li>
+<li><p>点进去发现0x4010FF位置有一个跳转，这个跳转决定到底是错误输出还是正确输出。可以看到这个跳转由上面的<code>CMP EAX, 0</code>的结果控制，也就是说如果相等，就会执行这个跳转，跳到正确的位置（0x401117），否则就是错误的。那作为爆破部分比较简单，直接把这个JE给改成JNE（输入错误会跳转）或者JMP（强制跳转）就可以了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717125622726.png" alt="image-20220717125622726"></p>
+</li>
+<li><p>双击JE那条语句，改成JMP以后assemble</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717131059444.png"></p>
+</li>
+<li><p>最后执行一下，发现well done了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717130547475.png" alt="image-20220717130547475"></p>
+</li>
+</ol>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>虽然爆破能让我们不用序列号就通过，但我们依然不知道正确的序列号是什么，以及其中的审查机制，要知道这些，就需要对整个程序进行算法分析</p>
+<ol>
+<li><p>要进行算法分析，我们要先在Ollydbg里面把程序跑起来</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717131703017.png" alt="image-20220717131703017" style="zoom: 80%;">
+
+<p>按F7单步执行，发现程序从第一行开始执行，到0x40101D会弹出输入序列号的对话框，然后会跳转到0x40106C，于是在0x40106C处按F2下断点</p>
+</li>
+<li><p>往后看，发现调用了一个函数叫GetDlgItemTextA，这个函数是用来接收刚刚在对话框中输入的字符串的。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132048801.png" alt="image-20220717132048801"></p>
+</li>
+<li><p>继续F7执行，执行到GetDlgItemTextA时，我们就不进去细看获取的过程了，按F8直接获取执行的结果</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132354299.png" alt="image-20220717132354299"></p>
+<p>在函数的堆栈处，发现刚刚输入的字符串已经被存在了0x402324的位置了（我没有改默认的字符串）</p>
+<p>这个时候可以右键点击这个地址</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132749398.png" alt="image-20220717132749398" style="zoom:50%;">
+
+<p>点击Follow in Dump，就可以在左边的数据窗口看到了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132833019.png" alt="image-20220717132833019"></p>
+</li>
+<li><p>接下来继续执行，马上又遇到了第二个函数，这个函数百度查一下发现是一个获取硬盘信息的函数，用来获取磁盘驱动卷编号的</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132932806.png" alt="image-20220717132932806"></p>
+<p>直接F8执行过去看结果</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717133249053.png" alt="image-20220717133249053"></p>
+<p>在下面已经获得结果了，此处我的磁盘名称就是test</p>
+<p>另外在这里我们看到了最开始查找字符串时候的4562-ABEX，看起来的确不是答案序列号</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135035633.png" alt="image-20220717135035633"></p>
+<p>但我们会发现，在经过lstrcatA函数后，程序把我们的卷编号和这个字符串拼到了一起</p>
+</li>
+<li><p>接下来我们继续运行，发现这样一段逻辑，先将DL赋值为2，然后执行下面的一系列加法操作，那我们首先来看，被加的地址0x40225C是什么</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135523739.png"></p>
+<p>发现刚好是刚刚拼起来的字符串，如果有一点汇编基础的话，应该知道，接下来的0x40225D、0x40225E、0x40225F分别对应着e、s、t三个字符，也就是说，这段指令就是把这几个字符的ASCII码加一</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135307042.png" alt="image-20220717135307042"></p>
+<p>都加完一遍以后，DEC DL的意思是DL的值减一，然后进行比较JNZ比较的是ZF标志位，当ZF标志位为0时，发生跳转，而DEC只有当被减数与减数相等时会将ZF置为0，于是这段代码将会循环一次。总的来说就是前四位每位一共被加了2.</p>
+</li>
+<li><p>继续往下运行，发现之前搜出来的另一个字符串也出现了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141237038.png"></p>
+<p>并且又是lstrcatA函数，先和空字符串合并，不变，又把这个字符串拼接到了我们刚刚处理过的字符串前面，得到真正的序列号</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141529307.png" alt="image-20220717141529307"></p>
+</li>
+<li><p>接下来，把这个序列号和我们输入的序列号进行比较</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141607771.png" alt="image-20220717141607771"></p>
+<p>如果不相等eax就会返回1，之后的就是在爆破中提到的跳转，就会跳转到错误分支上</p>
+<p>那么这里就有几种方式解决这个程序</p>
+<ol>
+<li><p>既然eax会返回0x1，那么我们可以把比较的对象也改为0x1</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717142002680.png" alt="image-20220717142002680"></p>
+</li>
+<li><p>我们现在已经知道了序列号，并且我们知道序列号只和卷编号有关，所以直接把目标序列号复制下来输进去也可以</p>
+</li>
+<li><p>注意在比较前，程序先将我们输入的数据push进栈，那么我们也可以直接改变push进栈的字符串地址，直接push两个答案进去，自然就一样了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717142229535.png" alt="image-20220717142229535"></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>至此这个程序的分析就结束了</p>
+<h1 id="New-160-Crackme-2-CrackMe-V3-0"><a href="#New-160-Crackme-2-CrackMe-V3-0" class="headerlink" title="New 160 Crackme-2 CrackMe V3.0"></a>New 160 Crackme-2 CrackMe V3.0</h1><p>算法 ：★★</p>
+<p>爆破 ：★★★</p>
+<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2><p>直接打开，发现就是一个纯粹的CrackMe软件，没有什么有用的信息</p>
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><ol>
+<li><p>使用Ollydbg打开</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717224817550.png" alt="image-20220717224817550"></p>
+<p>然后发现有FileName、ReadFile等字样，所以猜测应该是要读取一个文件，文件名应该叫CRACKME3.KEY</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717225026015.png" alt="image-20220717225026015"></p>
+<p>所以我们在相同的目录底下新建一个CRACKME3.KEY文件，内容随便输入就可以</p>
+</li>
+<li><p>然后我们直接在Ollydbg里面第一行下个断点开始单步执行</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718000140890.png"></p>
+<p>可以发现后面遇到一个CreateFileA函数，查一下这个函数应该是创建一个文件指针，本质上是为了打开文件的，如果打开成功就会将EAX赋值，否则EAX为-1（0xFFFFFFFF），不会执行之后的跳转，会将程序引入没有输入的路径</p>
+</li>
+<li><p>随后进行跳转后，会将EAX中的值赋值给0x4020F5这个地址，然后会在之后的ReadFile函数中读取文件</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718004046214.png"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">ReadFile</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">　　HANDLE hFile, <span class="comment">//文件的句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPVOID lpBuffer, <span class="comment">//用于保存读入数据的一个缓冲区</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　DWORD nNumberOfBytesToRead, <span class="comment">//要读入的字符数</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPDWORD lpNumberOfBytesRead, <span class="comment">//指向实际读取字节数的指针</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPOVERLAPPED lpOverlapped <span class="comment">//如文件打开时指定了FILE_FLAG_OVERLAPPED，那么必须，用这个参数引用一个特殊的结构。该结构定义了一次异步读取操作。否则，应将这个参数设为NULL</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>查一下ReadFile的函数原型，发现这个ReadFile函数前面的几行实际上是在给函数传参，比如PUSH EAX（0x12）就是说函数只会从文件中读取前0x12（18）个字符，读取的缓冲区在0x402008这个地址，可以看出来刚刚CreateFileA函数返回的EAX则是文件的句柄</p>
+</li>
+<li><p>然后继续执行，程序获取了我们文件中的内容后进入了位于0x401311的另一个函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718004745267.png" alt="image-20220718004745267"></p>
+<p>按F7进入这个函数查看里面的逻辑</p>
+</li>
+<li><p>进入以后首先的两个XOR是为了清空ECX和EAX，然后将ESP+4的值赋值给ESI</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005016359.png" alt="image-20220718005016359"></p>
+<p>观察寄存器地址发现ESP的值是0x19FF70，加4后就是0x19FF74，那再去看堆栈地址</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005314306.png" alt="image-20220718005314306"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005422158.png" alt="image-20220718005422158"></p>
+<p>发现正好就是我们刚刚读进来的字符串，也就是说这一行指令就是把我们刚刚读进来的字符串赋值给ESI</p>
+</li>
+<li><p>接下来，给BL赋值为0x41，再把ESI中的第一个字符提取出来赋值给AL，再让AL和BL进行异或，从这里我们想到，BL的0x41可能也是一个字符的ASCII码，查表得到0x41对应‘A’。然后将异或得到的结果放回ESI（0x40131F），再将ESI+1（0x401321）。注意这里的ESI实际上是起到指针的效果，ESI+1并不是让字符串中的字符+1，而是指向的地址增加，所以就是相当于后移一位。然后再将BL+1，也就是’B‘（0x401322）</p>
+</li>
+<li><p>接下来，比较AL是否为0，为0则跳转，否则不跳，这里第一轮是不跳的，然后让CL也+1，由于最开始ECX被清空了，所以此时ECX=0x1，然后再让BL和4F比较，不相等则跳转到前面重复执行，从之前的过程中我们知道每次执行上面的指令时，BL会+1，所以刚刚的指令一共会执行0x4F-0x41=0xe=14次，也就是会对前14个字符分别进行与“ABCDEFGHIJKLMN”的异或，然后出循环</p>
+</li>
+<li><p>最后将ECX，也就是一个计数器，保存在0x402149，返回函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011407360.png" alt="image-20220718011407360"></p>
+</li>
+<li><p>函数返回后要将0x4020F9位置的值与0x12345678异或</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011530549.png" alt="image-20220718011530549"></p>
+<p>查看一下发现这个位置的值为0x00000270</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011832457.png" alt="image-20220718011832457"></p>
+<p>但这个值是怎么来的呢？回溯一下会发现，是刚刚在第6步和第7步之间省略掉的一行指令，当时我们不知道这个有什么用，就省略掉了，现在再回去看，这行指令是把每个字符异或的结果都加在一起，存在0x4020F9的位置，所以我们看到的0x0270就是所有的异或后的值相加的结果。</p>
+</li>
+<li><p>异或之后，接下来把ESP+4，把处理过的字符串入栈，传给0x0040133C位置的函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718013848264.png" alt="image-20220718013848264"></p>
+<p>这个函数很简单，第一行是把处理过的字符串赋值给ESI指向的地址，然后地址+0xE，这时ESI就指向了最后四位没有进行过异或操作的字符，然后赋值给EAX，就返回了</p>
+</li>
+<li><p>回来以后，先给ESP+4，然后又是0x4020F9这个位置的值，这次要把他和EAX进行比较，刚刚我们分析函数可以知道EAX中是我们的后四位的字符的ASCII码</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718014208962.png" alt="image-20220718014208962"></p>
+<p>这里我们先写一下让0x4020F9里面的值等于EAX的值的算法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> result[<span class="number">18</span>];						<span class="comment">//最后生成的答案字符串</span></span><br><span class="line"><span class="type">char</span> input[<span class="number">18</span>]=&#123;<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;@&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;p&#x27;</span>,<span class="string">&#x27;q&#x27;</span>,<span class="string">&#x27;r&#x27;</span>&#125;;							<span class="comment">//输入的字符串</span></span><br><span class="line"><span class="type">int</span> sum;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">14</span>; i ++)&#123;			</span><br><span class="line">    result[i] = input[i] ^ (<span class="number">65</span> + i);	<span class="comment">//前14个字符对大写字母进行异或,注意得到的结果是十进制的</span></span><br><span class="line">    sum += result[i];					<span class="comment">//对异或结果求和</span></span><br><span class="line">	result[i] = result[i]%<span class="number">16</span>+result[i]/<span class="number">16</span>*<span class="number">10</span>; <span class="comment">//这一步让输出的结果直接就是16进制数</span></span><br><span class="line">&#125;</span><br><span class="line">sum = sum ^ <span class="number">0x12345678</span>;					<span class="comment">//求得的和与0x12345678进行异或</span></span><br><span class="line"><span class="type">char</span> tmp[<span class="number">8</span>];</span><br><span class="line"><span class="built_in">sprintf</span>(tmp, <span class="string">&quot;%x&quot;</span>, sum);				<span class="comment">//将求得的结果转化为字符串16进制</span></span><br><span class="line"><span class="comment">//由于系统采用小端法，所以求得的结果要从后往前存在result中，注意</span></span><br><span class="line">result[<span class="number">17</span>] = <span class="built_in">int</span>(tmp[<span class="number">0</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">1</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">16</span>] = <span class="built_in">int</span>(tmp[<span class="number">2</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">3</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">15</span>] = <span class="built_in">int</span>(tmp[<span class="number">4</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">5</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">14</span>] = <span class="built_in">int</span>(tmp[<span class="number">6</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">7</span>] - <span class="number">48</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">18</span>; i ++)&#123;</span><br><span class="line">    cout&lt;&lt;<span class="built_in">int</span>(result[i])&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>用010editor打开CRACKME3.KEY，把输出的<code>36232D252A063E29212524622E2024543412</code>按十六进制输入后保存就可以了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220819143624785.png" alt="image-20220819143624785"></p>
+</li>
+<li><p>再次打开软件，发现已经破解成功了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220819143711292.png" alt="image-20220819143711292"></p>
+</li>
+</ol>
+<h2 id="爆破-1"><a href="#爆破-1" class="headerlink" title="爆破"></a>爆破</h2><p>爆破的话比较简单，基本上就是把通往正确道路上的跳转都改掉就可以了</p>
+<p><code>00401035 的jnz改为jmp</code>强制在没有key文件时候不会跳转到程序结束</p>
+<p><code>0040106D 的jnz改为nop</code>无论读取到什么内容，无论有没有18个字符都可以继续运行</p>
+<p><code>0040109F 的je改为nop</code>无论之前的结果，运算过后与后四个字符是否相同，都继续</p>
+<p><code>0040118A 的jnz改为nop</code>在没有key文件时候不会结束，如果有Key文件，似乎不用改这个</p>
+<h1 id="New-160-Crackme-3-AcidBytes2"><a href="#New-160-Crackme-3-AcidBytes2" class="headerlink" title="New 160 Crackme-3 AcidBytes2"></a>New 160 Crackme-3 AcidBytes2</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<p>脱壳 ：★</p>
+<h2 id="准备工作-2"><a href="#准备工作-2" class="headerlink" title="准备工作"></a>准备工作</h2><p>这是这个系列第一个涉及到脱壳的程序，因此需要提前准备好一系列的工具</p>
+<ul>
+<li>PEiD</li>
+<li>exeinfope</li>
+<li>ImportREC</li>
+<li>其中前两个工具是用来查壳的，最后的是用来修补脱壳后的程序的（据说使用win xp和win7系统，不需要对其进行修复，但更新的win都需要在脱壳后对程序进行修复。</li>
+</ul>
+<p>此外我们大概运行一下这个程序，发现还是一个序列号性质的，就是你输入正确的值，就能过关。</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211137632.png" alt="image-20230220211137632" style="zoom:50%;">
+
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211148710.png" alt="image-20230220211148710" style="zoom:50%;">
+
+<h2 id="脱壳"><a href="#脱壳" class="headerlink" title="脱壳"></a>脱壳</h2><p>脱壳部分我本身其实并不是很理解原理，<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43082315/article/details/127200630">于是百度大致学习了一下</a>，在这篇文章中我们可以发现，一个加壳的程序，在反汇编以后我们看到的都是dd这样的伪指令。而什么是伪指令呢？伪指令是指在汇编的过程中，程序发给汇编器的指令，而不会最终编程机器码，可以理解为是一些给汇编器的参数，会被汇编器截取下来。</p>
+<p>但这篇文章讲的比较浅，于是又搜到<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/404215416?utm_medium=social&utm_oi=877948885966938112&utm_id=0">这篇</a>。从中我们可以发现，壳可以理解为一个压缩软件，只不过和我们一般见到的压缩软件的不同之处在于，这个压缩软件和压缩包是一体的。</p>
+<p>这篇文章后面提到了我们要使用的手工脱壳的方法。我们使用的是ESP定律法，利用堆栈平衡的特点来进行。堆栈平衡可以看这个<a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-250784.htm">贴子</a>，大概的意思就是说一段代码在调用函数前应该有自己的堆栈，而在调用结束后，应该将堆栈空间恢复成调用前的样子，而ESP作为栈顶寄存器，会在调用函数后作为新函数的栈底，调用函数结束后恢复为栈顶，由此我们知道，一旦原来的ESP归位了，就代表函数执行完毕了。通过这个特性，我们可以跟踪“壳”何时将原代码“解压”成功。而我们如何得知原来的ESP何时归位呢？这就需要硬件断点。硬件断点可以对某个地址下断点，一旦程序进行了与这个地址有关的操作，就会产生中断。</p>
+<p>硬件断点</p>
+<blockquote>
+<p>硬件断点比软件断点的功能更强，除了函数断点外，还可以数据断点，可以指定当数据被读或写时中断。</p>
+<p>硬件断点的本质就是在指定内存下断点，内存可以位于代码段（函数断点）也可以是数据段（数据断点）。可以设置事件有执行、写入、读写时中断。</p>
+</blockquote>
+<p>至此我们的理论工作就全部结束了，可以开始操作了。</p>
+<p>首先先用PEID查壳</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203712852.png" alt="image-20230220203712852" style="zoom:50%;">
+
+<p>发现有UPX加壳</p>
+<p>于是加载程序进OllyDBG</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203830295.png" alt="image-20230220203830295" style="zoom:80%;">
+
+<p>看到如图的区域</p>
+<p>因为有壳，所以不难想到这应该是壳的代码，进行一下字符串搜索，果然什么都没有</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203930071.png" alt="image-20230220203930071"></p>
+<p>然后我们先执行一步，发现ESP中存的地址是0x0019FF58，OK也就是说这就是壳自己所在的堆栈的ESP，所以我们直接对这个地址打硬件断点，观测这个地址什么时候会发生一次“恢复”</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220204612431.png" alt="image-20230220204612431"></p>
+<p>右键点击这个地址，选择HW break，然后我们的断点就打好了，接下来直接让程序自己运行</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220204816735.png" alt="image-20230220204816735"></p>
+<p>然后程序在运行到这一步的时候停下来了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220205025317.png" alt="image-20230220205025317"></p>
+<p>说明这就是我们要找的壳的结尾，可以看到接下来程序跳转到了0x00442E44这个位置，所以我们继续运行程序去这个位置找</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220205811727.png" alt="image-20230220205811727"></p>
+<p>找到以后右键点击这个指令，选择用OllyDump脱壳调试进行，然后直接点脱壳就可以了，然后会让保存成另一个exe</p>
+<p>打开新保存的exe发现会有报错，看到网上说要用Import REC注入一下<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210007071.png" alt="image-20230220210007071"></p>
+<p>我们先打开一个脱壳前的程序，然后用Import REC选中这个进程</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210307243.png" alt="image-20230220210307243"></p>
+<p>然后会发现，此时的映像基址是0x00400000，而我们刚刚看到入口点应该是0x00442E44，所以我们在下面的OEP中把这个差值0x42E44补上</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210524991.png" alt="image-20230220210524991"></p>
+<p>然后点击右侧的自动搜索IAT，最后底下的获取导入表，会发现上面多了很多导入表函数，接下来直接点下面的修复转储，选择我们刚刚脱壳后获得的那个报错的程序进行转储，然后会自动生成一个新的程序，这个新的程序就是最终的脱壳结果了。</p>
+<h2 id="算法分析-1"><a href="#算法分析-1" class="headerlink" title="算法分析"></a>算法分析</h2><p>脱壳结束后还是老规矩，先搜索字符串，然后我们发现了我们在准备工作中遇到的一系列字符串</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211227910.png" alt="image-20230220211227910"></p>
+<p>一眼就看见了Congrats，于是我们之间双击跟进</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221151956907.png" alt="image-20230221151956907"></p>
+<p>跟进之后发现两句破解成功的提示上面有一个跳转，应该是不满足的时候就直接跳转到两个提示底下了，因此我们要想办法不让他跳转。</p>
+<p>我们在这个函数入口（0x00442B2C）打上断点，然后让程序自己运行，需要输入的话，我们就随便输入一个123456，然后当程序执行到函数入口我们开始步进。前面十行一堆push指令是用来平衡堆栈的，我们不用管，直接看到0x442B42，发现程序将[local.1]这个地址给了edx，我们执行之后发现是0x0019F838，正好是ebp-0x4，于是我们正常实行过下面的函数，发现执行后0x0019F838这个位置存储了我们输入的123456，而后面的eax我们发现是6，应该对应的是输入数据的长度。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221194422557.png" alt="image-20230221194422557"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221194433222.png" alt="image-20230221194433222"></p>
+<p>接下来又是类似的操作，我们注意到这次程序先将我们输入的字符串作为参数，又将一串数字作为下面的参数，所以我们猜测接下来的函数应该是一个比对，于是我们可以猜到这个密码应该就是12011982</p>
+<h2 id="爆破-2"><a href="#爆破-2" class="headerlink" title="爆破"></a>爆破</h2><p>爆破比较简单，在脱壳的基础上，把0x00442B5D位置的跳转用nop覆盖掉就可以了，这时候无论我们输入什么，比对结果如何都会直接进到后面的成功部分。</p>
+<h1 id="New-160-Crackme-4-Andrnalin1"><a href="#New-160-Crackme-4-Andrnalin1" class="headerlink" title="New 160 Crackme-4 Andrnalin1"></a>New 160 Crackme-4 Andrnalin1</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作-3"><a href="#准备工作-3" class="headerlink" title="准备工作"></a>准备工作</h2><p>老规矩，先运行，看到是一个输入框，大概知道又是序列码类型的题，拿PEID查个壳</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201107854.png" alt="image-20230221201107854"></p>
+<p>发现没有，是VB5.0编写的程序（有年头了）这也是这个系列的第一个VB程序。</p>
+<h2 id="算法分析-2"><a href="#算法分析-2" class="headerlink" title="算法分析"></a>算法分析</h2><p>老规矩，把程序扔进OllyDBG后直接中文搜索引擎智能搜索，然后发现如图的一些字符串<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201303763.png" alt="image-20230221201303763"></p>
+<p>看起来不太像英文，有道词典搜了一下发现是德文，不过即使不知道是德文，有个SuCCESFul字符串应该也能看出来是成功的意思，所以我们还是直接跟进。</p>
+<p>跟进以后发现成功的代码段附近是这样的</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201505131.png" alt="image-20230221201505131"></p>
+<p>于是我们从这个字符串开始往上找跳转首先就看到了0x00401D9D位置的跳转，目标位置在底下，过去看了一下，发现如果跳过去应该就失败了，所以可以推出0x00401D9D这个位置不能跳转<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201629085.png" alt="image-20230221201629085"></p>
+<p>于是我们回去继续网上看发现右侧注释部分有个特殊的字符串“SynTaX 2oo1”</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201854664.png" alt="image-20230221201854664"></p>
+<p>而这个字符串底下注释中函数名写的vbaStrCmp，这就告诉我们下面这个函数应该是进行字符串比对的，那比对的另一方是谁呢？我们猜测应该是我们输入的字符串，所以我们在这打个断点，然后随便输入个123456试试</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202228446.png" alt="image-20230221202228446"></p>
+<p>果然，执行到push ecx时ecx存的值就是“123456”了，所以接下来程序把我们输入的字符串和给定的字符串都入栈进行比对，比对函数执行完后寄存器情况如下</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202436898.png" alt="image-20230221202436898"></p>
+<p>接下来的指令先把eax复制给edi（此时edi为FFFFFFFF），然后将一个地址复制给ecx，我们去内存里看一下会发现这个地址正好是存储我们输入字符串的地址。接下来让edi取补码，但是这里注意一下，因为这里edi是FFFFFFFF，neg指令取补码的原理和用0减操作数一样，是会产生借位的因此此时的cz为1，而接下来的指令sbb的意思是前面的操作数=前面的操作数-后面的操作数-cz，因此执行后edi为-1（0xFFFFFFFF），然后对edi加一，edi归0，再取反，依然是0。</p>
+<p>然后接下来两个函数我们不太用管，名字上来看应该是回收中间开辟的字符串和对象空间的。与之后的di和si的比较没什么关系。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202844893.png" alt="image-20230221202844893"></p>
+<p>但是我们注意，esi寄存器一直都是0，因此cmp后会触发跳转，于是我们逆向分析，如何才能让edi的值不为0。逆推发现，若最后结果不0，则最后取反前不能是0，则加一前不能是-1，则sbb时不能得-1，但sbb edi edi指令下，edi减自己一定为0，所以我们要求此时cz不能是1，所以取反前的edi一定是0，才不会有借位或进位。由此我们猜测输入与比对的字符串相同的字符串可以使edi为0。尝试后解决。</p>
+<h2 id="爆破-3"><a href="#爆破-3" class="headerlink" title="爆破"></a>爆破</h2><p>这题爆破起来方法很多，可以直接把je用nop填充，也可以在比较前把edi的值改了</p>
+<h1 id="New-160-Crackme-5-ArturDents-CM-2"><a href="#New-160-Crackme-5-ArturDents-CM-2" class="headerlink" title="New 160 Crackme-5 ArturDents_CM#2"></a>New 160 Crackme-5 ArturDents_CM#2</h1><p>算法 ：★★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作-4"><a href="#准备工作-4" class="headerlink" title="准备工作"></a>准备工作</h2><p>首先扔到PEID里面查壳，发现倒是没有壳，不过是用没见过的语言写的程序</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205321539.png" alt="image-20230221205321539"></p>
+<p>然后运行一下发现好像是一个登录程序</p>
+<h2 id="算法分析-3"><a href="#算法分析-3" class="headerlink" title="算法分析"></a>算法分析</h2><p>虽然编程语言没见过，但是没关系，直接往OllyDBG里面扔，反正汇编语言都是一样的。进去以后老规矩先搜字符串，直接搜到了成功的字符串，那就废话少说直接跟进</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205825707.png" alt="image-20230221205825707"></p>
+<p>跟进之后大概看了一下，发现比之前的要复杂一些</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205956701.png" alt="image-20230221205956701"></p>
+<p>在成功的对话框出现之前要经过一个循环，而这个循环内每次都有可能直接跳转到函数出口，跳过成功的对话框，说明在跳出循环之前不能让跳转发生</p>
+<p>所以我们在循环开始前下个断点，然后输入abcde和123456尝试一下。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221210422098.png" alt="image-20230221210422098"></p>
+<p>到这里，程序已经把我们的输入加载成功了</p>
+<p>然后我们往下执行，进入循环，第一步是把eax中的值也就是我们输入的name的第一个字母存到dl中，然后dl减去cl中的值，此时cl中的值是5，接下来要我们比对我们输入的serial第一个的第一个字符是否和相减后的dl中的值相同。到这里我们大概知道这道题需要两个输入字段配合着来。继续往后看，当比较跳转后还要分别给eax和ebx的地址加一，也就是把开头的字符取掉。然后开始下次循环。经过每次循环cl中的值都会减少1，所以我们可以逆推出name和serial之间的关系。</p>
+<p>可以的一组答案是 fghij acegi</p>
+<h2 id="爆破-4"><a href="#爆破-4" class="headerlink" title="爆破"></a>爆破</h2><p>爆破的话很简单一种是把跳转nop掉，还有一种是我在实验中使用的，就是在每次比较前，把寄存器中的数改为相同的值</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/02/21/New%20160%20Crackme%201-5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Reverse/" rel="tag">Reverse</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">植物大战僵尸外挂笔记</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2021-2023
+        <i class="ri-heart-fill heart_icon"></i> Kery
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Kery"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":0,"vOffset":-30},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
