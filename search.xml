@@ -64,6 +64,23 @@
       </tags>
   </entry>
   <entry>
+    <title>DOM启蒙</title>
+    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
+    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
+<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
+<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
     <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
     <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
@@ -166,23 +183,6 @@
       </tags>
   </entry>
   <entry>
-    <title>DOM启蒙</title>
-    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
-    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
-<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
-<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript学习记录</title>
     <url>/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="交互式网络"><a href="#交互式网络" class="headerlink" title="交互式网络"></a>交互式网络</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>要通过事件来触发函数，要添加事件处理器，比如载入网页时触发，使用<code>onload</code>，然后通过<code>alert()</code>函数列出信息。</p>
@@ -214,6 +214,45 @@
       <tags>
         <tag>web</tag>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Smart Greybox Fuzzing</title>
+    <url>/2021/12/13/Smart-Greybox-Fuzzing/</url>
+    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
+<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>SGF通过现实文件级别的变异操作来保证文件的有效性，这样产生的文件更加容易通过程序的解析阶段，可以暴露更深层的问题</p>
+<h3 id="P3"><a href="#P3" class="headerlink" title="P3"></a>P3</h3><p>探索了更多的路径，并暴露了更多的问题</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="P1-1"><a href="#P1-1" class="headerlink" title="P1"></a>P1</h3><p>灰盒测试只需使用轻量级的instrumentation</p>
+<h3 id="P2-1"><a href="#P2-1" class="headerlink" title="P2"></a>P2</h3><p>被变异的输入执行的控制流通过考察来确定他们是否是有趣的，而CGF帮助进行评价控制流的新颖性，随后，被认为值得继续探索的输入会产生更多的输入</p>
+<h3 id="P3-1"><a href="#P3-1" class="headerlink" title="P3"></a>P3</h3><p>而CGF的问题在于缺乏对于文件结构的认识，位级变异会在被处理之前就被程序拒绝</p>
+<h3 id="P4"><a href="#P4" class="headerlink" title="P4"></a>P4</h3><p>有两个方法可以解决这个问题，一个是基于字典，另一个是基于动态污点分析。</p>
+<p>对于字典，可能牺牲AFL的效率和可用性，当AFL要探索新路径时字典是很好的选择</p>
+<p>但两种方法都不能变异出高度结构化的文件</p>
+<h3 id="P5"><a href="#P5" class="headerlink" title="P5"></a>P5</h3><p>智能黑盒测试工具比如peach已经有了文件结构意识，而且能基于有效文件构建新的有效文件</p>
+<p>peach通过一个输入模型来反汇编有效文件，再重汇编成为新的文件</p>
+<h3 id="P6"><a href="#P6" class="headerlink" title="P6"></a>P6</h3><p>SGF可以基于高度结构化的种子文件产生新的文件，这使得其可以在保证文件有效的前提下探索全新的输入领域，可以花费更多时间在探索更深的漏洞</p>
+<h3 id="P7"><a href="#P7" class="headerlink" title="P7"></a>P7</h3><p>24小时内，AFLSMART发现的0day漏洞增加了一倍；还提高了20%的代码覆盖率；</p>
+<h3 id="P8"><a href="#P8" class="headerlink" title="P8"></a>P8</h3><p>文件格式规格可以被跨程序使用，也可以在不同版本的程序使用</p>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>之前用过一小段时间的peach，peach的测试方式是编写好一个pit文件，该文件中已经设计好需要的格式，只需要将需要测试的数据进行标记，变异时，peach会自动地随机填充数据，所以以前以为所有的seed都是这样的结构，但从这篇论文来看，AFL的seed结构本身并不具备文件的结构，对于这一点，可以尝试基于AFLSMART进一步提高变异出的文件的过解析率</p>
+<p>刚刚又看了<a href="https://www.sohu.com/a/305377300_354899%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%8F%90%E5%88%B0">https://www.sohu.com/a/305377300_354899这篇文章，其中提到</a></p>
+<p>在 AFL 的 bit 级别的变异的基础上，AFLSmart 增加了对 chunk 级别的变异操作，主要包括三种操作：</p>
+<p><strong>smart deletion：</strong></p>
+<p>在这种方法中，会对给定的种子文件，随机选取 chunk 进行删除。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/1fc4f80b9d3147d88ef4c4a0fc39d3ec.jpeg" alt="img"></p>
+<p><strong>smart addition：</strong></p>
+<p>在这种方法中，给定一个种子文件 S1，随机选取一个种子文件 S2，在 S2 中随机选取一个 chunk C2，将 C2 插入到 S1 中和 C2 具有相同父节点的 chunk C1 的后面（C1.parent.type ==C2.parent.type）</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/508bc05fbfca4395a860c49e42df6d74.jpeg" alt="img"></p>
+<p><strong>smart splicing：</strong></p>
+<p>这种方法中，对于给定的种子文件 S1，随机选取 chunk C1，随机选取种子文件 S2，找到 S2 中与 C1 类型相同的 chunk C2，将 C2 替换到 C1 的位置上。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/c45624de24b04d7289f775a978af9863.jpeg" alt="img"></p>
+<p>关于peach pit的博客<a href="http://blog.nsfocus.net/peach-fuzz/">http://blog.nsfocus.net/peach-fuzz/</a></p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>AFLSMART</tag>
       </tags>
   </entry>
   <entry>
@@ -466,45 +505,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Smart Greybox Fuzzing</title>
-    <url>/2021/12/13/Smart-Greybox-Fuzzing/</url>
-    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
-<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>SGF通过现实文件级别的变异操作来保证文件的有效性，这样产生的文件更加容易通过程序的解析阶段，可以暴露更深层的问题</p>
-<h3 id="P3"><a href="#P3" class="headerlink" title="P3"></a>P3</h3><p>探索了更多的路径，并暴露了更多的问题</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="P1-1"><a href="#P1-1" class="headerlink" title="P1"></a>P1</h3><p>灰盒测试只需使用轻量级的instrumentation</p>
-<h3 id="P2-1"><a href="#P2-1" class="headerlink" title="P2"></a>P2</h3><p>被变异的输入执行的控制流通过考察来确定他们是否是有趣的，而CGF帮助进行评价控制流的新颖性，随后，被认为值得继续探索的输入会产生更多的输入</p>
-<h3 id="P3-1"><a href="#P3-1" class="headerlink" title="P3"></a>P3</h3><p>而CGF的问题在于缺乏对于文件结构的认识，位级变异会在被处理之前就被程序拒绝</p>
-<h3 id="P4"><a href="#P4" class="headerlink" title="P4"></a>P4</h3><p>有两个方法可以解决这个问题，一个是基于字典，另一个是基于动态污点分析。</p>
-<p>对于字典，可能牺牲AFL的效率和可用性，当AFL要探索新路径时字典是很好的选择</p>
-<p>但两种方法都不能变异出高度结构化的文件</p>
-<h3 id="P5"><a href="#P5" class="headerlink" title="P5"></a>P5</h3><p>智能黑盒测试工具比如peach已经有了文件结构意识，而且能基于有效文件构建新的有效文件</p>
-<p>peach通过一个输入模型来反汇编有效文件，再重汇编成为新的文件</p>
-<h3 id="P6"><a href="#P6" class="headerlink" title="P6"></a>P6</h3><p>SGF可以基于高度结构化的种子文件产生新的文件，这使得其可以在保证文件有效的前提下探索全新的输入领域，可以花费更多时间在探索更深的漏洞</p>
-<h3 id="P7"><a href="#P7" class="headerlink" title="P7"></a>P7</h3><p>24小时内，AFLSMART发现的0day漏洞增加了一倍；还提高了20%的代码覆盖率；</p>
-<h3 id="P8"><a href="#P8" class="headerlink" title="P8"></a>P8</h3><p>文件格式规格可以被跨程序使用，也可以在不同版本的程序使用</p>
-<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>之前用过一小段时间的peach，peach的测试方式是编写好一个pit文件，该文件中已经设计好需要的格式，只需要将需要测试的数据进行标记，变异时，peach会自动地随机填充数据，所以以前以为所有的seed都是这样的结构，但从这篇论文来看，AFL的seed结构本身并不具备文件的结构，对于这一点，可以尝试基于AFLSMART进一步提高变异出的文件的过解析率</p>
-<p>刚刚又看了<a href="https://www.sohu.com/a/305377300_354899%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%8F%90%E5%88%B0">https://www.sohu.com/a/305377300_354899这篇文章，其中提到</a></p>
-<p>在 AFL 的 bit 级别的变异的基础上，AFLSmart 增加了对 chunk 级别的变异操作，主要包括三种操作：</p>
-<p><strong>smart deletion：</strong></p>
-<p>在这种方法中，会对给定的种子文件，随机选取 chunk 进行删除。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/1fc4f80b9d3147d88ef4c4a0fc39d3ec.jpeg" alt="img"></p>
-<p><strong>smart addition：</strong></p>
-<p>在这种方法中，给定一个种子文件 S1，随机选取一个种子文件 S2，在 S2 中随机选取一个 chunk C2，将 C2 插入到 S1 中和 C2 具有相同父节点的 chunk C1 的后面（C1.parent.type ==C2.parent.type）</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/508bc05fbfca4395a860c49e42df6d74.jpeg" alt="img"></p>
-<p><strong>smart splicing：</strong></p>
-<p>这种方法中，对于给定的种子文件 S1，随机选取 chunk C1，随机选取种子文件 S2，找到 S2 中与 C1 类型相同的 chunk C2，将 C2 替换到 C1 的位置上。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/c45624de24b04d7289f775a978af9863.jpeg" alt="img"></p>
-<p>关于peach pit的博客<a href="http://blog.nsfocus.net/peach-fuzz/">http://blog.nsfocus.net/peach-fuzz/</a></p>
-]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-        <tag>AFLSMART</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>WebKit</title>
     <url>/2022/01/16/WebKit/</url>
     <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
@@ -642,28 +642,6 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2022/04/22/%E5%91%A8%E6%8A%A5/</url>
-    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
-<p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
-<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
-<p>开了改进AFL的组会</p>
-<p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p>
-<h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p>
-<p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p>
-<p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p>
-<p>晚上出去喝酒</p>
-<h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p>
-<p>晚上做网络实验，继续看论文</p>
-<h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p>
-<h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p>
-<p>晚上上安全系统实验，正常背单词</p>
-<h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
-<p>晚上挺凉快的</p>
-<h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
-]]></content>
-  </entry>
-  <entry>
     <title>植物大战僵尸外挂笔记</title>
     <url>/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="植物大战僵尸外挂笔记"><a href="#植物大战僵尸外挂笔记" class="headerlink" title="植物大战僵尸外挂笔记"></a>植物大战僵尸外挂笔记</h1><h2 id="0x00-CE初步"><a href="#0x00-CE初步" class="headerlink" title="0x00 CE初步"></a>0x00 CE初步</h2><blockquote>
@@ -729,6 +707,28 @@
       <tags>
         <tag>Reverse</tag>
       </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/04/22/%E5%91%A8%E6%8A%A5/</url>
+    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
+<p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
+<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
+<p>开了改进AFL的组会</p>
+<p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p>
+<h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p>
+<p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p>
+<p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p>
+<p>晚上出去喝酒</p>
+<h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p>
+<p>晚上做网络实验，继续看论文</p>
+<h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p>
+<h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p>
+<p>晚上上安全系统实验，正常背单词</p>
+<h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
+<p>晚上挺凉快的</p>
+<h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
+]]></content>
   </entry>
   <entry>
     <title>污点分析技术（一）基本原理</title>
