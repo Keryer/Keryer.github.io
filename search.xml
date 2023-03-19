@@ -64,23 +64,6 @@
       </tags>
   </entry>
   <entry>
-    <title>DOM启蒙</title>
-    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
-    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
-<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
-<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
     <url>/2022/04/22/FuzzIL/</url>
     <content><![CDATA[<h1 id="FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines"><a href="#FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines" class="headerlink" title="FuzzIL：Coverage Guided Fuzzing for JavaScript Engines"></a>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>工作目标是引导测试工具来测试脚本解释器，这需要在代码上定义在语义上有效的突变。然而，与现有的突变语法方式不同（如代码的文本形式或语法树），突变是在新设计的中间语言（IL）上进行的。基于其形式，其可以轻松执行控制流和数据流突变。<strong>这反映了，程序的句法属性无关紧要</strong>。此外，该系统可以以高概率生成语义上有效的样本。这避免了将生成的代码包装到try-catch结构中。</p>
@@ -158,6 +141,23 @@
       </tags>
   </entry>
   <entry>
+    <title>DOM启蒙</title>
+    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
+    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
+<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
+<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript学习记录</title>
     <url>/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="交互式网络"><a href="#交互式网络" class="headerlink" title="交互式网络"></a>交互式网络</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>要通过事件来触发函数，要添加事件处理器，比如载入网页时触发，使用<code>onload</code>，然后通过<code>alert()</code>函数列出信息。</p>
@@ -192,6 +192,27 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux内核完全注释</title>
+    <url>/2023/03/18/Linux0.11/</url>
+    <content><![CDATA[<h1 id="Linux内核完全注释（1）"><a href="#Linux内核完全注释（1）" class="headerlink" title="Linux内核完全注释（1）"></a>Linux内核完全注释（1）</h1><p>赵博士这本书是一本很厚实的书，涉及到Linux的各个方面，早就想要一读，可惜一直没有找到时间，现在大四了终于有时间读一读，也是复习和进一步理解Linux系统内核的好机会。这个系列可能会断断续续更新很久，希望不会烂尾。</p>
+<h2 id="第2章-微型计算机组成结构"><a href="#第2章-微型计算机组成结构" class="headerlink" title="第2章 微型计算机组成结构"></a>第2章 微型计算机组成结构</h2><p>由于操作系统是应用程序与硬件沟通的桥梁，我们在学习操作系统时，必不可少地需要先具备一定的硬件知识。</p>
+<blockquote>
+<p>除了CPU以外，现代PC机主板主要使用两个超大规模芯片构成的芯片组组成：北桥芯片和南桥芯片。北桥芯片用于与CPU、内存和AGP视频接口，这些接口具有很高的传输速率。北桥芯片还起着存储器控制作用，因此Intel把该芯片标号为MCH芯片。南桥芯片用于管理低、中速的组件，例如PCI总线、IDE硬盘接口、USB端口等，因此南桥芯片的名称为ICH芯片。</p>
+</blockquote>
+<h2 id="第3章-内核编程语言和环境"><a href="#第3章-内核编程语言和环境" class="headerlink" title="第3章 内核编程语言和环境"></a>第3章 内核编程语言和环境</h2><p>在Linux 0.1系统中使用两种汇编器，一个是能产生16位代码的as86汇编器和ld86链接器，在Linux中被用来创建16位的引导扇区程序boot/bootsect.s和实模式下初始设置程序boot/setup.s的二进制代码，主要特点是小巧快速，有宏和错误检测功能。另一个是GNU的汇编器gas，使用GNU ld链接器。</p>
+<p>as86汇编器和Intel的汇编语言语法是不兼容的，其操作数的次序与GNU as相反。</p>
+<p>as86接收的汇编语言语句可以是只包含空格、制表符和换行符的空行，也可以是赋值语句或定义语句、伪操作语句和机器指令语句。每个操作码都以一个“.”字符开始，点字符本身是一个特殊的符号，代表着编译过程中的位置计数器，其值是点符号出现处机器指令第一个字节的地址。</p>
+<p>机器指令语句是可执行机器指令的助记符，由操作码和0个或多个操作数构成。在任何语句之前都可以有标号，标号是由一个标识符后跟一个冒号：组成，在编译过程中，汇编器遇到一个标号后，会将当前位置计数器的值赋给这个标号</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Binary</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
     <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
     <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
@@ -214,27 +235,6 @@
       <tags>
         <tag>侧信道攻击</tag>
         <tag>移动设备</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux内核完全注释</title>
-    <url>/2023/03/18/Linux0.11/</url>
-    <content><![CDATA[<h1 id="Linux内核完全注释（1）"><a href="#Linux内核完全注释（1）" class="headerlink" title="Linux内核完全注释（1）"></a>Linux内核完全注释（1）</h1><p>赵博士这本书是一本很厚实的书，涉及到Linux的各个方面，早就想要一读，可惜一直没有找到时间，现在大四了终于有时间读一读，也是复习和进一步理解Linux系统内核的好机会。这个系列可能会断断续续更新很久，希望不会烂尾。</p>
-<h2 id="第2章-微型计算机组成结构"><a href="#第2章-微型计算机组成结构" class="headerlink" title="第2章 微型计算机组成结构"></a>第2章 微型计算机组成结构</h2><p>由于操作系统是应用程序与硬件沟通的桥梁，我们在学习操作系统时，必不可少地需要先具备一定的硬件知识。</p>
-<blockquote>
-<p>除了CPU以外，现代PC机主板主要使用两个超大规模芯片构成的芯片组组成：北桥芯片和南桥芯片。北桥芯片用于与CPU、内存和AGP视频接口，这些接口具有很高的传输速率。北桥芯片还起着存储器控制作用，因此Intel把该芯片标号为MCH芯片。南桥芯片用于管理低、中速的组件，例如PCI总线、IDE硬盘接口、USB端口等，因此南桥芯片的名称为ICH芯片。</p>
-</blockquote>
-<h2 id="第3章-内核编程语言和环境"><a href="#第3章-内核编程语言和环境" class="headerlink" title="第3章 内核编程语言和环境"></a>第3章 内核编程语言和环境</h2><p>在Linux 0.1系统中使用两种汇编器，一个是能产生16位代码的as86汇编器和ld86链接器，在Linux中被用来创建16位的引导扇区程序boot/bootsect.s和实模式下初始设置程序boot/setup.s的二进制代码，主要特点是小巧快速，有宏和错误检测功能。另一个是GNU的汇编器gas，使用GNU ld链接器。</p>
-<p>as86汇编器和Intel的汇编语言语法是不兼容的，其操作数的次序与GNU as相反。</p>
-<p>as86接收的汇编语言语句可以是只包含空格、制表符和换行符的空行，也可以是赋值语句或定义语句、伪操作语句和机器指令语句。每个操作码都以一个“.”字符开始，点字符本身是一个特殊的符号，代表着编译过程中的位置计数器，其值是点符号出现处机器指令第一个字节的地址。</p>
-<p>机器指令语句是可执行机器指令的助记符，由操作码和0个或多个操作数构成。在任何语句之前都可以有标号，标号是由一个标识符后跟一个冒号：组成，在编译过程中，汇编器遇到一个标号后，会将当前位置计数器的值赋给这个标号</p>
-]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Binary</tag>
       </tags>
   </entry>
   <entry>
@@ -526,6 +526,67 @@
       </tags>
   </entry>
   <entry>
+    <title>WebKit</title>
+    <url>/2022/01/16/WebKit/</url>
+    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
+<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
+<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
+<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
+<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
+<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
+<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
+<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
+<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
+<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
+<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
+<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
+<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
+<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
+<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
+<p>数字表示基本顺序，但也不是严格一致。</p>
+<p>具体的过程如下：</p>
+<ol>
+<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
+<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
+<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
+<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
+<li>解释器根据词语构建节点（Node），形成DOM树</li>
+<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
+<li>JavaScript代码可能会修改DOM树结构</li>
+<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
+</ol>
+<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
+<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
+<p>这一段的具体过程如下：</p>
+<ol>
+<li>CSS文件被CSS解释器解释成内部表示结构</li>
+<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
+<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
+</ol>
+<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
+<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
+<p>这一阶段对应的具体过程如下：</p>
+<ol>
+<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
+<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
+<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
+</ol>
+<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
+<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
+<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
+<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello</title>
     <url>/2022/04/22/hello-world/</url>
     <content><![CDATA[<p>Welcome to Kery’s blog! </p>
@@ -603,6 +664,328 @@
   </entry>
   <entry>
     <title></title>
+    <url>/2023/03/19/Datalab&#39;s%20WriteUp/</url>
+    <content><![CDATA[<h1 id="DataLab’s-Writeup"><a href="#DataLab’s-Writeup" class="headerlink" title="DataLab’s Writeup"></a>DataLab’s Writeup</h1><blockquote>
+<p>The CS:APP Data Lab<br>Directions to Students</p>
+<hr>
+<p>Your goal is to modify your copy of bits.c so that it passes all the<br>tests in btest without violating any of the coding guidelines.</p>
+<hr>
+<ol start="0">
+<li>Files:</li>
+</ol>
+<hr>
+<p>Makefile    - Makes btest, fshow, and ishow<br>README        - This file<br>bits.c        - The file you will be modifying and handing in<br>bits.h        - Header file<br>btest.c        - The main btest program<br>btest.h    - Used to build btest<br>decl.c    - Used to build btest<br>tests.c       - Used to build btest<br>tests-header.c- Used to build btest<br>dlc*        - Rule checking compiler binary (data lab compiler)<br>driver.pl*    - Driver program that uses btest and dlc to autograde bits.c<br>Driverhdrs.pm   - Header file for optional “Beat the Prof” contest<br>fshow.c        - Utility for examining floating-point representations<br>ishow.c        - Utility for examining integer representations</p>
+</blockquote>
+<h2 id="0-Files"><a href="#0-Files" class="headerlink" title="0. Files"></a>0. Files</h2><p>首先，Readme给了一个任务说明，大概就把bits.c给改一下，然后运行btest，btest会自动测试修改后的bits.c，如果你改的符合要求，就能通过测试。</p>
+<p>接下来是一些一些文件说明，</p>
+<p>Makefile    - 用于编译 btest, fshow, ishow这几个文件<br>README        - 那个说明文档<br>bits.c        - 你要修改的目标文件<br>bits.h        - bits.c包含的头文件，里面写了一些基础函数<br>btest.c        - 测试程序的源码文件<br>btest.h    - 测试程序包含的头文件<br>decl.c    - 用来构建测试程序的源码之一<br>tests.c       - 用来构建测试程序的源码之一<br>tests-header.c- 用来构建测试程序的源码之一<br>dlc*        - 一个特殊设计过的编译器，是一个可执行文件，可以用于检测你所改写的程序在编译级的正确性<br>driver.pl*    - 一个能够让btest和dlc给你写的代码自动评分的驱动<br>Driverhdrs.pm   - 没看懂<br>fshow.c        - 用于检查浮点型结果的程序源码<br>ishow.c        - 用于检查整型结果的程序源码</p>
+<h2 id="1-Modifying-bits-c-and-checking-it-for-compliance-with-dlc"><a href="#1-Modifying-bits-c-and-checking-it-for-compliance-with-dlc" class="headerlink" title="1. Modifying bits.c and checking it for compliance with dlc"></a>1. Modifying bits.c and checking it for compliance with dlc</h2><p>这节在教你如何使用这个lab，有几个点需要注意。</p>
+<p>第一，bits.c有自己的编写格式要求，如果你为了达成目的不顾要求也会扣分（猜测这就是刚刚那个在编译级检测的程序做到的）</p>
+<p>第二，调用dlc的方式。其实很简单，从Terminal进入在dlc所在的目录下，执行下面的命令就行了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unix&gt; ./dlc bits.c</span><br></pre></td></tr></table></figure>
+
+<p>但是这里有个小坑，因为这个dlc是32bit的程序，如果你的Ubuntu是64位的，而且恰好没有安装32bit的运行库，你在运行的时候就会看到明明目录里面有这个dlc，但你运行的时候就告诉你dlc不存在!</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230311151750074.png" alt="image-20230311151750074"></p>
+<p>如果你也遇到了，需要运行以下命令安装一下32bit的运行库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install lib32z1</span><br></pre></td></tr></table></figure>
+
+<p>如果遇到问题，可以尝试先运行下面的命令更新一下apt-get，这个过程可能需要等一会。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get dist-upgrade</span><br></pre></td></tr></table></figure>
+
+<p>第三，如下图所示，如果你的代码没有语法问题，dlc就不会有回显；但不保证是合格的，你可以通过加一个参数<code>-e</code>的来让dlc显示运行每个函数的操作符数量具体情况。然后写完了一个就测一遍就行。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unix&gt; ./dlc -e bits.c  </span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230311153021523.png" alt="image-20230311153021523"></p>
+<h2 id="2-Testing-with-btest"><a href="#2-Testing-with-btest" class="headerlink" title="2. Testing with btest"></a>2. Testing with btest</h2><p>这个btest就是之前说过的用来测试自己写的代码的程序，但这个程序需要我们自己编译一遍，在btest.c所在的目录下运行以下命令就可以进行编译了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unix&gt; make btest</span><br></pre></td></tr></table></figure>
+
+<p>然后这里依然有个小坑，还是64位Ubuntu导致的，在make的时候会报错说没有<code>bits/libc-header-start.h</code>这个文件</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230311154007734.png" alt="image-20230311154007734"></p>
+<p>遇到这个报错的话要运行以下命令，安装这个头文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install gcc-multilib g++-multilib module-assistant</span><br></pre></td></tr></table></figure>
+
+<p>安装好了再次make就可以了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230311154246507.png" alt="image-20230311154246507"></p>
+<p>会有一些warning，但无伤大雅</p>
+<p>然后这个时候注意到gcc把使用的编译命令输出出来了，发现其中有一个-Wall参数，这个参数是用来打开warning显示的。如果我们从Makefile里面把这个参数删掉（如图），再编译就不会有warning显示了（强迫症狂喜</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230311155238507.png" alt="image-20230311155238507"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230311155309478.png" alt="image-20230311155309478"></p>
+<p>编译好了之后不知道是我的电脑有bug还是编译中有特殊的参数设置，我在GUI是看不到编译好的btest文件的，但是在Terminal可以通过ls命令看到（好奇怪，猜测也许跟64位的系统有关，不过好在后面都是在Terminal使用，看不见也问题不大。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230311155532942.png" alt="image-20230311155532942"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230311155506323.png" alt="image-20230311155506323"></p>
+<p>接下来通过以下命令来使用btest</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unix&gt; ./btest [optional cmd line args]</span><br></pre></td></tr></table></figure>
+
+<p>其中[]中的部分是一些可选参数</p>
+<p>btest支持通过传参的方式来对bits.c中的指定函数的指定参数进行进行设置，比如如果想测试名为“foo“的函数可以通过以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./btest -f foo</span><br></pre></td></tr></table></figure>
+
+<p>而如果向向foo函数的第一个参数传入”27”可以通过</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./btest -f foo -1 27</span><br></pre></td></tr></table></figure>
+
+<p> <code>-h</code>参数可以打印出btest的使用说明</p>
+<p>由于Btest 通过在每个函数上运行数百万个测试用例，这可能需要一段时间，你可以通过<code>-T</code>参数可以设置最大运行时间。</p>
+<p>   -g        Format output for autograding with no error messages</p>
+<p>​    -r <n>    Give uniform weight of n for all problems</n></p>
+<p>最后，每次修改bits.c程序后都要运行以下命令对btest重新进行编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make clean</span><br><span class="line">make btest</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>make clean</code>会自动清空上一次make操作中产生的所有文件</p>
+<p>但btest不会检测你的代码是否符合编码规则，这要用dlc来检测。</p>
+<h2 id="3-Helper-Programs"><a href="#3-Helper-Programs" class="headerlink" title="3. Helper Programs"></a>3. Helper Programs</h2><p>这个lab还给了两个辅助程序用来帮你翻译浮点数和整数，整数翻译比较简单就是10进制和16进制互换以及有符号数和无符号数，浮点数稍微i有点麻烦，但你应该还记得32位浮点数的存储方式，如果忘了可以看看<a href="https://blog.csdn.net/xiansaitan5036/article/details/107765590">这篇博客</a></p>
+<p>然后我把原文中的使用方式直接贴上来了，这个还算比较好理解</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unix&gt; make             //先编译两个文件</span><br><span class="line">unix&gt; ./ishow 0x27</span><br><span class="line">Hex = 0x00000027,	Signed = 39,	Unsigned = 39</span><br><span class="line"></span><br><span class="line">unix&gt; ./ishow 27</span><br><span class="line">Hex = 0x0000001b,	Signed = 27,	Unsigned = 27</span><br><span class="line"></span><br><span class="line">unix&gt; ./fshow 0x15213243</span><br><span class="line">Floating point value 3.255334057e-26</span><br><span class="line">Bit Representation 0x15213243, sign = 0, exponent = 0x2a, fraction = 0x213243</span><br><span class="line">Normalized.  +1.2593463659 X 2^(-85)</span><br><span class="line"></span><br><span class="line">linux&gt; ./fshow 15213243</span><br><span class="line">Floating point value 2.131829405e-38</span><br><span class="line">Bit Representation 0x00e822bb, sign = 0, exponent = 0x01, fraction = 0x6822bb</span><br><span class="line">Normalized.  +1.8135598898 X 2^(-126)</span><br></pre></td></tr></table></figure>
+
+<h1 id="好！文档中的说明就此结束！终于可以开始做实验了！"><a href="#好！文档中的说明就此结束！终于可以开始做实验了！" class="headerlink" title="好！文档中的说明就此结束！终于可以开始做实验了！"></a>好！文档中的说明就此结束！终于可以开始做实验了！</h1><p>首先我们打开bits.c文件，前面是一大大大段的说（fei）明（hua）</p>
+<p>不过简单看一下</p>
+<p>首先，不要在文件中加入<code>&lt;stdio.h&gt;</code>头文件，printf函数依然能用，只不过有warning。</p>
+<p>第二，对于整型的任务而言：</p>
+<ol>
+<li><p>要在每个函数中的return后面加入你所用于完成任务的表达式，在return之外，你只能进行变量的声明，比如你要计算a+b，要写成</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">1</span>；</span><br><span class="line"><span class="type">int</span> b = <span class="number">1</span>；</span><br><span class="line"><span class="keyword">return</span> a + b；</span><br></pre></td></tr></table></figure></li>
+<li><p>设定的常量值属于[ 0 , 255 ] (0xff)</p>
+</li>
+<li><p>在函数中不能使用全局变量</p>
+</li>
+<li><p>你只能使用有限的几种运算符号来完成任务如 !、~、&amp;、^、|、+、&lt;&lt;、&gt;&gt;</p>
+</li>
+<li><p>你不能使用if、do、while、for、switch等具有跳转功能的语句</p>
+</li>
+<li><p>不能使用宏</p>
+</li>
+<li><p>不能额外定义或调用其他函数</p>
+</li>
+<li><p>不能使用&amp;&amp;、||、-、？操作符</p>
+</li>
+<li><p>不能使用类型转换</p>
+</li>
+<li><p>不能使用其他数据类型，即不能使用数组等结构</p>
+</li>
+</ol>
+<p>第三，对于浮点型任务而言：</p>
+<ol>
+<li>可以使用循环和判断等语句</li>
+<li>可以使用整型和浮点型变量</li>
+</ol>
+<p>但以下规则依然成立</p>
+<ol>
+<li>不能使用宏</li>
+<li>不能额外定义或调用其他函数</li>
+<li>不能使用&amp;&amp;、||、-、？操作符</li>
+<li>不能使用类型转换</li>
+<li>不能使用其他数据类型，即不能使用数组等结构</li>
+</ol>
+<p>最后，每个函数有最大的操作符数量，dlc会检测操作符数。</p>
+<h2 id="好的！到这里要求就结束了，正式开始做实验！"><a href="#好的！到这里要求就结束了，正式开始做实验！" class="headerlink" title="好的！到这里要求就结束了，正式开始做实验！"></a>好的！到这里要求就结束了，正式开始做实验！</h2><h1 id="1-bitAnd"><a href="#1-bitAnd" class="headerlink" title="1. bitAnd"></a>1. bitAnd</h1><p>第一个函数名为bitAnd（驼峰命名法好评），源码及要求贴在下面</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * bitAnd - x&amp;y using only ~ and | </span></span><br><span class="line"><span class="comment"> * Example: bitAnd(6, 5) = 4</span></span><br><span class="line"><span class="comment"> * Legal ops: ~ |</span></span><br><span class="line"><span class="comment"> * Max ops: 8</span></span><br><span class="line"><span class="comment"> * Rating: 1</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="type">int</span> <span class="title function_">bitAnd</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>看起来就是个按位取与，要求最大操作符数是8个，只能用～和|两种操作</p>
+<p>也就是说要让我们通过或非两种操作来实现与操作</p>
+<p>这显然用德摩根率就可以搞定</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">bitAnd</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> ~(~x|~y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再重新编译btest检查，搞定</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230311171955960.png" alt="image-20230311171955960"></p>
+<h1 id="2-getByte"><a href="#2-getByte" class="headerlink" title="2. getByte"></a>2. getByte</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * getByte - Extract byte n from word x</span></span><br><span class="line"><span class="comment"> *   Bytes numbered from 0 (LSB) to 3 (MSB)</span></span><br><span class="line"><span class="comment"> *   Examples: getByte(0x12345678,1) = 0x56</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 6</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getByte</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这题要从x中提取指定的字节，要求最大操作符数是6个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这里我们比较容易想到要用<code>0xff</code>把不相关的字节移除，所以我们这里先将目标字节挪到最低处，但是具体要哪个字节由n来决定，因此挪动多少位也就由n决定。每挪动一个字节大小是8位，所以直接把n左移3位，相当于把n乘8，此时就代表n个字节所对应的位数，此时x再右移该位数就可以了。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">getByte</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (x&gt;&gt;(n&lt;&lt;<span class="number">3</span>))&amp;<span class="number">0xff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012547609.png" alt="image-20230315012547609"></p>
+<h1 id="3-logicalShift"><a href="#3-logicalShift" class="headerlink" title="3. logicalShift"></a>3. logicalShift</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * logicalShift - shift x to the right by n, using a logical shift</span></span><br><span class="line"><span class="comment"> *   Can assume that 0 &lt;= n &lt;= 31</span></span><br><span class="line"><span class="comment"> *   Examples: logicalShift(0x87654321,4) = 0x08765432</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 20</span></span><br><span class="line"><span class="comment"> *   Rating: 3 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">logicalShift</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这题要我们实现一个逻辑右移，要求最大操作数是20个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这里回顾以下算术右移和逻辑右移，其实很简单，逻辑右移就是最高位无论是啥都补0，算术右移就是最高位是1,就补1，是0就补0，而C语言中的&gt;&gt;操作是算术右移，所以我们可以联想到对算术右移进行修改。而我们知道两种移位最主要的区别就在于最高位的区别，因此我们可以构造一个形如0…01….1的序列，其中0的个数就是我们右移法位数，然后与我们经算术右移得到的值相与，就能得到高位为0的逻辑右移的结果了</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * logicalShift - shift x to the right by n, using a logical shift</span></span><br><span class="line"><span class="comment"> *   Can assume that 0 &lt;= n &lt;= 31</span></span><br><span class="line"><span class="comment"> *   Examples: logicalShift(0x87654321,4) = 0x08765432</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 20</span></span><br><span class="line"><span class="comment"> *   Rating: 3 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">logicalShift</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> x&gt;&gt;n&amp;((~<span class="number">0</span>^(<span class="number">1</span>&lt;&lt;<span class="number">31</span>))&gt;&gt;n&lt;&lt;<span class="number">0x1</span>^<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012602958.png" alt="image-20230315012602958"></p>
+<h1 id="4-bitCount"><a href="#4-bitCount" class="headerlink" title="4. bitCount"></a>4. bitCount</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * bitCount - returns count of number of 1&#x27;s in word</span></span><br><span class="line"><span class="comment"> *   Examples: bitCount(5) = 2, bitCount(7) = 3</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 40</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">bitCount</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这题要我们计算输入数中1的个数，要求最大操作数是40个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这道题难度比较高，网上还有别的版本的讲解，可以都看看，尝试理解。</p>
+<p>首先我们不要把输入数据当作一个数看，只需要把它当成一个由01构成的字符串。首先我们构造一个形如01010101的序列，与输入数据相与，此时得到的结果中的1表示输入序列的奇数位上有1，接下来将输入字符串右移一位，再与01010101相与，此时得到的结果中的1表示输入序列的偶数位上有1，然后将两次的结果相加，这相当于以两位为一个单元，我以8位的序列举一个例子，假设输入为10101110</p>
+<p>10101110&amp;01010101-&gt;00000100 然后把10101110右移一位得到11010111</p>
+<p>11010111&amp;01010101-&gt;01010101 然后将00000100和01010101相加得到01 01 10 01</p>
+<p>将这个结果看作是四组，每组代表这原序列对应的两位上的1的数量，</p>
+<p>在例子中1、2位有一个1（01），3、4位有两个1（10），5、6位有一个1（01），7、8位有一个1（01）</p>
+<p>接下来把这个结果与00110011依次做同样的运算</p>
+<p>01011001&amp;00110011-&gt;00010001 但这次要右移两位</p>
+<p>00010110&amp;00110011-&gt;00010010 然后把结果继续相加得到0010 0011</p>
+<p>将这个结果看作是两组，每组代表这原序列对应的四位上的1的数量，</p>
+<p>1、2、3、4位有三个1（0011），5、6、7、8位有两个1（0010）</p>
+<p>依次类推，可以得到8位中所有的1的数量，32位与之同理，但构造需要更多种类的掩码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * bitCount - returns count of number of 1&#x27;s in word</span></span><br><span class="line"><span class="comment"> *   Examples: bitCount(5) = 2, bitCount(7) = 3</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 40</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">bitCount</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> mask01 = (<span class="number">0x55</span>|<span class="number">0x55</span>&lt;&lt;<span class="number">8</span>)|((<span class="number">0x55</span>|(<span class="number">0x55</span>&lt;&lt;<span class="number">8</span>))&lt;&lt;<span class="number">16</span>);</span><br><span class="line">  <span class="comment">//构造0101 0101 0101 0101 0101 0101 0101 0101</span></span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> mask0011 = (<span class="number">0x33</span>|<span class="number">0x33</span>&lt;&lt;<span class="number">8</span>)|((<span class="number">0x33</span>|(<span class="number">0x33</span>&lt;&lt;<span class="number">8</span>))&lt;&lt;<span class="number">16</span>);</span><br><span class="line">  <span class="comment">//构造0011 0011 0011 0011 0011 0011 0011 0011</span></span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> mask00001111 = (<span class="number">0x0f</span>|<span class="number">0x0f</span>&lt;&lt;<span class="number">8</span>)|((<span class="number">0x0f</span>|(<span class="number">0x0f</span>&lt;&lt;<span class="number">8</span>))&lt;&lt;<span class="number">16</span>);</span><br><span class="line">  <span class="comment">//构造0000 1111 0000 1111 0000 1111 0000 1111</span></span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> mask11111111 = <span class="number">0xff</span>|(<span class="number">0xff</span>&lt;&lt;<span class="number">16</span>);</span><br><span class="line">  <span class="comment">//构造0000 0000 1111 1111 0000 0000 1111 1111</span></span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> mask116 = <span class="number">0xff</span>|(<span class="number">0xff</span>&lt;&lt;<span class="number">8</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> count01 = (x &amp; mask01) + ((x &gt;&gt; <span class="number">1</span>) &amp; mask01);</span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> count0011 = (count01 &amp; mask0011) + ((count01 &gt;&gt; <span class="number">2</span>) &amp; mask0011);</span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> count00001111 = (count0011 &amp; mask00001111) + ((count0011 &gt;&gt; <span class="number">4</span>) &amp; mask00001111);</span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> count11111111 = (count00001111 &amp; mask11111111) + ((count00001111 &gt;&gt; <span class="number">8</span>) &amp; mask11111111); </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//int count116 = (count11111111 &amp; mask116) + (count11111111 &gt;&gt; 16) &amp; mask116);</span></span><br><span class="line">  <span class="keyword">return</span> (count11111111 &amp; mask116) + ((count11111111 &gt;&gt; <span class="number">16</span>) &amp; mask116);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012616196.png" alt="image-20230315012616196"></p>
+<h1 id="5-bang"><a href="#5-bang" class="headerlink" title="5. bang"></a>5. bang</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * bang - Compute !x without using !</span></span><br><span class="line"><span class="comment"> *   Examples: bang(3) = 0, bang(0) = 1</span></span><br><span class="line"><span class="comment"> *   Legal ops: ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 12</span></span><br><span class="line"><span class="comment"> *   Rating: 4 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">bang</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题要我们在不使用！的情况下实现！，要求最大操作数是12个，能用 ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这道题需要我们知道两件事，第一，可以通过逐位取反加一得到相反数，第二，0的相反数还是0</p>
+<p>知道这两件事以后我们就可以开始操作了，因为非零数取相反数后符号位会改变，而0取相反数后符号位不会改变，所以我们可以将x取反加一，与自己相或，此时若x=0,则符号位为0，否则符号位必为1。因为输入0要输出1，所以我们把或运算后的结果逐位取反，此时输入0则符号位为1，否则为0，接下来右移31位，与0x1获取符号位即可</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * bang - Compute !x without using !</span></span><br><span class="line"><span class="comment"> *   Examples: bang(3) = 0, bang(0) = 1</span></span><br><span class="line"><span class="comment"> *   Legal ops: ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 12</span></span><br><span class="line"><span class="comment"> *   Rating: 4 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">bang</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (~(x|(~x+<span class="number">1</span>))&gt;&gt;<span class="number">31</span>)&amp;<span class="number">0x1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012627462.png" alt="image-20230315012627462"></p>
+<h1 id="6-tmin"><a href="#6-tmin" class="headerlink" title="6. tmin"></a>6. tmin</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * tmin - return minimum two&#x27;s complement integer </span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 4</span></span><br><span class="line"><span class="comment"> *   Rating: 1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">tmin</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数要我们找到最小的二进制整数的补码，要求最大操作数是4个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这个其实只要知道最小的整数是“-0”就可以很容易写出来了</p>
+<p>很简单，把1左移31位得到0x8000就可以了</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * tmin - return minimum two&#x27;s complement integer </span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 4</span></span><br><span class="line"><span class="comment"> *   Rating: 1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">tmin</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>&lt;&lt;<span class="number">31</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012635858.png" alt="image-20230315012635858"></p>
+<h1 id="7-fitsBits"><a href="#7-fitsBits" class="headerlink" title="7. fitsBits"></a>7. fitsBits</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * fitsBits - return 1 if x can be represented as an </span></span><br><span class="line"><span class="comment"> *  n-bit, two&#x27;s complement integer.</span></span><br><span class="line"><span class="comment"> *   1 &lt;= n &lt;= 32</span></span><br><span class="line"><span class="comment"> *   Examples: fitsBits(5,3) = 0, fitsBits(-4,3) = 1</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 15</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">fitsBits</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数要我们判断给定的数能不能用给定的位数表示，要求最大操作数是15个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这个函数首先要注意到n位中最高位是符号位，是不能被占用的，所以我们实际考虑的只有n-1位。这个问题实际上是让我们判断给定的数是不是在-2^(n-1)到2^(n-1)-1的这样一个区间里，所以我们只要考察两个端点的数字特征就可以（以最多8位为例）</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>-2^(n-1)</th>
+<th>2^(n-1)-1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>-8（11111000）</td>
+<td>7（00000111）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>-16（11110000）</td>
+<td>15（00001111）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>-32（11100000）</td>
+<td>31（00011111）</td>
+</tr>
+</tbody></table>
+<p>经过上表我们发现，当给定的数是负数时，第n位及更高位都为1,当给定的数是正数时，最高位都为0，因此我们可以考虑把负数转化为与整数相同的形式，即先右移n-1位，然后+1，让负数能变正，再右移一位，就可以让正数和负数都变成0了，此时再取反就得到1了。而对于比此范围大的数，左侧会有更少的1（0），在经过加一右移操作后，不会变为0，取非就会为0了。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * fitsBits - return 1 if x can be represented as an </span></span><br><span class="line"><span class="comment"> *  n-bit, two&#x27;s complement integer.</span></span><br><span class="line"><span class="comment"> *   1 &lt;= n &lt;= 32</span></span><br><span class="line"><span class="comment"> *   Examples: fitsBits(5,3) = 0, fitsBits(-4,3) = 1</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 15</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">fitsBits</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> !(((x &gt;&gt; (n+(~<span class="number">0</span>))) + <span class="number">1</span>)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是！这里有一个超级大坑！这里如果只是这样写的话，会有一个样例总是过不了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230312212037727.png" alt="image-20230312212037727"></p>
+<p>但是很明显，答案是错的，这个是datalab的一个bug，其实不用管也可以，但对于有强迫症的我造成伤害很大，所以我决定修了他。</p>
+<p>要修这个bug得先知道这个bug在哪，所以我们先用gdb调试一下。</p>
+<p>首先现在Makefile文件里面加上-g编译参数，能用gdb进行调试</p>
+<p>重新编译btest后，在命令行输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gdb btest</span><br></pre></td></tr></table></figure>
+
+<p>然后给main函数下个断点</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">b main</span><br></pre></td></tr></table></figure>
+
+<p>然后开始调试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">run -f fitsBits -1 0x80000000 -2 0x20</span><br></pre></td></tr></table></figure>
+
+<p>开始调试以后一路按n，直到看到</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">errors = run_tests();</span><br></pre></td></tr></table></figure>
+
+<p>这个函数名看起来就是用来测试我们写的函数的，所以我们用<code>step</code>命令进入函数，看看是如何运行的</p>
+<p>进去以后会看到一个很多轮的循环，这个循环是用来找我们要测的函数的，咱们这个函数是第七个，经过七次for循环后我们看到这样一行代码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">terrors = test_function(&amp;test_set[i]);</span><br></pre></td></tr></table></figure>
+
+<p>看函数名应该是具体测试的代码，继续用<code>step</code>命令进入函数</p>
+<p>然后进去以后跑着跑着就会发现error了，是因为Time out的原因，所以我们回到btest.c里面把351行的if和里面的代码全都注释掉。</p>
+<p>然后再重复一遍刚刚的操作，这次运行到test_function函数里面以后，前面都是一些传参不用管，运行到387行会看到另一个可疑的函数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (args == <span class="number">2</span>) &#123;</span><br><span class="line">	    errors += test_2_arg(t-&gt;solution_funct, </span><br></pre></td></tr></table></figure>
+
+<p>继续step进入函数，发现gdb帮我们打印除了函数的参数，就是fitsBits函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230312214243114.png" alt="image-20230312214243114"></p>
+<p>这里f2是我们写的函数不用管，继续运行下一个</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> rt = f2t(arg1, arg2);</span><br></pre></td></tr></table></figure>
+
+<p>这个f2t就是test函数，是我们要找的答案函数，既然答案出了问题，应该是这个函数写错了，所以我们step进入函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230312214607409.png" alt="image-20230312214607409"></p>
+<p>进去以后发现果然是fitsBits的答案函数，在这里我们先输入 <code>layout split</code>，打开源码和汇编窗口</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230312215313306.png" alt="image-20230312215313306"></p>
+<p>由于一条高级语言代码对应多条汇编语言指令，所以我们接下来使用<code>ni</code>指令逐条汇编指令调试，这样方便我们随时查看变量值的变化</p>
+<p>我们先执行几条<code>ni</code>指令，到<code>cmp</code>指令后，这是一个比较指令，此时变量的赋值操作应该已经完成了，所以我们用<code>i r</code>指令看一下寄存器的值</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230312215834703.png" alt="image-20230312215834703"></p>
+<p>发现寄存器中存了x和TMin_n的0x80000000却没有存TMax_n的0x7fffffff，</p>
+<p>而当我们要print两个变量的地址时发现也只有TMin_n可以print出在ecx寄存器</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230312220125131.png" alt="image-20230312220125131"></p>
+<p>因此猜测可能是原代码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> TMax_n = (<span class="number">1</span> &lt;&lt; (n<span class="number">-1</span>)) - <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>产生了负溢出，尤其是我们把该函数放在64位环境下编译时输出正常，所以我们要修改一下对TMax_n的定义</p>
+<p>所以我们最后找到test_fitBits函数在test.c文件里，这个文件里都是测试函数，找到test_fitBits的定义，加上一段重新赋值</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">test_fitsBits</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> TMin_n = -(<span class="number">1</span> &lt;&lt; (n<span class="number">-1</span>));</span><br><span class="line">  <span class="type">int</span> TMax_n = (<span class="number">1</span> &lt;&lt; (n<span class="number">-1</span>)) - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span>(n == <span class="number">0x20</span>)&#123;</span><br><span class="line"> 	TMin_n = <span class="number">0x80000000</span>;</span><br><span class="line"> 	TMax_n = <span class="number">0x7fffffff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> x &gt;= TMin_n &amp;&amp; x&lt;= TMax_n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>保存后再次编译btest就拿到分数了！</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230312220656737.png" alt="image-20230312220656737"></p>
+<h1 id="8-divpwr2"><a href="#8-divpwr2" class="headerlink" title="8. divpwr2"></a>8. divpwr2</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * divpwr2 - Compute x/(2^n), for 0 &lt;= n &lt;= 30</span></span><br><span class="line"><span class="comment"> *  Round toward zero</span></span><br><span class="line"><span class="comment"> *   Examples: divpwr2(15,1) = 7, divpwr2(-33,4) = -2</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 15</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">divpwr2</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (x&gt;&gt;n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题要我们把输入的数除以2的n次方，要求最大操作数是15个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>最直接的想法就是直接右移，但是对于正数和负数，取整方式是不同的，正数向下取整，而负数向上取整</p>
+<p>所以我们先去补到最近的向上取整的数就可以了</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * divpwr2 - Compute x/(2^n), for 0 &lt;= n &lt;= 30</span></span><br><span class="line"><span class="comment"> *  Round toward zero</span></span><br><span class="line"><span class="comment"> *   Examples: divpwr2(15,1) = 7, divpwr2(-33,4) = -2</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 15</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">divpwr2</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (x + ((x &gt;&gt; <span class="number">31</span>) &amp; ((<span class="number">1</span> &lt;&lt; n) + (~<span class="number">0</span>)))) &gt;&gt; n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012652082.png" alt="image-20230315012652082"></p>
+<h1 id="9-negate"><a href="#9-negate" class="headerlink" title="9. negate"></a>9. negate</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * negate - return -x </span></span><br><span class="line"><span class="comment"> *   Example: negate(1) = -1.</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 5</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">negate</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题要我们把输入的数转化为相反数输出，要求最大操作数是5个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这个其实也比较简单，首先要知道负数在计算机里是用其补码表示的。这里，如果输入的是正数，则输入原码，我们应该将其转化为对应负数的补码；而如果输入的是负数，则输入的是补码，而我们需要将其转化为原码输出。而原码求补码和补码求原码都可以用除符号位按位取反加一的方式，而符号位也是我们需要改的，因此我们直接对总体取反加一即可。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * negate - return -x </span></span><br><span class="line"><span class="comment"> *   Example: negate(1) = -1.</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 5</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">negate</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> ~x+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012703909.png" alt="image-20230315012703909"></p>
+<h1 id="10-isPositive"><a href="#10-isPositive" class="headerlink" title="10 isPositive"></a>10 isPositive</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * isPositive - return 1 if x &gt; 0, return 0 otherwise </span></span><br><span class="line"><span class="comment"> *   Example: isPositive(-1) = 0.</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 8</span></span><br><span class="line"><span class="comment"> *   Rating: 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">isPositive</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题要我们判断输入的数是否为整数，要求最大操作数是8个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这道题很容易想到通过符号位来判断，所以我们之间把x右移31位来获取符号位，但是算术右移会污染高位，所以我们与上一个构造出来的0x00000001，得到符号位。但这里还有一个小坑就是0的符号位是0，但我们要把他当负数看，所以我们最后异或上对x取非，这里可以把异或操作看作是模2加法，如果x是0，取非后是1，正好加一，如果x不是0，取非后是0，不影响结果。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * isPositive - return 1 if x &gt; 0, return 0 otherwise </span></span><br><span class="line"><span class="comment"> *   Example: isPositive(-1) = 0.</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 8</span></span><br><span class="line"><span class="comment"> *   Rating: 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">isPositive</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> ~(x&gt;&gt;<span class="number">31</span>)&amp;((<span class="number">0</span>&lt;&lt;<span class="number">31</span>)+<span class="number">1</span>)^(!x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012714190.png" alt="image-20230315012714190"></p>
+<h1 id="11-isLessOrEqual"><a href="#11-isLessOrEqual" class="headerlink" title="11. isLessOrEqual"></a>11. isLessOrEqual</h1> <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * isLessOrEqual - if x &lt;= y  then return 1, else return 0 </span></span><br><span class="line"><span class="comment"> * Example: isLessOrEqual(4,5) = 1.</span></span><br><span class="line"><span class="comment"> * Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> * Max ops: 24</span></span><br><span class="line"><span class="comment"> * Rating: 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">isLessOrEqual</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题要我们判断输入的x是否小于等于y，要求最大操作数是24个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这道题给出两种实现，第一种运算符数量超过了要求，但思想是一样的</p>
+<p>首先判断大小，最容易想到的就是作差，但是不确定两个数的范围，若两个数符号不同直接作差可能会溢出，所以我们先来判断x和y的符号，如果x为1，y为0可以直接确定为1，反之可以确定为0，剩下我们只需要讨论两个数符号相同的情况，对于相同符号的数，我们可以通过做减法，然后考察其差的符号来判断大小。</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * isLessOrEqual - if x &lt;= y  then return 1, else return 0 </span></span><br><span class="line"><span class="comment"> * Example: isLessOrEqual(4,5) = 1.</span></span><br><span class="line"><span class="comment"> * Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> * Max ops: 24</span></span><br><span class="line"><span class="comment"> * Rating: 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">isLessOrEqual</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> (!((y+~x+<span class="number">1</span>)&gt;&gt;<span class="number">31</span>)&amp;(!((!!(x&gt;&gt;<span class="number">31</span>))^(!!(y&gt;&gt;<span class="number">31</span>))))) | (!!(x&gt;&gt;<span class="number">31</span>)&amp;((!!(x&gt;&gt;<span class="number">31</span>))^(!!(y&gt;&gt;<span class="number">31</span>))));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * isLessOrEqual - if x &lt;= y  then return 1, else return 0 </span></span><br><span class="line"><span class="comment"> * Example: isLessOrEqual(4,5) = 1.</span></span><br><span class="line"><span class="comment"> * Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> * Max ops: 24</span></span><br><span class="line"><span class="comment"> * Rating: 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">isLessOrEqual</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">    <span class="type">int</span> signx = (x&gt;&gt;<span class="number">31</span>) &amp; <span class="number">0x1</span>; <span class="comment">//取x的符号</span></span><br><span class="line">    <span class="type">int</span> signy = (y&gt;&gt;<span class="number">31</span>) &amp; <span class="number">0x1</span>; <span class="comment">//取y的符号</span></span><br><span class="line">    <span class="type">int</span> isSameSign = !(signx^signy); <span class="comment">//对符号位异或取反，若相同则为1,不同则为0</span></span><br><span class="line">    <span class="type">int</span> p = !(((~x)+<span class="number">1</span>+y)&gt;&gt;<span class="number">31</span>); <span class="comment">//~x+1为x的相反数，与y相加后相当于y-x，右移31位后取符号，此时若为负数，则为0xffffffff，若为整数，则为0x00000000，因此取逻辑非，0xffffffff变为0,0x00000000变为1</span></span><br><span class="line">	<span class="keyword">return</span> (isSameSign &amp; p)|((!isSameSign) &amp; signx); <span class="comment">//若符号相同，且x&lt;y，则isSameSign == 1，p == 1，则isSameSign &amp; p为1，无论后面的结果为何，或运算后都为1。若符号相同，且x&gt;y，则isSameSign &amp; p为0，!isSameSign为0，则(!isSameSign) &amp; signx为0，前后都为0，输出0。若符号不同，则(!isSameSign)为1，(!isSameSign) &amp; signx的结果取决于x的符号，若为1（x&lt;0,y&gt;0)，则为1,否则为0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>   <img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012723391.png" alt="image-20230315012723391"></p>
+<h1 id="12-ilog2"><a href="#12-ilog2" class="headerlink" title="12. ilog2"></a>12. ilog2</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * ilog2 - return floor(log base 2 of x), where x &gt; 0</span></span><br><span class="line"><span class="comment"> *   Example: ilog2(16) = 4</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 90</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">ilog2</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题要我们计算输入的x对2取对数，要求最大操作数是90个，能用! ~ &amp; ^ | + &lt;&lt; &gt;&gt;操作</p>
+<p>这道题和之前计算1的个数那道题比较像。我们可以先不考虑计算机该怎么做，可以先来考虑人怎么判断一个二进制数对2求对数该怎么操作，很显然，我们直接看位置最高的1在哪位上就可以了，比如log32(00100000)，此时最高位的1在第六位上，所以就是6-1=5，因此我们就将这个问题转化为了一个寻找最高位1的问题。</p>
+<p>对于这样一个问题，我们从高位开始考虑，首先考虑高16位，如果其中有至少一个1，则两次非运算后得到1，然后将1左移4位，即变为16，意味着最高位的1，至少在16位（最低位为第0位），然后下一轮考察高16位的高八位，以此类推，得到最终的最高位1的所在位数。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * ilog2 - return floor(log base 2 of x), where x &gt; 0</span></span><br><span class="line"><span class="comment"> *   Example: ilog2(16) = 4</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 90</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">ilog2</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">  result += !!(x&gt;&gt;<span class="number">16</span>)&lt;&lt;<span class="number">4</span>;</span><br><span class="line">  result += !!(x&gt;&gt;(<span class="number">8</span>+result))&lt;&lt;<span class="number">3</span>;</span><br><span class="line">  result += !!(x&gt;&gt;(<span class="number">4</span>+result))&lt;&lt;<span class="number">2</span>;</span><br><span class="line">  result += !!(x&gt;&gt;(<span class="number">2</span>+result))&lt;&lt;<span class="number">1</span>;</span><br><span class="line">  result += !!(x&gt;&gt;(<span class="number">1</span>+result));</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012733371.png" alt="image-20230315012733371"></p>
+<h1 id="13-float-neg"><a href="#13-float-neg" class="headerlink" title="13. float_neg"></a>13. float_neg</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * float_neg - Return bit-level equivalent of expression -f for</span></span><br><span class="line"><span class="comment"> *   floating point argument f.</span></span><br><span class="line"><span class="comment"> *   Both the argument and result are passed as unsigned int&#x27;s, but</span></span><br><span class="line"><span class="comment"> *   they are to be interpreted as the bit-level representations of</span></span><br><span class="line"><span class="comment"> *   single-precision floating point values.</span></span><br><span class="line"><span class="comment"> *   When argument is NaN, return argument.</span></span><br><span class="line"><span class="comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span></span><br><span class="line"><span class="comment"> *   Max ops: 10</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">float_neg</span><span class="params">(<span class="type">unsigned</span> uf)</span> &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题要我们把输入的浮点数变为负数，当输入为NaN时直接输出，要求最大操作数是10个，从这道题开始，就进入浮点数阶段了，可以使用所有操作符和定义任意大小的常量。</p>
+<p>这个如果对浮点数的表示法很清楚的话还是很简单的。不太确定的话可以看<a href="http://kaito-kidd.com/2018/08/08/computer-system-float-point/">这个</a>。首先我们需要判断输入的数是不是NaN，根据NaN的定义我们知道，其指数部分都是1，而尾数不全为0，我们只需要根据此构建出需要的01序列，与之相与，判断结果是否和我们想要的一致即可，如果确定是NaN，则提前返回。否则，因为其和整数一样最高位为符号位，所以要变成相反数只需要把最高位变一下就可以。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * float_neg - Return bit-level equivalent of expression -f for</span></span><br><span class="line"><span class="comment"> *   floating point argument f.</span></span><br><span class="line"><span class="comment"> *   Both the argument and result are passed as unsigned int&#x27;s, but</span></span><br><span class="line"><span class="comment"> *   they are to be interpreted as the bit-level representations of</span></span><br><span class="line"><span class="comment"> *   single-precision floating point values.</span></span><br><span class="line"><span class="comment"> *   When argument is NaN, return argument.</span></span><br><span class="line"><span class="comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span></span><br><span class="line"><span class="comment"> *   Max ops: 10</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">float_neg</span><span class="params">(<span class="type">unsigned</span> uf)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span>((uf&amp;<span class="number">0x5fffff</span>) != <span class="number">0</span> &amp;&amp; (uf&amp;<span class="number">0x7f800000</span>) == <span class="number">0x7f800000</span>)</span><br><span class="line">		<span class="keyword">return</span> uf; </span><br><span class="line"> 	<span class="keyword">return</span> uf^<span class="number">0x80000000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012741805.png" alt="image-20230315012741805"></p>
+<h1 id="14-float-i2f"><a href="#14-float-i2f" class="headerlink" title="14. float_i2f"></a>14. float_i2f</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * float_i2f - Return bit-level equivalent of expression (float) x</span></span><br><span class="line"><span class="comment"> *   Result is returned as unsigned int, but</span></span><br><span class="line"><span class="comment"> *   it is to be interpreted as the bit-level representation of a</span></span><br><span class="line"><span class="comment"> *   single-precision floating point values.</span></span><br><span class="line"><span class="comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span></span><br><span class="line"><span class="comment"> *   Max ops: 30</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">float_i2f</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题要我们把输入的整数变为浮点数，要求最大操作数是30个</p>
+<p>首先我们先把0和-0处理掉，如果是这两个数，直接对应输出就可以了</p>
+<p>然后因为浮点数不用补码表示，我们先把负数都变成整数，最后再补上符号</p>
+<p>然后根据整数和浮点数的对应关系，我们依然要找最高位的1在哪，找到以后记录下来其所在的位数，方便我们之后把第一个1左侧的0都去掉</p>
+<p>再把x 右移8位按位与 1 得到 fraction，再来看最后 8 位是否要进位。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * float_i2f - Return bit-level equivalent of expression (float) x</span></span><br><span class="line"><span class="comment"> *   Result is returned as unsigned int, but</span></span><br><span class="line"><span class="comment"> *   it is to be interpreted as the bit-level representation of a</span></span><br><span class="line"><span class="comment"> *   single-precision floating point values.</span></span><br><span class="line"><span class="comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span></span><br><span class="line"><span class="comment"> *   Max ops: 30</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">float_i2f</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span>(x == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> e = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> fraction = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> sign = (x&gt;&gt;<span class="number">31</span>)&amp;<span class="number">0x1</span>; <span class="comment">//获取符号</span></span><br><span class="line">	<span class="keyword">if</span>(x == <span class="number">0x80000000</span>) <span class="keyword">return</span> <span class="number">0x80000000</span> | (<span class="number">158</span> &lt;&lt; <span class="number">23</span>); <span class="comment">//输入为-2^31时，指数为127+31=158</span></span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(sign == <span class="number">1</span>)</span><br><span class="line">			x = ~x+<span class="number">1</span>;									<span class="comment">//负数改成正数</span></span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> tmp = x;</span><br><span class="line">		<span class="keyword">while</span>(tmp != <span class="number">1</span>)									<span class="comment">//找最高位的1</span></span><br><span class="line">		&#123;</span><br><span class="line">			tmp = tmp &gt;&gt; <span class="number">1</span>;</span><br><span class="line">			e++;</span><br><span class="line">		&#125;</span><br><span class="line">        </span><br><span class="line">		x = x &lt;&lt; (<span class="number">31</span> - e);								<span class="comment">//去掉第一个1左侧的0</span></span><br><span class="line">		fraction = (x &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0x7fffff</span>;					<span class="comment">//只保留第一个1右侧的数据，但这一步可能会导致尾端的数据丢失</span></span><br><span class="line">		x = x &amp; <span class="number">0xff</span>;									<span class="comment">//保留最后八位也就是可能会丢失的八位</span></span><br><span class="line">		fraction = fraction + (x &gt; <span class="number">128</span> || ((x == <span class="number">128</span>) &amp;&amp; (fraction &amp; <span class="number">0x1</span>))); <span class="comment">//八位最多表示255,所以超过128就表示可以进位了</span></span><br><span class="line">		<span class="keyword">if</span>(fraction &gt;&gt; <span class="number">23</span>)								<span class="comment">//检查尾数在经过进位后有没有溢出</span></span><br><span class="line">		&#123;</span><br><span class="line">			fraction = fraction &amp; <span class="number">0x7fffff</span>;				<span class="comment">//如果有就重新把溢出位去掉</span></span><br><span class="line">			e += <span class="number">1</span>;										<span class="comment">//但给指数+1</span></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="keyword">return</span> (e+<span class="number">127</span>)&lt;&lt;<span class="number">23</span> | fraction | (sign &lt;&lt; <span class="number">31</span>);			<span class="comment">//最后把三部分组合</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012749731.png" alt="image-20230315012749731"></p>
+<h1 id="15-float-twice"><a href="#15-float-twice" class="headerlink" title="15. float_twice"></a>15. float_twice</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * float_twice - Return bit-level equivalent of expression 2*f for</span></span><br><span class="line"><span class="comment"> *   floating point argument f.</span></span><br><span class="line"><span class="comment"> *   Both the argument and result are passed as unsigned int&#x27;s, but</span></span><br><span class="line"><span class="comment"> *   they are to be interpreted as the bit-level representation of</span></span><br><span class="line"><span class="comment"> *   single-precision floating point values.</span></span><br><span class="line"><span class="comment"> *   When argument is NaN, return argument</span></span><br><span class="line"><span class="comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span></span><br><span class="line"><span class="comment"> *   Max ops: 30</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">float_twice</span><span class="params">(<span class="type">unsigned</span> uf)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题要我们把输入的浮点数乘2，当输入为NaN时直接输出，要求最大操作数是30个</p>
+<p>首先我们先来判断输入是什么类型的浮点数，令其与0x7f800000相与，若为0，则其为非规格化数，那么对于这种数直接右移一位就可以扩大两倍了，但要记得把符号位移完了放回去。</p>
+<p>然后再考虑其不是NaN时，这时指数部分有值，其本身的意义就是2的次方数，所以我们直接加一就可以</p>
+<p>最后如果都不满足，说明其是NaN，直接返回即可。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * float_twice - Return bit-level equivalent of expression 2*f for</span></span><br><span class="line"><span class="comment"> *   floating point argument f.</span></span><br><span class="line"><span class="comment"> *   Both the argument and result are passed as unsigned int&#x27;s, but</span></span><br><span class="line"><span class="comment"> *   they are to be interpreted as the bit-level representation of</span></span><br><span class="line"><span class="comment"> *   single-precision floating point values.</span></span><br><span class="line"><span class="comment"> *   When argument is NaN, return argument</span></span><br><span class="line"><span class="comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span></span><br><span class="line"><span class="comment"> *   Max ops: 30</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">unsigned</span> <span class="title function_">float_twice</span><span class="params">(<span class="type">unsigned</span> uf)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> ((uf &amp; <span class="number">0x7f800000</span>) == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> ((uf &amp; <span class="number">0x7fffff</span>) &lt;&lt; <span class="number">1</span>) | (<span class="number">0x80000000</span> &amp; uf);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> ((uf &amp; <span class="number">0x7f800000</span>) != <span class="number">0x7f800000</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> uf + <span class="number">0x800000</span>;</span><br><span class="line">	&#125;  </span><br><span class="line">  	<span class="keyword">return</span> uf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012755255.png" alt="image-20230315012755255"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012801739.png" alt="image-20230315012801739"></p>
+<h2 id="完结撒花！！！"><a href="#完结撒花！！！" class="headerlink" title="完结撒花！！！"></a>完结撒花！！！</h2>]]></content>
+  </entry>
+  <entry>
+    <title></title>
     <url>/2022/04/22/%E5%91%A8%E6%8A%A5/</url>
     <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
 <p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
@@ -622,67 +1005,6 @@
 <p>晚上挺凉快的</p>
 <h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>WebKit</title>
-    <url>/2022/01/16/WebKit/</url>
-    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
-<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
-<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
-<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
-<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
-<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
-<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
-<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
-<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
-<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
-<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
-<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
-<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
-<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
-<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
-<p>数字表示基本顺序，但也不是严格一致。</p>
-<p>具体的过程如下：</p>
-<ol>
-<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
-<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
-<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
-<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
-<li>解释器根据词语构建节点（Node），形成DOM树</li>
-<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
-<li>JavaScript代码可能会修改DOM树结构</li>
-<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
-</ol>
-<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
-<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
-<p>这一段的具体过程如下：</p>
-<ol>
-<li>CSS文件被CSS解释器解释成内部表示结构</li>
-<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
-<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
-</ol>
-<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
-<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
-<p>这一阶段对应的具体过程如下：</p>
-<ol>
-<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
-<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
-<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
-</ol>
-<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
-<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
-<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
-<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
-]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>浏览器</tag>
-      </tags>
   </entry>
   <entry>
     <title>植物大战僵尸外挂笔记</title>
