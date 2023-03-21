@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Coverage-based Greybox Fuzzing as Markov Chain</title>
+    <url>/2021/12/14/Coverage-based-Greybox-Fuzzing-as-Markov-Chain/</url>
+    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们发现多数测试检测相同且小量的“高频”路径，发展很多策略，通过向低频路径倾斜，用相同数量的测试样例来探索更多“低频”路径</p>
+<p>马尔可夫链模型指出模糊测试一个执行路径i的种子生成执行路径j的输入的可能性。</p>
+<p>每个种子有“能量”用于指出这个种子生成的输入数</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>最主要的问题就是测试程序的不同路径</p>
+<p>如果发现了新路径，就在此基础上进行修改，否则丢弃</p>
+<p>我们让每一个seed都有一个energy，然后energy指定下一次生成的输入</p>
+<p>将低能量分配给执行高频路径的种子，而把高能量分配给执行低频路径的种子</p>
+<p><a href="https://blog.csdn.net/u014578266/article/details/89042473">https://blog.csdn.net/u014578266/article/details/89042473</a></p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>AFLFAST</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CodeAlchemist</title>
     <url>/2022/04/22/CodeAlchemist/</url>
     <content><![CDATA[<h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol>
@@ -39,105 +59,8 @@
         <category>论文笔记</category>
       </categories>
       <tags>
+        <tag>Fuzzing</tag>
         <tag>CodeAlchenmist</tag>
-        <tag>Fuzzing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Coverage-based Greybox Fuzzing as Markov Chain</title>
-    <url>/2021/12/14/Coverage-based-Greybox-Fuzzing-as-Markov-Chain/</url>
-    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们发现多数测试检测相同且小量的“高频”路径，发展很多策略，通过向低频路径倾斜，用相同数量的测试样例来探索更多“低频”路径</p>
-<p>马尔可夫链模型指出模糊测试一个执行路径i的种子生成执行路径j的输入的可能性。</p>
-<p>每个种子有“能量”用于指出这个种子生成的输入数</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>最主要的问题就是测试程序的不同路径</p>
-<p>如果发现了新路径，就在此基础上进行修改，否则丢弃</p>
-<p>我们让每一个seed都有一个energy，然后energy指定下一次生成的输入</p>
-<p>将低能量分配给执行高频路径的种子，而把高能量分配给执行低频路径的种子</p>
-<p><a href="https://blog.csdn.net/u014578266/article/details/89042473">https://blog.csdn.net/u014578266/article/details/89042473</a></p>
-]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-        <tag>AFLFAST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
-    <url>/2022/04/22/FuzzIL/</url>
-    <content><![CDATA[<h1 id="FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines"><a href="#FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines" class="headerlink" title="FuzzIL：Coverage Guided Fuzzing for JavaScript Engines"></a>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>工作目标是引导测试工具来测试脚本解释器，这需要在代码上定义在语义上有效的突变。然而，与现有的突变语法方式不同（如代码的文本形式或语法树），突变是在新设计的中间语言（IL）上进行的。基于其形式，其可以轻松执行控制流和数据流突变。<strong>这反映了，程序的句法属性无关紧要</strong>。此外，该系统可以以高概率生成语义上有效的样本。这避免了将生成的代码包装到try-catch结构中。</p>
-<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>总的来说是为了开发一款工具，该工具还是基于覆盖率的。</p>
-<p>首先，语法上无效的程序一般无法通过解析阶段，所以生成的代码需要在语法上是合法的。</p>
-<p>其次，鉴于基于覆盖率进行指导模糊测试，我们需要定义合理的突变，以在突变时能够保留样本的大多数interesting features，以突变出更多的interesting cases。因此有必要定义能够改变程序控制流和数据流的突变，因为这是组件最终处理的内容。</p>
-<blockquote>
-<p>程序是从上到下顺序执行的，同时可以通过一些控制语句来改变执行的路线，受控制语句影响下，程序最终的执行路线就是控制流。</p>
-<p>js 里面的控制语句有 if、for、while、try-catch 等，它们都会改变程序的走向。</p>
-<p>程序是操作数据的，随着程序的运行，也就是控制流的前进而改变的数据叫做数据流。</p>
-<p>很明显，数据流是依赖控制流的，程序分析里面的数据流分析也是要先做控制流分析。</p>
-<p>比如这样一段代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> (a === <span class="number">1</span>) &#123;</span><br><span class="line">    b = <span class="string">&#x27;1111&#x27;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    b = <span class="string">&#x27;2222&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为 a 为 1，所以会执行到 <code>b = &#39;1111&#39;;</code>，这就是控制流，也就是程序最终执行的代码，可以用来分析程序的走向，做一些死代码删除之类的优化。</p>
-<p>而随着控制流的执行，b 会被赋值为 2222，这就是数据流，也就是值的变化的过程，可以用来分析某个语句的变量的值。</p>
-</blockquote>
-<p>最后，还有处理语义上无效的程序的临时解决方案，我们知道使用try-catch语句会导致漏报一些漏洞，我们的系统需要产生较高比例的语义有效程序，以避免try-catch结构的使用。但是，由于一些漏洞是通过内部异常而发现的，所以完全的语义正确性也是不可取的。</p>
-<blockquote>
-<p>try-catch语句</p>
-<p>try/catch/finally语句是JS中的异常处理机制。try子句用于定义要处理其中异常的代码块，catch子句是在try块中的语句发生异常后会被调用的语句。（finally块中是清理代码）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//正常情况下，这里的代码会从头到尾执行，</span></span><br><span class="line">	<span class="comment">//不会出现问题。但有时候也可能抛出异常：</span></span><br><span class="line">	<span class="comment">//直接通过throw语句抛出，或者由于调用</span></span><br><span class="line">	<span class="comment">//了一个抛出异常的方法而抛出</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(e)&#123;</span><br><span class="line">    <span class="comment">//当且仅当try块抛出异常时，才会执行这个</span></span><br><span class="line">    <span class="comment">//块中的语句。这里的语句可以使局部变量e</span></span><br><span class="line">    <span class="comment">//引用被抛出的Error对象。这个块可以以</span></span><br><span class="line">    <span class="comment">//某种方式来处理异常，也可以什么也不做</span></span><br><span class="line">    <span class="comment">//以忽略异常，还可以通过throw重新抛出异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一个具体的例子</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//请用户输入一个数值</span></span><br><span class="line">	<span class="keyword">let</span> n = <span class="title class_">Number</span>(<span class="title function_">prompt</span>(<span class="string">&quot;Please enter a positive integer&quot;</span>,<span class="string">&quot;&quot;</span>));</span><br><span class="line">	<span class="comment">//假设输入有效，继续计算该数值的阶乘</span></span><br><span class="line">	<span class="keyword">let</span> f = <span class="title function_">factorial</span>(n);</span><br><span class="line">	<span class="comment">//显示结果</span></span><br><span class="line">	<span class="title function_">alart</span>(n + <span class="string">&quot;!=&quot;</span> + f);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(ex)&#123;			<span class="comment">//如果用户的输入无效，则会跳转到这里</span></span><br><span class="line">	<span class="title function_">alart</span>(ex);		<span class="comment">//告诉用户发生了什么错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>总到来说，我们有三条需求：</p>
-<ol>
-<li>产生语法上有效的样本</li>
-<li>定义影响程序控制流和数据流的突变类型</li>
-<li>产生高比例的语义有效样本</li>
-</ol>
-<h2 id="Coverage-Guide-JavaScript-Fuzzing"><a href="#Coverage-Guide-JavaScript-Fuzzing" class="headerlink" title="Coverage Guide JavaScript Fuzzing"></a>Coverage Guide JavaScript Fuzzing</h2><h3 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h3><p>在更接近引擎内部表示的“字节码”级别上进行突变，而不是突变AST或者文本代码段等表示的句法结构。本质上，字节码级别类似于控制和数据流图，这是大多数攻击最终所需要的到达的级别，而语法信息（如AST）则在解析过程中很大程度上会被丢弃。</p>
-<p><img src="/.com//1.jpg" alt="1"></p>
-<p>因此我们定义了一种名为FuzzIL的中间语言，这样我们可以定义一些在AST层面上不容易实现的突变策略。</p>
-<p>为了满足第三条需求，我们首先注意到，由于每个突变执行的变化相对较小，所以改变语义有效性的概率也就较小。此外，所有突变都必须遵守IL的一套语义正确性的规则，在变量使用前要先进行定义等操作。最后可以将变异出的语义上无效的程序百分比维持在一个可以接受的程度上。</p>
-<h3 id="FuzzIL"><a href="#FuzzIL" class="headerlink" title="FuzzIL"></a>FuzzIL</h3><p>易于突变，同时允许直接转换为JS代码</p>
-<p>FuzzIL程序由指令列表组成,每个指令列表又由一个操作以及输入和输出变量列表组成</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">v0 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;0&#x27;</span>							<span class="comment">//const v0 = 0;</span></span><br><span class="line">v1 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;10&#x27;</span>							<span class="comment">//const v1 = 10;</span></span><br><span class="line">v2 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;1&#x27;</span>							<span class="comment">//const v2 = 1;</span></span><br><span class="line">v3 &lt;- <span class="title class_">Phi</span> v0								<span class="comment">//let v3 = v0;</span></span><br><span class="line"><span class="title class_">BeginFor</span> v0, <span class="string">&#x27;&lt;&#x27;</span>, v1, <span class="string">&#x27;+&#x27;</span>, v2 -&gt; v4			<span class="comment">//for(let v4 = v0; v4 &lt; v1; v4 = v4 + v2)&#123;</span></span><br><span class="line">		v6 &lt;- <span class="title class_">BinaryOperation</span> v3, <span class="string">&#x27;+&#x27;</span>, v4	<span class="comment">//		const v6 = v3 + v4;</span></span><br><span class="line">		<span class="title class_">Copy</span> v3, v6							<span class="comment">//		v3 = v6;</span></span><br><span class="line"><span class="title class_">EndFor</span>										<span class="comment">//&#125;</span></span><br><span class="line">v7 &lt;- <span class="title class_">LoadString</span> <span class="string">&#x27;Result: &#x27;</span>					<span class="comment">//const v7 = &quot;Result: &quot;;</span></span><br><span class="line">v8 &lt;- <span class="title class_">BinaryOperation</span> v7, <span class="string">&#x27;+&#x27;</span>, v3			<span class="comment">//const v8 = v7 + v3;</span></span><br><span class="line">v9 &lt;- <span class="title class_">LoadGlobal</span> <span class="string">&#x27;console&#x27;</span>					<span class="comment">//const v9 = console;</span></span><br><span class="line">v10 &lt;- <span class="title class_">CallMethod</span> v9, <span class="string">&#x27;log&#x27;</span>, [v8]			<span class="comment">//const v10 = v9.log(v8);</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>let</code>命令，用来声明变量。它的用法类似于<code>var</code>，但是所声明的变量，只在<code>let</code>命令所在的代码块内有效。</p>
-<p><img src="../AppData/Roaming/Typora/typora-user-images/image-20220128195045584.png" alt="image-20220128195045584"></p>
-<p>JavaScript 原生中默认是没有 Console 对象,这是宿主对象（也就是浏览器）提供的内置对象。用于访问调试控制台, 在不同的浏览器里效果可能不同。</p>
-</blockquote>
-<p>显示了由12个指令组成的程序实例,计算数字从0到9的总和并输出,变量通过整数识别,并且需要在每个单独的程序中从0开始依次连续编号</p>
-<h3 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h3><p>突变的目的是将已有的程序转化为不同的程序，但要保存其有趣的特征</p>
-<ul>
-<li>输入突变器：改变输入的参数变量</li>
-<li>操作突变器：改变操作参数</li>
-<li>插入突变器：将新生成的代码插入到程序</li>
-<li>组合突变器：将现有的两个程序组合到一起</li>
-<li>拼接突变器：将现有程序的一部分插入另一个程序</li>
-</ul>
-<h4 id="Input-Mutator"><a href="#Input-Mutator" class="headerlink" title="Input Mutator"></a>Input Mutator</h4><p>用于突变数据流，在FuzzIL中，指令的所有输入都是变量，所有突变器需要在原始程序中选择一个或者多个指令，并将其输入替换为不同的随机变量来运行</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># <span class="title class_">Before</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v6, v9, v3</span><br><span class="line"></span><br><span class="line"># <span class="title class_">After</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v12, v9, v3</span><br></pre></td></tr></table></figure>
-
-<h4 id="Operation-Mutator"><a href="#Operation-Mutator" class="headerlink" title="Operation Mutator"></a>Operation Mutator</h4><p>用于突变操作参数，例如LoadString操作使用的常量，以及比较中使用的比较器，属性操作和方法调用中使用的属性或方法名称，以及二进制或一元操作中的实际操作</p>
-<h4 id="Insertion-Mutator"><a href="#Insertion-Mutator" class="headerlink" title="Insertion Mutator"></a>Insertion Mutator</h4><p>本质上是一个小型代码生成组件，使用一系列预定义的代码生成器（一个将FuzzIL代码发送到突变程序中的函数）来进行工作</p>
-<h4 id="Combine-Mutator"><a href="#Combine-Mutator" class="headerlink" title="Combine Mutator"></a>Combine Mutator</h4><p>比较简单，将一个程序插入到另一个当中</p>
-<h4 id="Splice-Mutator"><a href="#Splice-Mutator" class="headerlink" title="Splice Mutator"></a>Splice Mutator</h4><p>插入一组被称为切片的指令，切片的关键属性是其中任何指令使用的每个变量也由切片中的指令定义</p>
-<h3 id="Refinement"><a href="#Refinement" class="headerlink" title="Refinement"></a>Refinement</h3><p>在将新发现的样本加入语料库或保存触发crash的样本前，先进行精细化操作</p>
-<ol>
-<li>检查样本的deterministic behavior</li>
-<li>minimization</li>
-<li>normalization</li>
-</ol>
-<h4 id="Determinism"><a href="#Determinism" class="headerlink" title="Determinism"></a>Determinism</h4>]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-        <tag>FuzzIL</tag>
       </tags>
   </entry>
   <entry>
@@ -155,61 +78,6 @@
       <tags>
         <tag>Web</tag>
         <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript学习记录</title>
-    <url>/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="交互式网络"><a href="#交互式网络" class="headerlink" title="交互式网络"></a>交互式网络</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>要通过事件来触发函数，要添加事件处理器，比如载入网页时触发，使用<code>onload</code>，然后通过<code>alert()</code>函数列出信息。</p>
-<p>事件由用户触发，但最终还是来源于浏览器，是一个被用户触发的事件，但浏览器必须包装关于事件的信息，再传递给负责相应这个事件的函数</p>
-<p>无论事件会不会被相应，都不会影响网页的载入</p>
-<p>Javascript的代码可以放在<code>&lt;script&gt;</code>标签里，也可以直接放在事件处理器中</p>
-<p>事件以JavaScript代码相应网页里发生的动静</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="prompt函数"><a href="#prompt函数" class="headerlink" title="prompt函数"></a>prompt函数</h3><p><code>prompt()</code>负责制作弹出窗口，用于显示可提示用户进行输入的对话框。函数返回值为字符串。当用户输入为数字或布尔类型时，一律返回string型，若想使类型不变，则需要进行类型转换。</p>
-<h3 id="document-getElementById函数"><a href="#document-getElementById函数" class="headerlink" title="document.getElementById函数"></a>document.getElementById函数</h3><p>顾明思义，get-Element-By-Id，就是通过ID来设置/返回HTML标签的属性及调用其事件与方法。用这个方法基本上可以控制页面所有标签，条件很简单就是给每个标签分配一个ID号</p>
-<h1 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h1><p>三种基本数据类型：text、number、boolean</p>
-<p>number用于存储数值数据、text用于存储字符串、boolean用于存储逻辑值</p>
-<p>alart框只能显示文本，不能显示数字，所以要进行类型转换</p>
-<p>在重新载入网页时，脚本的数据被重新设为初始值</p>
-<h2 id="函数-1"><a href="#函数-1" class="headerlink" title="函数"></a>函数</h2><h3 id="parseInt-函数"><a href="#parseInt-函数" class="headerlink" title="parseInt()函数"></a>parseInt()函数</h3><p>把字符串传给函数，函数把字符串转化为整数</p>
-<h3 id="parseFloat-函数"><a href="#parseFloat-函数" class="headerlink" title="parseFloat()函数"></a>parseFloat()函数</h3><p>把字符串传给函数，函数把字符串转化为浮点数</p>
-<p>使用这两个函数应该只包含数字的字符串</p>
-<p>NaN表示非数字，也用于某段数据不是数字，但被期待是数字的时候</p>
-<h3 id="indexOf-函数"><a href="#indexOf-函数" class="headerlink" title="indexOf()函数"></a>indexOf()函数</h3><p>indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。<br>indexOf() 方法对大小写敏感！</p>
-<p>string.indexOf(“xxx”)表示在string中搜索字符串xxx</p>
-<h1 id="探索客户端"><a href="#探索客户端" class="headerlink" title="探索客户端"></a>探索客户端</h1><h2 id="函数-2"><a href="#函数-2" class="headerlink" title="函数"></a>函数</h2><h3 id="refresh-函数"><a href="#refresh-函数" class="headerlink" title="refresh()函数"></a>refresh()函数</h3><p>重新整理网页</p>
-<h3 id="setTimeout-函数"><a href="#setTimeout-函数" class="headerlink" title="setTimeout()函数"></a>setTimeout()函数</h3><p>单次定时器函数</p>
-<p>函数有两段参数，分别是时间延迟和想要运行的程序代码，两个参数顺序无所谓</p>
-<p>时间单位为毫秒</p>
-<h3 id="setInterval-函数"><a href="#setInterval-函数" class="headerlink" title="setInterval()函数"></a>setInterval()函数</h3><p>间隔定时器函数，格式与setTimeout函数相同，以对应的时间间隔重复执行代码</p>
-]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux内核完全注释</title>
-    <url>/2023/03/18/Linux0.11/</url>
-    <content><![CDATA[<h1 id="Linux内核完全注释（1）"><a href="#Linux内核完全注释（1）" class="headerlink" title="Linux内核完全注释（1）"></a>Linux内核完全注释（1）</h1><p>赵博士这本书是一本很厚实的书，涉及到Linux的各个方面，早就想要一读，可惜一直没有找到时间，现在大四了终于有时间读一读，也是复习和进一步理解Linux系统内核的好机会。这个系列可能会断断续续更新很久，希望不会烂尾。</p>
-<h2 id="第2章-微型计算机组成结构"><a href="#第2章-微型计算机组成结构" class="headerlink" title="第2章 微型计算机组成结构"></a>第2章 微型计算机组成结构</h2><p>由于操作系统是应用程序与硬件沟通的桥梁，我们在学习操作系统时，必不可少地需要先具备一定的硬件知识。</p>
-<blockquote>
-<p>除了CPU以外，现代PC机主板主要使用两个超大规模芯片构成的芯片组组成：北桥芯片和南桥芯片。北桥芯片用于与CPU、内存和AGP视频接口，这些接口具有很高的传输速率。北桥芯片还起着存储器控制作用，因此Intel把该芯片标号为MCH芯片。南桥芯片用于管理低、中速的组件，例如PCI总线、IDE硬盘接口、USB端口等，因此南桥芯片的名称为ICH芯片。</p>
-</blockquote>
-<h2 id="第3章-内核编程语言和环境"><a href="#第3章-内核编程语言和环境" class="headerlink" title="第3章 内核编程语言和环境"></a>第3章 内核编程语言和环境</h2><p>在Linux 0.1系统中使用两种汇编器，一个是能产生16位代码的as86汇编器和ld86链接器，在Linux中被用来创建16位的引导扇区程序boot/bootsect.s和实模式下初始设置程序boot/setup.s的二进制代码，主要特点是小巧快速，有宏和错误检测功能。另一个是GNU的汇编器gas，使用GNU ld链接器。</p>
-<p>as86汇编器和Intel的汇编语言语法是不兼容的，其操作数的次序与GNU as相反。</p>
-<p>as86接收的汇编语言语句可以是只包含空格、制表符和换行符的空行，也可以是赋值语句或定义语句、伪操作语句和机器指令语句。每个操作码都以一个“.”字符开始，点字符本身是一个特殊的符号，代表着编译过程中的位置计数器，其值是点符号出现处机器指令第一个字节的地址。</p>
-<p>机器指令语句是可执行机器指令的助记符，由操作码和0个或多个操作数构成。在任何语句之前都可以有标号，标号是由一个标识符后跟一个冒号：组成，在编译过程中，汇编器遇到一个标号后，会将当前位置计数器的值赋给这个标号</p>
-]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Binary</tag>
       </tags>
   </entry>
   <entry>
@@ -238,433 +106,8 @@
       </tags>
   </entry>
   <entry>
-    <title>New 160 Crackme 1-5</title>
-    <url>/2023/02/21/New%20160%20Crackme%201-5/</url>
-    <content><![CDATA[<h1 id="New-160-Crackme-1-abex’-5th-crackme"><a href="#New-160-Crackme-1-abex’-5th-crackme" class="headerlink" title="New 160 Crackme-1 abex’ 5th crackme"></a>New 160 Crackme-1 abex’ 5th crackme</h1><p>算法 ：★</p>
-<p>爆破 ：★</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>OllyDbg</p>
-<p>先运行一下软件，发现是一个验证序列号的软件，如果输入序列号不正确就会自动退出</p>
-<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><ol>
-<li><p>使用Ollydbg打开要进行爆破的软件得到以下的界面</p>
-<p>按道理说应该先查壳，但是鉴于比较简单，就不查了，事实上也没有加壳<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717124717778.png" alt="image-20220717124717778" style="zoom: 50%;"></p>
-</li>
-<li><p>先查询字符串。右键点击第一行，找到查找字符串<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717124951265.png" alt="image-20220717124951265"></p>
-</li>
-<li><p>发现一共有6个字符串，其中前两个很像序列号格式的不知道是什么，猜测是正确答案，于是输进去试一试，结果不是，那就先不管。然后后面四个字符串分别是输入错误和正确时，弹出的MessageBox的标题和内容。因为错误的部分要比正确的位置靠前，所以先双击错误的字符串，看一下具体逻辑。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717125219570.png" alt="image-20220717125219570"></p>
-</li>
-<li><p>点进去发现0x4010FF位置有一个跳转，这个跳转决定到底是错误输出还是正确输出。可以看到这个跳转由上面的<code>CMP EAX, 0</code>的结果控制，也就是说如果相等，就会执行这个跳转，跳到正确的位置（0x401117），否则就是错误的。那作为爆破部分比较简单，直接把这个JE给改成JNE（输入错误会跳转）或者JMP（强制跳转）就可以了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717125622726.png" alt="image-20220717125622726"></p>
-</li>
-<li><p>双击JE那条语句，改成JMP以后assemble</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717131059444.png"></p>
-</li>
-<li><p>最后执行一下，发现well done了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717130547475.png" alt="image-20220717130547475"></p>
-</li>
-</ol>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>虽然爆破能让我们不用序列号就通过，但我们依然不知道正确的序列号是什么，以及其中的审查机制，要知道这些，就需要对整个程序进行算法分析</p>
-<ol>
-<li><p>要进行算法分析，我们要先在Ollydbg里面把程序跑起来</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717131703017.png" alt="image-20220717131703017" style="zoom: 80%;">
-
-<p>按F7单步执行，发现程序从第一行开始执行，到0x40101D会弹出输入序列号的对话框，然后会跳转到0x40106C，于是在0x40106C处按F2下断点</p>
-</li>
-<li><p>往后看，发现调用了一个函数叫GetDlgItemTextA，这个函数是用来接收刚刚在对话框中输入的字符串的。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132048801.png" alt="image-20220717132048801"></p>
-</li>
-<li><p>继续F7执行，执行到GetDlgItemTextA时，我们就不进去细看获取的过程了，按F8直接获取执行的结果</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132354299.png" alt="image-20220717132354299"></p>
-<p>在函数的堆栈处，发现刚刚输入的字符串已经被存在了0x402324的位置了（我没有改默认的字符串）</p>
-<p>这个时候可以右键点击这个地址</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132749398.png" alt="image-20220717132749398" style="zoom:50%;">
-
-<p>点击Follow in Dump，就可以在左边的数据窗口看到了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132833019.png" alt="image-20220717132833019"></p>
-</li>
-<li><p>接下来继续执行，马上又遇到了第二个函数，这个函数百度查一下发现是一个获取硬盘信息的函数，用来获取磁盘驱动卷编号的</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132932806.png" alt="image-20220717132932806"></p>
-<p>直接F8执行过去看结果</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717133249053.png" alt="image-20220717133249053"></p>
-<p>在下面已经获得结果了，此处我的磁盘名称就是test</p>
-<p>另外在这里我们看到了最开始查找字符串时候的4562-ABEX，看起来的确不是答案序列号</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135035633.png" alt="image-20220717135035633"></p>
-<p>但我们会发现，在经过lstrcatA函数后，程序把我们的卷编号和这个字符串拼到了一起</p>
-</li>
-<li><p>接下来我们继续运行，发现这样一段逻辑，先将DL赋值为2，然后执行下面的一系列加法操作，那我们首先来看，被加的地址0x40225C是什么</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135523739.png"></p>
-<p>发现刚好是刚刚拼起来的字符串，如果有一点汇编基础的话，应该知道，接下来的0x40225D、0x40225E、0x40225F分别对应着e、s、t三个字符，也就是说，这段指令就是把这几个字符的ASCII码加一</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135307042.png" alt="image-20220717135307042"></p>
-<p>都加完一遍以后，DEC DL的意思是DL的值减一，然后进行比较JNZ比较的是ZF标志位，当ZF标志位为0时，发生跳转，而DEC只有当被减数与减数相等时会将ZF置为0，于是这段代码将会循环一次。总的来说就是前四位每位一共被加了2.</p>
-</li>
-<li><p>继续往下运行，发现之前搜出来的另一个字符串也出现了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141237038.png"></p>
-<p>并且又是lstrcatA函数，先和空字符串合并，不变，又把这个字符串拼接到了我们刚刚处理过的字符串前面，得到真正的序列号</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141529307.png" alt="image-20220717141529307"></p>
-</li>
-<li><p>接下来，把这个序列号和我们输入的序列号进行比较</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141607771.png" alt="image-20220717141607771"></p>
-<p>如果不相等eax就会返回1，之后的就是在爆破中提到的跳转，就会跳转到错误分支上</p>
-<p>那么这里就有几种方式解决这个程序</p>
-<ol>
-<li><p>既然eax会返回0x1，那么我们可以把比较的对象也改为0x1</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717142002680.png" alt="image-20220717142002680"></p>
-</li>
-<li><p>我们现在已经知道了序列号，并且我们知道序列号只和卷编号有关，所以直接把目标序列号复制下来输进去也可以</p>
-</li>
-<li><p>注意在比较前，程序先将我们输入的数据push进栈，那么我们也可以直接改变push进栈的字符串地址，直接push两个答案进去，自然就一样了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717142229535.png" alt="image-20220717142229535"></p>
-</li>
-</ol>
-</li>
-</ol>
-<p>至此这个程序的分析就结束了</p>
-<h1 id="New-160-Crackme-2-CrackMe-V3-0"><a href="#New-160-Crackme-2-CrackMe-V3-0" class="headerlink" title="New 160 Crackme-2 CrackMe V3.0"></a>New 160 Crackme-2 CrackMe V3.0</h1><p>算法 ：★★</p>
-<p>爆破 ：★★★</p>
-<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2><p>直接打开，发现就是一个纯粹的CrackMe软件，没有什么有用的信息</p>
-<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><ol>
-<li><p>使用Ollydbg打开</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717224817550.png" alt="image-20220717224817550"></p>
-<p>然后发现有FileName、ReadFile等字样，所以猜测应该是要读取一个文件，文件名应该叫CRACKME3.KEY</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717225026015.png" alt="image-20220717225026015"></p>
-<p>所以我们在相同的目录底下新建一个CRACKME3.KEY文件，内容随便输入就可以</p>
-</li>
-<li><p>然后我们直接在Ollydbg里面第一行下个断点开始单步执行</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718000140890.png"></p>
-<p>可以发现后面遇到一个CreateFileA函数，查一下这个函数应该是创建一个文件指针，本质上是为了打开文件的，如果打开成功就会将EAX赋值，否则EAX为-1（0xFFFFFFFF），不会执行之后的跳转，会将程序引入没有输入的路径</p>
-</li>
-<li><p>随后进行跳转后，会将EAX中的值赋值给0x4020F5这个地址，然后会在之后的ReadFile函数中读取文件</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718004046214.png"></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">ReadFile</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">　　HANDLE hFile, <span class="comment">//文件的句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPVOID lpBuffer, <span class="comment">//用于保存读入数据的一个缓冲区</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　DWORD nNumberOfBytesToRead, <span class="comment">//要读入的字符数</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPDWORD lpNumberOfBytesRead, <span class="comment">//指向实际读取字节数的指针</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPOVERLAPPED lpOverlapped <span class="comment">//如文件打开时指定了FILE_FLAG_OVERLAPPED，那么必须，用这个参数引用一个特殊的结构。该结构定义了一次异步读取操作。否则，应将这个参数设为NULL</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>查一下ReadFile的函数原型，发现这个ReadFile函数前面的几行实际上是在给函数传参，比如PUSH EAX（0x12）就是说函数只会从文件中读取前0x12（18）个字符，读取的缓冲区在0x402008这个地址，可以看出来刚刚CreateFileA函数返回的EAX则是文件的句柄</p>
-</li>
-<li><p>然后继续执行，程序获取了我们文件中的内容后进入了位于0x401311的另一个函数</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718004745267.png" alt="image-20220718004745267"></p>
-<p>按F7进入这个函数查看里面的逻辑</p>
-</li>
-<li><p>进入以后首先的两个XOR是为了清空ECX和EAX，然后将ESP+4的值赋值给ESI</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005016359.png" alt="image-20220718005016359"></p>
-<p>观察寄存器地址发现ESP的值是0x19FF70，加4后就是0x19FF74，那再去看堆栈地址</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005314306.png" alt="image-20220718005314306"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005422158.png" alt="image-20220718005422158"></p>
-<p>发现正好就是我们刚刚读进来的字符串，也就是说这一行指令就是把我们刚刚读进来的字符串赋值给ESI</p>
-</li>
-<li><p>接下来，给BL赋值为0x41，再把ESI中的第一个字符提取出来赋值给AL，再让AL和BL进行异或，从这里我们想到，BL的0x41可能也是一个字符的ASCII码，查表得到0x41对应‘A’。然后将异或得到的结果放回ESI（0x40131F），再将ESI+1（0x401321）。注意这里的ESI实际上是起到指针的效果，ESI+1并不是让字符串中的字符+1，而是指向的地址增加，所以就是相当于后移一位。然后再将BL+1，也就是’B‘（0x401322）</p>
-</li>
-<li><p>接下来，比较AL是否为0，为0则跳转，否则不跳，这里第一轮是不跳的，然后让CL也+1，由于最开始ECX被清空了，所以此时ECX=0x1，然后再让BL和4F比较，不相等则跳转到前面重复执行，从之前的过程中我们知道每次执行上面的指令时，BL会+1，所以刚刚的指令一共会执行0x4F-0x41=0xe=14次，也就是会对前14个字符分别进行与“ABCDEFGHIJKLMN”的异或，然后出循环</p>
-</li>
-<li><p>最后将ECX，也就是一个计数器，保存在0x402149，返回函数</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011407360.png" alt="image-20220718011407360"></p>
-</li>
-<li><p>函数返回后要将0x4020F9位置的值与0x12345678异或</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011530549.png" alt="image-20220718011530549"></p>
-<p>查看一下发现这个位置的值为0x00000270</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011832457.png" alt="image-20220718011832457"></p>
-<p>但这个值是怎么来的呢？回溯一下会发现，是刚刚在第6步和第7步之间省略掉的一行指令，当时我们不知道这个有什么用，就省略掉了，现在再回去看，这行指令是把每个字符异或的结果都加在一起，存在0x4020F9的位置，所以我们看到的0x0270就是所有的异或后的值相加的结果。</p>
-</li>
-<li><p>异或之后，接下来把ESP+4，把处理过的字符串入栈，传给0x0040133C位置的函数</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718013848264.png" alt="image-20220718013848264"></p>
-<p>这个函数很简单，第一行是把处理过的字符串赋值给ESI指向的地址，然后地址+0xE，这时ESI就指向了最后四位没有进行过异或操作的字符，然后赋值给EAX，就返回了</p>
-</li>
-<li><p>回来以后，先给ESP+4，然后又是0x4020F9这个位置的值，这次要把他和EAX进行比较，刚刚我们分析函数可以知道EAX中是我们的后四位的字符的ASCII码</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718014208962.png" alt="image-20220718014208962"></p>
-<p>这里我们先写一下让0x4020F9里面的值等于EAX的值的算法</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> result[<span class="number">18</span>];						<span class="comment">//最后生成的答案字符串</span></span><br><span class="line"><span class="type">char</span> input[<span class="number">18</span>]=&#123;<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;@&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;p&#x27;</span>,<span class="string">&#x27;q&#x27;</span>,<span class="string">&#x27;r&#x27;</span>&#125;;							<span class="comment">//输入的字符串</span></span><br><span class="line"><span class="type">int</span> sum;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">14</span>; i ++)&#123;			</span><br><span class="line">    result[i] = input[i] ^ (<span class="number">65</span> + i);	<span class="comment">//前14个字符对大写字母进行异或,注意得到的结果是十进制的</span></span><br><span class="line">    sum += result[i];					<span class="comment">//对异或结果求和</span></span><br><span class="line">	result[i] = result[i]%<span class="number">16</span>+result[i]/<span class="number">16</span>*<span class="number">10</span>; <span class="comment">//这一步让输出的结果直接就是16进制数</span></span><br><span class="line">&#125;</span><br><span class="line">sum = sum ^ <span class="number">0x12345678</span>;					<span class="comment">//求得的和与0x12345678进行异或</span></span><br><span class="line"><span class="type">char</span> tmp[<span class="number">8</span>];</span><br><span class="line"><span class="built_in">sprintf</span>(tmp, <span class="string">&quot;%x&quot;</span>, sum);				<span class="comment">//将求得的结果转化为字符串16进制</span></span><br><span class="line"><span class="comment">//由于系统采用小端法，所以求得的结果要从后往前存在result中，注意</span></span><br><span class="line">result[<span class="number">17</span>] = <span class="built_in">int</span>(tmp[<span class="number">0</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">1</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">16</span>] = <span class="built_in">int</span>(tmp[<span class="number">2</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">3</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">15</span>] = <span class="built_in">int</span>(tmp[<span class="number">4</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">5</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">14</span>] = <span class="built_in">int</span>(tmp[<span class="number">6</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">7</span>] - <span class="number">48</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">18</span>; i ++)&#123;</span><br><span class="line">    cout&lt;&lt;<span class="built_in">int</span>(result[i])&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>用010editor打开CRACKME3.KEY，把输出的<code>36232D252A063E29212524622E2024543412</code>按十六进制输入后保存就可以了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220819143624785.png" alt="image-20220819143624785"></p>
-</li>
-<li><p>再次打开软件，发现已经破解成功了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220819143711292.png" alt="image-20220819143711292"></p>
-</li>
-</ol>
-<h2 id="爆破-1"><a href="#爆破-1" class="headerlink" title="爆破"></a>爆破</h2><p>爆破的话比较简单，基本上就是把通往正确道路上的跳转都改掉就可以了</p>
-<p><code>00401035 的jnz改为jmp</code>强制在没有key文件时候不会跳转到程序结束</p>
-<p><code>0040106D 的jnz改为nop</code>无论读取到什么内容，无论有没有18个字符都可以继续运行</p>
-<p><code>0040109F 的je改为nop</code>无论之前的结果，运算过后与后四个字符是否相同，都继续</p>
-<p><code>0040118A 的jnz改为nop</code>在没有key文件时候不会结束，如果有Key文件，似乎不用改这个</p>
-<h1 id="New-160-Crackme-3-AcidBytes2"><a href="#New-160-Crackme-3-AcidBytes2" class="headerlink" title="New 160 Crackme-3 AcidBytes2"></a>New 160 Crackme-3 AcidBytes2</h1><p>算法 ：★</p>
-<p>爆破 ：★</p>
-<p>脱壳 ：★</p>
-<h2 id="准备工作-2"><a href="#准备工作-2" class="headerlink" title="准备工作"></a>准备工作</h2><p>这是这个系列第一个涉及到脱壳的程序，因此需要提前准备好一系列的工具</p>
-<ul>
-<li>PEiD</li>
-<li>exeinfope</li>
-<li>ImportREC</li>
-<li>其中前两个工具是用来查壳的，最后的是用来修补脱壳后的程序的（据说使用win xp和win7系统，不需要对其进行修复，但更新的win都需要在脱壳后对程序进行修复。</li>
-</ul>
-<p>此外我们大概运行一下这个程序，发现还是一个序列号性质的，就是你输入正确的值，就能过关。</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211137632.png" alt="image-20230220211137632" style="zoom:50%;">
-
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211148710.png" alt="image-20230220211148710" style="zoom:50%;">
-
-<h2 id="脱壳"><a href="#脱壳" class="headerlink" title="脱壳"></a>脱壳</h2><p>脱壳部分我本身其实并不是很理解原理，<a href="https://blog.csdn.net/qq_43082315/article/details/127200630">于是百度大致学习了一下</a>，在这篇文章中我们可以发现，一个加壳的程序，在反汇编以后我们看到的都是dd这样的伪指令。而什么是伪指令呢？伪指令是指在汇编的过程中，程序发给汇编器的指令，而不会最终编程机器码，可以理解为是一些给汇编器的参数，会被汇编器截取下来。</p>
-<p>但这篇文章讲的比较浅，于是又搜到<a href="https://zhuanlan.zhihu.com/p/404215416?utm_medium=social&utm_oi=877948885966938112&utm_id=0">这篇</a>。从中我们可以发现，壳可以理解为一个压缩软件，只不过和我们一般见到的压缩软件的不同之处在于，这个压缩软件和压缩包是一体的。</p>
-<p>这篇文章后面提到了我们要使用的手工脱壳的方法。我们使用的是ESP定律法，利用堆栈平衡的特点来进行。堆栈平衡可以看这个<a href="https://bbs.kanxue.com/thread-250784.htm">贴子</a>，大概的意思就是说一段代码在调用函数前应该有自己的堆栈，而在调用结束后，应该将堆栈空间恢复成调用前的样子，而ESP作为栈顶寄存器，会在调用函数后作为新函数的栈底，调用函数结束后恢复为栈顶，由此我们知道，一旦原来的ESP归位了，就代表函数执行完毕了。通过这个特性，我们可以跟踪“壳”何时将原代码“解压”成功。而我们如何得知原来的ESP何时归位呢？这就需要硬件断点。硬件断点可以对某个地址下断点，一旦程序进行了与这个地址有关的操作，就会产生中断。</p>
-<p>硬件断点</p>
-<blockquote>
-<p>硬件断点比软件断点的功能更强，除了函数断点外，还可以数据断点，可以指定当数据被读或写时中断。</p>
-<p>硬件断点的本质就是在指定内存下断点，内存可以位于代码段（函数断点）也可以是数据段（数据断点）。可以设置事件有执行、写入、读写时中断。</p>
-</blockquote>
-<p>至此我们的理论工作就全部结束了，可以开始操作了。</p>
-<p>首先先用PEID查壳</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203712852.png" alt="image-20230220203712852" style="zoom:50%;">
-
-<p>发现有UPX加壳</p>
-<p>于是加载程序进OllyDBG</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203830295.png" alt="image-20230220203830295" style="zoom:80%;">
-
-<p>看到如图的区域</p>
-<p>因为有壳，所以不难想到这应该是壳的代码，进行一下字符串搜索，果然什么都没有</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203930071.png" alt="image-20230220203930071"></p>
-<p>然后我们先执行一步，发现ESP中存的地址是0x0019FF58，OK也就是说这就是壳自己所在的堆栈的ESP，所以我们直接对这个地址打硬件断点，观测这个地址什么时候会发生一次“恢复”</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220204612431.png" alt="image-20230220204612431"></p>
-<p>右键点击这个地址，选择HW break，然后我们的断点就打好了，接下来直接让程序自己运行</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220204816735.png" alt="image-20230220204816735"></p>
-<p>然后程序在运行到这一步的时候停下来了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220205025317.png" alt="image-20230220205025317"></p>
-<p>说明这就是我们要找的壳的结尾，可以看到接下来程序跳转到了0x00442E44这个位置，所以我们继续运行程序去这个位置找</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220205811727.png" alt="image-20230220205811727"></p>
-<p>找到以后右键点击这个指令，选择用OllyDump脱壳调试进行，然后直接点脱壳就可以了，然后会让保存成另一个exe</p>
-<p>打开新保存的exe发现会有报错，看到网上说要用Import REC注入一下<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210007071.png" alt="image-20230220210007071"></p>
-<p>我们先打开一个脱壳前的程序，然后用Import REC选中这个进程</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210307243.png" alt="image-20230220210307243"></p>
-<p>然后会发现，此时的映像基址是0x00400000，而我们刚刚看到入口点应该是0x00442E44，所以我们在下面的OEP中把这个差值0x42E44补上</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210524991.png" alt="image-20230220210524991"></p>
-<p>然后点击右侧的自动搜索IAT，最后底下的获取导入表，会发现上面多了很多导入表函数，接下来直接点下面的修复转储，选择我们刚刚脱壳后获得的那个报错的程序进行转储，然后会自动生成一个新的程序，这个新的程序就是最终的脱壳结果了。</p>
-<h2 id="算法分析-1"><a href="#算法分析-1" class="headerlink" title="算法分析"></a>算法分析</h2><p>脱壳结束后还是老规矩，先搜索字符串，然后我们发现了我们在准备工作中遇到的一系列字符串</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211227910.png" alt="image-20230220211227910"></p>
-<p>一眼就看见了Congrats，于是我们之间双击跟进</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221151956907.png" alt="image-20230221151956907"></p>
-<p>跟进之后发现两句破解成功的提示上面有一个跳转，应该是不满足的时候就直接跳转到两个提示底下了，因此我们要想办法不让他跳转。</p>
-<p>我们在这个函数入口（0x00442B2C）打上断点，然后让程序自己运行，需要输入的话，我们就随便输入一个123456，然后当程序执行到函数入口我们开始步进。前面十行一堆push指令是用来平衡堆栈的，我们不用管，直接看到0x442B42，发现程序将[local.1]这个地址给了edx，我们执行之后发现是0x0019F838，正好是ebp-0x4，于是我们正常实行过下面的函数，发现执行后0x0019F838这个位置存储了我们输入的123456，而后面的eax我们发现是6，应该对应的是输入数据的长度。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221194422557.png" alt="image-20230221194422557"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221194433222.png" alt="image-20230221194433222"></p>
-<p>接下来又是类似的操作，我们注意到这次程序先将我们输入的字符串作为参数，又将一串数字作为下面的参数，所以我们猜测接下来的函数应该是一个比对，于是我们可以猜到这个密码应该就是12011982</p>
-<h2 id="爆破-2"><a href="#爆破-2" class="headerlink" title="爆破"></a>爆破</h2><p>爆破比较简单，在脱壳的基础上，把0x00442B5D位置的跳转用nop覆盖掉就可以了，这时候无论我们输入什么，比对结果如何都会直接进到后面的成功部分。</p>
-<h1 id="New-160-Crackme-4-Andrnalin1"><a href="#New-160-Crackme-4-Andrnalin1" class="headerlink" title="New 160 Crackme-4 Andrnalin1"></a>New 160 Crackme-4 Andrnalin1</h1><p>算法 ：★</p>
-<p>爆破 ：★</p>
-<h2 id="准备工作-3"><a href="#准备工作-3" class="headerlink" title="准备工作"></a>准备工作</h2><p>老规矩，先运行，看到是一个输入框，大概知道又是序列码类型的题，拿PEID查个壳</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201107854.png" alt="image-20230221201107854"></p>
-<p>发现没有，是VB5.0编写的程序（有年头了）这也是这个系列的第一个VB程序。</p>
-<h2 id="算法分析-2"><a href="#算法分析-2" class="headerlink" title="算法分析"></a>算法分析</h2><p>老规矩，把程序扔进OllyDBG后直接中文搜索引擎智能搜索，然后发现如图的一些字符串<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201303763.png" alt="image-20230221201303763"></p>
-<p>看起来不太像英文，有道词典搜了一下发现是德文，不过即使不知道是德文，有个SuCCESFul字符串应该也能看出来是成功的意思，所以我们还是直接跟进。</p>
-<p>跟进以后发现成功的代码段附近是这样的</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201505131.png" alt="image-20230221201505131"></p>
-<p>于是我们从这个字符串开始往上找跳转首先就看到了0x00401D9D位置的跳转，目标位置在底下，过去看了一下，发现如果跳过去应该就失败了，所以可以推出0x00401D9D这个位置不能跳转<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201629085.png" alt="image-20230221201629085"></p>
-<p>于是我们回去继续网上看发现右侧注释部分有个特殊的字符串“SynTaX 2oo1”</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201854664.png" alt="image-20230221201854664"></p>
-<p>而这个字符串底下注释中函数名写的vbaStrCmp，这就告诉我们下面这个函数应该是进行字符串比对的，那比对的另一方是谁呢？我们猜测应该是我们输入的字符串，所以我们在这打个断点，然后随便输入个123456试试</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202228446.png" alt="image-20230221202228446"></p>
-<p>果然，执行到push ecx时ecx存的值就是“123456”了，所以接下来程序把我们输入的字符串和给定的字符串都入栈进行比对，比对函数执行完后寄存器情况如下</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202436898.png" alt="image-20230221202436898"></p>
-<p>接下来的指令先把eax复制给edi（此时edi为FFFFFFFF），然后将一个地址复制给ecx，我们去内存里看一下会发现这个地址正好是存储我们输入字符串的地址。接下来让edi取补码，但是这里注意一下，因为这里edi是FFFFFFFF，neg指令取补码的原理和用0减操作数一样，是会产生借位的因此此时的cz为1，而接下来的指令sbb的意思是前面的操作数=前面的操作数-后面的操作数-cz，因此执行后edi为-1（0xFFFFFFFF），然后对edi加一，edi归0，再取反，依然是0。</p>
-<p>然后接下来两个函数我们不太用管，名字上来看应该是回收中间开辟的字符串和对象空间的。与之后的di和si的比较没什么关系。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202844893.png" alt="image-20230221202844893"></p>
-<p>但是我们注意，esi寄存器一直都是0，因此cmp后会触发跳转，于是我们逆向分析，如何才能让edi的值不为0。逆推发现，若最后结果不0，则最后取反前不能是0，则加一前不能是-1，则sbb时不能得-1，但sbb edi edi指令下，edi减自己一定为0，所以我们要求此时cz不能是1，所以取反前的edi一定是0，才不会有借位或进位。由此我们猜测输入与比对的字符串相同的字符串可以使edi为0。尝试后解决。</p>
-<h2 id="爆破-3"><a href="#爆破-3" class="headerlink" title="爆破"></a>爆破</h2><p>这题爆破起来方法很多，可以直接把je用nop填充，也可以在比较前把edi的值改了</p>
-<h1 id="New-160-Crackme-5-ArturDents-CM-2"><a href="#New-160-Crackme-5-ArturDents-CM-2" class="headerlink" title="New 160 Crackme-5 ArturDents_CM#2"></a>New 160 Crackme-5 ArturDents_CM#2</h1><p>算法 ：★★</p>
-<p>爆破 ：★</p>
-<h2 id="准备工作-4"><a href="#准备工作-4" class="headerlink" title="准备工作"></a>准备工作</h2><p>首先扔到PEID里面查壳，发现倒是没有壳，不过是用没见过的语言写的程序</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205321539.png" alt="image-20230221205321539"></p>
-<p>然后运行一下发现好像是一个登录程序</p>
-<h2 id="算法分析-3"><a href="#算法分析-3" class="headerlink" title="算法分析"></a>算法分析</h2><p>虽然编程语言没见过，但是没关系，直接往OllyDBG里面扔，反正汇编语言都是一样的。进去以后老规矩先搜字符串，直接搜到了成功的字符串，那就废话少说直接跟进</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205825707.png" alt="image-20230221205825707"></p>
-<p>跟进之后大概看了一下，发现比之前的要复杂一些</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205956701.png" alt="image-20230221205956701"></p>
-<p>在成功的对话框出现之前要经过一个循环，而这个循环内每次都有可能直接跳转到函数出口，跳过成功的对话框，说明在跳出循环之前不能让跳转发生</p>
-<p>所以我们在循环开始前下个断点，然后输入abcde和123456尝试一下。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221210422098.png" alt="image-20230221210422098"></p>
-<p>到这里，程序已经把我们的输入加载成功了</p>
-<p>然后我们往下执行，进入循环，第一步是把eax中的值也就是我们输入的name的第一个字母存到dl中，然后dl减去cl中的值，此时cl中的值是5，接下来要我们比对我们输入的serial第一个的第一个字符是否和相减后的dl中的值相同。到这里我们大概知道这道题需要两个输入字段配合着来。继续往后看，当比较跳转后还要分别给eax和ebx的地址加一，也就是把开头的字符取掉。然后开始下次循环。经过每次循环cl中的值都会减少1，所以我们可以逆推出name和serial之间的关系。</p>
-<p>可以的一组答案是 fghij acegi</p>
-<h2 id="爆破-4"><a href="#爆破-4" class="headerlink" title="爆破"></a>爆破</h2><p>爆破的话很简单一种是把跳转nop掉，还有一种是我在实验中使用的，就是在每次比较前，把寄存器中的数改为相同的值</p>
-]]></content>
-      <categories>
-        <category>逆向实践</category>
-      </categories>
-      <tags>
-        <tag>Reverse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Smart Greybox Fuzzing</title>
-    <url>/2021/12/13/Smart-Greybox-Fuzzing/</url>
-    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
-<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>SGF通过现实文件级别的变异操作来保证文件的有效性，这样产生的文件更加容易通过程序的解析阶段，可以暴露更深层的问题</p>
-<h3 id="P3"><a href="#P3" class="headerlink" title="P3"></a>P3</h3><p>探索了更多的路径，并暴露了更多的问题</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="P1-1"><a href="#P1-1" class="headerlink" title="P1"></a>P1</h3><p>灰盒测试只需使用轻量级的instrumentation</p>
-<h3 id="P2-1"><a href="#P2-1" class="headerlink" title="P2"></a>P2</h3><p>被变异的输入执行的控制流通过考察来确定他们是否是有趣的，而CGF帮助进行评价控制流的新颖性，随后，被认为值得继续探索的输入会产生更多的输入</p>
-<h3 id="P3-1"><a href="#P3-1" class="headerlink" title="P3"></a>P3</h3><p>而CGF的问题在于缺乏对于文件结构的认识，位级变异会在被处理之前就被程序拒绝</p>
-<h3 id="P4"><a href="#P4" class="headerlink" title="P4"></a>P4</h3><p>有两个方法可以解决这个问题，一个是基于字典，另一个是基于动态污点分析。</p>
-<p>对于字典，可能牺牲AFL的效率和可用性，当AFL要探索新路径时字典是很好的选择</p>
-<p>但两种方法都不能变异出高度结构化的文件</p>
-<h3 id="P5"><a href="#P5" class="headerlink" title="P5"></a>P5</h3><p>智能黑盒测试工具比如peach已经有了文件结构意识，而且能基于有效文件构建新的有效文件</p>
-<p>peach通过一个输入模型来反汇编有效文件，再重汇编成为新的文件</p>
-<h3 id="P6"><a href="#P6" class="headerlink" title="P6"></a>P6</h3><p>SGF可以基于高度结构化的种子文件产生新的文件，这使得其可以在保证文件有效的前提下探索全新的输入领域，可以花费更多时间在探索更深的漏洞</p>
-<h3 id="P7"><a href="#P7" class="headerlink" title="P7"></a>P7</h3><p>24小时内，AFLSMART发现的0day漏洞增加了一倍；还提高了20%的代码覆盖率；</p>
-<h3 id="P8"><a href="#P8" class="headerlink" title="P8"></a>P8</h3><p>文件格式规格可以被跨程序使用，也可以在不同版本的程序使用</p>
-<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>之前用过一小段时间的peach，peach的测试方式是编写好一个pit文件，该文件中已经设计好需要的格式，只需要将需要测试的数据进行标记，变异时，peach会自动地随机填充数据，所以以前以为所有的seed都是这样的结构，但从这篇论文来看，AFL的seed结构本身并不具备文件的结构，对于这一点，可以尝试基于AFLSMART进一步提高变异出的文件的过解析率</p>
-<p>刚刚又看了<a href="https://www.sohu.com/a/305377300_354899%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%8F%90%E5%88%B0">https://www.sohu.com/a/305377300_354899这篇文章，其中提到</a></p>
-<p>在 AFL 的 bit 级别的变异的基础上，AFLSmart 增加了对 chunk 级别的变异操作，主要包括三种操作：</p>
-<p><strong>smart deletion：</strong></p>
-<p>在这种方法中，会对给定的种子文件，随机选取 chunk 进行删除。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/1fc4f80b9d3147d88ef4c4a0fc39d3ec.jpeg" alt="img"></p>
-<p><strong>smart addition：</strong></p>
-<p>在这种方法中，给定一个种子文件 S1，随机选取一个种子文件 S2，在 S2 中随机选取一个 chunk C2，将 C2 插入到 S1 中和 C2 具有相同父节点的 chunk C1 的后面（C1.parent.type ==C2.parent.type）</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/508bc05fbfca4395a860c49e42df6d74.jpeg" alt="img"></p>
-<p><strong>smart splicing：</strong></p>
-<p>这种方法中，对于给定的种子文件 S1，随机选取 chunk C1，随机选取种子文件 S2，找到 S2 中与 C1 类型相同的 chunk C2，将 C2 替换到 C1 的位置上。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/c45624de24b04d7289f775a978af9863.jpeg" alt="img"></p>
-<p>关于peach pit的博客<a href="http://blog.nsfocus.net/peach-fuzz/">http://blog.nsfocus.net/peach-fuzz/</a></p>
-]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-        <tag>AFLSMART</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WebKit</title>
-    <url>/2022/01/16/WebKit/</url>
-    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
-<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
-<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
-<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
-<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
-<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
-<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
-<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
-<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
-<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
-<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
-<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
-<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
-<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
-<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
-<p>数字表示基本顺序，但也不是严格一致。</p>
-<p>具体的过程如下：</p>
-<ol>
-<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
-<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
-<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
-<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
-<li>解释器根据词语构建节点（Node），形成DOM树</li>
-<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
-<li>JavaScript代码可能会修改DOM树结构</li>
-<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
-</ol>
-<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
-<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
-<p>这一段的具体过程如下：</p>
-<ol>
-<li>CSS文件被CSS解释器解释成内部表示结构</li>
-<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
-<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
-</ol>
-<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
-<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
-<p>这一阶段对应的具体过程如下：</p>
-<ol>
-<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
-<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
-<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
-</ol>
-<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
-<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
-<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
-<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
-]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>浏览器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello</title>
-    <url>/2022/04/22/hello-world/</url>
-    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
-]]></content>
-  </entry>
-  <entry>
-    <title>使用Fuzzilli测试JS引擎</title>
-    <url>/2022/04/22/%E4%BD%BF%E7%94%A8Fuzzilli%E6%B5%8B%E8%AF%95JavaScriptCore/</url>
-    <content><![CDATA[<h1 id="使用Fuzzilli测试JS引擎"><a href="#使用Fuzzilli测试JS引擎" class="headerlink" title="使用Fuzzilli测试JS引擎"></a>使用Fuzzilli测试JS引擎</h1><h2 id="Webkit（JSC）篇"><a href="#Webkit（JSC）篇" class="headerlink" title="Webkit（JSC）篇"></a>Webkit（JSC）篇</h2><h3 id="准备Webkit"><a href="#准备Webkit" class="headerlink" title="准备Webkit"></a>准备Webkit</h3><p>首先通过命令</p>
-<p><code>git clone https://github.com/Webkit/Webkit.git Webkit</code></p>
-<p>下载源码</p>
-<p>一共大概需要下载13个G的文件，所以需要把httpBuffer改大一点，我这个直接改成了5242880000，命令就是</p>
-<p><code>git config --global http.postBuffer 524288000</code></p>
-<p>clone完成以后还需要经历一个漫长的updating 的过程，据说需要2-3天，但updating一次以后，再次clone的时候就不会经历这么长的时间了，我就直接找了组里下过的同学，帮忙下载了一份。</p>
-<p>然后是根据Fuzzilli的文件打patch，Fuzzilli官方已经发布了JSC的patch，但是只能对特定的版本使用，查看一下<code>fuzzilli/Targets/JavaScriptCore/REVISION</code>中的commit号（我的版本使用的是<code>4110e1b44a345737cdb807d36572c8714e90c5d0</code>）</p>
-<p>根据指导在Webkit根目录下使用命令</p>
-<p><code>git checkout 4110e1b44a345737cdb807d36572c8714e90c5d0 -b fuzz</code></p>
-<p>进行checkout，大概十几分钟后会显示已经创建了fuzz分支</p>
-<p>然后先在webkit根目录下将<code>fuzzilli/Targets/JavaScriptCore/Patches</code>路径下面的webkit.patch拷贝过来，注意cp命令最后有个点，最开始以为是屏幕脏了没注意（xs</p>
-<p>拷贝过来以后打上patch就可以了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cp</span>  path/to/fuzzilli/Targets/JavaScriptCore/Patches/webkit.patch .</span><br><span class="line">$ patch -p1 &lt; webkit.patch</span><br></pre></td></tr></table></figure>
-
-<p>成功后会显示</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/f1.png" alt="1"></p>
-<p>然后再将<code>path/to/fuzzilli/Targets/JavaScriptCore</code>目录底下的fuzzbuild.sh也拷贝过来，执行<code>./fuzzbuild</code>开始编译JSC</p>
-<p>编译过程中可能会报这样一个错，说是找不到编译器，是因为fuzzbuild.sh默认使用clang-12编译，但我的机器里只有clang-11，直接把fuzzbuild.sh里面的clang-12改成clang-11就可以了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/2.png" alt="2"></p>
-<p>改完之后继续执行<code>./fuzzbuild</code>编译，编译过程中会报几个warning，不用去管，编译一共大约需要十分钟的样子，编译完这一步就完成了。</p>
-<h3 id="准备Fuzzilli"><a href="#准备Fuzzilli" class="headerlink" title="准备Fuzzilli"></a>准备Fuzzilli</h3><p>接下来要准备Fuzzilli</p>
-<p>还是直接从github上面下载</p>
-<p><code>git clone https://github.com/googleprojectzero/fuzzilli.git</code></p>
-<p>由于fuzzilli需要使用swift进行编译，所以我们接下来下载swift依赖</p>
-<p>首先从swift官网下载对应Ubuntu版本的swift</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/3.png" alt="3"></p>
-<p>比如我使用的是Ubuntu20.04就使用</p>
-<p><code>wget https://download.swift.org/swift-5.6.1-release/ubuntu2004/swift-5.6.1-RELEASE/swift-5.6.1-RELEASE-ubuntu20.04.tar.gz</code></p>
-<p>下载了5.6.1版本的swift，具体可以去<a href="https://www.swift.org/download/#releases">swift官网</a>查看自己适用的版本</p>
-<p>下载完成后使用<code>tar -zxvf 文件名</code>解压 </p>
-<p>如果在解压时遇到这个问题</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/4.png" alt="4"></p>
-<p>可能是因为下载了一个网页下来，可以cat一下这个压缩文件，如果显示了html代码，就需要重新下载一下</p>
-<p>正常解压大概需要几分钟</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/5.png" alt="5"></p>
-<p>解压完成后进入<code>swift-5.6.1-RELEASE-ubuntu20.04/usr/bin</code>目录下，有一个叫swift的可执行文件就是用来编译fuzzilli的</p>
-<p>然后我们记住swift所在的路径，进入fuzzilli的根目录</p>
-<p>使用<code>path/to/swift build</code>对fuzzilli进行编译，其中<code>path/to/swift</code>用自己的swift路径替换</p>
-<p>开始编译之后可能会有几个报错，说某个仓库是不安全的，这个他会告诉你运行什么命令来信任，复制执行就行了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/6.png" alt="6"></p>
-<p>执行后重新build，大概十几分钟的样子就能编译好了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/7.png" alt="7"></p>
-<p>在<code>fuzzilli/.build/debug</code>路径下有一个FuzzilliCli的文件就是我们要使用的fuzzilli的可执行文件了</p>
-<h3 id="开始fuzz"><a href="#开始fuzz" class="headerlink" title="开始fuzz"></a>开始fuzz</h3><p>首先我们先使用命令看一下fuzzilli的参数</p>
-<p><code>path/to/swift run FuzzilliCli --help</code></p>
-<p>参数还是很多的，挑几个了解一下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Options:</span><br><span class="line">	<span class="comment">#被测引擎的名字</span></span><br><span class="line">    --profile=name              : Select one of several preconfigured profiles.</span><br><span class="line">                                  Available profiles: [<span class="string">&quot;spidermonkey&quot;</span>, <span class="string">&quot;duktape&quot;</span>, <span class="string">&quot;jerryscript&quot;</span>, <span class="string">&quot;qjs&quot;</span>, <span class="string">&quot;v8&quot;</span>, <span class="string">&quot;xs&quot;</span>, <span class="string">&quot;jsc&quot;</span>].</span><br><span class="line">    <span class="comment">#创建用来fuzz的线程数                              </span></span><br><span class="line">    --<span class="built_in">jobs</span>=n                    : Total number of fuzzing <span class="built_in">jobs</span>. This will start one master thread and n-1 worker threads. Experimental!</span><br><span class="line">    --engine=name               : The fuzzing engine to use. Available engines: <span class="string">&quot;mutation&quot;</span> (default), <span class="string">&quot;hybrid&quot;</span>, <span class="string">&quot;multi&quot;</span>.</span><br><span class="line">                                  Only the mutation engine should be regarded stable at this point.</span><br><span class="line">    --corpus=name               : The corpus scheduler to use. Available schedulers: <span class="string">&quot;basic&quot;</span> (default), <span class="string">&quot;markov&quot;</span></span><br><span class="line">    --minDeterminismExecs=n     : The minimum number of <span class="built_in">times</span> a new sample will be executed when checking determinism (default: 3)</span><br><span class="line">    --maxDeterminismExecs=n     : The maximum number of <span class="built_in">times</span> a new sample will be executed when checking determinism (default: 50)</span><br><span class="line">    --noDeterministicCorpus     : Don<span class="string">&#x27;t ensure that samples added to the corpus behave deterministically.</span></span><br><span class="line"><span class="string">    --maxResetCount=n           : The number of times a non-deterministic edge is reset before it is ignored in subsequent executions.</span></span><br><span class="line"><span class="string">                                  Only used as part of --deterministicCorpus.</span></span><br><span class="line"><span class="string">    --logLevel=level            : The log level to use. Valid values: &quot;verbose&quot;, info&quot;, &quot;warning&quot;, &quot;error&quot;, &quot;fatal&quot;</span></span><br><span class="line"><span class="string">                                  (default: &quot;info&quot;).</span></span><br><span class="line"><span class="string">    --numIterations=n           : Run for the specified number of iterations (default: unlimited).</span></span><br><span class="line"><span class="string">    --timeout=n                 : Timeout in ms after which to interrupt execution of programs (default: 250).</span></span><br><span class="line"><span class="string">    --minMutationsPerSample=n   : Discard samples from the corpus after they have been mutated at least this</span></span><br><span class="line"><span class="string">                                  many times (default: 16).</span></span><br><span class="line"><span class="string">    #至少在样本变异多少次后才丢弃样本(default: 16)</span></span><br><span class="line"><span class="string">    --minCorpusSize=n           : Keep at least this many samples in the corpus regardless of the number of times</span></span><br><span class="line"><span class="string">                                  they have been mutated (default: 1024).</span></span><br><span class="line"><span class="string">    --maxCorpusSize=n           : Only allow the corpus to grow to this many samples. Otherwise the oldest samples</span></span><br><span class="line"><span class="string">                                  will be discarded (default: unlimited).</span></span><br><span class="line"><span class="string">    --markovDropoutRate=n       : Rate at which low edge samples are not selected, in the Markov Corpus Scheduler,</span></span><br><span class="line"><span class="string">                                  per round of sample selection. Used to ensure diversity between fuzzer instances</span></span><br><span class="line"><span class="string">                                  (default: 0.10)</span></span><br><span class="line"><span class="string">    --consecutiveMutations=n    : Perform this many consecutive mutations on each sample (default: 5).</span></span><br><span class="line"><span class="string">    --minimizationLimit=n       : When minimizing corpus samples, keep at least this many instructions in the</span></span><br><span class="line"><span class="string">                                  program. See Minimizer.swift for an overview of this feature (default: 0).</span></span><br><span class="line"><span class="string">    --storagePath=path          : Path at which to store output files (crashes, corpus, etc.) to.</span></span><br><span class="line"><span class="string">    #存储运行时产生的文件（crashes, corpus, etc）</span></span><br><span class="line"><span class="string">    --resume                    : If storage path exists, import the programs from the corpus/ subdirectory</span></span><br><span class="line"><span class="string">    --overwrite                 : If storage path exists, delete all data in it and start a fresh fuzzing session</span></span><br><span class="line"><span class="string">    --exportStatistics          : If enabled, fuzzing statistics will be collected and saved to disk every 10 minutes.</span></span><br><span class="line"><span class="string">                                  Requires --storagePath.</span></span><br><span class="line"><span class="string">    --importCorpusAll=path      : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  All provided programs are included, even if they do not increase coverage.</span></span><br><span class="line"><span class="string">                                  This is useful for searching for variants of existing bugs.</span></span><br><span class="line"><span class="string">                                  Can be used alongside wtih importCorpusNewCov, and will run first</span></span><br><span class="line"><span class="string">    #在启动fuzz之前导入现有语料库</span></span><br><span class="line"><span class="string">    --importCorpusNewCov=path   : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  This only includes programs that increase coverage.</span></span><br><span class="line"><span class="string">                                  This is useful for jump starting coverage for a wide range of JavaScript samples.</span></span><br><span class="line"><span class="string">                                  Can be used alongside importCorpusAll, and will run second.</span></span><br><span class="line"><span class="string">                                  Since all imported samples are asynchronously minimized, the corpus will show a smaller</span></span><br><span class="line"><span class="string">                                  than expected size until minimization completes.</span></span><br><span class="line"><span class="string">    --importCorpusMerge=path    : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  This only keeps programs that increase coverage but does not attempt to minimize</span></span><br><span class="line"><span class="string">                                  the samples. This is mostly useful to merge existing corpora from previous fuzzing</span></span><br><span class="line"><span class="string">                                  sessions that will have redundant samples but which will already be minimized.</span></span><br><span class="line"><span class="string">    --networkMaster=host:port   : Run as master and accept connections from workers over the network. Note: it is</span></span><br><span class="line"><span class="string">                                  *highly* recommended to run network fuzzers in an isolated network!</span></span><br><span class="line"><span class="string">    --networkWorker=host:port   : Run as worker and connect to the specified master instance.</span></span><br><span class="line"><span class="string">    --dontFuzz                  : If used, this instace will not perform fuzzing. Can be useful for master instances.</span></span><br><span class="line"><span class="string">    --noAbstractInterpretation  : Disable abstract interpretation of FuzzIL programs during fuzzing. See</span></span><br><span class="line"><span class="string">                                  Configuration.swift for more details.</span></span><br><span class="line"><span class="string">    --collectRuntimeTypes       : Collect runtime type information for programs that are added to the corpus.</span></span><br><span class="line"><span class="string">    --diagnostics               : Enable saving of programs that failed or timed-out during execution. Also tracks</span></span><br><span class="line"><span class="string">                                  executions on the current REPRL instance.</span></span><br><span class="line"><span class="string">    --inspect=opt1,opt2,...     : Enable inspection options. The following options are available:</span></span><br><span class="line"><span class="string">                                      history: Additional .fuzzil.history files are written to disk for every program.</span></span><br><span class="line"><span class="string">                                               These describe in detail how the program was generated through mutations,</span></span><br><span class="line"><span class="string">                                               code generation, and minimization</span></span><br><span class="line"><span class="string">                                        types: Programs written to disk also contain variable type information as</span></span><br><span class="line"><span class="string">                                               determined by Fuzzilli as comments</span></span><br><span class="line"><span class="string">                                          all: All of the above</span></span><br></pre></td></tr></table></figure>
-
-<p>然后直接按官方readme里面的命令跑就好</p>
-<p>注意如果你的目录在<del>/下，要把</del>展开，就是用/home+…的形式，否则无法识别</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/8.png" alt="8"></p>
-<h2 id="Gecko-dev（SpiderMonkey）篇"><a href="#Gecko-dev（SpiderMonkey）篇" class="headerlink" title="Gecko-dev（SpiderMonkey）篇"></a>Gecko-dev（SpiderMonkey）篇</h2><h3 id="准备Gecko-dev"><a href="#准备Gecko-dev" class="headerlink" title="准备Gecko-dev"></a>准备Gecko-dev</h3><p>老规矩，还是从官方的GitHub上面clone就可以，这个时间会比Webkit短很多，都完成的话也就是几个小时就可以，不想一直看着命令行发呆的话挂后台等着就行</p>
-<p>按照fuzzilli的Targets/SpiderMonkey下面的readme文件所说的，先checkout，我使用的版本是<code>73330bf7355c0aef844c41d0d7eed2848e53c82f</code>，等两分钟更新完以后从根目录进入到js/src目录底下，把fuzzilli/Targets/SpiderMonkey底下的fuzzbuild.sh复制过来后执行</p>
-<p>执行的时候可能会报一个错，大概是说找不到rustc和cargo编译器，如果有这个问题参照<a href="https://blog.csdn.net/qq_23857461/article/details/120296108">这篇博客</a>下载一下就可以了</p>
-<p>安装完以后，再执行一遍fuzzbuild.sh，大概等5分钟左右就编译好了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220423191320995.png" alt="image-20220423191320995"></p>
-<p>编译好之后，安装fuzzilli的说明，可执行文件应该在<code>fuzzbuild_OPT.OBJ/dist/bin/</code>这个目录下，这个目录不在gecko-dev的根目录下，而是在刚刚进入的js/src这个目录底下，我们顺着路径去找一下就能找到了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220423191641494.png" alt="image-20220423191641494"></p>
-<h3 id="开始fuzz-1"><a href="#开始fuzz-1" class="headerlink" title="开始fuzz"></a>开始fuzz</h3><p>前两天的JSC还没测完，这个部分过两天再写吧</p>
-]]></content>
-      <categories>
-        <category>漏洞挖掘</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2023/03/19/Datalab&#39;s%20WriteUp/</url>
+    <title>DataLab&#39;s Writeup</title>
+    <url>/2023/03/24/Datalab&#39;s%20WriteUp/</url>
     <content><![CDATA[<h1 id="DataLab’s-Writeup"><a href="#DataLab’s-Writeup" class="headerlink" title="DataLab’s Writeup"></a>DataLab’s Writeup</h1><blockquote>
 <p>The CS:APP Data Lab<br>Directions to Students</p>
 <hr>
@@ -983,6 +426,566 @@
 <p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012755255.png" alt="image-20230315012755255"></p>
 <p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230315012801739.png" alt="image-20230315012801739"></p>
 <h2 id="完结撒花！！！"><a href="#完结撒花！！！" class="headerlink" title="完结撒花！！！"></a>完结撒花！！！</h2>]]></content>
+      <categories>
+        <category>实验笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
+    <url>/2022/04/22/FuzzIL/</url>
+    <content><![CDATA[<h1 id="FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines"><a href="#FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines" class="headerlink" title="FuzzIL：Coverage Guided Fuzzing for JavaScript Engines"></a>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>工作目标是引导测试工具来测试脚本解释器，这需要在代码上定义在语义上有效的突变。然而，与现有的突变语法方式不同（如代码的文本形式或语法树），突变是在新设计的中间语言（IL）上进行的。基于其形式，其可以轻松执行控制流和数据流突变。<strong>这反映了，程序的句法属性无关紧要</strong>。此外，该系统可以以高概率生成语义上有效的样本。这避免了将生成的代码包装到try-catch结构中。</p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>总的来说是为了开发一款工具，该工具还是基于覆盖率的。</p>
+<p>首先，语法上无效的程序一般无法通过解析阶段，所以生成的代码需要在语法上是合法的。</p>
+<p>其次，鉴于基于覆盖率进行指导模糊测试，我们需要定义合理的突变，以在突变时能够保留样本的大多数interesting features，以突变出更多的interesting cases。因此有必要定义能够改变程序控制流和数据流的突变，因为这是组件最终处理的内容。</p>
+<blockquote>
+<p>程序是从上到下顺序执行的，同时可以通过一些控制语句来改变执行的路线，受控制语句影响下，程序最终的执行路线就是控制流。</p>
+<p>js 里面的控制语句有 if、for、while、try-catch 等，它们都会改变程序的走向。</p>
+<p>程序是操作数据的，随着程序的运行，也就是控制流的前进而改变的数据叫做数据流。</p>
+<p>很明显，数据流是依赖控制流的，程序分析里面的数据流分析也是要先做控制流分析。</p>
+<p>比如这样一段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> (a === <span class="number">1</span>) &#123;</span><br><span class="line">    b = <span class="string">&#x27;1111&#x27;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    b = <span class="string">&#x27;2222&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为 a 为 1，所以会执行到 <code>b = &#39;1111&#39;;</code>，这就是控制流，也就是程序最终执行的代码，可以用来分析程序的走向，做一些死代码删除之类的优化。</p>
+<p>而随着控制流的执行，b 会被赋值为 2222，这就是数据流，也就是值的变化的过程，可以用来分析某个语句的变量的值。</p>
+</blockquote>
+<p>最后，还有处理语义上无效的程序的临时解决方案，我们知道使用try-catch语句会导致漏报一些漏洞，我们的系统需要产生较高比例的语义有效程序，以避免try-catch结构的使用。但是，由于一些漏洞是通过内部异常而发现的，所以完全的语义正确性也是不可取的。</p>
+<blockquote>
+<p>try-catch语句</p>
+<p>try/catch/finally语句是JS中的异常处理机制。try子句用于定义要处理其中异常的代码块，catch子句是在try块中的语句发生异常后会被调用的语句。（finally块中是清理代码）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//正常情况下，这里的代码会从头到尾执行，</span></span><br><span class="line">	<span class="comment">//不会出现问题。但有时候也可能抛出异常：</span></span><br><span class="line">	<span class="comment">//直接通过throw语句抛出，或者由于调用</span></span><br><span class="line">	<span class="comment">//了一个抛出异常的方法而抛出</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(e)&#123;</span><br><span class="line">    <span class="comment">//当且仅当try块抛出异常时，才会执行这个</span></span><br><span class="line">    <span class="comment">//块中的语句。这里的语句可以使局部变量e</span></span><br><span class="line">    <span class="comment">//引用被抛出的Error对象。这个块可以以</span></span><br><span class="line">    <span class="comment">//某种方式来处理异常，也可以什么也不做</span></span><br><span class="line">    <span class="comment">//以忽略异常，还可以通过throw重新抛出异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个具体的例子</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//请用户输入一个数值</span></span><br><span class="line">	<span class="keyword">let</span> n = <span class="title class_">Number</span>(<span class="title function_">prompt</span>(<span class="string">&quot;Please enter a positive integer&quot;</span>,<span class="string">&quot;&quot;</span>));</span><br><span class="line">	<span class="comment">//假设输入有效，继续计算该数值的阶乘</span></span><br><span class="line">	<span class="keyword">let</span> f = <span class="title function_">factorial</span>(n);</span><br><span class="line">	<span class="comment">//显示结果</span></span><br><span class="line">	<span class="title function_">alart</span>(n + <span class="string">&quot;!=&quot;</span> + f);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(ex)&#123;			<span class="comment">//如果用户的输入无效，则会跳转到这里</span></span><br><span class="line">	<span class="title function_">alart</span>(ex);		<span class="comment">//告诉用户发生了什么错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>总到来说，我们有三条需求：</p>
+<ol>
+<li>产生语法上有效的样本</li>
+<li>定义影响程序控制流和数据流的突变类型</li>
+<li>产生高比例的语义有效样本</li>
+</ol>
+<h2 id="Coverage-Guide-JavaScript-Fuzzing"><a href="#Coverage-Guide-JavaScript-Fuzzing" class="headerlink" title="Coverage Guide JavaScript Fuzzing"></a>Coverage Guide JavaScript Fuzzing</h2><h3 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h3><p>在更接近引擎内部表示的“字节码”级别上进行突变，而不是突变AST或者文本代码段等表示的句法结构。本质上，字节码级别类似于控制和数据流图，这是大多数攻击最终所需要的到达的级别，而语法信息（如AST）则在解析过程中很大程度上会被丢弃。</p>
+<p><img src="/.com//1.jpg" alt="1"></p>
+<p>因此我们定义了一种名为FuzzIL的中间语言，这样我们可以定义一些在AST层面上不容易实现的突变策略。</p>
+<p>为了满足第三条需求，我们首先注意到，由于每个突变执行的变化相对较小，所以改变语义有效性的概率也就较小。此外，所有突变都必须遵守IL的一套语义正确性的规则，在变量使用前要先进行定义等操作。最后可以将变异出的语义上无效的程序百分比维持在一个可以接受的程度上。</p>
+<h3 id="FuzzIL"><a href="#FuzzIL" class="headerlink" title="FuzzIL"></a>FuzzIL</h3><p>易于突变，同时允许直接转换为JS代码</p>
+<p>FuzzIL程序由指令列表组成,每个指令列表又由一个操作以及输入和输出变量列表组成</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">v0 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;0&#x27;</span>							<span class="comment">//const v0 = 0;</span></span><br><span class="line">v1 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;10&#x27;</span>							<span class="comment">//const v1 = 10;</span></span><br><span class="line">v2 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;1&#x27;</span>							<span class="comment">//const v2 = 1;</span></span><br><span class="line">v3 &lt;- <span class="title class_">Phi</span> v0								<span class="comment">//let v3 = v0;</span></span><br><span class="line"><span class="title class_">BeginFor</span> v0, <span class="string">&#x27;&lt;&#x27;</span>, v1, <span class="string">&#x27;+&#x27;</span>, v2 -&gt; v4			<span class="comment">//for(let v4 = v0; v4 &lt; v1; v4 = v4 + v2)&#123;</span></span><br><span class="line">		v6 &lt;- <span class="title class_">BinaryOperation</span> v3, <span class="string">&#x27;+&#x27;</span>, v4	<span class="comment">//		const v6 = v3 + v4;</span></span><br><span class="line">		<span class="title class_">Copy</span> v3, v6							<span class="comment">//		v3 = v6;</span></span><br><span class="line"><span class="title class_">EndFor</span>										<span class="comment">//&#125;</span></span><br><span class="line">v7 &lt;- <span class="title class_">LoadString</span> <span class="string">&#x27;Result: &#x27;</span>					<span class="comment">//const v7 = &quot;Result: &quot;;</span></span><br><span class="line">v8 &lt;- <span class="title class_">BinaryOperation</span> v7, <span class="string">&#x27;+&#x27;</span>, v3			<span class="comment">//const v8 = v7 + v3;</span></span><br><span class="line">v9 &lt;- <span class="title class_">LoadGlobal</span> <span class="string">&#x27;console&#x27;</span>					<span class="comment">//const v9 = console;</span></span><br><span class="line">v10 &lt;- <span class="title class_">CallMethod</span> v9, <span class="string">&#x27;log&#x27;</span>, [v8]			<span class="comment">//const v10 = v9.log(v8);</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>let</code>命令，用来声明变量。它的用法类似于<code>var</code>，但是所声明的变量，只在<code>let</code>命令所在的代码块内有效。</p>
+<p><img src="../AppData/Roaming/Typora/typora-user-images/image-20220128195045584.png" alt="image-20220128195045584"></p>
+<p>JavaScript 原生中默认是没有 Console 对象,这是宿主对象（也就是浏览器）提供的内置对象。用于访问调试控制台, 在不同的浏览器里效果可能不同。</p>
+</blockquote>
+<p>显示了由12个指令组成的程序实例,计算数字从0到9的总和并输出,变量通过整数识别,并且需要在每个单独的程序中从0开始依次连续编号</p>
+<h3 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h3><p>突变的目的是将已有的程序转化为不同的程序，但要保存其有趣的特征</p>
+<ul>
+<li>输入突变器：改变输入的参数变量</li>
+<li>操作突变器：改变操作参数</li>
+<li>插入突变器：将新生成的代码插入到程序</li>
+<li>组合突变器：将现有的两个程序组合到一起</li>
+<li>拼接突变器：将现有程序的一部分插入另一个程序</li>
+</ul>
+<h4 id="Input-Mutator"><a href="#Input-Mutator" class="headerlink" title="Input Mutator"></a>Input Mutator</h4><p>用于突变数据流，在FuzzIL中，指令的所有输入都是变量，所有突变器需要在原始程序中选择一个或者多个指令，并将其输入替换为不同的随机变量来运行</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># <span class="title class_">Before</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v6, v9, v3</span><br><span class="line"></span><br><span class="line"># <span class="title class_">After</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v12, v9, v3</span><br></pre></td></tr></table></figure>
+
+<h4 id="Operation-Mutator"><a href="#Operation-Mutator" class="headerlink" title="Operation Mutator"></a>Operation Mutator</h4><p>用于突变操作参数，例如LoadString操作使用的常量，以及比较中使用的比较器，属性操作和方法调用中使用的属性或方法名称，以及二进制或一元操作中的实际操作</p>
+<h4 id="Insertion-Mutator"><a href="#Insertion-Mutator" class="headerlink" title="Insertion Mutator"></a>Insertion Mutator</h4><p>本质上是一个小型代码生成组件，使用一系列预定义的代码生成器（一个将FuzzIL代码发送到突变程序中的函数）来进行工作</p>
+<h4 id="Combine-Mutator"><a href="#Combine-Mutator" class="headerlink" title="Combine Mutator"></a>Combine Mutator</h4><p>比较简单，将一个程序插入到另一个当中</p>
+<h4 id="Splice-Mutator"><a href="#Splice-Mutator" class="headerlink" title="Splice Mutator"></a>Splice Mutator</h4><p>插入一组被称为切片的指令，切片的关键属性是其中任何指令使用的每个变量也由切片中的指令定义</p>
+<h3 id="Refinement"><a href="#Refinement" class="headerlink" title="Refinement"></a>Refinement</h3><p>在将新发现的样本加入语料库或保存触发crash的样本前，先进行精细化操作</p>
+<ol>
+<li>检查样本的deterministic behavior</li>
+<li>minimization</li>
+<li>normalization</li>
+</ol>
+<h4 id="Determinism"><a href="#Determinism" class="headerlink" title="Determinism"></a>Determinism</h4>]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>FuzzIL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript学习记录</title>
+    <url>/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="交互式网络"><a href="#交互式网络" class="headerlink" title="交互式网络"></a>交互式网络</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>要通过事件来触发函数，要添加事件处理器，比如载入网页时触发，使用<code>onload</code>，然后通过<code>alert()</code>函数列出信息。</p>
+<p>事件由用户触发，但最终还是来源于浏览器，是一个被用户触发的事件，但浏览器必须包装关于事件的信息，再传递给负责相应这个事件的函数</p>
+<p>无论事件会不会被相应，都不会影响网页的载入</p>
+<p>Javascript的代码可以放在<code>&lt;script&gt;</code>标签里，也可以直接放在事件处理器中</p>
+<p>事件以JavaScript代码相应网页里发生的动静</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="prompt函数"><a href="#prompt函数" class="headerlink" title="prompt函数"></a>prompt函数</h3><p><code>prompt()</code>负责制作弹出窗口，用于显示可提示用户进行输入的对话框。函数返回值为字符串。当用户输入为数字或布尔类型时，一律返回string型，若想使类型不变，则需要进行类型转换。</p>
+<h3 id="document-getElementById函数"><a href="#document-getElementById函数" class="headerlink" title="document.getElementById函数"></a>document.getElementById函数</h3><p>顾明思义，get-Element-By-Id，就是通过ID来设置/返回HTML标签的属性及调用其事件与方法。用这个方法基本上可以控制页面所有标签，条件很简单就是给每个标签分配一个ID号</p>
+<h1 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h1><p>三种基本数据类型：text、number、boolean</p>
+<p>number用于存储数值数据、text用于存储字符串、boolean用于存储逻辑值</p>
+<p>alart框只能显示文本，不能显示数字，所以要进行类型转换</p>
+<p>在重新载入网页时，脚本的数据被重新设为初始值</p>
+<h2 id="函数-1"><a href="#函数-1" class="headerlink" title="函数"></a>函数</h2><h3 id="parseInt-函数"><a href="#parseInt-函数" class="headerlink" title="parseInt()函数"></a>parseInt()函数</h3><p>把字符串传给函数，函数把字符串转化为整数</p>
+<h3 id="parseFloat-函数"><a href="#parseFloat-函数" class="headerlink" title="parseFloat()函数"></a>parseFloat()函数</h3><p>把字符串传给函数，函数把字符串转化为浮点数</p>
+<p>使用这两个函数应该只包含数字的字符串</p>
+<p>NaN表示非数字，也用于某段数据不是数字，但被期待是数字的时候</p>
+<h3 id="indexOf-函数"><a href="#indexOf-函数" class="headerlink" title="indexOf()函数"></a>indexOf()函数</h3><p>indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。<br>indexOf() 方法对大小写敏感！</p>
+<p>string.indexOf(“xxx”)表示在string中搜索字符串xxx</p>
+<h1 id="探索客户端"><a href="#探索客户端" class="headerlink" title="探索客户端"></a>探索客户端</h1><h2 id="函数-2"><a href="#函数-2" class="headerlink" title="函数"></a>函数</h2><h3 id="refresh-函数"><a href="#refresh-函数" class="headerlink" title="refresh()函数"></a>refresh()函数</h3><p>重新整理网页</p>
+<h3 id="setTimeout-函数"><a href="#setTimeout-函数" class="headerlink" title="setTimeout()函数"></a>setTimeout()函数</h3><p>单次定时器函数</p>
+<p>函数有两段参数，分别是时间延迟和想要运行的程序代码，两个参数顺序无所谓</p>
+<p>时间单位为毫秒</p>
+<h3 id="setInterval-函数"><a href="#setInterval-函数" class="headerlink" title="setInterval()函数"></a>setInterval()函数</h3><p>间隔定时器函数，格式与setTimeout函数相同，以对应的时间间隔重复执行代码</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux内核完全注释</title>
+    <url>/2023/03/18/Linux0.11/</url>
+    <content><![CDATA[<h1 id="Linux内核完全注释（1）"><a href="#Linux内核完全注释（1）" class="headerlink" title="Linux内核完全注释（1）"></a>Linux内核完全注释（1）</h1><p>赵博士这本书是一本很厚实的书，涉及到Linux的各个方面，早就想要一读，可惜一直没有找到时间，现在大四了终于有时间读一读，也是复习和进一步理解Linux系统内核的好机会。这个系列可能会断断续续更新很久，希望不会烂尾。</p>
+<h2 id="第2章-微型计算机组成结构"><a href="#第2章-微型计算机组成结构" class="headerlink" title="第2章 微型计算机组成结构"></a>第2章 微型计算机组成结构</h2><p>由于操作系统是应用程序与硬件沟通的桥梁，我们在学习操作系统时，必不可少地需要先具备一定的硬件知识。</p>
+<blockquote>
+<p>除了CPU以外，现代PC机主板主要使用两个超大规模芯片构成的芯片组组成：北桥芯片和南桥芯片。北桥芯片用于与CPU、内存和AGP视频接口，这些接口具有很高的传输速率。北桥芯片还起着存储器控制作用，因此Intel把该芯片标号为MCH芯片。南桥芯片用于管理低、中速的组件，例如PCI总线、IDE硬盘接口、USB端口等，因此南桥芯片的名称为ICH芯片。</p>
+</blockquote>
+<h2 id="第3章-内核编程语言和环境"><a href="#第3章-内核编程语言和环境" class="headerlink" title="第3章 内核编程语言和环境"></a>第3章 内核编程语言和环境</h2><p>在Linux 0.1系统中使用两种汇编器，一个是能产生16位代码的as86汇编器和ld86链接器，在Linux中被用来创建16位的引导扇区程序boot/bootsect.s和实模式下初始设置程序boot/setup.s的二进制代码，主要特点是小巧快速，有宏和错误检测功能。另一个是GNU的汇编器gas，使用GNU ld链接器。</p>
+<p>as86汇编器和Intel的汇编语言语法是不兼容的，其操作数的次序与GNU as相反。</p>
+<p>as86接收的汇编语言语句可以是只包含空格、制表符和换行符的空行，也可以是赋值语句或定义语句、伪操作语句和机器指令语句。每个操作码都以一个“.”字符开始，点字符本身是一个特殊的符号，代表着编译过程中的位置计数器，其值是点符号出现处机器指令第一个字节的地址。</p>
+<p>机器指令语句是可执行机器指令的助记符，由操作码和0个或多个操作数构成。在任何语句之前都可以有标号，标号是由一个标识符后跟一个冒号：组成，在编译过程中，汇编器遇到一个标号后，会将当前位置计数器的值赋给这个标号</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Binary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>New 160 Crackme 1-5</title>
+    <url>/2023/02/21/New%20160%20Crackme%201-5/</url>
+    <content><![CDATA[<h1 id="New-160-Crackme-1-abex’-5th-crackme"><a href="#New-160-Crackme-1-abex’-5th-crackme" class="headerlink" title="New 160 Crackme-1 abex’ 5th crackme"></a>New 160 Crackme-1 abex’ 5th crackme</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>OllyDbg</p>
+<p>先运行一下软件，发现是一个验证序列号的软件，如果输入序列号不正确就会自动退出</p>
+<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><ol>
+<li><p>使用Ollydbg打开要进行爆破的软件得到以下的界面</p>
+<p>按道理说应该先查壳，但是鉴于比较简单，就不查了，事实上也没有加壳<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717124717778.png" alt="image-20220717124717778" style="zoom: 50%;"></p>
+</li>
+<li><p>先查询字符串。右键点击第一行，找到查找字符串<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717124951265.png" alt="image-20220717124951265"></p>
+</li>
+<li><p>发现一共有6个字符串，其中前两个很像序列号格式的不知道是什么，猜测是正确答案，于是输进去试一试，结果不是，那就先不管。然后后面四个字符串分别是输入错误和正确时，弹出的MessageBox的标题和内容。因为错误的部分要比正确的位置靠前，所以先双击错误的字符串，看一下具体逻辑。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717125219570.png" alt="image-20220717125219570"></p>
+</li>
+<li><p>点进去发现0x4010FF位置有一个跳转，这个跳转决定到底是错误输出还是正确输出。可以看到这个跳转由上面的<code>CMP EAX, 0</code>的结果控制，也就是说如果相等，就会执行这个跳转，跳到正确的位置（0x401117），否则就是错误的。那作为爆破部分比较简单，直接把这个JE给改成JNE（输入错误会跳转）或者JMP（强制跳转）就可以了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717125622726.png" alt="image-20220717125622726"></p>
+</li>
+<li><p>双击JE那条语句，改成JMP以后assemble</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717131059444.png"></p>
+</li>
+<li><p>最后执行一下，发现well done了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717130547475.png" alt="image-20220717130547475"></p>
+</li>
+</ol>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>虽然爆破能让我们不用序列号就通过，但我们依然不知道正确的序列号是什么，以及其中的审查机制，要知道这些，就需要对整个程序进行算法分析</p>
+<ol>
+<li><p>要进行算法分析，我们要先在Ollydbg里面把程序跑起来</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717131703017.png" alt="image-20220717131703017" style="zoom: 80%;">
+
+<p>按F7单步执行，发现程序从第一行开始执行，到0x40101D会弹出输入序列号的对话框，然后会跳转到0x40106C，于是在0x40106C处按F2下断点</p>
+</li>
+<li><p>往后看，发现调用了一个函数叫GetDlgItemTextA，这个函数是用来接收刚刚在对话框中输入的字符串的。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132048801.png" alt="image-20220717132048801"></p>
+</li>
+<li><p>继续F7执行，执行到GetDlgItemTextA时，我们就不进去细看获取的过程了，按F8直接获取执行的结果</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132354299.png" alt="image-20220717132354299"></p>
+<p>在函数的堆栈处，发现刚刚输入的字符串已经被存在了0x402324的位置了（我没有改默认的字符串）</p>
+<p>这个时候可以右键点击这个地址</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132749398.png" alt="image-20220717132749398" style="zoom:50%;">
+
+<p>点击Follow in Dump，就可以在左边的数据窗口看到了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132833019.png" alt="image-20220717132833019"></p>
+</li>
+<li><p>接下来继续执行，马上又遇到了第二个函数，这个函数百度查一下发现是一个获取硬盘信息的函数，用来获取磁盘驱动卷编号的</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717132932806.png" alt="image-20220717132932806"></p>
+<p>直接F8执行过去看结果</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717133249053.png" alt="image-20220717133249053"></p>
+<p>在下面已经获得结果了，此处我的磁盘名称就是test</p>
+<p>另外在这里我们看到了最开始查找字符串时候的4562-ABEX，看起来的确不是答案序列号</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135035633.png" alt="image-20220717135035633"></p>
+<p>但我们会发现，在经过lstrcatA函数后，程序把我们的卷编号和这个字符串拼到了一起</p>
+</li>
+<li><p>接下来我们继续运行，发现这样一段逻辑，先将DL赋值为2，然后执行下面的一系列加法操作，那我们首先来看，被加的地址0x40225C是什么</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135523739.png"></p>
+<p>发现刚好是刚刚拼起来的字符串，如果有一点汇编基础的话，应该知道，接下来的0x40225D、0x40225E、0x40225F分别对应着e、s、t三个字符，也就是说，这段指令就是把这几个字符的ASCII码加一</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717135307042.png" alt="image-20220717135307042"></p>
+<p>都加完一遍以后，DEC DL的意思是DL的值减一，然后进行比较JNZ比较的是ZF标志位，当ZF标志位为0时，发生跳转，而DEC只有当被减数与减数相等时会将ZF置为0，于是这段代码将会循环一次。总的来说就是前四位每位一共被加了2.</p>
+</li>
+<li><p>继续往下运行，发现之前搜出来的另一个字符串也出现了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141237038.png"></p>
+<p>并且又是lstrcatA函数，先和空字符串合并，不变，又把这个字符串拼接到了我们刚刚处理过的字符串前面，得到真正的序列号</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141529307.png" alt="image-20220717141529307"></p>
+</li>
+<li><p>接下来，把这个序列号和我们输入的序列号进行比较</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717141607771.png" alt="image-20220717141607771"></p>
+<p>如果不相等eax就会返回1，之后的就是在爆破中提到的跳转，就会跳转到错误分支上</p>
+<p>那么这里就有几种方式解决这个程序</p>
+<ol>
+<li><p>既然eax会返回0x1，那么我们可以把比较的对象也改为0x1</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717142002680.png" alt="image-20220717142002680"></p>
+</li>
+<li><p>我们现在已经知道了序列号，并且我们知道序列号只和卷编号有关，所以直接把目标序列号复制下来输进去也可以</p>
+</li>
+<li><p>注意在比较前，程序先将我们输入的数据push进栈，那么我们也可以直接改变push进栈的字符串地址，直接push两个答案进去，自然就一样了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717142229535.png" alt="image-20220717142229535"></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>至此这个程序的分析就结束了</p>
+<h1 id="New-160-Crackme-2-CrackMe-V3-0"><a href="#New-160-Crackme-2-CrackMe-V3-0" class="headerlink" title="New 160 Crackme-2 CrackMe V3.0"></a>New 160 Crackme-2 CrackMe V3.0</h1><p>算法 ：★★</p>
+<p>爆破 ：★★★</p>
+<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2><p>直接打开，发现就是一个纯粹的CrackMe软件，没有什么有用的信息</p>
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><ol>
+<li><p>使用Ollydbg打开</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717224817550.png" alt="image-20220717224817550"></p>
+<p>然后发现有FileName、ReadFile等字样，所以猜测应该是要读取一个文件，文件名应该叫CRACKME3.KEY</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220717225026015.png" alt="image-20220717225026015"></p>
+<p>所以我们在相同的目录底下新建一个CRACKME3.KEY文件，内容随便输入就可以</p>
+</li>
+<li><p>然后我们直接在Ollydbg里面第一行下个断点开始单步执行</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718000140890.png"></p>
+<p>可以发现后面遇到一个CreateFileA函数，查一下这个函数应该是创建一个文件指针，本质上是为了打开文件的，如果打开成功就会将EAX赋值，否则EAX为-1（0xFFFFFFFF），不会执行之后的跳转，会将程序引入没有输入的路径</p>
+</li>
+<li><p>随后进行跳转后，会将EAX中的值赋值给0x4020F5这个地址，然后会在之后的ReadFile函数中读取文件</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718004046214.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">ReadFile</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">　　HANDLE hFile, <span class="comment">//文件的句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPVOID lpBuffer, <span class="comment">//用于保存读入数据的一个缓冲区</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　DWORD nNumberOfBytesToRead, <span class="comment">//要读入的字符数</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPDWORD lpNumberOfBytesRead, <span class="comment">//指向实际读取字节数的指针</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　LPOVERLAPPED lpOverlapped <span class="comment">//如文件打开时指定了FILE_FLAG_OVERLAPPED，那么必须，用这个参数引用一个特殊的结构。该结构定义了一次异步读取操作。否则，应将这个参数设为NULL</span></span></span></span><br><span class="line"><span class="params"><span class="function">　　)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>查一下ReadFile的函数原型，发现这个ReadFile函数前面的几行实际上是在给函数传参，比如PUSH EAX（0x12）就是说函数只会从文件中读取前0x12（18）个字符，读取的缓冲区在0x402008这个地址，可以看出来刚刚CreateFileA函数返回的EAX则是文件的句柄</p>
+</li>
+<li><p>然后继续执行，程序获取了我们文件中的内容后进入了位于0x401311的另一个函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718004745267.png" alt="image-20220718004745267"></p>
+<p>按F7进入这个函数查看里面的逻辑</p>
+</li>
+<li><p>进入以后首先的两个XOR是为了清空ECX和EAX，然后将ESP+4的值赋值给ESI</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005016359.png" alt="image-20220718005016359"></p>
+<p>观察寄存器地址发现ESP的值是0x19FF70，加4后就是0x19FF74，那再去看堆栈地址</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005314306.png" alt="image-20220718005314306"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718005422158.png" alt="image-20220718005422158"></p>
+<p>发现正好就是我们刚刚读进来的字符串，也就是说这一行指令就是把我们刚刚读进来的字符串赋值给ESI</p>
+</li>
+<li><p>接下来，给BL赋值为0x41，再把ESI中的第一个字符提取出来赋值给AL，再让AL和BL进行异或，从这里我们想到，BL的0x41可能也是一个字符的ASCII码，查表得到0x41对应‘A’。然后将异或得到的结果放回ESI（0x40131F），再将ESI+1（0x401321）。注意这里的ESI实际上是起到指针的效果，ESI+1并不是让字符串中的字符+1，而是指向的地址增加，所以就是相当于后移一位。然后再将BL+1，也就是’B‘（0x401322）</p>
+</li>
+<li><p>接下来，比较AL是否为0，为0则跳转，否则不跳，这里第一轮是不跳的，然后让CL也+1，由于最开始ECX被清空了，所以此时ECX=0x1，然后再让BL和4F比较，不相等则跳转到前面重复执行，从之前的过程中我们知道每次执行上面的指令时，BL会+1，所以刚刚的指令一共会执行0x4F-0x41=0xe=14次，也就是会对前14个字符分别进行与“ABCDEFGHIJKLMN”的异或，然后出循环</p>
+</li>
+<li><p>最后将ECX，也就是一个计数器，保存在0x402149，返回函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011407360.png" alt="image-20220718011407360"></p>
+</li>
+<li><p>函数返回后要将0x4020F9位置的值与0x12345678异或</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011530549.png" alt="image-20220718011530549"></p>
+<p>查看一下发现这个位置的值为0x00000270</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718011832457.png" alt="image-20220718011832457"></p>
+<p>但这个值是怎么来的呢？回溯一下会发现，是刚刚在第6步和第7步之间省略掉的一行指令，当时我们不知道这个有什么用，就省略掉了，现在再回去看，这行指令是把每个字符异或的结果都加在一起，存在0x4020F9的位置，所以我们看到的0x0270就是所有的异或后的值相加的结果。</p>
+</li>
+<li><p>异或之后，接下来把ESP+4，把处理过的字符串入栈，传给0x0040133C位置的函数</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718013848264.png" alt="image-20220718013848264"></p>
+<p>这个函数很简单，第一行是把处理过的字符串赋值给ESI指向的地址，然后地址+0xE，这时ESI就指向了最后四位没有进行过异或操作的字符，然后赋值给EAX，就返回了</p>
+</li>
+<li><p>回来以后，先给ESP+4，然后又是0x4020F9这个位置的值，这次要把他和EAX进行比较，刚刚我们分析函数可以知道EAX中是我们的后四位的字符的ASCII码</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220718014208962.png" alt="image-20220718014208962"></p>
+<p>这里我们先写一下让0x4020F9里面的值等于EAX的值的算法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> result[<span class="number">18</span>];						<span class="comment">//最后生成的答案字符串</span></span><br><span class="line"><span class="type">char</span> input[<span class="number">18</span>]=&#123;<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;@&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;p&#x27;</span>,<span class="string">&#x27;q&#x27;</span>,<span class="string">&#x27;r&#x27;</span>&#125;;							<span class="comment">//输入的字符串</span></span><br><span class="line"><span class="type">int</span> sum;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">14</span>; i ++)&#123;			</span><br><span class="line">    result[i] = input[i] ^ (<span class="number">65</span> + i);	<span class="comment">//前14个字符对大写字母进行异或,注意得到的结果是十进制的</span></span><br><span class="line">    sum += result[i];					<span class="comment">//对异或结果求和</span></span><br><span class="line">	result[i] = result[i]%<span class="number">16</span>+result[i]/<span class="number">16</span>*<span class="number">10</span>; <span class="comment">//这一步让输出的结果直接就是16进制数</span></span><br><span class="line">&#125;</span><br><span class="line">sum = sum ^ <span class="number">0x12345678</span>;					<span class="comment">//求得的和与0x12345678进行异或</span></span><br><span class="line"><span class="type">char</span> tmp[<span class="number">8</span>];</span><br><span class="line"><span class="built_in">sprintf</span>(tmp, <span class="string">&quot;%x&quot;</span>, sum);				<span class="comment">//将求得的结果转化为字符串16进制</span></span><br><span class="line"><span class="comment">//由于系统采用小端法，所以求得的结果要从后往前存在result中，注意</span></span><br><span class="line">result[<span class="number">17</span>] = <span class="built_in">int</span>(tmp[<span class="number">0</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">1</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">16</span>] = <span class="built_in">int</span>(tmp[<span class="number">2</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">3</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">15</span>] = <span class="built_in">int</span>(tmp[<span class="number">4</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">5</span>] - <span class="number">48</span>);</span><br><span class="line">result[<span class="number">14</span>] = <span class="built_in">int</span>(tmp[<span class="number">6</span>] - <span class="number">48</span>) * <span class="number">10</span> + <span class="built_in">int</span>(tmp[<span class="number">7</span>] - <span class="number">48</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">18</span>; i ++)&#123;</span><br><span class="line">    cout&lt;&lt;<span class="built_in">int</span>(result[i])&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>用010editor打开CRACKME3.KEY，把输出的<code>36232D252A063E29212524622E2024543412</code>按十六进制输入后保存就可以了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220819143624785.png" alt="image-20220819143624785"></p>
+</li>
+<li><p>再次打开软件，发现已经破解成功了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220819143711292.png" alt="image-20220819143711292"></p>
+</li>
+</ol>
+<h2 id="爆破-1"><a href="#爆破-1" class="headerlink" title="爆破"></a>爆破</h2><p>爆破的话比较简单，基本上就是把通往正确道路上的跳转都改掉就可以了</p>
+<p><code>00401035 的jnz改为jmp</code>强制在没有key文件时候不会跳转到程序结束</p>
+<p><code>0040106D 的jnz改为nop</code>无论读取到什么内容，无论有没有18个字符都可以继续运行</p>
+<p><code>0040109F 的je改为nop</code>无论之前的结果，运算过后与后四个字符是否相同，都继续</p>
+<p><code>0040118A 的jnz改为nop</code>在没有key文件时候不会结束，如果有Key文件，似乎不用改这个</p>
+<h1 id="New-160-Crackme-3-AcidBytes2"><a href="#New-160-Crackme-3-AcidBytes2" class="headerlink" title="New 160 Crackme-3 AcidBytes2"></a>New 160 Crackme-3 AcidBytes2</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<p>脱壳 ：★</p>
+<h2 id="准备工作-2"><a href="#准备工作-2" class="headerlink" title="准备工作"></a>准备工作</h2><p>这是这个系列第一个涉及到脱壳的程序，因此需要提前准备好一系列的工具</p>
+<ul>
+<li>PEiD</li>
+<li>exeinfope</li>
+<li>ImportREC</li>
+<li>其中前两个工具是用来查壳的，最后的是用来修补脱壳后的程序的（据说使用win xp和win7系统，不需要对其进行修复，但更新的win都需要在脱壳后对程序进行修复。</li>
+</ul>
+<p>此外我们大概运行一下这个程序，发现还是一个序列号性质的，就是你输入正确的值，就能过关。</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211137632.png" alt="image-20230220211137632" style="zoom:50%;">
+
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211148710.png" alt="image-20230220211148710" style="zoom:50%;">
+
+<h2 id="脱壳"><a href="#脱壳" class="headerlink" title="脱壳"></a>脱壳</h2><p>脱壳部分我本身其实并不是很理解原理，<a href="https://blog.csdn.net/qq_43082315/article/details/127200630">于是百度大致学习了一下</a>，在这篇文章中我们可以发现，一个加壳的程序，在反汇编以后我们看到的都是dd这样的伪指令。而什么是伪指令呢？伪指令是指在汇编的过程中，程序发给汇编器的指令，而不会最终编程机器码，可以理解为是一些给汇编器的参数，会被汇编器截取下来。</p>
+<p>但这篇文章讲的比较浅，于是又搜到<a href="https://zhuanlan.zhihu.com/p/404215416?utm_medium=social&utm_oi=877948885966938112&utm_id=0">这篇</a>。从中我们可以发现，壳可以理解为一个压缩软件，只不过和我们一般见到的压缩软件的不同之处在于，这个压缩软件和压缩包是一体的。</p>
+<p>这篇文章后面提到了我们要使用的手工脱壳的方法。我们使用的是ESP定律法，利用堆栈平衡的特点来进行。堆栈平衡可以看这个<a href="https://bbs.kanxue.com/thread-250784.htm">贴子</a>，大概的意思就是说一段代码在调用函数前应该有自己的堆栈，而在调用结束后，应该将堆栈空间恢复成调用前的样子，而ESP作为栈顶寄存器，会在调用函数后作为新函数的栈底，调用函数结束后恢复为栈顶，由此我们知道，一旦原来的ESP归位了，就代表函数执行完毕了。通过这个特性，我们可以跟踪“壳”何时将原代码“解压”成功。而我们如何得知原来的ESP何时归位呢？这就需要硬件断点。硬件断点可以对某个地址下断点，一旦程序进行了与这个地址有关的操作，就会产生中断。</p>
+<p>硬件断点</p>
+<blockquote>
+<p>硬件断点比软件断点的功能更强，除了函数断点外，还可以数据断点，可以指定当数据被读或写时中断。</p>
+<p>硬件断点的本质就是在指定内存下断点，内存可以位于代码段（函数断点）也可以是数据段（数据断点）。可以设置事件有执行、写入、读写时中断。</p>
+</blockquote>
+<p>至此我们的理论工作就全部结束了，可以开始操作了。</p>
+<p>首先先用PEID查壳</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203712852.png" alt="image-20230220203712852" style="zoom:50%;">
+
+<p>发现有UPX加壳</p>
+<p>于是加载程序进OllyDBG</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203830295.png" alt="image-20230220203830295" style="zoom:80%;">
+
+<p>看到如图的区域</p>
+<p>因为有壳，所以不难想到这应该是壳的代码，进行一下字符串搜索，果然什么都没有</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220203930071.png" alt="image-20230220203930071"></p>
+<p>然后我们先执行一步，发现ESP中存的地址是0x0019FF58，OK也就是说这就是壳自己所在的堆栈的ESP，所以我们直接对这个地址打硬件断点，观测这个地址什么时候会发生一次“恢复”</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220204612431.png" alt="image-20230220204612431"></p>
+<p>右键点击这个地址，选择HW break，然后我们的断点就打好了，接下来直接让程序自己运行</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220204816735.png" alt="image-20230220204816735"></p>
+<p>然后程序在运行到这一步的时候停下来了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220205025317.png" alt="image-20230220205025317"></p>
+<p>说明这就是我们要找的壳的结尾，可以看到接下来程序跳转到了0x00442E44这个位置，所以我们继续运行程序去这个位置找</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220205811727.png" alt="image-20230220205811727"></p>
+<p>找到以后右键点击这个指令，选择用OllyDump脱壳调试进行，然后直接点脱壳就可以了，然后会让保存成另一个exe</p>
+<p>打开新保存的exe发现会有报错，看到网上说要用Import REC注入一下<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210007071.png" alt="image-20230220210007071"></p>
+<p>我们先打开一个脱壳前的程序，然后用Import REC选中这个进程</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210307243.png" alt="image-20230220210307243"></p>
+<p>然后会发现，此时的映像基址是0x00400000，而我们刚刚看到入口点应该是0x00442E44，所以我们在下面的OEP中把这个差值0x42E44补上</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220210524991.png" alt="image-20230220210524991"></p>
+<p>然后点击右侧的自动搜索IAT，最后底下的获取导入表，会发现上面多了很多导入表函数，接下来直接点下面的修复转储，选择我们刚刚脱壳后获得的那个报错的程序进行转储，然后会自动生成一个新的程序，这个新的程序就是最终的脱壳结果了。</p>
+<h2 id="算法分析-1"><a href="#算法分析-1" class="headerlink" title="算法分析"></a>算法分析</h2><p>脱壳结束后还是老规矩，先搜索字符串，然后我们发现了我们在准备工作中遇到的一系列字符串</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230220211227910.png" alt="image-20230220211227910"></p>
+<p>一眼就看见了Congrats，于是我们之间双击跟进</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221151956907.png" alt="image-20230221151956907"></p>
+<p>跟进之后发现两句破解成功的提示上面有一个跳转，应该是不满足的时候就直接跳转到两个提示底下了，因此我们要想办法不让他跳转。</p>
+<p>我们在这个函数入口（0x00442B2C）打上断点，然后让程序自己运行，需要输入的话，我们就随便输入一个123456，然后当程序执行到函数入口我们开始步进。前面十行一堆push指令是用来平衡堆栈的，我们不用管，直接看到0x442B42，发现程序将[local.1]这个地址给了edx，我们执行之后发现是0x0019F838，正好是ebp-0x4，于是我们正常实行过下面的函数，发现执行后0x0019F838这个位置存储了我们输入的123456，而后面的eax我们发现是6，应该对应的是输入数据的长度。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221194422557.png" alt="image-20230221194422557"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221194433222.png" alt="image-20230221194433222"></p>
+<p>接下来又是类似的操作，我们注意到这次程序先将我们输入的字符串作为参数，又将一串数字作为下面的参数，所以我们猜测接下来的函数应该是一个比对，于是我们可以猜到这个密码应该就是12011982</p>
+<h2 id="爆破-2"><a href="#爆破-2" class="headerlink" title="爆破"></a>爆破</h2><p>爆破比较简单，在脱壳的基础上，把0x00442B5D位置的跳转用nop覆盖掉就可以了，这时候无论我们输入什么，比对结果如何都会直接进到后面的成功部分。</p>
+<h1 id="New-160-Crackme-4-Andrnalin1"><a href="#New-160-Crackme-4-Andrnalin1" class="headerlink" title="New 160 Crackme-4 Andrnalin1"></a>New 160 Crackme-4 Andrnalin1</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作-3"><a href="#准备工作-3" class="headerlink" title="准备工作"></a>准备工作</h2><p>老规矩，先运行，看到是一个输入框，大概知道又是序列码类型的题，拿PEID查个壳</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201107854.png" alt="image-20230221201107854"></p>
+<p>发现没有，是VB5.0编写的程序（有年头了）这也是这个系列的第一个VB程序。</p>
+<h2 id="算法分析-2"><a href="#算法分析-2" class="headerlink" title="算法分析"></a>算法分析</h2><p>老规矩，把程序扔进OllyDBG后直接中文搜索引擎智能搜索，然后发现如图的一些字符串<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201303763.png" alt="image-20230221201303763"></p>
+<p>看起来不太像英文，有道词典搜了一下发现是德文，不过即使不知道是德文，有个SuCCESFul字符串应该也能看出来是成功的意思，所以我们还是直接跟进。</p>
+<p>跟进以后发现成功的代码段附近是这样的</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201505131.png" alt="image-20230221201505131"></p>
+<p>于是我们从这个字符串开始往上找跳转首先就看到了0x00401D9D位置的跳转，目标位置在底下，过去看了一下，发现如果跳过去应该就失败了，所以可以推出0x00401D9D这个位置不能跳转<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201629085.png" alt="image-20230221201629085"></p>
+<p>于是我们回去继续网上看发现右侧注释部分有个特殊的字符串“SynTaX 2oo1”</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221201854664.png" alt="image-20230221201854664"></p>
+<p>而这个字符串底下注释中函数名写的vbaStrCmp，这就告诉我们下面这个函数应该是进行字符串比对的，那比对的另一方是谁呢？我们猜测应该是我们输入的字符串，所以我们在这打个断点，然后随便输入个123456试试</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202228446.png" alt="image-20230221202228446"></p>
+<p>果然，执行到push ecx时ecx存的值就是“123456”了，所以接下来程序把我们输入的字符串和给定的字符串都入栈进行比对，比对函数执行完后寄存器情况如下</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202436898.png" alt="image-20230221202436898"></p>
+<p>接下来的指令先把eax复制给edi（此时edi为FFFFFFFF），然后将一个地址复制给ecx，我们去内存里看一下会发现这个地址正好是存储我们输入字符串的地址。接下来让edi取补码，但是这里注意一下，因为这里edi是FFFFFFFF，neg指令取补码的原理和用0减操作数一样，是会产生借位的因此此时的cz为1，而接下来的指令sbb的意思是前面的操作数=前面的操作数-后面的操作数-cz，因此执行后edi为-1（0xFFFFFFFF），然后对edi加一，edi归0，再取反，依然是0。</p>
+<p>然后接下来两个函数我们不太用管，名字上来看应该是回收中间开辟的字符串和对象空间的。与之后的di和si的比较没什么关系。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221202844893.png" alt="image-20230221202844893"></p>
+<p>但是我们注意，esi寄存器一直都是0，因此cmp后会触发跳转，于是我们逆向分析，如何才能让edi的值不为0。逆推发现，若最后结果不0，则最后取反前不能是0，则加一前不能是-1，则sbb时不能得-1，但sbb edi edi指令下，edi减自己一定为0，所以我们要求此时cz不能是1，所以取反前的edi一定是0，才不会有借位或进位。由此我们猜测输入与比对的字符串相同的字符串可以使edi为0。尝试后解决。</p>
+<h2 id="爆破-3"><a href="#爆破-3" class="headerlink" title="爆破"></a>爆破</h2><p>这题爆破起来方法很多，可以直接把je用nop填充，也可以在比较前把edi的值改了</p>
+<h1 id="New-160-Crackme-5-ArturDents-CM-2"><a href="#New-160-Crackme-5-ArturDents-CM-2" class="headerlink" title="New 160 Crackme-5 ArturDents_CM#2"></a>New 160 Crackme-5 ArturDents_CM#2</h1><p>算法 ：★★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作-4"><a href="#准备工作-4" class="headerlink" title="准备工作"></a>准备工作</h2><p>首先扔到PEID里面查壳，发现倒是没有壳，不过是用没见过的语言写的程序</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205321539.png" alt="image-20230221205321539"></p>
+<p>然后运行一下发现好像是一个登录程序</p>
+<h2 id="算法分析-3"><a href="#算法分析-3" class="headerlink" title="算法分析"></a>算法分析</h2><p>虽然编程语言没见过，但是没关系，直接往OllyDBG里面扔，反正汇编语言都是一样的。进去以后老规矩先搜字符串，直接搜到了成功的字符串，那就废话少说直接跟进</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205825707.png" alt="image-20230221205825707"></p>
+<p>跟进之后大概看了一下，发现比之前的要复杂一些</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221205956701.png" alt="image-20230221205956701"></p>
+<p>在成功的对话框出现之前要经过一个循环，而这个循环内每次都有可能直接跳转到函数出口，跳过成功的对话框，说明在跳出循环之前不能让跳转发生</p>
+<p>所以我们在循环开始前下个断点，然后输入abcde和123456尝试一下。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221210422098.png" alt="image-20230221210422098"></p>
+<p>到这里，程序已经把我们的输入加载成功了</p>
+<p>然后我们往下执行，进入循环，第一步是把eax中的值也就是我们输入的name的第一个字母存到dl中，然后dl减去cl中的值，此时cl中的值是5，接下来要我们比对我们输入的serial第一个的第一个字符是否和相减后的dl中的值相同。到这里我们大概知道这道题需要两个输入字段配合着来。继续往后看，当比较跳转后还要分别给eax和ebx的地址加一，也就是把开头的字符取掉。然后开始下次循环。经过每次循环cl中的值都会减少1，所以我们可以逆推出name和serial之间的关系。</p>
+<p>可以的一组答案是 fghij acegi</p>
+<h2 id="爆破-4"><a href="#爆破-4" class="headerlink" title="爆破"></a>爆破</h2><p>爆破的话很简单一种是把跳转nop掉，还有一种是我在实验中使用的，就是在每次比较前，把寄存器中的数改为相同的值</p>
+]]></content>
+      <categories>
+        <category>逆向实践</category>
+      </categories>
+      <tags>
+        <tag>Reverse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Smart Greybox Fuzzing</title>
+    <url>/2021/12/13/Smart-Greybox-Fuzzing/</url>
+    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
+<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>SGF通过现实文件级别的变异操作来保证文件的有效性，这样产生的文件更加容易通过程序的解析阶段，可以暴露更深层的问题</p>
+<h3 id="P3"><a href="#P3" class="headerlink" title="P3"></a>P3</h3><p>探索了更多的路径，并暴露了更多的问题</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="P1-1"><a href="#P1-1" class="headerlink" title="P1"></a>P1</h3><p>灰盒测试只需使用轻量级的instrumentation</p>
+<h3 id="P2-1"><a href="#P2-1" class="headerlink" title="P2"></a>P2</h3><p>被变异的输入执行的控制流通过考察来确定他们是否是有趣的，而CGF帮助进行评价控制流的新颖性，随后，被认为值得继续探索的输入会产生更多的输入</p>
+<h3 id="P3-1"><a href="#P3-1" class="headerlink" title="P3"></a>P3</h3><p>而CGF的问题在于缺乏对于文件结构的认识，位级变异会在被处理之前就被程序拒绝</p>
+<h3 id="P4"><a href="#P4" class="headerlink" title="P4"></a>P4</h3><p>有两个方法可以解决这个问题，一个是基于字典，另一个是基于动态污点分析。</p>
+<p>对于字典，可能牺牲AFL的效率和可用性，当AFL要探索新路径时字典是很好的选择</p>
+<p>但两种方法都不能变异出高度结构化的文件</p>
+<h3 id="P5"><a href="#P5" class="headerlink" title="P5"></a>P5</h3><p>智能黑盒测试工具比如peach已经有了文件结构意识，而且能基于有效文件构建新的有效文件</p>
+<p>peach通过一个输入模型来反汇编有效文件，再重汇编成为新的文件</p>
+<h3 id="P6"><a href="#P6" class="headerlink" title="P6"></a>P6</h3><p>SGF可以基于高度结构化的种子文件产生新的文件，这使得其可以在保证文件有效的前提下探索全新的输入领域，可以花费更多时间在探索更深的漏洞</p>
+<h3 id="P7"><a href="#P7" class="headerlink" title="P7"></a>P7</h3><p>24小时内，AFLSMART发现的0day漏洞增加了一倍；还提高了20%的代码覆盖率；</p>
+<h3 id="P8"><a href="#P8" class="headerlink" title="P8"></a>P8</h3><p>文件格式规格可以被跨程序使用，也可以在不同版本的程序使用</p>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>之前用过一小段时间的peach，peach的测试方式是编写好一个pit文件，该文件中已经设计好需要的格式，只需要将需要测试的数据进行标记，变异时，peach会自动地随机填充数据，所以以前以为所有的seed都是这样的结构，但从这篇论文来看，AFL的seed结构本身并不具备文件的结构，对于这一点，可以尝试基于AFLSMART进一步提高变异出的文件的过解析率</p>
+<p>刚刚又看了<a href="https://www.sohu.com/a/305377300_354899%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%8F%90%E5%88%B0">https://www.sohu.com/a/305377300_354899这篇文章，其中提到</a></p>
+<p>在 AFL 的 bit 级别的变异的基础上，AFLSmart 增加了对 chunk 级别的变异操作，主要包括三种操作：</p>
+<p><strong>smart deletion：</strong></p>
+<p>在这种方法中，会对给定的种子文件，随机选取 chunk 进行删除。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/1fc4f80b9d3147d88ef4c4a0fc39d3ec.jpeg" alt="img"></p>
+<p><strong>smart addition：</strong></p>
+<p>在这种方法中，给定一个种子文件 S1，随机选取一个种子文件 S2，在 S2 中随机选取一个 chunk C2，将 C2 插入到 S1 中和 C2 具有相同父节点的 chunk C1 的后面（C1.parent.type ==C2.parent.type）</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/508bc05fbfca4395a860c49e42df6d74.jpeg" alt="img"></p>
+<p><strong>smart splicing：</strong></p>
+<p>这种方法中，对于给定的种子文件 S1，随机选取 chunk C1，随机选取种子文件 S2，找到 S2 中与 C1 类型相同的 chunk C2，将 C2 替换到 C1 的位置上。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/c45624de24b04d7289f775a978af9863.jpeg" alt="img"></p>
+<p>关于peach pit的博客<a href="http://blog.nsfocus.net/peach-fuzz/">http://blog.nsfocus.net/peach-fuzz/</a></p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>AFLSMART</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello</title>
+    <url>/2022/04/22/hello-world/</url>
+    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
+]]></content>
+  </entry>
+  <entry>
+    <title>使用Fuzzilli测试JS引擎</title>
+    <url>/2022/04/22/%E4%BD%BF%E7%94%A8Fuzzilli%E6%B5%8B%E8%AF%95JavaScriptCore/</url>
+    <content><![CDATA[<h1 id="使用Fuzzilli测试JS引擎"><a href="#使用Fuzzilli测试JS引擎" class="headerlink" title="使用Fuzzilli测试JS引擎"></a>使用Fuzzilli测试JS引擎</h1><h2 id="Webkit（JSC）篇"><a href="#Webkit（JSC）篇" class="headerlink" title="Webkit（JSC）篇"></a>Webkit（JSC）篇</h2><h3 id="准备Webkit"><a href="#准备Webkit" class="headerlink" title="准备Webkit"></a>准备Webkit</h3><p>首先通过命令</p>
+<p><code>git clone https://github.com/Webkit/Webkit.git Webkit</code></p>
+<p>下载源码</p>
+<p>一共大概需要下载13个G的文件，所以需要把httpBuffer改大一点，我这个直接改成了5242880000，命令就是</p>
+<p><code>git config --global http.postBuffer 524288000</code></p>
+<p>clone完成以后还需要经历一个漫长的updating 的过程，据说需要2-3天，但updating一次以后，再次clone的时候就不会经历这么长的时间了，我就直接找了组里下过的同学，帮忙下载了一份。</p>
+<p>然后是根据Fuzzilli的文件打patch，Fuzzilli官方已经发布了JSC的patch，但是只能对特定的版本使用，查看一下<code>fuzzilli/Targets/JavaScriptCore/REVISION</code>中的commit号（我的版本使用的是<code>4110e1b44a345737cdb807d36572c8714e90c5d0</code>）</p>
+<p>根据指导在Webkit根目录下使用命令</p>
+<p><code>git checkout 4110e1b44a345737cdb807d36572c8714e90c5d0 -b fuzz</code></p>
+<p>进行checkout，大概十几分钟后会显示已经创建了fuzz分支</p>
+<p>然后先在webkit根目录下将<code>fuzzilli/Targets/JavaScriptCore/Patches</code>路径下面的webkit.patch拷贝过来，注意cp命令最后有个点，最开始以为是屏幕脏了没注意（xs</p>
+<p>拷贝过来以后打上patch就可以了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cp</span>  path/to/fuzzilli/Targets/JavaScriptCore/Patches/webkit.patch .</span><br><span class="line">$ patch -p1 &lt; webkit.patch</span><br></pre></td></tr></table></figure>
+
+<p>成功后会显示</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/f1.png" alt="1"></p>
+<p>然后再将<code>path/to/fuzzilli/Targets/JavaScriptCore</code>目录底下的fuzzbuild.sh也拷贝过来，执行<code>./fuzzbuild</code>开始编译JSC</p>
+<p>编译过程中可能会报这样一个错，说是找不到编译器，是因为fuzzbuild.sh默认使用clang-12编译，但我的机器里只有clang-11，直接把fuzzbuild.sh里面的clang-12改成clang-11就可以了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/2.png" alt="2"></p>
+<p>改完之后继续执行<code>./fuzzbuild</code>编译，编译过程中会报几个warning，不用去管，编译一共大约需要十分钟的样子，编译完这一步就完成了。</p>
+<h3 id="准备Fuzzilli"><a href="#准备Fuzzilli" class="headerlink" title="准备Fuzzilli"></a>准备Fuzzilli</h3><p>接下来要准备Fuzzilli</p>
+<p>还是直接从github上面下载</p>
+<p><code>git clone https://github.com/googleprojectzero/fuzzilli.git</code></p>
+<p>由于fuzzilli需要使用swift进行编译，所以我们接下来下载swift依赖</p>
+<p>首先从swift官网下载对应Ubuntu版本的swift</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/3.png" alt="3"></p>
+<p>比如我使用的是Ubuntu20.04就使用</p>
+<p><code>wget https://download.swift.org/swift-5.6.1-release/ubuntu2004/swift-5.6.1-RELEASE/swift-5.6.1-RELEASE-ubuntu20.04.tar.gz</code></p>
+<p>下载了5.6.1版本的swift，具体可以去<a href="https://www.swift.org/download/#releases">swift官网</a>查看自己适用的版本</p>
+<p>下载完成后使用<code>tar -zxvf 文件名</code>解压 </p>
+<p>如果在解压时遇到这个问题</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/4.png" alt="4"></p>
+<p>可能是因为下载了一个网页下来，可以cat一下这个压缩文件，如果显示了html代码，就需要重新下载一下</p>
+<p>正常解压大概需要几分钟</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/5.png" alt="5"></p>
+<p>解压完成后进入<code>swift-5.6.1-RELEASE-ubuntu20.04/usr/bin</code>目录下，有一个叫swift的可执行文件就是用来编译fuzzilli的</p>
+<p>然后我们记住swift所在的路径，进入fuzzilli的根目录</p>
+<p>使用<code>path/to/swift build</code>对fuzzilli进行编译，其中<code>path/to/swift</code>用自己的swift路径替换</p>
+<p>开始编译之后可能会有几个报错，说某个仓库是不安全的，这个他会告诉你运行什么命令来信任，复制执行就行了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/6.png" alt="6"></p>
+<p>执行后重新build，大概十几分钟的样子就能编译好了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/7.png" alt="7"></p>
+<p>在<code>fuzzilli/.build/debug</code>路径下有一个FuzzilliCli的文件就是我们要使用的fuzzilli的可执行文件了</p>
+<h3 id="开始fuzz"><a href="#开始fuzz" class="headerlink" title="开始fuzz"></a>开始fuzz</h3><p>首先我们先使用命令看一下fuzzilli的参数</p>
+<p><code>path/to/swift run FuzzilliCli --help</code></p>
+<p>参数还是很多的，挑几个了解一下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Options:</span><br><span class="line">	<span class="comment">#被测引擎的名字</span></span><br><span class="line">    --profile=name              : Select one of several preconfigured profiles.</span><br><span class="line">                                  Available profiles: [<span class="string">&quot;spidermonkey&quot;</span>, <span class="string">&quot;duktape&quot;</span>, <span class="string">&quot;jerryscript&quot;</span>, <span class="string">&quot;qjs&quot;</span>, <span class="string">&quot;v8&quot;</span>, <span class="string">&quot;xs&quot;</span>, <span class="string">&quot;jsc&quot;</span>].</span><br><span class="line">    <span class="comment">#创建用来fuzz的线程数                              </span></span><br><span class="line">    --<span class="built_in">jobs</span>=n                    : Total number of fuzzing <span class="built_in">jobs</span>. This will start one master thread and n-1 worker threads. Experimental!</span><br><span class="line">    --engine=name               : The fuzzing engine to use. Available engines: <span class="string">&quot;mutation&quot;</span> (default), <span class="string">&quot;hybrid&quot;</span>, <span class="string">&quot;multi&quot;</span>.</span><br><span class="line">                                  Only the mutation engine should be regarded stable at this point.</span><br><span class="line">    --corpus=name               : The corpus scheduler to use. Available schedulers: <span class="string">&quot;basic&quot;</span> (default), <span class="string">&quot;markov&quot;</span></span><br><span class="line">    --minDeterminismExecs=n     : The minimum number of <span class="built_in">times</span> a new sample will be executed when checking determinism (default: 3)</span><br><span class="line">    --maxDeterminismExecs=n     : The maximum number of <span class="built_in">times</span> a new sample will be executed when checking determinism (default: 50)</span><br><span class="line">    --noDeterministicCorpus     : Don<span class="string">&#x27;t ensure that samples added to the corpus behave deterministically.</span></span><br><span class="line"><span class="string">    --maxResetCount=n           : The number of times a non-deterministic edge is reset before it is ignored in subsequent executions.</span></span><br><span class="line"><span class="string">                                  Only used as part of --deterministicCorpus.</span></span><br><span class="line"><span class="string">    --logLevel=level            : The log level to use. Valid values: &quot;verbose&quot;, info&quot;, &quot;warning&quot;, &quot;error&quot;, &quot;fatal&quot;</span></span><br><span class="line"><span class="string">                                  (default: &quot;info&quot;).</span></span><br><span class="line"><span class="string">    --numIterations=n           : Run for the specified number of iterations (default: unlimited).</span></span><br><span class="line"><span class="string">    --timeout=n                 : Timeout in ms after which to interrupt execution of programs (default: 250).</span></span><br><span class="line"><span class="string">    --minMutationsPerSample=n   : Discard samples from the corpus after they have been mutated at least this</span></span><br><span class="line"><span class="string">                                  many times (default: 16).</span></span><br><span class="line"><span class="string">    #至少在样本变异多少次后才丢弃样本(default: 16)</span></span><br><span class="line"><span class="string">    --minCorpusSize=n           : Keep at least this many samples in the corpus regardless of the number of times</span></span><br><span class="line"><span class="string">                                  they have been mutated (default: 1024).</span></span><br><span class="line"><span class="string">    --maxCorpusSize=n           : Only allow the corpus to grow to this many samples. Otherwise the oldest samples</span></span><br><span class="line"><span class="string">                                  will be discarded (default: unlimited).</span></span><br><span class="line"><span class="string">    --markovDropoutRate=n       : Rate at which low edge samples are not selected, in the Markov Corpus Scheduler,</span></span><br><span class="line"><span class="string">                                  per round of sample selection. Used to ensure diversity between fuzzer instances</span></span><br><span class="line"><span class="string">                                  (default: 0.10)</span></span><br><span class="line"><span class="string">    --consecutiveMutations=n    : Perform this many consecutive mutations on each sample (default: 5).</span></span><br><span class="line"><span class="string">    --minimizationLimit=n       : When minimizing corpus samples, keep at least this many instructions in the</span></span><br><span class="line"><span class="string">                                  program. See Minimizer.swift for an overview of this feature (default: 0).</span></span><br><span class="line"><span class="string">    --storagePath=path          : Path at which to store output files (crashes, corpus, etc.) to.</span></span><br><span class="line"><span class="string">    #存储运行时产生的文件（crashes, corpus, etc）</span></span><br><span class="line"><span class="string">    --resume                    : If storage path exists, import the programs from the corpus/ subdirectory</span></span><br><span class="line"><span class="string">    --overwrite                 : If storage path exists, delete all data in it and start a fresh fuzzing session</span></span><br><span class="line"><span class="string">    --exportStatistics          : If enabled, fuzzing statistics will be collected and saved to disk every 10 minutes.</span></span><br><span class="line"><span class="string">                                  Requires --storagePath.</span></span><br><span class="line"><span class="string">    --importCorpusAll=path      : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  All provided programs are included, even if they do not increase coverage.</span></span><br><span class="line"><span class="string">                                  This is useful for searching for variants of existing bugs.</span></span><br><span class="line"><span class="string">                                  Can be used alongside wtih importCorpusNewCov, and will run first</span></span><br><span class="line"><span class="string">    #在启动fuzz之前导入现有语料库</span></span><br><span class="line"><span class="string">    --importCorpusNewCov=path   : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  This only includes programs that increase coverage.</span></span><br><span class="line"><span class="string">                                  This is useful for jump starting coverage for a wide range of JavaScript samples.</span></span><br><span class="line"><span class="string">                                  Can be used alongside importCorpusAll, and will run second.</span></span><br><span class="line"><span class="string">                                  Since all imported samples are asynchronously minimized, the corpus will show a smaller</span></span><br><span class="line"><span class="string">                                  than expected size until minimization completes.</span></span><br><span class="line"><span class="string">    --importCorpusMerge=path    : Imports a corpus of protobufs to start the initial fuzzing corpus.</span></span><br><span class="line"><span class="string">                                  This only keeps programs that increase coverage but does not attempt to minimize</span></span><br><span class="line"><span class="string">                                  the samples. This is mostly useful to merge existing corpora from previous fuzzing</span></span><br><span class="line"><span class="string">                                  sessions that will have redundant samples but which will already be minimized.</span></span><br><span class="line"><span class="string">    --networkMaster=host:port   : Run as master and accept connections from workers over the network. Note: it is</span></span><br><span class="line"><span class="string">                                  *highly* recommended to run network fuzzers in an isolated network!</span></span><br><span class="line"><span class="string">    --networkWorker=host:port   : Run as worker and connect to the specified master instance.</span></span><br><span class="line"><span class="string">    --dontFuzz                  : If used, this instace will not perform fuzzing. Can be useful for master instances.</span></span><br><span class="line"><span class="string">    --noAbstractInterpretation  : Disable abstract interpretation of FuzzIL programs during fuzzing. See</span></span><br><span class="line"><span class="string">                                  Configuration.swift for more details.</span></span><br><span class="line"><span class="string">    --collectRuntimeTypes       : Collect runtime type information for programs that are added to the corpus.</span></span><br><span class="line"><span class="string">    --diagnostics               : Enable saving of programs that failed or timed-out during execution. Also tracks</span></span><br><span class="line"><span class="string">                                  executions on the current REPRL instance.</span></span><br><span class="line"><span class="string">    --inspect=opt1,opt2,...     : Enable inspection options. The following options are available:</span></span><br><span class="line"><span class="string">                                      history: Additional .fuzzil.history files are written to disk for every program.</span></span><br><span class="line"><span class="string">                                               These describe in detail how the program was generated through mutations,</span></span><br><span class="line"><span class="string">                                               code generation, and minimization</span></span><br><span class="line"><span class="string">                                        types: Programs written to disk also contain variable type information as</span></span><br><span class="line"><span class="string">                                               determined by Fuzzilli as comments</span></span><br><span class="line"><span class="string">                                          all: All of the above</span></span><br></pre></td></tr></table></figure>
+
+<p>然后直接按官方readme里面的命令跑就好</p>
+<p>注意如果你的目录在<del>/下，要把</del>展开，就是用/home+…的形式，否则无法识别</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/8.png" alt="8"></p>
+<h2 id="Gecko-dev（SpiderMonkey）篇"><a href="#Gecko-dev（SpiderMonkey）篇" class="headerlink" title="Gecko-dev（SpiderMonkey）篇"></a>Gecko-dev（SpiderMonkey）篇</h2><h3 id="准备Gecko-dev"><a href="#准备Gecko-dev" class="headerlink" title="准备Gecko-dev"></a>准备Gecko-dev</h3><p>老规矩，还是从官方的GitHub上面clone就可以，这个时间会比Webkit短很多，都完成的话也就是几个小时就可以，不想一直看着命令行发呆的话挂后台等着就行</p>
+<p>按照fuzzilli的Targets/SpiderMonkey下面的readme文件所说的，先checkout，我使用的版本是<code>73330bf7355c0aef844c41d0d7eed2848e53c82f</code>，等两分钟更新完以后从根目录进入到js/src目录底下，把fuzzilli/Targets/SpiderMonkey底下的fuzzbuild.sh复制过来后执行</p>
+<p>执行的时候可能会报一个错，大概是说找不到rustc和cargo编译器，如果有这个问题参照<a href="https://blog.csdn.net/qq_23857461/article/details/120296108">这篇博客</a>下载一下就可以了</p>
+<p>安装完以后，再执行一遍fuzzbuild.sh，大概等5分钟左右就编译好了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220423191320995.png" alt="image-20220423191320995"></p>
+<p>编译好之后，安装fuzzilli的说明，可执行文件应该在<code>fuzzbuild_OPT.OBJ/dist/bin/</code>这个目录下，这个目录不在gecko-dev的根目录下，而是在刚刚进入的js/src这个目录底下，我们顺着路径去找一下就能找到了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220423191641494.png" alt="image-20220423191641494"></p>
+<h3 id="开始fuzz-1"><a href="#开始fuzz-1" class="headerlink" title="开始fuzz"></a>开始fuzz</h3><p>前两天的JSC还没测完，这个部分过两天再写吧</p>
+]]></content>
+      <categories>
+        <category>漏洞挖掘</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WebKit</title>
+    <url>/2022/01/16/WebKit/</url>
+    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
+<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
+<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
+<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
+<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
+<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
+<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
+<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
+<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
+<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
+<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
+<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
+<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
+<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
+<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
+<p>数字表示基本顺序，但也不是严格一致。</p>
+<p>具体的过程如下：</p>
+<ol>
+<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
+<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
+<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
+<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
+<li>解释器根据词语构建节点（Node），形成DOM树</li>
+<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
+<li>JavaScript代码可能会修改DOM树结构</li>
+<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
+</ol>
+<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
+<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
+<p>这一段的具体过程如下：</p>
+<ol>
+<li>CSS文件被CSS解释器解释成内部表示结构</li>
+<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
+<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
+</ol>
+<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
+<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
+<p>这一阶段对应的具体过程如下：</p>
+<ol>
+<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
+<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
+<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
+</ol>
+<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
+<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
+<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
+<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
+      </tags>
   </entry>
   <entry>
     <title></title>
@@ -1164,6 +1167,45 @@
       </categories>
       <tags>
         <tag>Fuzzing</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>New 160 Crackme 6-10</title>
+    <url>/2023/03/21/New%20160%20Crackme%206-10/</url>
+    <content><![CDATA[<h1 id="New-160-Crackme-6-Reg"><a href="#New-160-Crackme-6-Reg" class="headerlink" title="New 160 Crackme-6 Reg"></a>New 160 Crackme-6 Reg</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>拖进PEID发现没壳，但依然是没见过的编程语言</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215405148.png" alt="image-20230221215405148"></p>
+<p>然后我们直接打开程序看看，发现让我们填用户名和SN，随便填一个以后，会自己生成一个dll文件，这个dll文件里面会存起来我们输进去的username和SN，然后我们要重启程序来验证注册码</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>大概知道程序能干什么之后，还是直接拖进OllyDBG，老规矩先搜字符串，然后在最底下，发现了这样一段话<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215749432.png" alt="image-20230221215749432"></p>
+<p>猜测告知有效期了应该就是注册成功了，所以我们跟进看一看。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223165907229.png" alt="image-20230223165907229"></p>
+<p>注意到“有效期至”和未注册之间的命令是顺序执行的，而下面会有一个跳转，所以猜测应该是两个输出结果都放进内存里面，之后由程序决定输出哪个。而之后的跳转，如果跳转成功，会直接跳转到结尾部分，所以不能让其正常跳转。经过几次尝试之后。发现这个跳转应该是用来检测是否有dll文件的，所以正常来说这个跳转不用去管它。</p>
+<p>接下来几行执行完之后发现堆栈基本上没有太有价值的变化，所以我们继续往下执行，接下来到reg.dll之后又出现了Username和SN猜测接下来三个函数应该是打开dll并从中读取Username和SN。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204637015.png" alt="image-20230223204637015"></p>
+<p>执行完第二个函数后果然把之前输入的用户名读出来了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204927665.png" alt="image-20230223204927665"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205025878.png" alt="image-20230223205025878"></p>
+<p>继续执行完第三个函数，发现把SN码也读出来了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205103081.png" alt="image-20230223205103081"></p>
+<p>接下来把我们输入的两个值分别赋给EAX和EDX，底下又是一个函数，这个显然是要传参了，而这个函数以我们输入的值为参数，不出意外的话应该就是验证算法所在的函数了，所以我们在这里用f7进入函数看一下究竟是怎么验证的。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205511142.png" alt="image-20230223205511142"></p>
+<p>进入这个函数之后，前几行都是用来开辟栈空间的，我们不用管，然后看到程序将ECX清零，然后又把0x0019FD74-0x0019FD6C的位置都清0，接下来又把0x0019FD88和0x0019FD90清零了，然后把我们输入的SN放在0x0019FD94，把用户名放在0x0019FD98。接下来两个函数，一个以用户名为参数，一个以SN为参数，需要注意一下</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205836081.png" alt="image-20230223205836081"></p>
+<p>但其实进去看了以下并没有发生什么，所以我们继续往下走。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223212113728.png" alt="image-20230223212113728"></p>
+<p>接下来看到一个函数，紧接着一个跳转，查看一下这个跳转目标地址发现如果发生跳转就会跳到几乎要结束的位置，所以不能跳，而如果不跳就需要让EAX为0x10，所以而函数执行前EAX的值是我们输入的SN码，因此这个函数应该会决定EAX的值，我们进去看一看。发现是eax-0x4这个位置的值，我试了几次以后发现这个值应该是SN码的长度，也就是说SN码需要是16位的。</p>
+<p>然后接下来是对序列码进行一轮检验，应该是要求序列码只能有十六进制字符。</p>
+<p>接下来继续运行获得了一个日期和一个字符串，发现正好是一个十六位的字符串，猜测这个就是正确的序列号，试验后果然可以，至此结束。</p>
+<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><p>这道题爆破可以从算法Call后面的关键函数下手，把那个je指令nop掉就可以了</p>
+<p>或者可以把算法Call的入口改为让eax返回我们需要的值然后直接retn</p>
+<h1 id="New-160-Crackme-7"><a href="#New-160-Crackme-7" class="headerlink" title="New 160 Crackme-7"></a>New 160 Crackme-7</h1><p>算法 ：★★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2>]]></content>
+      <categories>
+        <category>逆向实践</category>
+      </categories>
+      <tags>
+        <tag>Reverse</tag>
       </tags>
   </entry>
 </search>
