@@ -64,50 +64,8 @@
       </tags>
   </entry>
   <entry>
-    <title>DOM启蒙</title>
-    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
-    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
-<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
-<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
-    <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
-    <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>方法：使用80台移动设备、包含56种强磁计进行试验，</p>
-<p>实验结果：在实验的设备上，90%的设备被正确检测出打开的应用和网站</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>智能手机上的CPU的峰值活动会对磁传感器造成干扰，由此通过对峰值状态下和空闲状态下的CPU对磁传感器造成的干扰进行分析，建立隐蔽通道。</p>
-<p>强磁计被扰动程度与CPU的工作量密切相关，因此这样可以对浏览器和应用程序进行唯一识别。而且该方法不需要任何额外的用户权限，可以通过任意应用程序实现，而通过通用传感器API在网页种访问强磁计，这样攻击者不需要使用恶意应用程序，而是通过网页直接获取其他应用的指纹</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Magnetometers"><a href="#Magnetometers" class="headerlink" title="Magnetometers"></a>Magnetometers</h3><p>强磁计即磁传感器，可以用于指向</p>
-<h3 id="Sensitivity-of-magnetometers-to-CPU-activity"><a href="#Sensitivity-of-magnetometers-to-CPU-activity" class="headerlink" title="Sensitivity of magnetometers to CPU activity"></a>Sensitivity of magnetometers to CPU activity</h3><p>高负载的CPU需要更大的功率，从而产生更高的电磁场</p>
-<p>高负载的CPU会导致强磁计测量值出现明显的峰值</p>
-<p>对于每个应用程序，CPU和传感器测量的数据所绘制的图像相互关联，并且对于CPU运行不同的应用程序图像有显著差异。</p>
-<p>同时，不同的应用程序或网站在运行时需要不同数量的CPU资源。因此，CPU利用率跟踪以及相应的传感器受干扰程度可以唯一标识正在运行的应用、网页。</p>
-<h2 id="Attack-Scenario"><a href="#Attack-Scenario" class="headerlink" title="Attack Scenario"></a>Attack Scenario</h2><p>在应用程序场景下，恶意程序可以通过沙盒处理，只能访问零权限传感器信息</p>
-<p>在浏览器场景下，网页要么完全属于攻击者，要么包含来自攻击者控制的服务器的组件。</p>
-<p>攻击者需要执行一个培训阶段，为每个网站和应用收集足够的标记，还可以发送受害者的设备型号，以提高成功率</p>
-]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>侧信道攻击</tag>
-        <tag>移动设备</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>DataLab&#39;s Writeup</title>
-    <url>/2023/03/24/Datalab&#39;s%20WriteUp/</url>
+    <url>/2023/03/18/Datalab&#39;s%20WriteUp/</url>
     <content><![CDATA[<h1 id="DataLab’s-Writeup"><a href="#DataLab’s-Writeup" class="headerlink" title="DataLab’s Writeup"></a>DataLab’s Writeup</h1><blockquote>
 <p>The CS:APP Data Lab<br>Directions to Students</p>
 <hr>
@@ -431,6 +389,48 @@
       </categories>
   </entry>
   <entry>
+    <title>DOM启蒙</title>
+    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
+    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
+<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
+<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
+    <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
+    <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>方法：使用80台移动设备、包含56种强磁计进行试验，</p>
+<p>实验结果：在实验的设备上，90%的设备被正确检测出打开的应用和网站</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>智能手机上的CPU的峰值活动会对磁传感器造成干扰，由此通过对峰值状态下和空闲状态下的CPU对磁传感器造成的干扰进行分析，建立隐蔽通道。</p>
+<p>强磁计被扰动程度与CPU的工作量密切相关，因此这样可以对浏览器和应用程序进行唯一识别。而且该方法不需要任何额外的用户权限，可以通过任意应用程序实现，而通过通用传感器API在网页种访问强磁计，这样攻击者不需要使用恶意应用程序，而是通过网页直接获取其他应用的指纹</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Magnetometers"><a href="#Magnetometers" class="headerlink" title="Magnetometers"></a>Magnetometers</h3><p>强磁计即磁传感器，可以用于指向</p>
+<h3 id="Sensitivity-of-magnetometers-to-CPU-activity"><a href="#Sensitivity-of-magnetometers-to-CPU-activity" class="headerlink" title="Sensitivity of magnetometers to CPU activity"></a>Sensitivity of magnetometers to CPU activity</h3><p>高负载的CPU需要更大的功率，从而产生更高的电磁场</p>
+<p>高负载的CPU会导致强磁计测量值出现明显的峰值</p>
+<p>对于每个应用程序，CPU和传感器测量的数据所绘制的图像相互关联，并且对于CPU运行不同的应用程序图像有显著差异。</p>
+<p>同时，不同的应用程序或网站在运行时需要不同数量的CPU资源。因此，CPU利用率跟踪以及相应的传感器受干扰程度可以唯一标识正在运行的应用、网页。</p>
+<h2 id="Attack-Scenario"><a href="#Attack-Scenario" class="headerlink" title="Attack Scenario"></a>Attack Scenario</h2><p>在应用程序场景下，恶意程序可以通过沙盒处理，只能访问零权限传感器信息</p>
+<p>在浏览器场景下，网页要么完全属于攻击者，要么包含来自攻击者控制的服务器的组件。</p>
+<p>攻击者需要执行一个培训阶段，为每个网站和应用收集足够的标记，还可以发送受害者的设备型号，以提高成功率</p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>侧信道攻击</tag>
+        <tag>移动设备</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
     <url>/2022/04/22/FuzzIL/</url>
     <content><![CDATA[<h1 id="FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines"><a href="#FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines" class="headerlink" title="FuzzIL：Coverage Guided Fuzzing for JavaScript Engines"></a>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>工作目标是引导测试工具来测试脚本解释器，这需要在代码上定义在语义上有效的突变。然而，与现有的突变语法方式不同（如代码的文本形式或语法树），突变是在新设计的中间语言（IL）上进行的。基于其形式，其可以轻松执行控制流和数据流突变。<strong>这反映了，程序的句法属性无关紧要</strong>。此外，该系统可以以高概率生成语义上有效的样本。这避免了将生成的代码包装到try-catch结构中。</p>
@@ -539,6 +539,45 @@
       <tags>
         <tag>web</tag>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>New 160 Crackme 6-10</title>
+    <url>/2023/03/21/New%20160%20Crackme%206-10/</url>
+    <content><![CDATA[<h1 id="New-160-Crackme-6-Reg"><a href="#New-160-Crackme-6-Reg" class="headerlink" title="New 160 Crackme-6 Reg"></a>New 160 Crackme-6 Reg</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>拖进PEID发现没壳，但依然是没见过的编程语言</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215405148.png" alt="image-20230221215405148"></p>
+<p>然后我们直接打开程序看看，发现让我们填用户名和SN，随便填一个以后，会自己生成一个dll文件，这个dll文件里面会存起来我们输进去的username和SN，然后我们要重启程序来验证注册码</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>大概知道程序能干什么之后，还是直接拖进OllyDBG，老规矩先搜字符串，然后在最底下，发现了这样一段话<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215749432.png" alt="image-20230221215749432"></p>
+<p>猜测告知有效期了应该就是注册成功了，所以我们跟进看一看。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223165907229.png" alt="image-20230223165907229"></p>
+<p>注意到“有效期至”和未注册之间的命令是顺序执行的，而下面会有一个跳转，所以猜测应该是两个输出结果都放进内存里面，之后由程序决定输出哪个。而之后的跳转，如果跳转成功，会直接跳转到结尾部分，所以不能让其正常跳转。经过几次尝试之后。发现这个跳转应该是用来检测是否有dll文件的，所以正常来说这个跳转不用去管它。</p>
+<p>接下来几行执行完之后发现堆栈基本上没有太有价值的变化，所以我们继续往下执行，接下来到reg.dll之后又出现了Username和SN猜测接下来三个函数应该是打开dll并从中读取Username和SN。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204637015.png" alt="image-20230223204637015"></p>
+<p>执行完第二个函数后果然把之前输入的用户名读出来了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204927665.png" alt="image-20230223204927665"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205025878.png" alt="image-20230223205025878"></p>
+<p>继续执行完第三个函数，发现把SN码也读出来了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205103081.png" alt="image-20230223205103081"></p>
+<p>接下来把我们输入的两个值分别赋给EAX和EDX，底下又是一个函数，这个显然是要传参了，而这个函数以我们输入的值为参数，不出意外的话应该就是验证算法所在的函数了，所以我们在这里用f7进入函数看一下究竟是怎么验证的。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205511142.png" alt="image-20230223205511142"></p>
+<p>进入这个函数之后，前几行都是用来开辟栈空间的，我们不用管，然后看到程序将ECX清零，然后又把0x0019FD74-0x0019FD6C的位置都清0，接下来又把0x0019FD88和0x0019FD90清零了，然后把我们输入的SN放在0x0019FD94，把用户名放在0x0019FD98。接下来两个函数，一个以用户名为参数，一个以SN为参数，需要注意一下</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205836081.png" alt="image-20230223205836081"></p>
+<p>但其实进去看了以下并没有发生什么，所以我们继续往下走。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223212113728.png" alt="image-20230223212113728"></p>
+<p>接下来看到一个函数，紧接着一个跳转，查看一下这个跳转目标地址发现如果发生跳转就会跳到几乎要结束的位置，所以不能跳，而如果不跳就需要让EAX为0x10，所以而函数执行前EAX的值是我们输入的SN码，因此这个函数应该会决定EAX的值，我们进去看一看。发现是eax-0x4这个位置的值，我试了几次以后发现这个值应该是SN码的长度，也就是说SN码需要是16位的。</p>
+<p>然后接下来是对序列码进行一轮检验，应该是要求序列码只能有十六进制字符。</p>
+<p>接下来继续运行获得了一个日期和一个字符串，发现正好是一个十六位的字符串，猜测这个就是正确的序列号，试验后果然可以，至此结束。</p>
+<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><p>这道题爆破可以从算法Call后面的关键函数下手，把那个je指令nop掉就可以了</p>
+<p>或者可以把算法Call的入口改为让eax返回我们需要的值然后直接retn</p>
+<h1 id="New-160-Crackme-7"><a href="#New-160-Crackme-7" class="headerlink" title="New 160 Crackme-7"></a>New 160 Crackme-7</h1><p>算法 ：★★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2>]]></content>
+      <categories>
+        <category>逆向实践</category>
+      </categories>
+      <tags>
+        <tag>Reverse</tag>
       </tags>
   </entry>
   <entry>
@@ -812,6 +851,73 @@
       </tags>
   </entry>
   <entry>
+    <title>WebKit</title>
+    <url>/2022/01/16/WebKit/</url>
+    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
+<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
+<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
+<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
+<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
+<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
+<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
+<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
+<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
+<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
+<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
+<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
+<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
+<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
+<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
+<p>数字表示基本顺序，但也不是严格一致。</p>
+<p>具体的过程如下：</p>
+<ol>
+<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
+<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
+<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
+<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
+<li>解释器根据词语构建节点（Node），形成DOM树</li>
+<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
+<li>JavaScript代码可能会修改DOM树结构</li>
+<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
+</ol>
+<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
+<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
+<p>这一段的具体过程如下：</p>
+<ol>
+<li>CSS文件被CSS解释器解释成内部表示结构</li>
+<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
+<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
+</ol>
+<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
+<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
+<p>这一阶段对应的具体过程如下：</p>
+<ol>
+<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
+<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
+<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
+</ol>
+<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
+<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
+<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
+<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello</title>
+    <url>/2022/04/22/hello-world/</url>
+    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
+]]></content>
+  </entry>
+  <entry>
     <title>Smart Greybox Fuzzing</title>
     <url>/2021/12/13/Smart-Greybox-Fuzzing/</url>
     <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
@@ -849,12 +955,6 @@
         <tag>Fuzzing</tag>
         <tag>AFLSMART</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello</title>
-    <url>/2022/04/22/hello-world/</url>
-    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
-]]></content>
   </entry>
   <entry>
     <title>使用Fuzzilli测试JS引擎</title>
@@ -924,67 +1024,6 @@
       </categories>
       <tags>
         <tag>Fuzzing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WebKit</title>
-    <url>/2022/01/16/WebKit/</url>
-    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
-<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
-<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
-<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
-<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
-<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
-<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
-<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
-<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
-<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
-<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
-<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
-<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
-<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
-<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
-<p>数字表示基本顺序，但也不是严格一致。</p>
-<p>具体的过程如下：</p>
-<ol>
-<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
-<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
-<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
-<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
-<li>解释器根据词语构建节点（Node），形成DOM树</li>
-<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
-<li>JavaScript代码可能会修改DOM树结构</li>
-<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
-</ol>
-<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
-<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
-<p>这一段的具体过程如下：</p>
-<ol>
-<li>CSS文件被CSS解释器解释成内部表示结构</li>
-<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
-<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
-</ol>
-<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
-<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
-<p>这一阶段对应的具体过程如下：</p>
-<ol>
-<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
-<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
-<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
-</ol>
-<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
-<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
-<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
-<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
-]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>浏览器</tag>
       </tags>
   </entry>
   <entry>
@@ -1167,45 +1206,6 @@
       </categories>
       <tags>
         <tag>Fuzzing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>New 160 Crackme 6-10</title>
-    <url>/2023/03/21/New%20160%20Crackme%206-10/</url>
-    <content><![CDATA[<h1 id="New-160-Crackme-6-Reg"><a href="#New-160-Crackme-6-Reg" class="headerlink" title="New 160 Crackme-6 Reg"></a>New 160 Crackme-6 Reg</h1><p>算法 ：★</p>
-<p>爆破 ：★</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>拖进PEID发现没壳，但依然是没见过的编程语言</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215405148.png" alt="image-20230221215405148"></p>
-<p>然后我们直接打开程序看看，发现让我们填用户名和SN，随便填一个以后，会自己生成一个dll文件，这个dll文件里面会存起来我们输进去的username和SN，然后我们要重启程序来验证注册码</p>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>大概知道程序能干什么之后，还是直接拖进OllyDBG，老规矩先搜字符串，然后在最底下，发现了这样一段话<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215749432.png" alt="image-20230221215749432"></p>
-<p>猜测告知有效期了应该就是注册成功了，所以我们跟进看一看。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223165907229.png" alt="image-20230223165907229"></p>
-<p>注意到“有效期至”和未注册之间的命令是顺序执行的，而下面会有一个跳转，所以猜测应该是两个输出结果都放进内存里面，之后由程序决定输出哪个。而之后的跳转，如果跳转成功，会直接跳转到结尾部分，所以不能让其正常跳转。经过几次尝试之后。发现这个跳转应该是用来检测是否有dll文件的，所以正常来说这个跳转不用去管它。</p>
-<p>接下来几行执行完之后发现堆栈基本上没有太有价值的变化，所以我们继续往下执行，接下来到reg.dll之后又出现了Username和SN猜测接下来三个函数应该是打开dll并从中读取Username和SN。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204637015.png" alt="image-20230223204637015"></p>
-<p>执行完第二个函数后果然把之前输入的用户名读出来了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204927665.png" alt="image-20230223204927665"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205025878.png" alt="image-20230223205025878"></p>
-<p>继续执行完第三个函数，发现把SN码也读出来了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205103081.png" alt="image-20230223205103081"></p>
-<p>接下来把我们输入的两个值分别赋给EAX和EDX，底下又是一个函数，这个显然是要传参了，而这个函数以我们输入的值为参数，不出意外的话应该就是验证算法所在的函数了，所以我们在这里用f7进入函数看一下究竟是怎么验证的。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205511142.png" alt="image-20230223205511142"></p>
-<p>进入这个函数之后，前几行都是用来开辟栈空间的，我们不用管，然后看到程序将ECX清零，然后又把0x0019FD74-0x0019FD6C的位置都清0，接下来又把0x0019FD88和0x0019FD90清零了，然后把我们输入的SN放在0x0019FD94，把用户名放在0x0019FD98。接下来两个函数，一个以用户名为参数，一个以SN为参数，需要注意一下</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205836081.png" alt="image-20230223205836081"></p>
-<p>但其实进去看了以下并没有发生什么，所以我们继续往下走。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223212113728.png" alt="image-20230223212113728"></p>
-<p>接下来看到一个函数，紧接着一个跳转，查看一下这个跳转目标地址发现如果发生跳转就会跳到几乎要结束的位置，所以不能跳，而如果不跳就需要让EAX为0x10，所以而函数执行前EAX的值是我们输入的SN码，因此这个函数应该会决定EAX的值，我们进去看一看。发现是eax-0x4这个位置的值，我试了几次以后发现这个值应该是SN码的长度，也就是说SN码需要是16位的。</p>
-<p>然后接下来是对序列码进行一轮检验，应该是要求序列码只能有十六进制字符。</p>
-<p>接下来继续运行获得了一个日期和一个字符串，发现正好是一个十六位的字符串，猜测这个就是正确的序列号，试验后果然可以，至此结束。</p>
-<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><p>这道题爆破可以从算法Call后面的关键函数下手，把那个je指令nop掉就可以了</p>
-<p>或者可以把算法Call的入口改为让eax返回我们需要的值然后直接retn</p>
-<h1 id="New-160-Crackme-7"><a href="#New-160-Crackme-7" class="headerlink" title="New 160 Crackme-7"></a>New 160 Crackme-7</h1><p>算法 ：★★</p>
-<p>爆破 ：★</p>
-<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2>]]></content>
-      <categories>
-        <category>逆向实践</category>
-      </categories>
-      <tags>
-        <tag>Reverse</tag>
       </tags>
   </entry>
 </search>
