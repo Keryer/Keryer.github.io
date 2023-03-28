@@ -64,6 +64,83 @@
       </tags>
   </entry>
   <entry>
+    <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
+    <url>/2022/04/22/FuzzIL/</url>
+    <content><![CDATA[<h1 id="FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines"><a href="#FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines" class="headerlink" title="FuzzIL：Coverage Guided Fuzzing for JavaScript Engines"></a>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>工作目标是引导测试工具来测试脚本解释器，这需要在代码上定义在语义上有效的突变。然而，与现有的突变语法方式不同（如代码的文本形式或语法树），突变是在新设计的中间语言（IL）上进行的。基于其形式，其可以轻松执行控制流和数据流突变。<strong>这反映了，程序的句法属性无关紧要</strong>。此外，该系统可以以高概率生成语义上有效的样本。这避免了将生成的代码包装到try-catch结构中。</p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>总的来说是为了开发一款工具，该工具还是基于覆盖率的。</p>
+<p>首先，语法上无效的程序一般无法通过解析阶段，所以生成的代码需要在语法上是合法的。</p>
+<p>其次，鉴于基于覆盖率进行指导模糊测试，我们需要定义合理的突变，以在突变时能够保留样本的大多数interesting features，以突变出更多的interesting cases。因此有必要定义能够改变程序控制流和数据流的突变，因为这是组件最终处理的内容。</p>
+<blockquote>
+<p>程序是从上到下顺序执行的，同时可以通过一些控制语句来改变执行的路线，受控制语句影响下，程序最终的执行路线就是控制流。</p>
+<p>js 里面的控制语句有 if、for、while、try-catch 等，它们都会改变程序的走向。</p>
+<p>程序是操作数据的，随着程序的运行，也就是控制流的前进而改变的数据叫做数据流。</p>
+<p>很明显，数据流是依赖控制流的，程序分析里面的数据流分析也是要先做控制流分析。</p>
+<p>比如这样一段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> (a === <span class="number">1</span>) &#123;</span><br><span class="line">    b = <span class="string">&#x27;1111&#x27;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    b = <span class="string">&#x27;2222&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为 a 为 1，所以会执行到 <code>b = &#39;1111&#39;;</code>，这就是控制流，也就是程序最终执行的代码，可以用来分析程序的走向，做一些死代码删除之类的优化。</p>
+<p>而随着控制流的执行，b 会被赋值为 2222，这就是数据流，也就是值的变化的过程，可以用来分析某个语句的变量的值。</p>
+</blockquote>
+<p>最后，还有处理语义上无效的程序的临时解决方案，我们知道使用try-catch语句会导致漏报一些漏洞，我们的系统需要产生较高比例的语义有效程序，以避免try-catch结构的使用。但是，由于一些漏洞是通过内部异常而发现的，所以完全的语义正确性也是不可取的。</p>
+<blockquote>
+<p>try-catch语句</p>
+<p>try/catch/finally语句是JS中的异常处理机制。try子句用于定义要处理其中异常的代码块，catch子句是在try块中的语句发生异常后会被调用的语句。（finally块中是清理代码）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//正常情况下，这里的代码会从头到尾执行，</span></span><br><span class="line">	<span class="comment">//不会出现问题。但有时候也可能抛出异常：</span></span><br><span class="line">	<span class="comment">//直接通过throw语句抛出，或者由于调用</span></span><br><span class="line">	<span class="comment">//了一个抛出异常的方法而抛出</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(e)&#123;</span><br><span class="line">    <span class="comment">//当且仅当try块抛出异常时，才会执行这个</span></span><br><span class="line">    <span class="comment">//块中的语句。这里的语句可以使局部变量e</span></span><br><span class="line">    <span class="comment">//引用被抛出的Error对象。这个块可以以</span></span><br><span class="line">    <span class="comment">//某种方式来处理异常，也可以什么也不做</span></span><br><span class="line">    <span class="comment">//以忽略异常，还可以通过throw重新抛出异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个具体的例子</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//请用户输入一个数值</span></span><br><span class="line">	<span class="keyword">let</span> n = <span class="title class_">Number</span>(<span class="title function_">prompt</span>(<span class="string">&quot;Please enter a positive integer&quot;</span>,<span class="string">&quot;&quot;</span>));</span><br><span class="line">	<span class="comment">//假设输入有效，继续计算该数值的阶乘</span></span><br><span class="line">	<span class="keyword">let</span> f = <span class="title function_">factorial</span>(n);</span><br><span class="line">	<span class="comment">//显示结果</span></span><br><span class="line">	<span class="title function_">alart</span>(n + <span class="string">&quot;!=&quot;</span> + f);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(ex)&#123;			<span class="comment">//如果用户的输入无效，则会跳转到这里</span></span><br><span class="line">	<span class="title function_">alart</span>(ex);		<span class="comment">//告诉用户发生了什么错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>总到来说，我们有三条需求：</p>
+<ol>
+<li>产生语法上有效的样本</li>
+<li>定义影响程序控制流和数据流的突变类型</li>
+<li>产生高比例的语义有效样本</li>
+</ol>
+<h2 id="Coverage-Guide-JavaScript-Fuzzing"><a href="#Coverage-Guide-JavaScript-Fuzzing" class="headerlink" title="Coverage Guide JavaScript Fuzzing"></a>Coverage Guide JavaScript Fuzzing</h2><h3 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h3><p>在更接近引擎内部表示的“字节码”级别上进行突变，而不是突变AST或者文本代码段等表示的句法结构。本质上，字节码级别类似于控制和数据流图，这是大多数攻击最终所需要的到达的级别，而语法信息（如AST）则在解析过程中很大程度上会被丢弃。</p>
+<p><img src="/.com//1.jpg" alt="1"></p>
+<p>因此我们定义了一种名为FuzzIL的中间语言，这样我们可以定义一些在AST层面上不容易实现的突变策略。</p>
+<p>为了满足第三条需求，我们首先注意到，由于每个突变执行的变化相对较小，所以改变语义有效性的概率也就较小。此外，所有突变都必须遵守IL的一套语义正确性的规则，在变量使用前要先进行定义等操作。最后可以将变异出的语义上无效的程序百分比维持在一个可以接受的程度上。</p>
+<h3 id="FuzzIL"><a href="#FuzzIL" class="headerlink" title="FuzzIL"></a>FuzzIL</h3><p>易于突变，同时允许直接转换为JS代码</p>
+<p>FuzzIL程序由指令列表组成,每个指令列表又由一个操作以及输入和输出变量列表组成</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">v0 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;0&#x27;</span>							<span class="comment">//const v0 = 0;</span></span><br><span class="line">v1 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;10&#x27;</span>							<span class="comment">//const v1 = 10;</span></span><br><span class="line">v2 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;1&#x27;</span>							<span class="comment">//const v2 = 1;</span></span><br><span class="line">v3 &lt;- <span class="title class_">Phi</span> v0								<span class="comment">//let v3 = v0;</span></span><br><span class="line"><span class="title class_">BeginFor</span> v0, <span class="string">&#x27;&lt;&#x27;</span>, v1, <span class="string">&#x27;+&#x27;</span>, v2 -&gt; v4			<span class="comment">//for(let v4 = v0; v4 &lt; v1; v4 = v4 + v2)&#123;</span></span><br><span class="line">		v6 &lt;- <span class="title class_">BinaryOperation</span> v3, <span class="string">&#x27;+&#x27;</span>, v4	<span class="comment">//		const v6 = v3 + v4;</span></span><br><span class="line">		<span class="title class_">Copy</span> v3, v6							<span class="comment">//		v3 = v6;</span></span><br><span class="line"><span class="title class_">EndFor</span>										<span class="comment">//&#125;</span></span><br><span class="line">v7 &lt;- <span class="title class_">LoadString</span> <span class="string">&#x27;Result: &#x27;</span>					<span class="comment">//const v7 = &quot;Result: &quot;;</span></span><br><span class="line">v8 &lt;- <span class="title class_">BinaryOperation</span> v7, <span class="string">&#x27;+&#x27;</span>, v3			<span class="comment">//const v8 = v7 + v3;</span></span><br><span class="line">v9 &lt;- <span class="title class_">LoadGlobal</span> <span class="string">&#x27;console&#x27;</span>					<span class="comment">//const v9 = console;</span></span><br><span class="line">v10 &lt;- <span class="title class_">CallMethod</span> v9, <span class="string">&#x27;log&#x27;</span>, [v8]			<span class="comment">//const v10 = v9.log(v8);</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>let</code>命令，用来声明变量。它的用法类似于<code>var</code>，但是所声明的变量，只在<code>let</code>命令所在的代码块内有效。</p>
+<p><img src="../AppData/Roaming/Typora/typora-user-images/image-20220128195045584.png" alt="image-20220128195045584"></p>
+<p>JavaScript 原生中默认是没有 Console 对象,这是宿主对象（也就是浏览器）提供的内置对象。用于访问调试控制台, 在不同的浏览器里效果可能不同。</p>
+</blockquote>
+<p>显示了由12个指令组成的程序实例,计算数字从0到9的总和并输出,变量通过整数识别,并且需要在每个单独的程序中从0开始依次连续编号</p>
+<h3 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h3><p>突变的目的是将已有的程序转化为不同的程序，但要保存其有趣的特征</p>
+<ul>
+<li>输入突变器：改变输入的参数变量</li>
+<li>操作突变器：改变操作参数</li>
+<li>插入突变器：将新生成的代码插入到程序</li>
+<li>组合突变器：将现有的两个程序组合到一起</li>
+<li>拼接突变器：将现有程序的一部分插入另一个程序</li>
+</ul>
+<h4 id="Input-Mutator"><a href="#Input-Mutator" class="headerlink" title="Input Mutator"></a>Input Mutator</h4><p>用于突变数据流，在FuzzIL中，指令的所有输入都是变量，所有突变器需要在原始程序中选择一个或者多个指令，并将其输入替换为不同的随机变量来运行</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># <span class="title class_">Before</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v6, v9, v3</span><br><span class="line"></span><br><span class="line"># <span class="title class_">After</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v12, v9, v3</span><br></pre></td></tr></table></figure>
+
+<h4 id="Operation-Mutator"><a href="#Operation-Mutator" class="headerlink" title="Operation Mutator"></a>Operation Mutator</h4><p>用于突变操作参数，例如LoadString操作使用的常量，以及比较中使用的比较器，属性操作和方法调用中使用的属性或方法名称，以及二进制或一元操作中的实际操作</p>
+<h4 id="Insertion-Mutator"><a href="#Insertion-Mutator" class="headerlink" title="Insertion Mutator"></a>Insertion Mutator</h4><p>本质上是一个小型代码生成组件，使用一系列预定义的代码生成器（一个将FuzzIL代码发送到突变程序中的函数）来进行工作</p>
+<h4 id="Combine-Mutator"><a href="#Combine-Mutator" class="headerlink" title="Combine Mutator"></a>Combine Mutator</h4><p>比较简单，将一个程序插入到另一个当中</p>
+<h4 id="Splice-Mutator"><a href="#Splice-Mutator" class="headerlink" title="Splice Mutator"></a>Splice Mutator</h4><p>插入一组被称为切片的指令，切片的关键属性是其中任何指令使用的每个变量也由切片中的指令定义</p>
+<h3 id="Refinement"><a href="#Refinement" class="headerlink" title="Refinement"></a>Refinement</h3><p>在将新发现的样本加入语料库或保存触发crash的样本前，先进行精细化操作</p>
+<ol>
+<li>检查样本的deterministic behavior</li>
+<li>minimization</li>
+<li>normalization</li>
+</ol>
+<h4 id="Determinism"><a href="#Determinism" class="headerlink" title="Determinism"></a>Determinism</h4>]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>FuzzIL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DOM启蒙</title>
     <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
     <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
@@ -78,31 +155,6 @@
       <tags>
         <tag>Web</tag>
         <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
-    <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
-    <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>方法：使用80台移动设备、包含56种强磁计进行试验，</p>
-<p>实验结果：在实验的设备上，90%的设备被正确检测出打开的应用和网站</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>智能手机上的CPU的峰值活动会对磁传感器造成干扰，由此通过对峰值状态下和空闲状态下的CPU对磁传感器造成的干扰进行分析，建立隐蔽通道。</p>
-<p>强磁计被扰动程度与CPU的工作量密切相关，因此这样可以对浏览器和应用程序进行唯一识别。而且该方法不需要任何额外的用户权限，可以通过任意应用程序实现，而通过通用传感器API在网页种访问强磁计，这样攻击者不需要使用恶意应用程序，而是通过网页直接获取其他应用的指纹</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Magnetometers"><a href="#Magnetometers" class="headerlink" title="Magnetometers"></a>Magnetometers</h3><p>强磁计即磁传感器，可以用于指向</p>
-<h3 id="Sensitivity-of-magnetometers-to-CPU-activity"><a href="#Sensitivity-of-magnetometers-to-CPU-activity" class="headerlink" title="Sensitivity of magnetometers to CPU activity"></a>Sensitivity of magnetometers to CPU activity</h3><p>高负载的CPU需要更大的功率，从而产生更高的电磁场</p>
-<p>高负载的CPU会导致强磁计测量值出现明显的峰值</p>
-<p>对于每个应用程序，CPU和传感器测量的数据所绘制的图像相互关联，并且对于CPU运行不同的应用程序图像有显著差异。</p>
-<p>同时，不同的应用程序或网站在运行时需要不同数量的CPU资源。因此，CPU利用率跟踪以及相应的传感器受干扰程度可以唯一标识正在运行的应用、网页。</p>
-<h2 id="Attack-Scenario"><a href="#Attack-Scenario" class="headerlink" title="Attack Scenario"></a>Attack Scenario</h2><p>在应用程序场景下，恶意程序可以通过沙盒处理，只能访问零权限传感器信息</p>
-<p>在浏览器场景下，网页要么完全属于攻击者，要么包含来自攻击者控制的服务器的组件。</p>
-<p>攻击者需要执行一个培训阶段，为每个网站和应用收集足够的标记，还可以发送受害者的设备型号，以提高成功率</p>
-]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>侧信道攻击</tag>
-        <tag>移动设备</tag>
       </tags>
   </entry>
   <entry>
@@ -140,25 +192,34 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux内核完全注释</title>
-    <url>/2023/03/18/Linux0.11/</url>
-    <content><![CDATA[<h1 id="Linux内核完全注释（1）"><a href="#Linux内核完全注释（1）" class="headerlink" title="Linux内核完全注释（1）"></a>Linux内核完全注释（1）</h1><p>赵博士这本书是一本很厚实的书，涉及到Linux的各个方面，早就想要一读，可惜一直没有找到时间，现在大四了终于有时间读一读，也是复习和进一步理解Linux系统内核的好机会。这个系列可能会断断续续更新很久，希望不会烂尾。</p>
-<h2 id="第2章-微型计算机组成结构"><a href="#第2章-微型计算机组成结构" class="headerlink" title="第2章 微型计算机组成结构"></a>第2章 微型计算机组成结构</h2><p>由于操作系统是应用程序与硬件沟通的桥梁，我们在学习操作系统时，必不可少地需要先具备一定的硬件知识。</p>
-<blockquote>
-<p>除了CPU以外，现代PC机主板主要使用两个超大规模芯片构成的芯片组组成：北桥芯片和南桥芯片。北桥芯片用于与CPU、内存和AGP视频接口，这些接口具有很高的传输速率。北桥芯片还起着存储器控制作用，因此Intel把该芯片标号为MCH芯片。南桥芯片用于管理低、中速的组件，例如PCI总线、IDE硬盘接口、USB端口等，因此南桥芯片的名称为ICH芯片。</p>
-</blockquote>
-<h2 id="第3章-内核编程语言和环境"><a href="#第3章-内核编程语言和环境" class="headerlink" title="第3章 内核编程语言和环境"></a>第3章 内核编程语言和环境</h2><p>在Linux 0.1系统中使用两种汇编器，一个是能产生16位代码的as86汇编器和ld86链接器，在Linux中被用来创建16位的引导扇区程序boot/bootsect.s和实模式下初始设置程序boot/setup.s的二进制代码，主要特点是小巧快速，有宏和错误检测功能。另一个是GNU的汇编器gas，使用GNU ld链接器。</p>
-<p>as86汇编器和Intel的汇编语言语法是不兼容的，其操作数的次序与GNU as相反。</p>
-<p>as86接收的汇编语言语句可以是只包含空格、制表符和换行符的空行，也可以是赋值语句或定义语句、伪操作语句和机器指令语句。每个操作码都以一个“.”字符开始，点字符本身是一个特殊的符号，代表着编译过程中的位置计数器，其值是点符号出现处机器指令第一个字节的地址。</p>
-<p>机器指令语句是可执行机器指令的助记符，由操作码和0个或多个操作数构成。在任何语句之前都可以有标号，标号是由一个标识符后跟一个冒号：组成，在编译过程中，汇编器遇到一个标号后，会将当前位置计数器的值赋给这个标号</p>
+    <title></title>
+    <url>/2023/03/26/NKCTF2023%20Reverse-PMKF%20Writeup%20/</url>
+    <content><![CDATA[<h1 id="NKCTF2023-Reverse-PMKF-Writeup"><a href="#NKCTF2023-Reverse-PMKF-Writeup" class="headerlink" title="NKCTF2023 Reverse-PMKF Writeup"></a>NKCTF2023 Reverse-PMKF Writeup</h1><p>拿到题目以后发现是一个exe文件，我们直接运行一下看看，会闪过一个命令行窗口，没什么有用的信息，然后我们用Exeinfo PE打开看一看，发现没有壳，是个32位的C++程序</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230326213237616.png" alt="image-20230326213237616"></p>
+<p>所以我们直接扔进x32dbg里面看看</p>
+<p>进去以后右键点击任意代码区域，然后选择搜索当前区域的字符串，发现以下字样</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326213438742.png" alt="image-20230326213438742"></p>
+<p>其中很明显有wrong、you found it这种明显提示结果的字符串，这个我们一会来看。</p>
+<p>注意到最开始有一个明显是文件路径的东西，所以我们可以猜测这个程序会从C:\nk.ctf这个文件里读出数据，所以我们就创建一个这个文件，注意C盘的根目录是不能直接创建文件的，需要从别的地方创建然后复制过来，创建之后我们随便往里面写点东西，因为题目提示写了，flag是输入的十六进制，所以我们往里面写的时候也用010editor直接写十六进制到文件里</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215627939.png" alt="image-20230326215627939"></p>
+<p>写好以后我们重新加载文件，再到搜索字符串的位置，这次我们来看怎么才能到Congratulations所在的位置，所以我们直接双击点进去，如下图</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214521307.png" alt="image-20230326214521307"></p>
+<p>然后我们从这里往上翻，就看注释和函数名即可，发现果然有一些readfile函数，而且每一次readfile后都会进行判断，都有可能会导致wrong所以我们先在第一个readfile的地方下断点看看第一次读取文件都要进行什么操作</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214755114.png" alt="image-20230326214755114"></p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214740216.png" alt="image-20230326214740216"></p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214709714.png" alt="image-20230326214709714"></p>
+<p>下断点以后点击几次运行，就会运行到断点处了</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215044222.png" alt="image-20230326215044222"></p>
+<p>大致看一下，如果不想运行到wrong，就需要在0x781113的位置跳转，而要跳转就需要eax的值为0x5，知道这些以后我们就按F8单步运行，看看eax里面的值是哪来的</p>
+<p>运行到<code>cmp eax,5</code>后我们查看eax中的值发现是<img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215805912.png" alt="image-20230326215805912">，正好是我们刚刚随便输入的第一个字节，因此我们猜测这个要求是我们输入的第一个字节是0x05，但这里我们先记下来，先直接双击这个值，把他改成0x5，然后继续运行</p>
+<p>一直按F8运行，一路无事发生，一直到运行到下一个readfile</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220203759.png" alt="image-20230326220203759"></p>
+<p>这次还是中间会遇到wrong，只不过这次是要让eax和ecx进行比较所以我们直接运行到cmp这行，这时我们查看eax和ecx的值</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220335730.png" alt="image-20230326220335730"></p>
+<p>发现eax是0xFFFFFFFA，而ecx是0x6E，但给出了一个对应的字母是n，这里我们还是看不出跟我们的输入有什么关系，于是我们继续改eax，改成0x6E，先通过这次判断</p>
+<p>通过以后发现eax被赋予了内存中的一个值，然后加了个1，这个比较容易想到应该是for循环里面的变量++操作，所以之后也是又跳回到上面了这次再运行到cmp的时候，继续看eax和ecx的值，发现一个是0xFFFFFFAE一个是0x6B对应的字母是k，这里我们发现，这个AE和刚刚的FA好像分别是我们之前输入到文件里的第二三个字节的数据，至于之前的FFFF应该是在进行右移的时候高位是1补位导致的，而进行比对的nk两个字母，可以再回去看看我们之前搜索字符串时候看到的字符串，有一个是nkman，猜测也许这里就是要输入一个，我们继续运行几轮之后发现果然就是这几个字符</p>
+<p>到这我们可以去</p>
 ]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Binary</tag>
-      </tags>
   </entry>
   <entry>
     <title>DataLab&#39;s Writeup</title>
@@ -486,6 +547,31 @@
       </categories>
   </entry>
   <entry>
+    <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
+    <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
+    <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>方法：使用80台移动设备、包含56种强磁计进行试验，</p>
+<p>实验结果：在实验的设备上，90%的设备被正确检测出打开的应用和网站</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>智能手机上的CPU的峰值活动会对磁传感器造成干扰，由此通过对峰值状态下和空闲状态下的CPU对磁传感器造成的干扰进行分析，建立隐蔽通道。</p>
+<p>强磁计被扰动程度与CPU的工作量密切相关，因此这样可以对浏览器和应用程序进行唯一识别。而且该方法不需要任何额外的用户权限，可以通过任意应用程序实现，而通过通用传感器API在网页种访问强磁计，这样攻击者不需要使用恶意应用程序，而是通过网页直接获取其他应用的指纹</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Magnetometers"><a href="#Magnetometers" class="headerlink" title="Magnetometers"></a>Magnetometers</h3><p>强磁计即磁传感器，可以用于指向</p>
+<h3 id="Sensitivity-of-magnetometers-to-CPU-activity"><a href="#Sensitivity-of-magnetometers-to-CPU-activity" class="headerlink" title="Sensitivity of magnetometers to CPU activity"></a>Sensitivity of magnetometers to CPU activity</h3><p>高负载的CPU需要更大的功率，从而产生更高的电磁场</p>
+<p>高负载的CPU会导致强磁计测量值出现明显的峰值</p>
+<p>对于每个应用程序，CPU和传感器测量的数据所绘制的图像相互关联，并且对于CPU运行不同的应用程序图像有显著差异。</p>
+<p>同时，不同的应用程序或网站在运行时需要不同数量的CPU资源。因此，CPU利用率跟踪以及相应的传感器受干扰程度可以唯一标识正在运行的应用、网页。</p>
+<h2 id="Attack-Scenario"><a href="#Attack-Scenario" class="headerlink" title="Attack Scenario"></a>Attack Scenario</h2><p>在应用程序场景下，恶意程序可以通过沙盒处理，只能访问零权限传感器信息</p>
+<p>在浏览器场景下，网页要么完全属于攻击者，要么包含来自攻击者控制的服务器的组件。</p>
+<p>攻击者需要执行一个培训阶段，为每个网站和应用收集足够的标记，还可以发送受害者的设备型号，以提高成功率</p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>侧信道攻击</tag>
+        <tag>移动设备</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>New 160 Crackme 1-5</title>
     <url>/2023/02/21/New%20160%20Crackme%201-5/</url>
     <content><![CDATA[<h1 id="New-160-Crackme-1-abex’-5th-crackme"><a href="#New-160-Crackme-1-abex’-5th-crackme" class="headerlink" title="New 160 Crackme-1 abex’ 5th crackme"></a>New 160 Crackme-1 abex’ 5th crackme</h1><p>算法 ：★</p>
@@ -735,110 +821,24 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2023/03/26/NKCTF2023%20Reverse-PMKF%20Writeup%20/</url>
-    <content><![CDATA[<h1 id="NKCTF2023-Reverse-PMKF-Writeup"><a href="#NKCTF2023-Reverse-PMKF-Writeup" class="headerlink" title="NKCTF2023 Reverse-PMKF Writeup"></a>NKCTF2023 Reverse-PMKF Writeup</h1><p>拿到题目以后发现是一个exe文件，我们直接运行一下看看，会闪过一个命令行窗口，没什么有用的信息，然后我们用Exeinfo PE打开看一看，发现没有壳，是个32位的C++程序</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230326213237616.png" alt="image-20230326213237616"></p>
-<p>所以我们直接扔进x32dbg里面看看</p>
-<p>进去以后右键点击任意代码区域，然后选择搜索当前区域的字符串，发现以下字样</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326213438742.png" alt="image-20230326213438742"></p>
-<p>其中很明显有wrong、you found it这种明显提示结果的字符串，这个我们一会来看。</p>
-<p>注意到最开始有一个明显是文件路径的东西，所以我们可以猜测这个程序会从C:\nk.ctf这个文件里读出数据，所以我们就创建一个这个文件，注意C盘的根目录是不能直接创建文件的，需要从别的地方创建然后复制过来，创建之后我们随便往里面写点东西，因为题目提示写了，flag是输入的十六进制，所以我们往里面写的时候也用010editor直接写十六进制到文件里</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215627939.png" alt="image-20230326215627939"></p>
-<p>写好以后我们重新加载文件，再到搜索字符串的位置，这次我们来看怎么才能到Congratulations所在的位置，所以我们直接双击点进去，如下图</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214521307.png" alt="image-20230326214521307"></p>
-<p>然后我们从这里往上翻，就看注释和函数名即可，发现果然有一些readfile函数，而且每一次readfile后都会进行判断，都有可能会导致wrong所以我们先在第一个readfile的地方下断点看看第一次读取文件都要进行什么操作</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214755114.png" alt="image-20230326214755114"></p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214740216.png" alt="image-20230326214740216"></p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214709714.png" alt="image-20230326214709714"></p>
-<p>下断点以后点击几次运行，就会运行到断点处了</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215044222.png" alt="image-20230326215044222"></p>
-<p>大致看一下，如果不想运行到wrong，就需要在0x781113的位置跳转，而要跳转就需要eax的值为0x5，知道这些以后我们就按F8单步运行，看看eax里面的值是哪来的</p>
-<p>运行到<code>cmp eax,5</code>后我们查看eax中的值发现是<img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215805912.png" alt="image-20230326215805912">，正好是我们刚刚随便输入的第一个字节，因此我们猜测这个要求是我们输入的第一个字节是0x05，但这里我们先记下来，先直接双击这个值，把他改成0x5，然后继续运行</p>
-<p>一直按F8运行，一路无事发生，一直到运行到下一个readfile</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220203759.png" alt="image-20230326220203759"></p>
-<p>这次还是中间会遇到wrong，只不过这次是要让eax和ecx进行比较所以我们直接运行到cmp这行，这时我们查看eax和ecx的值</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220335730.png" alt="image-20230326220335730"></p>
-<p>发现eax是0xFFFFFFFA，而ecx是0x6E，但给出了一个对应的字母是n，这里我们还是看不出跟我们的输入有什么关系，于是我们继续改eax，改成0x6E，先通过这次判断</p>
-<p>通过以后发现eax被赋予了内存中的一个值，然后加了个1，这个比较容易想到应该是for循环里面的变量++操作，所以之后也是又跳回到上面了这次再运行到cmp的时候，继续看eax和ecx的值，发现一个是0xFFFFFFAE一个是0x6B对应的字母是k，这里我们发现，这个AE和刚刚的FA好像分别是我们之前输入到文件里的第二三个字节的数据，至于之前的FFFF应该是在进行右移的时候高位是1补位导致的，而进行比对的nk两个字母，可以再回去看看我们之前搜索字符串时候看到的字符串，有一个是nkman，猜测也许这里就是要输入一个，我们继续运行几轮之后发现果然就是这几个字符</p>
-<p>到这我们可以去</p>
+    <title>Linux内核完全注释</title>
+    <url>/2023/03/18/Linux0.11/</url>
+    <content><![CDATA[<h1 id="Linux内核完全注释（1）"><a href="#Linux内核完全注释（1）" class="headerlink" title="Linux内核完全注释（1）"></a>Linux内核完全注释（1）</h1><p>赵博士这本书是一本很厚实的书，涉及到Linux的各个方面，早就想要一读，可惜一直没有找到时间，现在大四了终于有时间读一读，也是复习和进一步理解Linux系统内核的好机会。这个系列可能会断断续续更新很久，希望不会烂尾。</p>
+<h2 id="第2章-微型计算机组成结构"><a href="#第2章-微型计算机组成结构" class="headerlink" title="第2章 微型计算机组成结构"></a>第2章 微型计算机组成结构</h2><p>由于操作系统是应用程序与硬件沟通的桥梁，我们在学习操作系统时，必不可少地需要先具备一定的硬件知识。</p>
+<blockquote>
+<p>除了CPU以外，现代PC机主板主要使用两个超大规模芯片构成的芯片组组成：北桥芯片和南桥芯片。北桥芯片用于与CPU、内存和AGP视频接口，这些接口具有很高的传输速率。北桥芯片还起着存储器控制作用，因此Intel把该芯片标号为MCH芯片。南桥芯片用于管理低、中速的组件，例如PCI总线、IDE硬盘接口、USB端口等，因此南桥芯片的名称为ICH芯片。</p>
+</blockquote>
+<h2 id="第3章-内核编程语言和环境"><a href="#第3章-内核编程语言和环境" class="headerlink" title="第3章 内核编程语言和环境"></a>第3章 内核编程语言和环境</h2><p>在Linux 0.1系统中使用两种汇编器，一个是能产生16位代码的as86汇编器和ld86链接器，在Linux中被用来创建16位的引导扇区程序boot/bootsect.s和实模式下初始设置程序boot/setup.s的二进制代码，主要特点是小巧快速，有宏和错误检测功能。另一个是GNU的汇编器gas，使用GNU ld链接器。</p>
+<p>as86汇编器和Intel的汇编语言语法是不兼容的，其操作数的次序与GNU as相反。</p>
+<p>as86接收的汇编语言语句可以是只包含空格、制表符和换行符的空行，也可以是赋值语句或定义语句、伪操作语句和机器指令语句。每个操作码都以一个“.”字符开始，点字符本身是一个特殊的符号，代表着编译过程中的位置计数器，其值是点符号出现处机器指令第一个字节的地址。</p>
+<p>机器指令语句是可执行机器指令的助记符，由操作码和0个或多个操作数构成。在任何语句之前都可以有标号，标号是由一个标识符后跟一个冒号：组成，在编译过程中，汇编器遇到一个标号后，会将当前位置计数器的值赋给这个标号</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
-    <url>/2022/04/22/FuzzIL/</url>
-    <content><![CDATA[<h1 id="FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines"><a href="#FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines" class="headerlink" title="FuzzIL：Coverage Guided Fuzzing for JavaScript Engines"></a>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>工作目标是引导测试工具来测试脚本解释器，这需要在代码上定义在语义上有效的突变。然而，与现有的突变语法方式不同（如代码的文本形式或语法树），突变是在新设计的中间语言（IL）上进行的。基于其形式，其可以轻松执行控制流和数据流突变。<strong>这反映了，程序的句法属性无关紧要</strong>。此外，该系统可以以高概率生成语义上有效的样本。这避免了将生成的代码包装到try-catch结构中。</p>
-<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>总的来说是为了开发一款工具，该工具还是基于覆盖率的。</p>
-<p>首先，语法上无效的程序一般无法通过解析阶段，所以生成的代码需要在语法上是合法的。</p>
-<p>其次，鉴于基于覆盖率进行指导模糊测试，我们需要定义合理的突变，以在突变时能够保留样本的大多数interesting features，以突变出更多的interesting cases。因此有必要定义能够改变程序控制流和数据流的突变，因为这是组件最终处理的内容。</p>
-<blockquote>
-<p>程序是从上到下顺序执行的，同时可以通过一些控制语句来改变执行的路线，受控制语句影响下，程序最终的执行路线就是控制流。</p>
-<p>js 里面的控制语句有 if、for、while、try-catch 等，它们都会改变程序的走向。</p>
-<p>程序是操作数据的，随着程序的运行，也就是控制流的前进而改变的数据叫做数据流。</p>
-<p>很明显，数据流是依赖控制流的，程序分析里面的数据流分析也是要先做控制流分析。</p>
-<p>比如这样一段代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> (a === <span class="number">1</span>) &#123;</span><br><span class="line">    b = <span class="string">&#x27;1111&#x27;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    b = <span class="string">&#x27;2222&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为 a 为 1，所以会执行到 <code>b = &#39;1111&#39;;</code>，这就是控制流，也就是程序最终执行的代码，可以用来分析程序的走向，做一些死代码删除之类的优化。</p>
-<p>而随着控制流的执行，b 会被赋值为 2222，这就是数据流，也就是值的变化的过程，可以用来分析某个语句的变量的值。</p>
-</blockquote>
-<p>最后，还有处理语义上无效的程序的临时解决方案，我们知道使用try-catch语句会导致漏报一些漏洞，我们的系统需要产生较高比例的语义有效程序，以避免try-catch结构的使用。但是，由于一些漏洞是通过内部异常而发现的，所以完全的语义正确性也是不可取的。</p>
-<blockquote>
-<p>try-catch语句</p>
-<p>try/catch/finally语句是JS中的异常处理机制。try子句用于定义要处理其中异常的代码块，catch子句是在try块中的语句发生异常后会被调用的语句。（finally块中是清理代码）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//正常情况下，这里的代码会从头到尾执行，</span></span><br><span class="line">	<span class="comment">//不会出现问题。但有时候也可能抛出异常：</span></span><br><span class="line">	<span class="comment">//直接通过throw语句抛出，或者由于调用</span></span><br><span class="line">	<span class="comment">//了一个抛出异常的方法而抛出</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(e)&#123;</span><br><span class="line">    <span class="comment">//当且仅当try块抛出异常时，才会执行这个</span></span><br><span class="line">    <span class="comment">//块中的语句。这里的语句可以使局部变量e</span></span><br><span class="line">    <span class="comment">//引用被抛出的Error对象。这个块可以以</span></span><br><span class="line">    <span class="comment">//某种方式来处理异常，也可以什么也不做</span></span><br><span class="line">    <span class="comment">//以忽略异常，还可以通过throw重新抛出异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一个具体的例子</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//请用户输入一个数值</span></span><br><span class="line">	<span class="keyword">let</span> n = <span class="title class_">Number</span>(<span class="title function_">prompt</span>(<span class="string">&quot;Please enter a positive integer&quot;</span>,<span class="string">&quot;&quot;</span>));</span><br><span class="line">	<span class="comment">//假设输入有效，继续计算该数值的阶乘</span></span><br><span class="line">	<span class="keyword">let</span> f = <span class="title function_">factorial</span>(n);</span><br><span class="line">	<span class="comment">//显示结果</span></span><br><span class="line">	<span class="title function_">alart</span>(n + <span class="string">&quot;!=&quot;</span> + f);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(ex)&#123;			<span class="comment">//如果用户的输入无效，则会跳转到这里</span></span><br><span class="line">	<span class="title function_">alart</span>(ex);		<span class="comment">//告诉用户发生了什么错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>总到来说，我们有三条需求：</p>
-<ol>
-<li>产生语法上有效的样本</li>
-<li>定义影响程序控制流和数据流的突变类型</li>
-<li>产生高比例的语义有效样本</li>
-</ol>
-<h2 id="Coverage-Guide-JavaScript-Fuzzing"><a href="#Coverage-Guide-JavaScript-Fuzzing" class="headerlink" title="Coverage Guide JavaScript Fuzzing"></a>Coverage Guide JavaScript Fuzzing</h2><h3 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h3><p>在更接近引擎内部表示的“字节码”级别上进行突变，而不是突变AST或者文本代码段等表示的句法结构。本质上，字节码级别类似于控制和数据流图，这是大多数攻击最终所需要的到达的级别，而语法信息（如AST）则在解析过程中很大程度上会被丢弃。</p>
-<p><img src="/.com//1.jpg" alt="1"></p>
-<p>因此我们定义了一种名为FuzzIL的中间语言，这样我们可以定义一些在AST层面上不容易实现的突变策略。</p>
-<p>为了满足第三条需求，我们首先注意到，由于每个突变执行的变化相对较小，所以改变语义有效性的概率也就较小。此外，所有突变都必须遵守IL的一套语义正确性的规则，在变量使用前要先进行定义等操作。最后可以将变异出的语义上无效的程序百分比维持在一个可以接受的程度上。</p>
-<h3 id="FuzzIL"><a href="#FuzzIL" class="headerlink" title="FuzzIL"></a>FuzzIL</h3><p>易于突变，同时允许直接转换为JS代码</p>
-<p>FuzzIL程序由指令列表组成,每个指令列表又由一个操作以及输入和输出变量列表组成</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">v0 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;0&#x27;</span>							<span class="comment">//const v0 = 0;</span></span><br><span class="line">v1 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;10&#x27;</span>							<span class="comment">//const v1 = 10;</span></span><br><span class="line">v2 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;1&#x27;</span>							<span class="comment">//const v2 = 1;</span></span><br><span class="line">v3 &lt;- <span class="title class_">Phi</span> v0								<span class="comment">//let v3 = v0;</span></span><br><span class="line"><span class="title class_">BeginFor</span> v0, <span class="string">&#x27;&lt;&#x27;</span>, v1, <span class="string">&#x27;+&#x27;</span>, v2 -&gt; v4			<span class="comment">//for(let v4 = v0; v4 &lt; v1; v4 = v4 + v2)&#123;</span></span><br><span class="line">		v6 &lt;- <span class="title class_">BinaryOperation</span> v3, <span class="string">&#x27;+&#x27;</span>, v4	<span class="comment">//		const v6 = v3 + v4;</span></span><br><span class="line">		<span class="title class_">Copy</span> v3, v6							<span class="comment">//		v3 = v6;</span></span><br><span class="line"><span class="title class_">EndFor</span>										<span class="comment">//&#125;</span></span><br><span class="line">v7 &lt;- <span class="title class_">LoadString</span> <span class="string">&#x27;Result: &#x27;</span>					<span class="comment">//const v7 = &quot;Result: &quot;;</span></span><br><span class="line">v8 &lt;- <span class="title class_">BinaryOperation</span> v7, <span class="string">&#x27;+&#x27;</span>, v3			<span class="comment">//const v8 = v7 + v3;</span></span><br><span class="line">v9 &lt;- <span class="title class_">LoadGlobal</span> <span class="string">&#x27;console&#x27;</span>					<span class="comment">//const v9 = console;</span></span><br><span class="line">v10 &lt;- <span class="title class_">CallMethod</span> v9, <span class="string">&#x27;log&#x27;</span>, [v8]			<span class="comment">//const v10 = v9.log(v8);</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>let</code>命令，用来声明变量。它的用法类似于<code>var</code>，但是所声明的变量，只在<code>let</code>命令所在的代码块内有效。</p>
-<p><img src="../AppData/Roaming/Typora/typora-user-images/image-20220128195045584.png" alt="image-20220128195045584"></p>
-<p>JavaScript 原生中默认是没有 Console 对象,这是宿主对象（也就是浏览器）提供的内置对象。用于访问调试控制台, 在不同的浏览器里效果可能不同。</p>
-</blockquote>
-<p>显示了由12个指令组成的程序实例,计算数字从0到9的总和并输出,变量通过整数识别,并且需要在每个单独的程序中从0开始依次连续编号</p>
-<h3 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h3><p>突变的目的是将已有的程序转化为不同的程序，但要保存其有趣的特征</p>
-<ul>
-<li>输入突变器：改变输入的参数变量</li>
-<li>操作突变器：改变操作参数</li>
-<li>插入突变器：将新生成的代码插入到程序</li>
-<li>组合突变器：将现有的两个程序组合到一起</li>
-<li>拼接突变器：将现有程序的一部分插入另一个程序</li>
-</ul>
-<h4 id="Input-Mutator"><a href="#Input-Mutator" class="headerlink" title="Input Mutator"></a>Input Mutator</h4><p>用于突变数据流，在FuzzIL中，指令的所有输入都是变量，所有突变器需要在原始程序中选择一个或者多个指令，并将其输入替换为不同的随机变量来运行</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># <span class="title class_">Before</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v6, v9, v3</span><br><span class="line"></span><br><span class="line"># <span class="title class_">After</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v12, v9, v3</span><br></pre></td></tr></table></figure>
-
-<h4 id="Operation-Mutator"><a href="#Operation-Mutator" class="headerlink" title="Operation Mutator"></a>Operation Mutator</h4><p>用于突变操作参数，例如LoadString操作使用的常量，以及比较中使用的比较器，属性操作和方法调用中使用的属性或方法名称，以及二进制或一元操作中的实际操作</p>
-<h4 id="Insertion-Mutator"><a href="#Insertion-Mutator" class="headerlink" title="Insertion Mutator"></a>Insertion Mutator</h4><p>本质上是一个小型代码生成组件，使用一系列预定义的代码生成器（一个将FuzzIL代码发送到突变程序中的函数）来进行工作</p>
-<h4 id="Combine-Mutator"><a href="#Combine-Mutator" class="headerlink" title="Combine Mutator"></a>Combine Mutator</h4><p>比较简单，将一个程序插入到另一个当中</p>
-<h4 id="Splice-Mutator"><a href="#Splice-Mutator" class="headerlink" title="Splice Mutator"></a>Splice Mutator</h4><p>插入一组被称为切片的指令，切片的关键属性是其中任何指令使用的每个变量也由切片中的指令定义</p>
-<h3 id="Refinement"><a href="#Refinement" class="headerlink" title="Refinement"></a>Refinement</h3><p>在将新发现的样本加入语料库或保存触发crash的样本前，先进行精细化操作</p>
-<ol>
-<li>检查样本的deterministic behavior</li>
-<li>minimization</li>
-<li>normalization</li>
-</ol>
-<h4 id="Determinism"><a href="#Determinism" class="headerlink" title="Determinism"></a>Determinism</h4>]]></content>
       <categories>
-        <category>论文笔记</category>
+        <category>啃书笔记</category>
       </categories>
       <tags>
-        <tag>Fuzzing</tag>
-        <tag>FuzzIL</tag>
+        <tag>Linux</tag>
+        <tag>Binary</tag>
       </tags>
   </entry>
   <entry>
@@ -981,12 +981,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello</title>
-    <url>/2022/04/22/hello-world/</url>
-    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
-]]></content>
-  </entry>
-  <entry>
     <title>使用Fuzzilli测试JS引擎</title>
     <url>/2022/04/22/%E4%BD%BF%E7%94%A8Fuzzilli%E6%B5%8B%E8%AF%95JavaScriptCore/</url>
     <content><![CDATA[<h1 id="使用Fuzzilli测试JS引擎"><a href="#使用Fuzzilli测试JS引擎" class="headerlink" title="使用Fuzzilli测试JS引擎"></a>使用Fuzzilli测试JS引擎</h1><h2 id="Webkit（JSC）篇"><a href="#Webkit（JSC）篇" class="headerlink" title="Webkit（JSC）篇"></a>Webkit（JSC）篇</h2><h3 id="准备Webkit"><a href="#准备Webkit" class="headerlink" title="准备Webkit"></a>准备Webkit</h3><p>首先通过命令</p>
@@ -1054,6 +1048,66 @@
       </categories>
       <tags>
         <tag>Fuzzing</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>污点分析技术（一）基本原理</title>
+    <url>/2021/12/13/%E6%B1%A1%E7%82%B9%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[<p>这两天在AFLSMART的论文时发现提到了动态污点分析这项技术，正好前两天在VUL337课题组里面也发现有大佬提到过这个，但是还是不太明白，趁着今天有时间给自己科普一下。</p>
+<p>参考博客：<a href="https://www.cnblogs.com/LittleHann/p/13034079.html">https://www.cnblogs.com/LittleHann/p/13034079.html</a></p>
+<h2 id="0x1-污点分析定义"><a href="#0x1-污点分析定义" class="headerlink" title="0x1  污点分析定义"></a>0x1  污点分析定义</h2><p>根据这篇博客，污点分析由三部分组成：污点源（source）、污点汇集点（sink）和数据流处理（processor）</p>
+<p>其中，source指的是最开始引入外部数据的操作；sink代表直接产生安全敏感操作（违反数据完整性）或者泄露隐私数据到外界（违反数据保密性）的操作。（我也理解为最后一次处理被污染的数据的操作）；processor代表数据加密或者转义的过程，是一个把数据无害化的过程</p>
+<p>在我看来，污点分析有点像是高中生物学的同位素示踪法，通过引入同位素，然后检测受污染的区域，以达到显示整个处理流程的目的，然后来分析可能出现的问题。</p>
+<h2 id="0x2-识别污点源和污点汇聚点"><a href="#0x2-识别污点源和污点汇聚点" class="headerlink" title="0x2  识别污点源和污点汇聚点"></a>0x2  识别污点源和污点汇聚点</h2><blockquote>
+<p>识别污点源和污点汇聚点是污点分析的前提。目前，在不同的应用程序中识别污点源和汇聚点的方法各不相同，这其实是一个泛概念，在不同的场景下，污点源和汇聚点污点分析会表现出不同的形式，这里的场景例如：</p>
+<ul>
+<li>不同的系统模型</li>
+<li>编程语言之间的差异</li>
+<li>待跟踪分析的对象的差异</li>
+</ul>
+<p>对于污点汇聚点来说，可以从概念上大致分为3类：</p>
+<ul>
+<li><strong>使用启发式的策略进行标记</strong>。例如在webshell检测中，将来自程序外部输入的数据统称为“污点”数据，保守地认为这些数据有可能包含恶意的攻击数据 </li>
+<li><strong>根据具体应用程序调用的 API 或者重要的数据类型，手工标记源和汇聚点</strong>。例如在webshell检测中，将file_get_contents这一类危险函数的执行结果标记为污点，继续后续的跟踪</li>
+<li>使用统计或机器学习技术自动地识别和标记污点源及汇聚点.</li>
+</ul>
+</blockquote>
+<h2 id="0x3-污点传播分析"><a href="#0x3-污点传播分析" class="headerlink" title="0x3  污点传播分析"></a>0x3  污点传播分析</h2><p>污点传播分析就是分析污点标记数据在程序中的传播途径。按照分析过程中关注的程序依赖关系的不同, 可以将污点传播分析分为以下两种：</p>
+<ul>
+<li>显式流分析</li>
+<li>隐式流分析</li>
+</ul>
+<h3 id="1-显式流分析"><a href="#1-显式流分析" class="headerlink" title="1.显式流分析"></a>1.显式流分析</h3><p><strong>污点传播分析中的显式流分析就是分析污点标记如何随程序中变量之间的【数据依赖关系】传播</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="built_in">source</span>(),           <span class="comment">//污点源</span></span><br><span class="line">	<span class="type">int</span> b = <span class="built_in">source</span>(); 			<span class="comment">//污点源</span></span><br><span class="line">	<span class="type">int</span> x,y;</span><br><span class="line">	x = a * <span class="number">2</span>;</span><br><span class="line">	y = b + <span class="number">4</span>;</span><br><span class="line">	<span class="built_in">sink</span>(x);					<span class="comment">//污点汇聚点</span></span><br><span class="line">	<span class="built_in">sink</span>(y);					<span class="comment">//污点汇聚点</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//代码逻辑输入的值会乘2或者加4被泄露</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面这段代码中，a和b被污点源函数source标记为污点源，设标记为taint_a和taint_b，在第5、6行的对x、y赋值的过程中，其数据内容直接依赖于变量a、b，显式流分析会分别将taint_a和taint_b传播给x、y，由于x，y在第7、8行到达污染汇聚点，我们就可以按照预设的策略得出结论，例如上面代码存在的信息泄露问题。</p>
+<h3 id="2-隐式流分析"><a href="#2-隐式流分析" class="headerlink" title="2.隐式流分析"></a>2.隐式流分析</h3><p><strong>污点传播分析中的隐式流分析是分析污点标记如何随程序中变量之间的【控制依赖关系】传播，也就是分析污点标记如何从条件指令传播到其所控制的语句</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">	string X = <span class="built_in">source</span>();					<span class="comment">//污点源</span></span><br><span class="line">	string Y = <span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; X.<span class="built_in">length</span>();i++)&#123;</span><br><span class="line">		<span class="type">int</span> x = (<span class="type">int</span>) X.<span class="built_in">charAt</span>(i);</span><br><span class="line">		<span class="type">int</span> y = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; x;j++)&#123;</span><br><span class="line">			y = y + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Y = Y + (<span class="type">char</span>) y;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sink</span>(Y);								<span class="comment">//污点汇聚点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上图所示的代码中，变量 X 是被污点标记的字符串类型变量，变量 Y 和变量 X 之间并没有直接或间接的数据依赖关系（显式流关系），但 X 上的污点标记可以经过控制依赖隐式地传播到 Y。</p>
+<p>具体来说，由第 4 行的循环条件控制的外层循环顺序地取出 X 中的每一个字符，转化成整型后赋给变量 x，再由第 7 行的循环条件控制的内层循环以累加的方式将 x 的值赋给 y，内层循环执行完毕后，x == y。最后由外层循环将 y 逐一传给 Y。</p>
+<p>最终，第 12 行的 Y 值和 X 值相同，程序存在信息泄漏问题。</p>
+<p>但是，如果不进行隐式流污点传播分析，第 12 行 的变量 Y 将不会被赋予污点标记，程序的信息泄漏问题被掩盖。</p>
+<h3 id="3-欠污染和过污染问题"><a href="#3-欠污染和过污染问题" class="headerlink" title="3.欠污染和过污染问题"></a>3.欠污染和过污染问题</h3><blockquote>
+<p>隐式流污点传播一直以来都是一个重要的问题，和显式流一样，如果不被正确处理，会使污点分析的结果不精确。</p>
+<ul>
+<li>由于对隐式流污点传播处理不当导致本应被标记的变量没有被标记的问题称为<strong>欠污染（under-taint）问题</strong></li>
+<li>由于污点标记的数量过多而导致污点变量大量扩散的问题称为<strong>过污染（over-taint）问题</strong></li>
+</ul>
+<p>欠污染和过污染问题，都会导致在汇聚点污点检测的时候产生误报或者漏报，这也是目前隐式流问题研究的重点。</p>
+</blockquote>
+<h2 id="0x4-无害处理"><a href="#0x4-无害处理" class="headerlink" title="0x4  无害处理"></a>0x4  无害处理</h2><p>污点数据在传播的过程中可能会经过无害处理模块，无害处理模块是指污点数据经过该模块的处理后，数据本身不再携带敏感信息或者针对该数据的操作不会再对系统产生危害。换言之，带污点标记的数据在经过无害处理模块后，污点标记可以被移除。</p>
+<p>正确地使用无害处理可以降低系统中污点标记的数量，提高污点分析的效率，并且避免由于污点扩散导致的分析结果不精确的问题。</p>
+<h3 id="1-加密处理"><a href="#1-加密处理" class="headerlink" title="1.加密处理"></a>1.加密处理</h3><p>开发者将敏感数据进行加密处理，加密库函数就是processor模块，加密后，攻击者就无法计算出密码的可能范围</p>
+<h3 id="2-输入验证"><a href="#2-输入验证" class="headerlink" title="2.输入验证"></a>2.输入验证</h3><p>为了防止外界输入带有危险操作或者对系统关键区域产生危害，通常会对输入数据进行验证，输入验证是一个无害处理模块</p>
+<h3 id="3-输入转义"><a href="#3-输入转义" class="headerlink" title="3.输入转义"></a>3.输入转义</h3><p>比如防注入的转义，字符串经过转义后就不会携带可能产生威胁的代码</p>
+]]></content>
+      <categories>
+        <category>Fuzzing技术学习</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>taint</tag>
       </tags>
   </entry>
   <entry>
@@ -1150,66 +1204,6 @@
       </tags>
   </entry>
   <entry>
-    <title>污点分析技术（一）基本原理</title>
-    <url>/2021/12/13/%E6%B1%A1%E7%82%B9%E6%8A%80%E6%9C%AF/</url>
-    <content><![CDATA[<p>这两天在AFLSMART的论文时发现提到了动态污点分析这项技术，正好前两天在VUL337课题组里面也发现有大佬提到过这个，但是还是不太明白，趁着今天有时间给自己科普一下。</p>
-<p>参考博客：<a href="https://www.cnblogs.com/LittleHann/p/13034079.html">https://www.cnblogs.com/LittleHann/p/13034079.html</a></p>
-<h2 id="0x1-污点分析定义"><a href="#0x1-污点分析定义" class="headerlink" title="0x1  污点分析定义"></a>0x1  污点分析定义</h2><p>根据这篇博客，污点分析由三部分组成：污点源（source）、污点汇集点（sink）和数据流处理（processor）</p>
-<p>其中，source指的是最开始引入外部数据的操作；sink代表直接产生安全敏感操作（违反数据完整性）或者泄露隐私数据到外界（违反数据保密性）的操作。（我也理解为最后一次处理被污染的数据的操作）；processor代表数据加密或者转义的过程，是一个把数据无害化的过程</p>
-<p>在我看来，污点分析有点像是高中生物学的同位素示踪法，通过引入同位素，然后检测受污染的区域，以达到显示整个处理流程的目的，然后来分析可能出现的问题。</p>
-<h2 id="0x2-识别污点源和污点汇聚点"><a href="#0x2-识别污点源和污点汇聚点" class="headerlink" title="0x2  识别污点源和污点汇聚点"></a>0x2  识别污点源和污点汇聚点</h2><blockquote>
-<p>识别污点源和污点汇聚点是污点分析的前提。目前，在不同的应用程序中识别污点源和汇聚点的方法各不相同，这其实是一个泛概念，在不同的场景下，污点源和汇聚点污点分析会表现出不同的形式，这里的场景例如：</p>
-<ul>
-<li>不同的系统模型</li>
-<li>编程语言之间的差异</li>
-<li>待跟踪分析的对象的差异</li>
-</ul>
-<p>对于污点汇聚点来说，可以从概念上大致分为3类：</p>
-<ul>
-<li><strong>使用启发式的策略进行标记</strong>。例如在webshell检测中，将来自程序外部输入的数据统称为“污点”数据，保守地认为这些数据有可能包含恶意的攻击数据 </li>
-<li><strong>根据具体应用程序调用的 API 或者重要的数据类型，手工标记源和汇聚点</strong>。例如在webshell检测中，将file_get_contents这一类危险函数的执行结果标记为污点，继续后续的跟踪</li>
-<li>使用统计或机器学习技术自动地识别和标记污点源及汇聚点.</li>
-</ul>
-</blockquote>
-<h2 id="0x3-污点传播分析"><a href="#0x3-污点传播分析" class="headerlink" title="0x3  污点传播分析"></a>0x3  污点传播分析</h2><p>污点传播分析就是分析污点标记数据在程序中的传播途径。按照分析过程中关注的程序依赖关系的不同, 可以将污点传播分析分为以下两种：</p>
-<ul>
-<li>显式流分析</li>
-<li>隐式流分析</li>
-</ul>
-<h3 id="1-显式流分析"><a href="#1-显式流分析" class="headerlink" title="1.显式流分析"></a>1.显式流分析</h3><p><strong>污点传播分析中的显式流分析就是分析污点标记如何随程序中变量之间的【数据依赖关系】传播</strong>。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="built_in">source</span>(),           <span class="comment">//污点源</span></span><br><span class="line">	<span class="type">int</span> b = <span class="built_in">source</span>(); 			<span class="comment">//污点源</span></span><br><span class="line">	<span class="type">int</span> x,y;</span><br><span class="line">	x = a * <span class="number">2</span>;</span><br><span class="line">	y = b + <span class="number">4</span>;</span><br><span class="line">	<span class="built_in">sink</span>(x);					<span class="comment">//污点汇聚点</span></span><br><span class="line">	<span class="built_in">sink</span>(y);					<span class="comment">//污点汇聚点</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//代码逻辑输入的值会乘2或者加4被泄露</span></span><br></pre></td></tr></table></figure>
-
-<p>在上面这段代码中，a和b被污点源函数source标记为污点源，设标记为taint_a和taint_b，在第5、6行的对x、y赋值的过程中，其数据内容直接依赖于变量a、b，显式流分析会分别将taint_a和taint_b传播给x、y，由于x，y在第7、8行到达污染汇聚点，我们就可以按照预设的策略得出结论，例如上面代码存在的信息泄露问题。</p>
-<h3 id="2-隐式流分析"><a href="#2-隐式流分析" class="headerlink" title="2.隐式流分析"></a>2.隐式流分析</h3><p><strong>污点传播分析中的隐式流分析是分析污点标记如何随程序中变量之间的【控制依赖关系】传播，也就是分析污点标记如何从条件指令传播到其所控制的语句</strong>。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">	string X = <span class="built_in">source</span>();					<span class="comment">//污点源</span></span><br><span class="line">	string Y = <span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; X.<span class="built_in">length</span>();i++)&#123;</span><br><span class="line">		<span class="type">int</span> x = (<span class="type">int</span>) X.<span class="built_in">charAt</span>(i);</span><br><span class="line">		<span class="type">int</span> y = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; x;j++)&#123;</span><br><span class="line">			y = y + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Y = Y + (<span class="type">char</span>) y;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sink</span>(Y);								<span class="comment">//污点汇聚点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上图所示的代码中，变量 X 是被污点标记的字符串类型变量，变量 Y 和变量 X 之间并没有直接或间接的数据依赖关系（显式流关系），但 X 上的污点标记可以经过控制依赖隐式地传播到 Y。</p>
-<p>具体来说，由第 4 行的循环条件控制的外层循环顺序地取出 X 中的每一个字符，转化成整型后赋给变量 x，再由第 7 行的循环条件控制的内层循环以累加的方式将 x 的值赋给 y，内层循环执行完毕后，x == y。最后由外层循环将 y 逐一传给 Y。</p>
-<p>最终，第 12 行的 Y 值和 X 值相同，程序存在信息泄漏问题。</p>
-<p>但是，如果不进行隐式流污点传播分析，第 12 行 的变量 Y 将不会被赋予污点标记，程序的信息泄漏问题被掩盖。</p>
-<h3 id="3-欠污染和过污染问题"><a href="#3-欠污染和过污染问题" class="headerlink" title="3.欠污染和过污染问题"></a>3.欠污染和过污染问题</h3><blockquote>
-<p>隐式流污点传播一直以来都是一个重要的问题，和显式流一样，如果不被正确处理，会使污点分析的结果不精确。</p>
-<ul>
-<li>由于对隐式流污点传播处理不当导致本应被标记的变量没有被标记的问题称为<strong>欠污染（under-taint）问题</strong></li>
-<li>由于污点标记的数量过多而导致污点变量大量扩散的问题称为<strong>过污染（over-taint）问题</strong></li>
-</ul>
-<p>欠污染和过污染问题，都会导致在汇聚点污点检测的时候产生误报或者漏报，这也是目前隐式流问题研究的重点。</p>
-</blockquote>
-<h2 id="0x4-无害处理"><a href="#0x4-无害处理" class="headerlink" title="0x4  无害处理"></a>0x4  无害处理</h2><p>污点数据在传播的过程中可能会经过无害处理模块，无害处理模块是指污点数据经过该模块的处理后，数据本身不再携带敏感信息或者针对该数据的操作不会再对系统产生危害。换言之，带污点标记的数据在经过无害处理模块后，污点标记可以被移除。</p>
-<p>正确地使用无害处理可以降低系统中污点标记的数量，提高污点分析的效率，并且避免由于污点扩散导致的分析结果不精确的问题。</p>
-<h3 id="1-加密处理"><a href="#1-加密处理" class="headerlink" title="1.加密处理"></a>1.加密处理</h3><p>开发者将敏感数据进行加密处理，加密库函数就是processor模块，加密后，攻击者就无法计算出密码的可能范围</p>
-<h3 id="2-输入验证"><a href="#2-输入验证" class="headerlink" title="2.输入验证"></a>2.输入验证</h3><p>为了防止外界输入带有危险操作或者对系统关键区域产生危害，通常会对输入数据进行验证，输入验证是一个无害处理模块</p>
-<h3 id="3-输入转义"><a href="#3-输入转义" class="headerlink" title="3.输入转义"></a>3.输入转义</h3><p>比如防注入的转义，字符串经过转义后就不会携带可能产生威胁的代码</p>
-]]></content>
-      <categories>
-        <category>Fuzzing技术学习</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-        <tag>taint</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>软件安全与质量保证的模糊测试</title>
     <url>/2021/12/29/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E4%B8%8E%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="软件安全与质量保证的模糊测试（翻译）"><a href="#软件安全与质量保证的模糊测试（翻译）" class="headerlink" title="软件安全与质量保证的模糊测试（翻译）"></a>软件安全与质量保证的模糊测试（翻译）</h1><h2 id="第一章-介绍"><a href="#第一章-介绍" class="headerlink" title="第一章 介绍"></a>第一章 介绍</h2><p>欢迎来到模糊测试的世界！</p>
@@ -1241,5 +1235,11 @@
       <tags>
         <tag>Fuzzing</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello</title>
+    <url>/2022/04/22/hello-world/</url>
+    <content><![CDATA[<p>Welcome to Kery’s blog! </p>
+]]></content>
   </entry>
 </search>
