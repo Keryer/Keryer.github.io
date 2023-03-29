@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>New 160 Crackme 6-10 |  Kery</title>
+      <title>Tag: Watermark |  Kery</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -57,243 +57,56 @@
       
     <main class="content on">
       <section class="outer">
-  <article
-  id="post-New 160 Crackme 6-10"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
+  
+  
+  <article class="articles">
     
-    <header class="article-header">
+    
+    <h1 class="page-type-title">#&nbspWatermark</h1>
+    
+    
+  
+  
+  
+  
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2023" class="archive-year">2023</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2023/02/27/SSLGuard%20A%20Watermarking%20Scheme%20for%20Self-supervised%20Learning%20Pre-trained%20Encoders/" class="archive-article-date">
+  <time datetime="2023-02-26T16:00:00.000Z" itemprop="datePublished">02/27</time>
+</a>
        
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  New 160 Crackme 6-10
-</h1>
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2023/02/27/SSLGuard%20A%20Watermarking%20Scheme%20for%20Self-supervised%20Learning%20Pre-trained%20Encoders/"
+    >SSLGuard A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders</a> 
+</h2>
  
 
-      
     </header>
-     
-    <div class="article-meta">
-      <a href="/2023/03/21/New%20160%20Crackme%206-10/" class="article-date">
-  <time datetime="2023-03-21T08:02:53.000Z" itemprop="datePublished">2023-03-21</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/">逆向实践</a>
+    
+    
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSLGuard/" rel="tag">SSLGuard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Watermark/" rel="tag">Watermark</a></li></ul>
+
+    
   </div>
-  
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">953</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
-      
-    <div class="tocbot"></div>
-
-
-
-
-  
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="New-160-Crackme-6-Reg"><a href="#New-160-Crackme-6-Reg" class="headerlink" title="New 160 Crackme-6 Reg"></a>New 160 Crackme-6 Reg</h1><p>算法 ：★</p>
-<p>爆破 ：★</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>拖进PEID发现没壳，但依然是没见过的编程语言</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215405148.png" alt="image-20230221215405148"></p>
-<p>然后我们直接打开程序看看，发现让我们填用户名和SN，随便填一个以后，会自己生成一个dll文件，这个dll文件里面会存起来我们输进去的username和SN，然后我们要重启程序来验证注册码</p>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>大概知道程序能干什么之后，还是直接拖进OllyDBG，老规矩先搜字符串，然后在最底下，发现了这样一段话<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215749432.png" alt="image-20230221215749432"></p>
-<p>猜测告知有效期了应该就是注册成功了，所以我们跟进看一看。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223165907229.png" alt="image-20230223165907229"></p>
-<p>注意到“有效期至”和未注册之间的命令是顺序执行的，而下面会有一个跳转，所以猜测应该是两个输出结果都放进内存里面，之后由程序决定输出哪个。而之后的跳转，如果跳转成功，会直接跳转到结尾部分，所以不能让其正常跳转。经过几次尝试之后。发现这个跳转应该是用来检测是否有dll文件的，所以正常来说这个跳转不用去管它。</p>
-<p>接下来几行执行完之后发现堆栈基本上没有太有价值的变化，所以我们继续往下执行，接下来到reg.dll之后又出现了Username和SN猜测接下来三个函数应该是打开dll并从中读取Username和SN。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204637015.png" alt="image-20230223204637015"></p>
-<p>执行完第二个函数后果然把之前输入的用户名读出来了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204927665.png" alt="image-20230223204927665"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205025878.png" alt="image-20230223205025878"></p>
-<p>继续执行完第三个函数，发现把SN码也读出来了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205103081.png" alt="image-20230223205103081"></p>
-<p>接下来把我们输入的两个值分别赋给EAX和EDX，底下又是一个函数，这个显然是要传参了，而这个函数以我们输入的值为参数，不出意外的话应该就是验证算法所在的函数了，所以我们在这里用f7进入函数看一下究竟是怎么验证的。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205511142.png" alt="image-20230223205511142"></p>
-<p>进入这个函数之后，前几行都是用来开辟栈空间的，我们不用管，然后看到程序将ECX清零，然后又把0x0019FD74-0x0019FD6C的位置都清0，接下来又把0x0019FD88和0x0019FD90清零了，然后把我们输入的SN放在0x0019FD94，把用户名放在0x0019FD98。接下来两个函数，一个以用户名为参数，一个以SN为参数，需要注意一下</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205836081.png" alt="image-20230223205836081"></p>
-<p>但其实进去看了以下并没有发生什么，所以我们继续往下走。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223212113728.png" alt="image-20230223212113728"></p>
-<p>接下来看到一个函数，紧接着一个跳转，查看一下这个跳转目标地址发现如果发生跳转就会跳到几乎要结束的位置，所以不能跳，而如果不跳就需要让EAX为0x10，所以而函数执行前EAX的值是我们输入的SN码，因此这个函数应该会决定EAX的值，我们进去看一看。发现是eax-0x4这个位置的值，我试了几次以后发现这个值应该是SN码的长度，也就是说SN码需要是16位的。</p>
-<p>然后接下来是对序列码进行一轮检验，应该是要求序列码只能有十六进制字符。</p>
-<p>接下来继续运行获得了一个日期和一个字符串，发现正好是一个十六位的字符串，猜测这个就是正确的序列号，试验后果然可以，至此结束。</p>
-<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><p>这道题爆破可以从算法Call后面的关键函数下手，把那个je指令nop掉就可以了</p>
-<p>或者可以把算法Call的入口改为让eax返回我们需要的值然后直接retn</p>
-<h1 id="New-160-Crackme-7"><a href="#New-160-Crackme-7" class="headerlink" title="New 160 Crackme-7"></a>New 160 Crackme-7</h1><p>算法 ：★★</p>
-<p>爆破 ：★</p>
-<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2> 
-      <!-- reward -->
-      
-      <div id="reword-out">
-        <div id="reward-btn">
-          Donate
-        </div>
-      </div>
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <div class="declare">
-      <ul class="post-copyright">
-        <li>
-          <i class="ri-copyright-line"></i>
-          <strong>Copyright： </strong>
-          
-          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
-          
-        </li>
-      </ul>
-    </div>
-    
-    <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/21/New%20160%20Crackme%206-10/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Reverse/" rel="tag">Reverse</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-  <nav class="article-nav">
-    
-      <a href="/2023/03/28/NKCTF2023%20Reverse-PMKF%20Writeup%20/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            NKCTF2023 Reverse PMKF Writeup
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2023/03/18/Linux0.11/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Linux内核完全注释</div>
-      </a>
-    
-  </nav>
-
-   
-<!-- valine评论 -->
-<div id="vcomments-box">
-  <div id="vcomments"></div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
-<script>
-  new Valine({
-    el: "#vcomments",
-    app_id: "",
-    app_key: "",
-    path: window.location.pathname,
-    avatar: "monsterid",
-    placeholder: "给我的文章加点评论吧~",
-    recordIP: true,
-  });
-  const infoEle = document.querySelector("#vcomments .info");
-  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-    infoEle.childNodes.forEach(function (item) {
-      item.parentNode.removeChild(item);
-    });
-  }
-</script>
-<style>
-  #vcomments-box {
-    padding: 5px 30px;
-  }
-
-  @media screen and (max-width: 800px) {
-    #vcomments-box {
-      padding: 5px 0px;
-    }
-  }
-
-  #vcomments-box #vcomments {
-    background-color: #fff;
-  }
-
-  .v .vlist .vcard .vh {
-    padding-right: 20px;
-  }
-
-  .v .vlist .vcard {
-    padding-left: 10px;
-  }
-</style>
-
- 
-   
-     
 </article>
+      
+      
+    </div>
+  </div>
+  
+  
 
+  
 </section>
       <footer class="footer">
   <div class="outer">
@@ -426,22 +239,6 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link

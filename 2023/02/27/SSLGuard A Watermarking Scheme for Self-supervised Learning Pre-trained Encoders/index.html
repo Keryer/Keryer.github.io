@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>SSLGuard A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders |  Kery</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Kery" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-SSLGuard A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  SSLGuard A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/02/27/SSLGuard%20A%20Watermarking%20Scheme%20for%20Self-supervised%20Learning%20Pre-trained%20Encoders/" class="article-date">
+  <time datetime="2023-02-26T16:00:00.000Z" itemprop="datePublished">2023-02-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">4.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">14 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="SSLGuard-A-Watermarking-Scheme-for-Self-supervised-Learning-Pre-trained-Encoders"><a href="#SSLGuard-A-Watermarking-Scheme-for-Self-supervised-Learning-Pre-trained-Encoders" class="headerlink" title="SSLGuard: A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders"></a><strong>SSLGuard: A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders</strong></h1><p>作者：Tianshuo Cong    Xinlei He    Yang Zhang</p>
+<p>清华大学高等研究院</p>
+<p>亥姆霍兹信息安全中心</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在图像分类任务中，以监督学习(Supervised learning)为主的深度学习模型在过去几年里取得巨大成功，但是监督学习依赖高质量的有标签的数据，且泛化能力较差。与此同时，无标签的数据随时随地都能生成，自监督学习(Self-supervised learning)试图解决如何利用没有标签的数据预训练出和监督学习性能相当的编码器，预训练好的编码器可以被下游任务使用。对比学习(Contrastive learning)是自监督学习的经典范式，其核心是构建正负样本集来产生“标签”，从而指导模型进行训练。SimCLR, MoCo和BYOL是近年来最经典的对比学习算法。</p>
+<p>由于自监督预训练编码器可以在多个下游任务场景中使用，并且训练成本昂贵，模型的基本信息(结构，参数等)通常被视为模型持有者的知识产权。在实际生活中，想使用自监督编码器的个体通常难以承受训练成本，因此AI公司可以将自监督学习编码器部署在云端使其商业化，即Encoder-as-a-Service (EaaS)，如GPT-3。EaaS通常向客户提供API来上传数据和返回计算结果(embedding)。但是，敌手可以同样访问此API来发起模型窃取攻击，进而在本地训练出性能相当的编码器，并且训练成本极低。敌手可以生成盗版模型(surrogate encoders)以本地使用来减少访问费用，甚至可以部署到云端形成商业竞品，侵犯原模型持有者的知识产权。因此，本文通过向自监督学习编码器嵌入水印来保护模型的知识产权。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215104005814.png" alt="image-20221215104005814"></p>
+<h2 id="工作概述"><a href="#工作概述" class="headerlink" title="工作概述"></a>工作概述</h2><p>本文提出SSLGuard框架，通过在预训练编码器中嵌入水印，来保护模型的知识产权。SSLGuard是首个针对自监督学习模型的水印算法。同时，针对自监督学习模型的模型窃取攻击也是被首次研究。以往针对监督学习模型的水印算法被证明很难抵抗模型窃取攻击(知识蒸馏)，SSLGuard通过引入shadow encoder来本地模拟模型窃取攻击，从而保证SSLGuard可以在surrogate encoder中提取出水印信息。另外，SSLGuard不受下游任务限制，仅从embbeding层面进行水印的嵌入与提取。</p>
+<p>SSLGuard的工作流程如下图所示。给定一个要保护的目标编码器(绿色)，SSLGuard可以生成一个嵌有水印的编码器(黄色)以及水印验证组件(key-tuple)。模型持有者能够利用key-tuple完成模型水印的提取，以及将水印编码器部署到云端来抵抗模型窃取攻击。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215104653972.png" alt="image-20221215104653972"></p>
+<h2 id="工作细节"><a href="#工作细节" class="headerlink" title="工作细节"></a>工作细节</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>SSLGuard的设计需要满足以下5条性质：</p>
+<ul>
+<li>保真性 (Fidelity)：SSLGuard需最小化对原模型性能的影响，即原模型的预测准确率基本保持不变</li>
+<li>有效性 (Effectiveness)：模型拥有者可以成功地从嵌有水印的模型中提取出水印信息</li>
+<li>不可检测性 (Undetectability)：非模型拥有者无法谎称模型的版权拥有，即无法从水印模型中成功提取出水印</li>
+<li>高效性 (Efficiency)：SSLGuard嵌入水印所需计算成本要低</li>
+<li>鲁棒性 (Robustness)：SSLGuard需抵抗多种水印擦除攻击</li>
+</ul>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><h4 id="1-水印嵌入"><a href="#1-水印嵌入" class="headerlink" title="1. 水印嵌入"></a>1. 水印嵌入</h4><p>文中为达到以上目标设计了三个基本损失函数：</p>
+<p><em>Lcorr</em>函数的目标是计算𝐷𝑣中所有元素提取出的向量与秘密向量的平均相似度，并使得这个相似度在训练的过程中越来越高</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215111938656.png" alt="image-20221215111938656"></p>
+<p><em>Luncorr</em>函数的目标是计算𝐷中所有元素提取出的向量与秘密向量的平均相似度，并使得这个相似度在训练的过程中越来越低</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215111945252.png" alt="image-20221215111945252"></p>
+<p><em>Lmatch</em>函数的目标是计算𝐷中所有元素输入模型后得到的两个embedding的相似度，并使得这个相似度在训练的过程中越来越高</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215112020029.png" alt="image-20221215112020029"></p>
+<p>（1）训练shadow encoder：此部分是用来模拟模型窃取攻击。通过把来自shadow dataset的同一张图片分别输入clean encoder和shadow encoder，使其embedding的相似度变高来训练shadow encoder。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105400086.png" alt="image-20221215105400086"></p>
+<p>其中<em>Ls</em> 定义为：</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215122733142.png" alt="image-20221215122733142"></p>
+<p>目标是提高通过<em>Ds</em>窃取的水印模型的输出和水印模型本身的输出的相似度。</p>
+<p>（2）训练trigger和decoder：SSLGuard的目标是把𝐷𝑣的图片编码到事先指定的秘钥sk附近（cosine similarity较高），而来自非𝐷𝑣的图片产生的embedding都远离sk。同样需保证此性质在shadow encoder中成立。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105610436.png" alt="image-20221215105610436"></p>
+<p>其中𝐷𝑣由下面的方法构成。其中M是一个掩码，用于确定在新的数据集𝐷𝑣中，原数据集元素与插入的Trigger的权重。即M的值越大，新数据集中的元素相对于原数据集中的元素的更改越大。在本轮训练过程中，目标是训练T和G，使得G能够从模型输出的embedding中解码出T的特征</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215110901749.png" alt="image-20221215110901749"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215110914858.png" alt="image-20221215110914858"></p>
+<p>而<em>LTD</em>由以下方式定义：</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215122954694.png" alt="image-20221215122954694"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123001004.png" alt="image-20221215123001004"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123007516.png" alt="image-20221215123007516"></p>
+<p>(3) 训练水印模型：嵌入水印的模型首先要保证保真性，即对于来自𝐷𝑡(与预训练数据集的分布相同)数据集的图片产生的embedding，需与原模型的embedding相似，同时还需保证可以成功提取出sk。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105658637.png" alt="image-20221215105658637"></p>
+<h4 id="2-水印提取"><a href="#2-水印提取" class="headerlink" title="2. 水印提取"></a>2. 水印提取</h4><p>本文中的水印提取其实并非将打入模型中的水印真的提取出来，因为文中的水印指的是使得模型具有区分验证数据集的能力，这种能力本身无法提取出来，文中水印提取指的是通过使用验证数据集进行验证，目标模型是否具有这种区分特殊数据集的能力，以验证水印的存在。</p>
+<p>具体来讲，SSLGuard利用key-tuple中的验证数据集，以及解码器G，从待验证的编码器中获得解码向量sk’，若sk’与sk的余弦相似度大于设定阈值 (如文中设置的0.5)，即可判断模型的归属权。作者利用watermark rate (WR) 作为判断模型所有权的检测值，即验证数据集中的图片被编码到sk附近的比率。需要说明的是，在高维空间中，两个随机向量几乎是正交的，即其夹角的余弦值分布近似成均值为0的高斯分布，且维度越高，余弦值为0的概率越大。此条性质可以保证提取出与sk余弦值靠近的sk‘是证明模型所有权的“强信号”，且可保证SSLGuard性质中的不可检测性。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215110028888.png" alt="image-20221215110028888"></p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><h4 id="原模型的下游任务准确率"><a href="#原模型的下游任务准确率" class="headerlink" title="原模型的下游任务准确率"></a>原模型的下游任务准确率</h4><p>给定三个干净的SSL预训练编码器（即，由SimCLR、MoCo v2和MmageNet上的BYOL预训练），作者首先测量它们的下游精度(表示为干净下游精度（CDA）。作者考虑了4个下游分类任务，即STL-10、CIFAR-10、MNIST和F-MNIST。准确率如表2所示。我们观察到，SSL预训练的编码器可以在不同的下游任务上取得显著的性能，这意味着SSL预训练的编码器可以从一个任务（即ImageNet）学习高级语义信息，而信息嵌入可以推广到其他任务（即STL-10和CIFAR-10）。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215181628950.png" alt="image-20221215181628950"></p>
+<h4 id="训练自监督模型的成本"><a href="#训练自监督模型的成本" class="headerlink" title="训练自监督模型的成本"></a>训练自监督模型的成本</h4><p>表3显示了SSL预训练SSL编码器的成本比，这说明了SSL模型的成本保护SSL预训练编码器的版权的必要性。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123817335.png" alt="image-20221215123817335"></p>
+<h4 id="模型窃取攻击过程中的影响因素"><a href="#模型窃取攻击过程中的影响因素" class="headerlink" title="模型窃取攻击过程中的影响因素"></a>模型窃取攻击过程中的影响因素</h4><p>图4显示了对于使用不同的体系结构，即ResNet-18、ResNet-34、ResNet-50或ResNet-101进行窃取。最后在结果中观察到，如果输出维度不同于ResNet-50（受害者编码器的体系结构），例如，ResNet-18/ResNet-34输出512维嵌入，作者利用一个额外的线性层将它们转换为2048维。代理编码器的DA总结如图4所示。一般的趋势是，代理编码器的体系结构越深，它在下游任务上可以实现的性能就越好。</p>
+<p>图5显示了对于使用STL-10训练的SimCLR、MoCo v2、BYOL模型，使用STL-10、CIFAR-10、FashionMNIST、MNIST四个数据集进行窃取攻击所获得的下游任务准确率，这显示了当查询数据集与训练前数据集相同时，模型窃取攻击更有效。另一个观察结果是，窃取数据集的分布也可能影响不同任务上的准确率。</p>
+<p>图6显示了在窃取攻击中使用不同的相似性函数，对窃取到的模型的下游任务准确率的影响，在这里，作者假设窃取者利用ResNet-50作为代理模型的架构，而STL-10作为查询数据集。结果显示，余弦相似性在大多数设置下优于MAE和MSE。<strong>这可能归功于余弦相似度的归一化效应，这有助于更好地学习嵌入。</strong></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123800541.png" alt="image-20221215123800541"></p>
+<h4 id="SSLGuard"><a href="#SSLGuard" class="headerlink" title="SSLGuard"></a>SSLGuard</h4><h4 id="有效性"><a href="#有效性" class="headerlink" title="有效性"></a>有效性</h4><p>然后作者评估了SSLGuard的有效性。具体地说，作者检查模型所有者是否可以从水印编码器中提取水印。模型所有者应该能够从水印编码器和窃取编码器中验证出水印，而从原始编码器中，不能得到水印信息。实验结果如表4所示，F∗和Fs的WR均为1.00，这意味着编码器F∗和Fs都包含了Dv和sk的信息。同时，F的WR为0.00，SSLGuard并不会将一个干净的编码器识别为水印编码器</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215205658176.png"></p>
+<h4 id="性能干扰"><a href="#性能干扰" class="headerlink" title="性能干扰"></a>性能干扰</h4><p>随后作者检测了SSLGuard是否会对原编码器的结果造成干扰，作者以BYOL为例，使用t-分布式邻域嵌入（t-SNE）将Fbyol（由BYOL预训练的干净编码器）和F∗BYOL的嵌入输出可视化，如图7所示。观察到F byol和F∗byol的t-SNE结果几乎相同，嵌入都被两个编码器成功地分离。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123842845.png" alt="image-20221215123842845"></p>
+<p>表5中则显示了在其他状态下的水印编码器与原编码器的性能差异，结果显示，水印编码器的DA与干净编码器的DA几乎相同。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123853619.png" alt="image-20221215123853619"></p>
+<h4 id="不可检测性"><a href="#不可检测性" class="headerlink" title="不可检测性"></a>不可检测性</h4><p>然后，作者检查水印是否可以通过一个不匹配的键元组来提取。作者通过SSLGuard生成了三个Key向量： κ simclr，κ moco和κ byol。作者使用其中一个K向量来验证其他水印编码器。如表6所示，作者可以看到在无匹配对中的WR都是0.00，这意味着没有与水印相匹配的密钥，无法检测出模型中是否被加入的水印。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123901406.png" alt="image-20221215123901406"></p>
+<h4 id="可操作性"><a href="#可操作性" class="headerlink" title="可操作性"></a>可操作性</h4><p>SSLGuard在只使用了一个GPU的情况下，分别使用17.5小时、17.36小时和10.70小时注入SimCLR、MoCo v2和BYOL，分别占SSL编码器训练前时间成本的29.17%、8.19%和14.86%，水印提取时间分别为1.51s、2.08s和1.82s。这比训练编码器本身所需时间要少得多，这说明这种加入水印的方式是理论可行的。</p>
+<h4 id="鲁棒性"><a href="#鲁棒性" class="headerlink" title="鲁棒性"></a>鲁棒性</h4><p>为了验证SSLGuard具有鲁棒性，作者对每个窃取攻击中使用的输入图像加入高斯噪声，为x0 = x+ε1·N（0,1）。当使用不同的ε1时，作者评估四个下游任务和DA的WR。WR的结果如图8a所示，DA如图9a所示。首先观察到DA随着ε1的增加而下降。而对于SimCLR、MoCo和BYOL上的不同ε1，WR始终为1.00。这可能是因为Dv的分布太特殊了，所以水印编码器可以记住这些特殊的样本，该实验表明对输入噪声攻击是鲁棒性的。</p>
+<p>此外，对手还可以通过在编码器输出的embedding中加入噪声，于是作者设计实验给每个编码器产生的embedding加入高斯噪声，为h0 = h + ε2·N（0,1），其中h为原始embedding，h0为扰动embedding，ε2为控制噪声水平的超参数。然后，作者在不同的ε2上评估DA和WR。从图9b中，可以观察到，随着ε2的增加，DA减少。然而，所有水印编码器的WR都保持在0.50以上（见图8b），这意味着将噪声嵌入到解码器时，仍然可以成功提取秘密向量。因此，即使对手以降低模型的性能为代价，向embedding中添加随机噪声，也不能删除水印。</p>
+<p>对手可能会通过利用截断embedding中的小数位数来降低embedding的精度。于是作者设计实验为嵌入中的每个值保留k个小数位。图8c和图9c显示了不同k下的WR和DA。可以观察到，当k从1减小到0时，DA会急剧下降。同时，除MoCo以外，其他编码器的WR均在0.5以上，虽然当k=为0时，MoCo的WR下降到0.00，但此时STL-10上的DA仅为0.10。因此，对手不能从编码器中删除水印，同时保留其功能</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123913078.png" alt="image-20221215123913078"></p>
+<p>对手还可以利用SSLGuard向SSL编码器注入新的水印，不管他们是否知道编码器已经注入了水印。作者希望确认在水印叠加的情况下依然可以有效提取水印。在表7中观察到，虽然用一个新的键元组覆盖水印编码器来生成一个新的编码器，但原始水印仍然保留，即新编码器中原始水印的WR为1.00。这表明，即使对手在模型中覆盖一个新的水印，仍然可以保留原始的水印。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123923572.png" alt="image-20221215123923572"></p>
+<p>剪枝技术是一种水印去除攻击，因为许多神经元可能被禁用，这降低了水印的有效性。在这一部分中，作者利用全局和局部的非结构化剪枝方法来处理水标编码器。在全局剪枝设置中，作者将卷积层中绝对值最小的卷积层中权重的r个分数设为0。局部剪枝的目的是在同一层中修剪绝对值最小的连接比例。图10和图11的前两个子图中显示了该组WR和DA。可以观察到，随着全局修剪比例的增加，DA和WR略有下降。而在局部修剪方面，DA有较大的下降趋势。</p>
+<p>在修剪后，对手可以在受害者编码器的监督下微调代理编码器。这个过程也被称为精细修剪。微调的目标是重新获得DA的下降。作者通过MSE损失函数来微调修剪过的编码器的所有权重（全局和局部）。我们注意到，WR如图10c和图10d所示，DA如图11c和图11d所示。这意味着SSLGuard对微调是健壮的。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123940867.png" alt="image-20221215123940867"></p>
+<p>然后，作者通过模型窃取攻击的镜头来量化SSLGuard的鲁棒性。请注意，作者只考虑最有效的代理编码器的架构和最有效的查询数据集。具体来讲，作者将ResNet-50和ResNet-101作为代理编码器的架构，将STL-10作为查询数据集。作者命名为三个攻击Steal1，Steal2，和Steal3。每次攻击的细节如表8所示。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123931603.png" alt="image-20221215123931603"></p>
+<p>不同攻击的WR和DA如表9所示。可以观察到，虽然模型窃取攻击窃取到了水印编码器，但我们可以通过验证窃取到的模型的所有权。SSLGuard注入的水印仍然可以保留在被对手窃取的代理编码器中。我们对窃取-1和窃取-3也有类似的观察，这证明了SSLGuard在模型窃取攻击下的鲁棒性。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123950223.png" alt="image-20221215123950223"></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/02/27/SSLGuard%20A%20Watermarking%20Scheme%20for%20Self-supervised%20Learning%20Pre-trained%20Encoders/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSLGuard/" rel="tag">SSLGuard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Watermark/" rel="tag">Watermark</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/03/18/Datalab's%20WriteUp/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            DataLab&#39;s Writeup
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/02/21/New%20160%20Crackme%201-5/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">New 160 Crackme 1-5</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2021-2023
+        <i class="ri-heart-fill heart_icon"></i> Kery
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Kery"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":200,"height":400,"hOffset":0,"vOffset":-30},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
