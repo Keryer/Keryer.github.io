@@ -312,6 +312,26 @@
   </entry>
   
   <entry>
+    <title>周报/日记</title>
+    <link href="http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/"/>
+    <id>http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/</id>
+    <published>2022-01-13T09:19:53.000Z</published>
+    <updated>2023-03-29T09:00:32.734Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p><p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p><h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p><p>开了改进AFL的组会</p><p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p><h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p><p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p><p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p><p>晚上出去喝酒</p><h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p><p>晚上做网络实验，继续看论文</p><h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p><h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p><p>晚上上安全系统实验，正常背单词</p><h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p><p>晚上挺凉快的</p><h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p><h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p><p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p><p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p><p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p><h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p><p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2022&quot;&gt;&lt;a href=&quot;#2022&quot; class=&quot;headerlink&quot; title=&quot;2022&quot;&gt;&lt;/a&gt;2022&lt;/h1&gt;&lt;h2 id=&quot;3-8-3-14&quot;&gt;&lt;a href=&quot;#3-8-3-14&quot; class=&quot;headerlink&quot; title=&quot;3</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>JavaScript学习记录</title>
     <link href="http://example.com/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     <id>http://example.com/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</id>
@@ -334,26 +354,6 @@
     <category term="web" scheme="http://example.com/tags/web/"/>
     
     <category term="JavaScript" scheme="http://example.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>周报/日记</title>
-    <link href="http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/"/>
-    <id>http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/</id>
-    <published>2022-01-13T09:19:53.000Z</published>
-    <updated>2023-03-29T09:00:32.734Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p><p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p><h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p><p>开了改进AFL的组会</p><p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p><h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p><p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p><p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p><p>晚上出去喝酒</p><h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p><p>晚上做网络实验，继续看论文</p><h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p><h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p><p>晚上上安全系统实验，正常背单词</p><h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p><p>晚上挺凉快的</p><h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p><h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p><p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p><p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p><p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p><h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p><p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;2022&quot;&gt;&lt;a href=&quot;#2022&quot; class=&quot;headerlink&quot; title=&quot;2022&quot;&gt;&lt;/a&gt;2022&lt;/h1&gt;&lt;h2 id=&quot;3-8-3-14&quot;&gt;&lt;a href=&quot;#3-8-3-14&quot; class=&quot;headerlink&quot; title=&quot;3</summary>
-      
-    
-    
-    
     
   </entry>
   
