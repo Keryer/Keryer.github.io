@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-03-29T09:00:51.166Z</updated>
+  <updated>2023-03-31T06:44:05.910Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>NKCTF2023 Reverse PMKF Writeup</title>
-    <link href="http://example.com/2023/03/28/NKCTF2023%20Reverse-PMKF%20Writeup%20/"/>
-    <id>http://example.com/2023/03/28/NKCTF2023%20Reverse-PMKF%20Writeup%20/</id>
+    <link href="http://example.com/2023/03/28/NKCTF2023%20Reverse%20PMKF%20Writeup/"/>
+    <id>http://example.com/2023/03/28/NKCTF2023%20Reverse%20PMKF%20Writeup/</id>
     <published>2023-03-27T19:36:00.000Z</published>
-    <updated>2023-03-29T09:00:51.166Z</updated>
+    <updated>2023-03-31T06:44:05.910Z</updated>
     
     <content type="html"><![CDATA[<h1 id="NKCTF2023-Reverse-PMKF-Writeup"><a href="#NKCTF2023-Reverse-PMKF-Writeup" class="headerlink" title="NKCTF2023 Reverse PMKF Writeup"></a>NKCTF2023 Reverse PMKF Writeup</h1><p>拿到题目以后发现是一个exe文件，我们直接运行一下看看，会闪过一个命令行窗口，没什么有用的信息，然后我们用Exeinfo PE打开看一看，发现没有壳，是个32位的C++程序</p><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230326213237616.png" alt="image-20230326213237616"></p><p>所以我们直接扔进x32dbg里面看看</p><p>进去以后右键点击任意代码区域，然后选择搜索当前区域的字符串，发现以下字样</p><p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326213438742.png" alt="image-20230326213438742"></p><p>其中很明显有wrong、you found it这种明显提示结果的字符串，这个我们一会来看。</p><p>注意到最开始有一个明显是文件路径的东西，所以我们可以猜测这个程序会从C:\nk.ctf这个文件里读出数据，所以我们就创建一个这个文件，注意C盘的根目录是不能直接创建文件的，需要从别的地方创建然后复制过来，创建之后我们随便往里面写点东西，因为题目提示写了，flag是输入的十六进制，所以我们往里面写的时候也用010editor直接写十六进制到文件里</p><p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215627939.png" alt="image-20230326215627939"></p><p>写好以后我们重新加载文件，再到搜索字符串的位置，这次我们来看怎么才能到Congratulations所在的位置，所以我们直接双击点进去，如下图</p><p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214521307.png" alt="image-20230326214521307"></p><p>然后我们从这里往上翻，就看注释和函数名即可，发现果然有一些readfile函数，而且每一次readfile后都会进行判断，都有可能会导致wrong所以我们先在第一个readfile的地方下断点看看第一次读取文件都要进行什么操作</p><p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214755114.png" alt="image-20230326214755114"></p><p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214740216.png" alt="image-20230326214740216"></p><p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214709714.png" alt="image-20230326214709714"></p><p>下断点以后点击几次运行，就会运行到断点处了</p><p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215044222.png" alt="image-20230326215044222"></p><p>大致看一下，如果不想运行到wrong，就需要在0x781113的位置跳转，而要跳转就需要eax的值为0x5，知道这些以后我们就按F8单步运行，看看eax里面的值是哪来的</p><p>运行到<code>cmp eax,5</code>后我们查看eax中的值发现是<img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215805912.png" alt="image-20230326215805912">，正好是我们刚刚随便输入的第一个字节，因此我们猜测这个要求是我们输入的第一个字节是0x05，但这里我们先记下来，先直接双击这个值，把他改成0x5，然后继续运行</p><p>一直按F8运行，一路无事发生，一直到运行到下一个readfile</p><p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220203759.png" alt="image-20230326220203759"></p><p>这次还是中间会遇到wrong，只不过这次是要让eax和ecx进行比较所以我们直接运行到cmp这行，这时我们查看eax和ecx的值</p><p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220335730.png" alt="image-20230326220335730"></p><p>发现eax是0xFFFFFFFA，而ecx是0x6E，但给出了一个对应的字母是n，这里我们还是看不出跟我们的输入有什么关系，于是我们继续改eax，改成0x6E，先通过这次判断</p><p>通过以后发现eax被赋予了内存中的一个值，然后加了个1，这个比较容易想到应该是for循环里面的变量++操作，所以之后也是又跳回到上面了这次再运行到cmp的时候，继续看eax和ecx的值，发现一个是0xFFFFFFAE一个是0x6B对应的字母是k，这里我们发现，这个AE和刚刚的FA好像分别是我们之前输入到文件里的第二三个字节的数据，至于之前的FFFF应该是在进行右移的时候高位是1补位导致的，而进行比对的nk两个字母，可以再回去看看我们之前搜索字符串时候看到的字符串，有一个是nkman，猜测也许这里就是要输入一个，我们继续运行几轮之后发现果然就是这几个字符</p><p>到这我们可以去</p>]]></content>
     
@@ -312,26 +312,6 @@
   </entry>
   
   <entry>
-    <title>周报/日记</title>
-    <link href="http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/"/>
-    <id>http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/</id>
-    <published>2022-01-13T09:19:53.000Z</published>
-    <updated>2023-03-29T09:00:32.734Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p><p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p><h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p><p>开了改进AFL的组会</p><p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p><h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p><p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p><p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p><p>晚上出去喝酒</p><h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p><p>晚上做网络实验，继续看论文</p><h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p><h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p><p>晚上上安全系统实验，正常背单词</p><h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p><p>晚上挺凉快的</p><h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p><h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p><p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p><p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p><p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p><h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p><p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;2022&quot;&gt;&lt;a href=&quot;#2022&quot; class=&quot;headerlink&quot; title=&quot;2022&quot;&gt;&lt;/a&gt;2022&lt;/h1&gt;&lt;h2 id=&quot;3-8-3-14&quot;&gt;&lt;a href=&quot;#3-8-3-14&quot; class=&quot;headerlink&quot; title=&quot;3</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>JavaScript学习记录</title>
     <link href="http://example.com/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     <id>http://example.com/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</id>
@@ -354,6 +334,26 @@
     <category term="web" scheme="http://example.com/tags/web/"/>
     
     <category term="JavaScript" scheme="http://example.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>周报/日记</title>
+    <link href="http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/"/>
+    <id>http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/</id>
+    <published>2022-01-13T09:19:53.000Z</published>
+    <updated>2023-03-31T10:23:50.870Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h2><p>今天把若依的Vue3前端替换了原本的Vue2前端，仔细读了一下ruoyi的源码，发现有很多之前自己没有注意到的后端的功能，大多是为了系统的安全性和可用性，不禁感叹自己经验太少了，这个稍微记录一下</p><h3 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h3><p>每个controller有自己的logger</p><p>作为一个系统应该对系统所在的主机性能进行监测</p><p>每次操作需要有日志留存</p><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>验证码生成与验证（先生成随机数，然后转化为图片，接收到传回来的值再与初始值对比）</p><p>用户的记住登录，通过cookie实现</p><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载文件前对输入的文件名进行检测是否合法</p><h2 id="3-30"><a href="#3-30" class="headerlink" title="3.30"></a>3.30</h2><p>今天来了发现Idea更新了，这次比较大的更新是把页面给更了，尝试了一下感觉还不错，比原来更简洁了，但是好像有时候会突然报个错，看来还是beta版，多少有点问题</p><p>毕设进度的话知道了一个叫若依的项目，这个项目是一个写好的前后端系统，不过现在前端只有Vue2写的和后端集成了，这两天可以看看能不能把Vue3版本也加上去</p><h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p><p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p><h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p><p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p><p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p><p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p><h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p><p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p><h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p><p>开了改进AFL的组会</p><p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p><h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p><p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p><p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p><p>晚上出去喝酒</p><h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p><p>晚上做网络实验，继续看论文</p><h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p><h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p><p>晚上上安全系统实验，正常背单词</p><h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p><p>晚上挺凉快的</p><h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2023&quot;&gt;&lt;a href=&quot;#2023&quot; class=&quot;headerlink&quot; title=&quot;2023&quot;&gt;&lt;/a&gt;2023&lt;/h1&gt;&lt;h2 id=&quot;3-31&quot;&gt;&lt;a href=&quot;#3-31&quot; class=&quot;headerlink&quot; title=&quot;3.31&quot;&gt;&lt;/a</summary>
+      
+    
+    
+    
     
   </entry>
   

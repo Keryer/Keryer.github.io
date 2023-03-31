@@ -3,7 +3,22 @@
   <entry>
     <title>周报/日记</title>
     <url>/2022/01/13/%E5%91%A8%E6%8A%A5/</url>
-    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
+    <content><![CDATA[<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h2><p>今天把若依的Vue3前端替换了原本的Vue2前端，仔细读了一下ruoyi的源码，发现有很多之前自己没有注意到的后端的功能，大多是为了系统的安全性和可用性，不禁感叹自己经验太少了，这个稍微记录一下</p>
+<h3 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h3><p>每个controller有自己的logger</p>
+<p>作为一个系统应该对系统所在的主机性能进行监测</p>
+<p>每次操作需要有日志留存</p>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>验证码生成与验证（先生成随机数，然后转化为图片，接收到传回来的值再与初始值对比）</p>
+<p>用户的记住登录，通过cookie实现</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载文件前对输入的文件名进行检测是否合法</p>
+<h2 id="3-30"><a href="#3-30" class="headerlink" title="3.30"></a>3.30</h2><p>今天来了发现Idea更新了，这次比较大的更新是把页面给更了，尝试了一下感觉还不错，比原来更简洁了，但是好像有时候会突然报个错，看来还是beta版，多少有点问题</p>
+<p>毕设进度的话知道了一个叫若依的项目，这个项目是一个写好的前后端系统，不过现在前端只有Vue2写的和后端集成了，这两天可以看看能不能把Vue3版本也加上去</p>
+<h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p>
+<p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p>
+<h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p>
+<p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p>
+<p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p>
+<p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p>
+<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
 <p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
 <h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
 <p>开了改进AFL的组会</p>
@@ -20,17 +35,11 @@
 <h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
 <p>晚上挺凉快的</p>
 <h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
-<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p>
-<p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p>
-<p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p>
-<p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p>
-<h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p>
-<p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p>
 ]]></content>
   </entry>
   <entry>
     <title>NKCTF2023 Reverse PMKF Writeup</title>
-    <url>/2023/03/28/NKCTF2023%20Reverse-PMKF%20Writeup%20/</url>
+    <url>/2023/03/28/NKCTF2023%20Reverse%20PMKF%20Writeup/</url>
     <content><![CDATA[<h1 id="NKCTF2023-Reverse-PMKF-Writeup"><a href="#NKCTF2023-Reverse-PMKF-Writeup" class="headerlink" title="NKCTF2023 Reverse PMKF Writeup"></a>NKCTF2023 Reverse PMKF Writeup</h1><p>拿到题目以后发现是一个exe文件，我们直接运行一下看看，会闪过一个命令行窗口，没什么有用的信息，然后我们用Exeinfo PE打开看一看，发现没有壳，是个32位的C++程序</p>
 <p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230326213237616.png" alt="image-20230326213237616"></p>
 <p>所以我们直接扔进x32dbg里面看看</p>

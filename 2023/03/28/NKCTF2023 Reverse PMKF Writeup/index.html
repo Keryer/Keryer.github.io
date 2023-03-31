@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>逆向实践 |  Kery</title>
+      <title>NKCTF2023 Reverse PMKF Writeup |  Kery</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -57,150 +57,231 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="post-NKCTF2023 Reverse PMKF Writeup"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">逆向实践</h1>
-    
-    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  NKCTF2023 Reverse PMKF Writeup
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/03/28/NKCTF2023%20Reverse%20PMKF%20Writeup/" class="article-date">
+  <time datetime="2023-03-27T19:36:00.000Z" itemprop="datePublished">2023-03-28</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/">逆向实践</a>
+  </div>
   
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2023" class="archive-year">2023</a>
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">954</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">3 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
-    <div class="archives">
       
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/28/NKCTF2023%20Reverse%20PMKF%20Writeup/" class="archive-article-date">
-  <time datetime="2023-03-27T19:36:00.000Z" itemprop="datePublished">03/28</time>
-</a>
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/28/NKCTF2023%20Reverse%20PMKF%20Writeup/"
-    >NKCTF2023 Reverse PMKF Writeup</a> 
-</h2>
+  <h1 id="NKCTF2023-Reverse-PMKF-Writeup"><a href="#NKCTF2023-Reverse-PMKF-Writeup" class="headerlink" title="NKCTF2023 Reverse PMKF Writeup"></a>NKCTF2023 Reverse PMKF Writeup</h1><p>拿到题目以后发现是一个exe文件，我们直接运行一下看看，会闪过一个命令行窗口，没什么有用的信息，然后我们用Exeinfo PE打开看一看，发现没有壳，是个32位的C++程序</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230326213237616.png" alt="image-20230326213237616"></p>
+<p>所以我们直接扔进x32dbg里面看看</p>
+<p>进去以后右键点击任意代码区域，然后选择搜索当前区域的字符串，发现以下字样</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326213438742.png" alt="image-20230326213438742"></p>
+<p>其中很明显有wrong、you found it这种明显提示结果的字符串，这个我们一会来看。</p>
+<p>注意到最开始有一个明显是文件路径的东西，所以我们可以猜测这个程序会从C:\nk.ctf这个文件里读出数据，所以我们就创建一个这个文件，注意C盘的根目录是不能直接创建文件的，需要从别的地方创建然后复制过来，创建之后我们随便往里面写点东西，因为题目提示写了，flag是输入的十六进制，所以我们往里面写的时候也用010editor直接写十六进制到文件里</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215627939.png" alt="image-20230326215627939"></p>
+<p>写好以后我们重新加载文件，再到搜索字符串的位置，这次我们来看怎么才能到Congratulations所在的位置，所以我们直接双击点进去，如下图</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214521307.png" alt="image-20230326214521307"></p>
+<p>然后我们从这里往上翻，就看注释和函数名即可，发现果然有一些readfile函数，而且每一次readfile后都会进行判断，都有可能会导致wrong所以我们先在第一个readfile的地方下断点看看第一次读取文件都要进行什么操作</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214755114.png" alt="image-20230326214755114"></p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214740216.png" alt="image-20230326214740216"></p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214709714.png" alt="image-20230326214709714"></p>
+<p>下断点以后点击几次运行，就会运行到断点处了</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215044222.png" alt="image-20230326215044222"></p>
+<p>大致看一下，如果不想运行到wrong，就需要在0x781113的位置跳转，而要跳转就需要eax的值为0x5，知道这些以后我们就按F8单步运行，看看eax里面的值是哪来的</p>
+<p>运行到<code>cmp eax,5</code>后我们查看eax中的值发现是<img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215805912.png" alt="image-20230326215805912">，正好是我们刚刚随便输入的第一个字节，因此我们猜测这个要求是我们输入的第一个字节是0x05，但这里我们先记下来，先直接双击这个值，把他改成0x5，然后继续运行</p>
+<p>一直按F8运行，一路无事发生，一直到运行到下一个readfile</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220203759.png" alt="image-20230326220203759"></p>
+<p>这次还是中间会遇到wrong，只不过这次是要让eax和ecx进行比较所以我们直接运行到cmp这行，这时我们查看eax和ecx的值</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220335730.png" alt="image-20230326220335730"></p>
+<p>发现eax是0xFFFFFFFA，而ecx是0x6E，但给出了一个对应的字母是n，这里我们还是看不出跟我们的输入有什么关系，于是我们继续改eax，改成0x6E，先通过这次判断</p>
+<p>通过以后发现eax被赋予了内存中的一个值，然后加了个1，这个比较容易想到应该是for循环里面的变量++操作，所以之后也是又跳回到上面了这次再运行到cmp的时候，继续看eax和ecx的值，发现一个是0xFFFFFFAE一个是0x6B对应的字母是k，这里我们发现，这个AE和刚刚的FA好像分别是我们之前输入到文件里的第二三个字节的数据，至于之前的FFFF应该是在进行右移的时候高位是1补位导致的，而进行比对的nk两个字母，可以再回去看看我们之前搜索字符串时候看到的字符串，有一个是nkman，猜测也许这里就是要输入一个，我们继续运行几轮之后发现果然就是这几个字符</p>
+<p>到这我们可以去</p>
  
-
-    </header>
-    
+      <!-- reward -->
       
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/">逆向实践</a>
-  </div>
-
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/21/New%20160%20Crackme%206-10/" class="archive-article-date">
-  <time datetime="2023-03-21T08:02:53.000Z" itemprop="datePublished">03/21</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/21/New%20160%20Crackme%206-10/"
-    >New 160 Crackme 6-10</a> 
-</h2>
- 
-
-    </header>
-    
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/">逆向实践</a>
-  </div>
-
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/02/21/New%20160%20Crackme%201-5/" class="archive-article-date">
-  <time datetime="2023-02-21T13:43:53.000Z" itemprop="datePublished">02/21</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/02/21/New%20160%20Crackme%201-5/"
-    >New 160 Crackme 1-5</a> 
-</h2>
- 
-
-    </header>
-    
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/">逆向实践</a>
-  </div>
-
-    
-    
-  </div>
-</article>
-      
-  
-  
-  
-  </div>
-  </div>
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2022" class="archive-year">2022</a>
-    </div>
-    <div class="archives">
-      
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  <time datetime="2022-06-30T04:27:09.000Z" itemprop="datePublished">06/30</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/"
-    >植物大战僵尸外挂笔记</a> 
-</h2>
- 
-
-    </header>
-    
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/">逆向实践</a>
-  </div>
-
-    
-    
-  </div>
-</article>
-      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
       
     </div>
-  </div>
-  
-  
+    
 
-  
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/28/NKCTF2023%20Reverse%20PMKF%20Writeup/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Reverse/" rel="tag">Reverse</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/03/21/New%20160%20Crackme%206-10/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">New 160 Crackme 6-10</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -333,6 +414,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link
