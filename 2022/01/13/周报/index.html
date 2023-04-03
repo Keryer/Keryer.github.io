@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -94,7 +94,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -109,13 +109,16 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h2><p>今天把若依的Vue3前端替换了原本的Vue2前端，仔细读了一下ruoyi的源码，发现有很多之前自己没有注意到的后端的功能，大多是为了系统的安全性和可用性，不禁感叹自己经验太少了，这个稍微记录一下</p>
+  <h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h2><p>今天没做太多，大概还是从若依里面学习，注释了一个controller，加深理解，也方便学习，其他的就是丰富底下的开发要点</p>
+<h2 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h2><p>今天把若依的Vue3前端替换了原本的Vue2前端，仔细读了一下ruoyi的源码，发现有很多之前自己没有注意到的后端的功能，大多是为了系统的安全性和可用性，不禁感叹自己经验太少了，这个稍微记录一下</p>
 <h3 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h3><p>每个controller有自己的logger</p>
 <p>作为一个系统应该对系统所在的主机性能进行监测</p>
 <p>每次操作需要有日志留存</p>
 <h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>验证码生成与验证（先生成随机数，然后转化为图片，接收到传回来的值再与初始值对比）</p>
 <p>用户的记住登录，通过cookie实现</p>
 <h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载文件前对输入的文件名进行检测是否合法</p>
+<h3 id="敏感内容查看"><a href="#敏感内容查看" class="headerlink" title="敏感内容查看"></a>敏感内容查看</h3><p>在调用后端的查询函数前，先使用@PreAuthorize关键字预先对请求信息的用户进行身份验证，判断其是否具有相应的权限</p>
+<h3 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h3><p>在查询时，优先使用redis缓存，避免对数据库造成过大压力</p>
 <h2 id="3-30"><a href="#3-30" class="headerlink" title="3.30"></a>3.30</h2><p>今天来了发现Idea更新了，这次比较大的更新是把页面给更了，尝试了一下感觉还不错，比原来更简洁了，但是好像有时候会突然报个错，看来还是beta版，多少有点问题</p>
 <p>毕设进度的话知道了一个叫若依的项目，这个项目是一个写好的前后端系统，不过现在前端只有Vue2写的和后端集成了，这两天可以看看能不能把Vue3版本也加上去</p>
 <h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p>
