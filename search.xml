@@ -3,7 +3,8 @@
   <entry>
     <title>周报/日记</title>
     <url>/2022/01/13/%E5%91%A8%E6%8A%A5/</url>
-    <content><![CDATA[<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h2><p>今天没做太多，大概还是从若依里面学习，注释了一个controller，加深理解，也方便学习，其他的就是丰富底下的开发要点</p>
+    <content><![CDATA[<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="4-4-4-8"><a href="#4-4-4-8" class="headerlink" title="4.4-4.8"></a>4.4-4.8</h2><p>这几天的主要内容还是了解若依，另外就是这两天最终的毕设任务下来了，最终要做一个数据管理处理的系统出来，这两天的主要内容就是把各个模块所在位置都了解一下，在原有的系统上加入自己的页面，给新的页面配置数据层的方法。目前可以进行基本的任务创建等工作了，后续的话还需要跟leader商量一下具体的需求</p>
+<h2 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h2><p>今天没做太多，大概还是从若依里面学习，注释了一个controller，加深理解，也方便学习，其他的就是丰富底下的开发要点</p>
 <h2 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h2><p>今天把若依的Vue3前端替换了原本的Vue2前端，仔细读了一下ruoyi的源码，发现有很多之前自己没有注意到的后端的功能，大多是为了系统的安全性和可用性，不禁感叹自己经验太少了，这个稍微记录一下</p>
 <h3 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h3><p>每个controller有自己的logger</p>
 <p>作为一个系统应该对系统所在的主机性能进行监测</p>
@@ -73,8 +74,8 @@
         <category>逆向实践</category>
       </categories>
       <tags>
-        <tag>CTF</tag>
         <tag>Reverse</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
