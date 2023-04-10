@@ -290,14 +290,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/Linux/</loc>
+    <loc>http://example.com/tags/CTF/</loc>
     <lastmod>2023-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/Binary/</loc>
+    <loc>http://example.com/tags/Reverse/</loc>
     <lastmod>2023-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -311,14 +311,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/CTF/</loc>
+    <loc>http://example.com/tags/Linux/</loc>
     <lastmod>2023-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/Reverse/</loc>
+    <loc>http://example.com/tags/Binary/</loc>
     <lastmod>2023-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -376,14 +376,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://example.com/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2023-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/</loc>
+    <loc>http://example.com/categories/%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-04-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
