@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Kery</title>
-  
+  <title>Kery&#39;s blog</title>
+  <icon>https://www.gravatar.com/avatar/d8aad01b45117137dbbd39128a82c563</icon>
   
   <link href="http://example.com/atom.xml" rel="self"/>
   
@@ -11,7 +11,7 @@
   
   <author>
     <name>Kery</name>
-    
+    <email>qikeyu2017@gmail.com</email>
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
@@ -36,9 +36,9 @@
     <category term="逆向实践" scheme="http://example.com/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/"/>
     
     
-    <category term="Reverse" scheme="http://example.com/tags/Reverse/"/>
-    
     <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    
+    <category term="Reverse" scheme="http://example.com/tags/Reverse/"/>
     
   </entry>
   
@@ -211,32 +211,6 @@
   </entry>
   
   <entry>
-    <title>CodeAlchemist</title>
-    <link href="http://example.com/2022/04/22/CodeAlchemist/"/>
-    <id>http://example.com/2022/04/22/CodeAlchemist/</id>
-    <published>2022-04-21T16:00:00.000Z</published>
-    <updated>2023-03-19T05:36:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol><li><p>LangFuzz</p><p>通过解析最初的作为种子的JS文件，将其中的语句拆分成代码段，任何重新组合片段生成测试用例。</p><p>由于LangFuzz在关联代码的时候不考虑JS的语义，所以会很快发生运行时错误。</p></li><li><p>jsfunfuzz</p><p>不需要初始的JS文件，而是通过引用手动编写的JS语料库随机产生语法正确的JS语句。</p><p>超过99%的生成用例会在执行三条语句后就发生运行错误。</p></li><li><p>Skyfire/TreeFuzz</p><p>通过从JS种子文件的语料库构建概率语言模型，来学习JS语义，再使用模型来生成用例。</p><p>但这种方式依赖于语言模型的准确性。鉴于JS的复杂类型系统，这种方式也不能完全解决语义问题</p></li><li><p>CodeAlchemist</p><p>将种子文件中的代码分解，并约束每个碎片，使之仅在特定的情况下可以被使用</p><p>使用数据流分析，计算每个代码块中，使用和定义的变量，并动态获取他们的类型，只有当对应的类型可以匹配上的时候，才会进行拼接</p><p>在一些情况下，也会引发语义错误，但已经大幅降低了</p><p>CodeAlchemist会按照JavaScript 语句的粒度分解种子文件, 针对每个块语句生成多种变体提升代码块的丰富性, 通过对多个代码块组合产生嵌套循环等结构。</p><p>CodeAlchemist提出使用数据流分析技术确定未定义变量和已定义变量, 并结合运行时插桩技术探测已执行变量的类型。 CodeAlchemist在JavaScript代码生成过程中, 不断向代码尾部扩展代码片段, 每次扩展代码片段都会确保其中的变量在之前已经被定义并且具备正确的 类 型</p></li></ol><h2 id="2-JS语言问题"><a href="#2-JS语言问题" class="headerlink" title="2. JS语言问题"></a>2. JS语言问题</h2><h3 id="1-面向原型的语言"><a href="#1-面向原型的语言" class="headerlink" title="1. 面向原型的语言"></a>1. 面向原型的语言</h3><p>一个对象实例A只需要将另一个对象实例B设置为自己的原型，就可以在运行是继承B的属性。可以通过<code>_proto_</code>属性来确定对象实例在运行时使用哪个原型。而由于一个对象的类型可以动态更改，所以很有可能会发生语义错误</p><h3 id="2-错误类型"><a href="#2-错误类型" class="headerlink" title="2. 错误类型"></a>2. 错误类型</h3><p>五种运行时错误类型</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;break&#x27;</span>);      <span class="comment">//语法错误</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> <span class="title class_">Array</span> (<span class="number">4294967296</span>); <span class="comment">//范围错误</span></span><br><span class="line">u;<span class="comment">//引用错误</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="number">10</span>; <span class="title function_">t</span>();<span class="comment">//类型错误</span></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%&#x27;</span>);<span class="comment">//URI错误</span></span><br></pre></td></tr></table></figure><p>对于第一行的eval函数，语句本身在语法上是正确的，但在实际运行时会引发语法错误</p><h2 id="3-CodeAlchemist架构"><a href="#3-CodeAlchemist架构" class="headerlink" title="3. CodeAlchemist架构"></a>3. CodeAlchemist架构</h2><img src="https://img1.3s78.com/codercto/97d8a767902c2febf1786c0e63b5506a" alt="CodeAlchemist：用于在JavasScript引擎中查找漏洞的代码生成工具" style="zoom:150%;"><p>其主要包含三个部分：Seed Parser 模块将 JS seeds 分解为不同的代码块，Constraint analyzer 模块为每个代码块推断出其组合约束条件，Engine fuzzer 则根据组件约束条件池中的代码块，生成测试用例并针对目标 JS 引擎执行生成的测试用例。如果引擎崩溃，它会在文件系统上存储相应的测试用例。</p><h2 id="4-语义感知组件"><a href="#4-语义感知组件" class="headerlink" title="4. 语义感知组件"></a>4. 语义感知组件</h2><p>是一种用于JS引擎的测试用例生成算法，将JS种子碎片化成若干可以组合的代码块，一个代码块就是一小段有效的JS抽象语法树.</p><p>具体而言，组合约束条件包含两种：先决条件和后置条件。先决条件是一组变量及其类型，需要预先定义这些符号从而可以在没有运行时错误的情况下执行代码块。后置条件描述了在代码块的末尾定义了哪种变量，并在后面可被其他代码块使用。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;CodeAlchemist&quot;&gt;&lt;a href=&quot;#CodeAlchemist&quot; class=&quot;headerlink&quot; title=&quot;CodeAlchemist&quot;&gt;&lt;/a&gt;CodeAlchemist&lt;/h1&gt;&lt;h2 id=&quot;1-与其他同类型fuzzer对比&quot;&gt;&lt;a </summary>
-      
-    
-    
-    
-    <category term="论文笔记" scheme="http://example.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="CodeAlchenmist" scheme="http://example.com/tags/CodeAlchenmist/"/>
-    
-    <category term="Fuzzing" scheme="http://example.com/tags/Fuzzing/"/>
-    
-  </entry>
-  
-  <entry>
     <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
     <link href="http://example.com/2022/04/22/FuzzIL/"/>
     <id>http://example.com/2022/04/22/FuzzIL/</id>
@@ -259,6 +233,32 @@
     <category term="Fuzzing" scheme="http://example.com/tags/Fuzzing/"/>
     
     <category term="FuzzIL" scheme="http://example.com/tags/FuzzIL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CodeAlchemist</title>
+    <link href="http://example.com/2022/04/22/CodeAlchemist/"/>
+    <id>http://example.com/2022/04/22/CodeAlchemist/</id>
+    <published>2022-04-21T16:00:00.000Z</published>
+    <updated>2023-03-19T05:36:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol><li><p>LangFuzz</p><p>通过解析最初的作为种子的JS文件，将其中的语句拆分成代码段，任何重新组合片段生成测试用例。</p><p>由于LangFuzz在关联代码的时候不考虑JS的语义，所以会很快发生运行时错误。</p></li><li><p>jsfunfuzz</p><p>不需要初始的JS文件，而是通过引用手动编写的JS语料库随机产生语法正确的JS语句。</p><p>超过99%的生成用例会在执行三条语句后就发生运行错误。</p></li><li><p>Skyfire/TreeFuzz</p><p>通过从JS种子文件的语料库构建概率语言模型，来学习JS语义，再使用模型来生成用例。</p><p>但这种方式依赖于语言模型的准确性。鉴于JS的复杂类型系统，这种方式也不能完全解决语义问题</p></li><li><p>CodeAlchemist</p><p>将种子文件中的代码分解，并约束每个碎片，使之仅在特定的情况下可以被使用</p><p>使用数据流分析，计算每个代码块中，使用和定义的变量，并动态获取他们的类型，只有当对应的类型可以匹配上的时候，才会进行拼接</p><p>在一些情况下，也会引发语义错误，但已经大幅降低了</p><p>CodeAlchemist会按照JavaScript 语句的粒度分解种子文件, 针对每个块语句生成多种变体提升代码块的丰富性, 通过对多个代码块组合产生嵌套循环等结构。</p><p>CodeAlchemist提出使用数据流分析技术确定未定义变量和已定义变量, 并结合运行时插桩技术探测已执行变量的类型。 CodeAlchemist在JavaScript代码生成过程中, 不断向代码尾部扩展代码片段, 每次扩展代码片段都会确保其中的变量在之前已经被定义并且具备正确的 类 型</p></li></ol><h2 id="2-JS语言问题"><a href="#2-JS语言问题" class="headerlink" title="2. JS语言问题"></a>2. JS语言问题</h2><h3 id="1-面向原型的语言"><a href="#1-面向原型的语言" class="headerlink" title="1. 面向原型的语言"></a>1. 面向原型的语言</h3><p>一个对象实例A只需要将另一个对象实例B设置为自己的原型，就可以在运行是继承B的属性。可以通过<code>_proto_</code>属性来确定对象实例在运行时使用哪个原型。而由于一个对象的类型可以动态更改，所以很有可能会发生语义错误</p><h3 id="2-错误类型"><a href="#2-错误类型" class="headerlink" title="2. 错误类型"></a>2. 错误类型</h3><p>五种运行时错误类型</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;break&#x27;</span>);      <span class="comment">//语法错误</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> <span class="title class_">Array</span> (<span class="number">4294967296</span>); <span class="comment">//范围错误</span></span><br><span class="line">u;<span class="comment">//引用错误</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="number">10</span>; <span class="title function_">t</span>();<span class="comment">//类型错误</span></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%&#x27;</span>);<span class="comment">//URI错误</span></span><br></pre></td></tr></table></figure><p>对于第一行的eval函数，语句本身在语法上是正确的，但在实际运行时会引发语法错误</p><h2 id="3-CodeAlchemist架构"><a href="#3-CodeAlchemist架构" class="headerlink" title="3. CodeAlchemist架构"></a>3. CodeAlchemist架构</h2><img src="https://img1.3s78.com/codercto/97d8a767902c2febf1786c0e63b5506a" alt="CodeAlchemist：用于在JavasScript引擎中查找漏洞的代码生成工具" style="zoom:150%;"><p>其主要包含三个部分：Seed Parser 模块将 JS seeds 分解为不同的代码块，Constraint analyzer 模块为每个代码块推断出其组合约束条件，Engine fuzzer 则根据组件约束条件池中的代码块，生成测试用例并针对目标 JS 引擎执行生成的测试用例。如果引擎崩溃，它会在文件系统上存储相应的测试用例。</p><h2 id="4-语义感知组件"><a href="#4-语义感知组件" class="headerlink" title="4. 语义感知组件"></a>4. 语义感知组件</h2><p>是一种用于JS引擎的测试用例生成算法，将JS种子碎片化成若干可以组合的代码块，一个代码块就是一小段有效的JS抽象语法树.</p><p>具体而言，组合约束条件包含两种：先决条件和后置条件。先决条件是一组变量及其类型，需要预先定义这些符号从而可以在没有运行时错误的情况下执行代码块。后置条件描述了在代码块的末尾定义了哪种变量，并在后面可被其他代码块使用。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;CodeAlchemist&quot;&gt;&lt;a href=&quot;#CodeAlchemist&quot; class=&quot;headerlink&quot; title=&quot;CodeAlchemist&quot;&gt;&lt;/a&gt;CodeAlchemist&lt;/h1&gt;&lt;h2 id=&quot;1-与其他同类型fuzzer对比&quot;&gt;&lt;a </summary>
+      
+    
+    
+    
+    <category term="论文笔记" scheme="http://example.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Fuzzing" scheme="http://example.com/tags/Fuzzing/"/>
+    
+    <category term="CodeAlchenmist" scheme="http://example.com/tags/CodeAlchenmist/"/>
     
   </entry>
   
