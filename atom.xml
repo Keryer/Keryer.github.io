@@ -36,9 +36,9 @@
     <category term="逆向实践" scheme="http://example.com/categories/%E9%80%86%E5%90%91%E5%AE%9E%E8%B7%B5/"/>
     
     
-    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
-    
     <category term="Reverse" scheme="http://example.com/tags/Reverse/"/>
+    
+    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
     
   </entry>
   
@@ -211,6 +211,32 @@
   </entry>
   
   <entry>
+    <title>CodeAlchemist</title>
+    <link href="http://example.com/2022/04/22/CodeAlchemist/"/>
+    <id>http://example.com/2022/04/22/CodeAlchemist/</id>
+    <published>2022-04-21T16:00:00.000Z</published>
+    <updated>2023-03-19T05:36:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol><li><p>LangFuzz</p><p>通过解析最初的作为种子的JS文件，将其中的语句拆分成代码段，任何重新组合片段生成测试用例。</p><p>由于LangFuzz在关联代码的时候不考虑JS的语义，所以会很快发生运行时错误。</p></li><li><p>jsfunfuzz</p><p>不需要初始的JS文件，而是通过引用手动编写的JS语料库随机产生语法正确的JS语句。</p><p>超过99%的生成用例会在执行三条语句后就发生运行错误。</p></li><li><p>Skyfire/TreeFuzz</p><p>通过从JS种子文件的语料库构建概率语言模型，来学习JS语义，再使用模型来生成用例。</p><p>但这种方式依赖于语言模型的准确性。鉴于JS的复杂类型系统，这种方式也不能完全解决语义问题</p></li><li><p>CodeAlchemist</p><p>将种子文件中的代码分解，并约束每个碎片，使之仅在特定的情况下可以被使用</p><p>使用数据流分析，计算每个代码块中，使用和定义的变量，并动态获取他们的类型，只有当对应的类型可以匹配上的时候，才会进行拼接</p><p>在一些情况下，也会引发语义错误，但已经大幅降低了</p><p>CodeAlchemist会按照JavaScript 语句的粒度分解种子文件, 针对每个块语句生成多种变体提升代码块的丰富性, 通过对多个代码块组合产生嵌套循环等结构。</p><p>CodeAlchemist提出使用数据流分析技术确定未定义变量和已定义变量, 并结合运行时插桩技术探测已执行变量的类型。 CodeAlchemist在JavaScript代码生成过程中, 不断向代码尾部扩展代码片段, 每次扩展代码片段都会确保其中的变量在之前已经被定义并且具备正确的 类 型</p></li></ol><h2 id="2-JS语言问题"><a href="#2-JS语言问题" class="headerlink" title="2. JS语言问题"></a>2. JS语言问题</h2><h3 id="1-面向原型的语言"><a href="#1-面向原型的语言" class="headerlink" title="1. 面向原型的语言"></a>1. 面向原型的语言</h3><p>一个对象实例A只需要将另一个对象实例B设置为自己的原型，就可以在运行是继承B的属性。可以通过<code>_proto_</code>属性来确定对象实例在运行时使用哪个原型。而由于一个对象的类型可以动态更改，所以很有可能会发生语义错误</p><h3 id="2-错误类型"><a href="#2-错误类型" class="headerlink" title="2. 错误类型"></a>2. 错误类型</h3><p>五种运行时错误类型</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;break&#x27;</span>);      <span class="comment">//语法错误</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> <span class="title class_">Array</span> (<span class="number">4294967296</span>); <span class="comment">//范围错误</span></span><br><span class="line">u;<span class="comment">//引用错误</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="number">10</span>; <span class="title function_">t</span>();<span class="comment">//类型错误</span></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%&#x27;</span>);<span class="comment">//URI错误</span></span><br></pre></td></tr></table></figure><p>对于第一行的eval函数，语句本身在语法上是正确的，但在实际运行时会引发语法错误</p><h2 id="3-CodeAlchemist架构"><a href="#3-CodeAlchemist架构" class="headerlink" title="3. CodeAlchemist架构"></a>3. CodeAlchemist架构</h2><img src="https://img1.3s78.com/codercto/97d8a767902c2febf1786c0e63b5506a" alt="CodeAlchemist：用于在JavasScript引擎中查找漏洞的代码生成工具" style="zoom:150%;"><p>其主要包含三个部分：Seed Parser 模块将 JS seeds 分解为不同的代码块，Constraint analyzer 模块为每个代码块推断出其组合约束条件，Engine fuzzer 则根据组件约束条件池中的代码块，生成测试用例并针对目标 JS 引擎执行生成的测试用例。如果引擎崩溃，它会在文件系统上存储相应的测试用例。</p><h2 id="4-语义感知组件"><a href="#4-语义感知组件" class="headerlink" title="4. 语义感知组件"></a>4. 语义感知组件</h2><p>是一种用于JS引擎的测试用例生成算法，将JS种子碎片化成若干可以组合的代码块，一个代码块就是一小段有效的JS抽象语法树.</p><p>具体而言，组合约束条件包含两种：先决条件和后置条件。先决条件是一组变量及其类型，需要预先定义这些符号从而可以在没有运行时错误的情况下执行代码块。后置条件描述了在代码块的末尾定义了哪种变量，并在后面可被其他代码块使用。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;CodeAlchemist&quot;&gt;&lt;a href=&quot;#CodeAlchemist&quot; class=&quot;headerlink&quot; title=&quot;CodeAlchemist&quot;&gt;&lt;/a&gt;CodeAlchemist&lt;/h1&gt;&lt;h2 id=&quot;1-与其他同类型fuzzer对比&quot;&gt;&lt;a </summary>
+      
+    
+    
+    
+    <category term="论文笔记" scheme="http://example.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="CodeAlchenmist" scheme="http://example.com/tags/CodeAlchenmist/"/>
+    
+    <category term="Fuzzing" scheme="http://example.com/tags/Fuzzing/"/>
+    
+  </entry>
+  
+  <entry>
     <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
     <link href="http://example.com/2022/04/22/FuzzIL/"/>
     <id>http://example.com/2022/04/22/FuzzIL/</id>
@@ -233,32 +259,6 @@
     <category term="Fuzzing" scheme="http://example.com/tags/Fuzzing/"/>
     
     <category term="FuzzIL" scheme="http://example.com/tags/FuzzIL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CodeAlchemist</title>
-    <link href="http://example.com/2022/04/22/CodeAlchemist/"/>
-    <id>http://example.com/2022/04/22/CodeAlchemist/</id>
-    <published>2022-04-21T16:00:00.000Z</published>
-    <updated>2023-03-19T05:36:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol><li><p>LangFuzz</p><p>通过解析最初的作为种子的JS文件，将其中的语句拆分成代码段，任何重新组合片段生成测试用例。</p><p>由于LangFuzz在关联代码的时候不考虑JS的语义，所以会很快发生运行时错误。</p></li><li><p>jsfunfuzz</p><p>不需要初始的JS文件，而是通过引用手动编写的JS语料库随机产生语法正确的JS语句。</p><p>超过99%的生成用例会在执行三条语句后就发生运行错误。</p></li><li><p>Skyfire/TreeFuzz</p><p>通过从JS种子文件的语料库构建概率语言模型，来学习JS语义，再使用模型来生成用例。</p><p>但这种方式依赖于语言模型的准确性。鉴于JS的复杂类型系统，这种方式也不能完全解决语义问题</p></li><li><p>CodeAlchemist</p><p>将种子文件中的代码分解，并约束每个碎片，使之仅在特定的情况下可以被使用</p><p>使用数据流分析，计算每个代码块中，使用和定义的变量，并动态获取他们的类型，只有当对应的类型可以匹配上的时候，才会进行拼接</p><p>在一些情况下，也会引发语义错误，但已经大幅降低了</p><p>CodeAlchemist会按照JavaScript 语句的粒度分解种子文件, 针对每个块语句生成多种变体提升代码块的丰富性, 通过对多个代码块组合产生嵌套循环等结构。</p><p>CodeAlchemist提出使用数据流分析技术确定未定义变量和已定义变量, 并结合运行时插桩技术探测已执行变量的类型。 CodeAlchemist在JavaScript代码生成过程中, 不断向代码尾部扩展代码片段, 每次扩展代码片段都会确保其中的变量在之前已经被定义并且具备正确的 类 型</p></li></ol><h2 id="2-JS语言问题"><a href="#2-JS语言问题" class="headerlink" title="2. JS语言问题"></a>2. JS语言问题</h2><h3 id="1-面向原型的语言"><a href="#1-面向原型的语言" class="headerlink" title="1. 面向原型的语言"></a>1. 面向原型的语言</h3><p>一个对象实例A只需要将另一个对象实例B设置为自己的原型，就可以在运行是继承B的属性。可以通过<code>_proto_</code>属性来确定对象实例在运行时使用哪个原型。而由于一个对象的类型可以动态更改，所以很有可能会发生语义错误</p><h3 id="2-错误类型"><a href="#2-错误类型" class="headerlink" title="2. 错误类型"></a>2. 错误类型</h3><p>五种运行时错误类型</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;break&#x27;</span>);      <span class="comment">//语法错误</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> <span class="title class_">Array</span> (<span class="number">4294967296</span>); <span class="comment">//范围错误</span></span><br><span class="line">u;<span class="comment">//引用错误</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="number">10</span>; <span class="title function_">t</span>();<span class="comment">//类型错误</span></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%&#x27;</span>);<span class="comment">//URI错误</span></span><br></pre></td></tr></table></figure><p>对于第一行的eval函数，语句本身在语法上是正确的，但在实际运行时会引发语法错误</p><h2 id="3-CodeAlchemist架构"><a href="#3-CodeAlchemist架构" class="headerlink" title="3. CodeAlchemist架构"></a>3. CodeAlchemist架构</h2><img src="https://img1.3s78.com/codercto/97d8a767902c2febf1786c0e63b5506a" alt="CodeAlchemist：用于在JavasScript引擎中查找漏洞的代码生成工具" style="zoom:150%;"><p>其主要包含三个部分：Seed Parser 模块将 JS seeds 分解为不同的代码块，Constraint analyzer 模块为每个代码块推断出其组合约束条件，Engine fuzzer 则根据组件约束条件池中的代码块，生成测试用例并针对目标 JS 引擎执行生成的测试用例。如果引擎崩溃，它会在文件系统上存储相应的测试用例。</p><h2 id="4-语义感知组件"><a href="#4-语义感知组件" class="headerlink" title="4. 语义感知组件"></a>4. 语义感知组件</h2><p>是一种用于JS引擎的测试用例生成算法，将JS种子碎片化成若干可以组合的代码块，一个代码块就是一小段有效的JS抽象语法树.</p><p>具体而言，组合约束条件包含两种：先决条件和后置条件。先决条件是一组变量及其类型，需要预先定义这些符号从而可以在没有运行时错误的情况下执行代码块。后置条件描述了在代码块的末尾定义了哪种变量，并在后面可被其他代码块使用。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;CodeAlchemist&quot;&gt;&lt;a href=&quot;#CodeAlchemist&quot; class=&quot;headerlink&quot; title=&quot;CodeAlchemist&quot;&gt;&lt;/a&gt;CodeAlchemist&lt;/h1&gt;&lt;h2 id=&quot;1-与其他同类型fuzzer对比&quot;&gt;&lt;a </summary>
-      
-    
-    
-    
-    <category term="论文笔记" scheme="http://example.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Fuzzing" scheme="http://example.com/tags/Fuzzing/"/>
-    
-    <category term="CodeAlchenmist" scheme="http://example.com/tags/CodeAlchenmist/"/>
     
   </entry>
   
@@ -312,6 +312,26 @@
   </entry>
   
   <entry>
+    <title>周报/日记</title>
+    <link href="http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/"/>
+    <id>http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/</id>
+    <published>2022-01-13T09:19:53.000Z</published>
+    <updated>2023-04-12T10:09:30.507Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="4-12"><a href="#4-12" class="headerlink" title="4.12"></a>4.12</h2><p>el-select和输入框的问题都解决了，明天搞一下项目获取的问题，然后考虑一下这些用户选择的东西要怎么处理，后端的逻辑还需要明确一下。这些弄好就开始最后的重头戏了，把分库做了，目前还不确定这个要不要去改sqlsessionfactory，如果需要那就是大工程了…到时候再说吧</p><p>晚上看专业课，大概是操作系统和数据结构，还有背单词。</p><h2 id="4-11"><a href="#4-11" class="headerlink" title="4.11"></a>4.11</h2><p>昨天的问题解决了，但是也出现了新的问题，el-select的选项选择后不能同步显示，但应该不是什么大问题，明天找时间处理一下就行，另外今天也是正式拥有chatgpt账号了，不用再用国内的接口了，正式和前沿技术接轨</p><p>晚上去打台球，还要把ismart的作业做了，以及今天的背50个单词</p><h2 id="4-10"><a href="#4-10" class="headerlink" title="4.10"></a>4.10</h2><p>今天主要是继续开发备份列表的界面，然后遇到了一个小问题就是后端传回来的值能接收到，但是不能回显到el-element里面，明天再研究一下吧</p><p>之后的话不知道还要做多少，慢慢来吧</p><p>今天听到了两首很好听的歌《好想爱这个世界啊》和《逝爱的刺客》，心情变得好了不少，终于明白为什么说华晨宇关爱抑郁症患者）哈哈哈哈哈很感谢生命中出现的一些人，谢谢你们，爱我的每个人</p><p>今天也是低多巴胺生活的第一天，没有游戏，没有短视频，午饭吃沙拉，认真工作…虽然不是第一次了但还是希望这次可以坚持下去，毕竟身边出现了很棒的人！真的会带来希望！</p><p>ps：今天晚上知道的铁人三项进决赛啦，4月底去福州打比赛！！</p><h2 id="4-4-4-8"><a href="#4-4-4-8" class="headerlink" title="4.4-4.8"></a>4.4-4.8</h2><p>这几天的主要内容还是了解若依，另外就是这两天最终的毕设任务下来了，最终要做一个数据管理处理的系统出来，这两天的主要内容就是把各个模块所在位置都了解一下，在原有的系统上加入自己的页面，给新的页面配置数据层的方法。目前可以进行基本的任务创建等工作了，后续的话还需要跟leader商量一下具体的需求</p><h2 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h2><p>今天没做太多，大概还是从若依里面学习，注释了一个controller，加深理解，也方便学习，其他的就是丰富底下的开发要点</p><h2 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h2><p>今天把若依的Vue3前端替换了原本的Vue2前端，仔细读了一下ruoyi的源码，发现有很多之前自己没有注意到的后端的功能，大多是为了系统的安全性和可用性，不禁感叹自己经验太少了，这个稍微记录一下</p><h3 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h3><p>每个controller有自己的logger</p><p>作为一个系统应该对系统所在的主机性能进行监测</p><p>每次操作需要有日志留存</p><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>验证码生成与验证（先生成随机数，然后转化为图片，接收到传回来的值再与初始值对比）</p><p>用户的记住登录，通过cookie实现</p><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载文件前对输入的文件名进行检测是否合法</p><h3 id="敏感内容查看"><a href="#敏感内容查看" class="headerlink" title="敏感内容查看"></a>敏感内容查看</h3><p>在调用后端的查询函数前，先使用@PreAuthorize关键字预先对请求信息的用户进行身份验证，判断其是否具有相应的权限</p><h3 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h3><p>在查询时，优先使用redis缓存，避免对数据库造成过大压力</p><h2 id="3-30"><a href="#3-30" class="headerlink" title="3.30"></a>3.30</h2><p>今天来了发现Idea更新了，这次比较大的更新是把页面给更了，尝试了一下感觉还不错，比原来更简洁了，但是好像有时候会突然报个错，看来还是beta版，多少有点问题</p><p>毕设进度的话知道了一个叫若依的项目，这个项目是一个写好的前后端系统，不过现在前端只有Vue2写的和后端集成了，这两天可以看看能不能把Vue3版本也加上去</p><h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p><p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p><h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p><p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p><p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p><p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p><h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p><p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p><h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p><p>开了改进AFL的组会</p><p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p><h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p><p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p><p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p><p>晚上出去喝酒</p><h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p><p>晚上做网络实验，继续看论文</p><h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p><h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p><p>晚上上安全系统实验，正常背单词</p><h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p><p>晚上挺凉快的</p><h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2023&quot;&gt;&lt;a href=&quot;#2023&quot; class=&quot;headerlink&quot; title=&quot;2023&quot;&gt;&lt;/a&gt;2023&lt;/h1&gt;&lt;h2 id=&quot;4-12&quot;&gt;&lt;a href=&quot;#4-12&quot; class=&quot;headerlink&quot; title=&quot;4.12&quot;&gt;&lt;/a</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>JavaScript学习记录</title>
     <link href="http://example.com/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     <id>http://example.com/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</id>
@@ -334,26 +354,6 @@
     <category term="web" scheme="http://example.com/tags/web/"/>
     
     <category term="JavaScript" scheme="http://example.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>周报/日记</title>
-    <link href="http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/"/>
-    <id>http://example.com/2022/01/13/%E5%91%A8%E6%8A%A5/</id>
-    <published>2022-01-13T09:19:53.000Z</published>
-    <updated>2023-04-12T10:09:30.507Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="4-12"><a href="#4-12" class="headerlink" title="4.12"></a>4.12</h2><p>el-select和输入框的问题都解决了，明天搞一下项目获取的问题，然后考虑一下这些用户选择的东西要怎么处理，后端的逻辑还需要明确一下。这些弄好就开始最后的重头戏了，把分库做了，目前还不确定这个要不要去改sqlsessionfactory，如果需要那就是大工程了…到时候再说吧</p><p>晚上看专业课，大概是操作系统和数据结构，还有背单词。</p><h2 id="4-11"><a href="#4-11" class="headerlink" title="4.11"></a>4.11</h2><p>昨天的问题解决了，但是也出现了新的问题，el-select的选项选择后不能同步显示，但应该不是什么大问题，明天找时间处理一下就行，另外今天也是正式拥有chatgpt账号了，不用再用国内的接口了，正式和前沿技术接轨</p><p>晚上去打台球，还要把ismart的作业做了，以及今天的背50个单词</p><h2 id="4-10"><a href="#4-10" class="headerlink" title="4.10"></a>4.10</h2><p>今天主要是继续开发备份列表的界面，然后遇到了一个小问题就是后端传回来的值能接收到，但是不能回显到el-element里面，明天再研究一下吧</p><p>之后的话不知道还要做多少，慢慢来吧</p><p>今天听到了两首很好听的歌《好想爱这个世界啊》和《逝爱的刺客》，心情变得好了不少，终于明白为什么说华晨宇关爱抑郁症患者）哈哈哈哈哈很感谢生命中出现的一些人，谢谢你们，爱我的每个人</p><p>今天也是低多巴胺生活的第一天，没有游戏，没有短视频，午饭吃沙拉，认真工作…虽然不是第一次了但还是希望这次可以坚持下去，毕竟身边出现了很棒的人！真的会带来希望！</p><p>ps：今天晚上知道的铁人三项进决赛啦，4月底去福州打比赛！！</p><h2 id="4-4-4-8"><a href="#4-4-4-8" class="headerlink" title="4.4-4.8"></a>4.4-4.8</h2><p>这几天的主要内容还是了解若依，另外就是这两天最终的毕设任务下来了，最终要做一个数据管理处理的系统出来，这两天的主要内容就是把各个模块所在位置都了解一下，在原有的系统上加入自己的页面，给新的页面配置数据层的方法。目前可以进行基本的任务创建等工作了，后续的话还需要跟leader商量一下具体的需求</p><h2 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h2><p>今天没做太多，大概还是从若依里面学习，注释了一个controller，加深理解，也方便学习，其他的就是丰富底下的开发要点</p><h2 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h2><p>今天把若依的Vue3前端替换了原本的Vue2前端，仔细读了一下ruoyi的源码，发现有很多之前自己没有注意到的后端的功能，大多是为了系统的安全性和可用性，不禁感叹自己经验太少了，这个稍微记录一下</p><h3 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h3><p>每个controller有自己的logger</p><p>作为一个系统应该对系统所在的主机性能进行监测</p><p>每次操作需要有日志留存</p><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>验证码生成与验证（先生成随机数，然后转化为图片，接收到传回来的值再与初始值对比）</p><p>用户的记住登录，通过cookie实现</p><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载文件前对输入的文件名进行检测是否合法</p><h3 id="敏感内容查看"><a href="#敏感内容查看" class="headerlink" title="敏感内容查看"></a>敏感内容查看</h3><p>在调用后端的查询函数前，先使用@PreAuthorize关键字预先对请求信息的用户进行身份验证，判断其是否具有相应的权限</p><h3 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h3><p>在查询时，优先使用redis缓存，避免对数据库造成过大压力</p><h2 id="3-30"><a href="#3-30" class="headerlink" title="3.30"></a>3.30</h2><p>今天来了发现Idea更新了，这次比较大的更新是把页面给更了，尝试了一下感觉还不错，比原来更简洁了，但是好像有时候会突然报个错，看来还是beta版，多少有点问题</p><p>毕设进度的话知道了一个叫若依的项目，这个项目是一个写好的前后端系统，不过现在前端只有Vue2写的和后端集成了，这两天可以看看能不能把Vue3版本也加上去</p><h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p><p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p><h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p><p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p><p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p><p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p><h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p><p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p><h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p><p>开了改进AFL的组会</p><p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p><h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p><p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p><p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p><p>晚上出去喝酒</p><h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p><p>晚上做网络实验，继续看论文</p><h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p><h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p><p>晚上上安全系统实验，正常背单词</p><h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p><p>晚上挺凉快的</p><h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;2023&quot;&gt;&lt;a href=&quot;#2023&quot; class=&quot;headerlink&quot; title=&quot;2023&quot;&gt;&lt;/a&gt;2023&lt;/h1&gt;&lt;h2 id=&quot;4-12&quot;&gt;&lt;a href=&quot;#4-12&quot; class=&quot;headerlink&quot; title=&quot;4.12&quot;&gt;&lt;/a</summary>
-      
-    
-    
-    
     
   </entry>
   
