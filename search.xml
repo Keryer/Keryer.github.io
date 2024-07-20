@@ -1,150 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>周报/日记</title>
-    <url>/2022/01/13/%E5%91%A8%E6%8A%A5/</url>
-    <content><![CDATA[<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="4-12"><a href="#4-12" class="headerlink" title="4.12"></a>4.12</h2><p>el-select和输入框的问题都解决了，明天搞一下项目获取的问题，然后考虑一下这些用户选择的东西要怎么处理，后端的逻辑还需要明确一下。这些弄好就开始最后的重头戏了，把分库做了，目前还不确定这个要不要去改sqlsessionfactory，如果需要那就是大工程了…到时候再说吧</p>
-<p>晚上看专业课，大概是操作系统和数据结构，还有背单词。</p>
-<h2 id="4-11"><a href="#4-11" class="headerlink" title="4.11"></a>4.11</h2><p>昨天的问题解决了，但是也出现了新的问题，el-select的选项选择后不能同步显示，但应该不是什么大问题，明天找时间处理一下就行，另外今天也是正式拥有chatgpt账号了，不用再用国内的接口了，正式和前沿技术接轨</p>
-<p>晚上去打台球，还要把ismart的作业做了，以及今天的背50个单词</p>
-<h2 id="4-10"><a href="#4-10" class="headerlink" title="4.10"></a>4.10</h2><p>今天主要是继续开发备份列表的界面，然后遇到了一个小问题就是后端传回来的值能接收到，但是不能回显到el-element里面，明天再研究一下吧</p>
-<p>之后的话不知道还要做多少，慢慢来吧</p>
-<p>今天听到了两首很好听的歌《好想爱这个世界啊》和《逝爱的刺客》，心情变得好了不少，终于明白为什么说华晨宇关爱抑郁症患者）哈哈哈哈哈很感谢生命中出现的一些人，谢谢你们，爱我的每个人</p>
-<p>今天也是低多巴胺生活的第一天，没有游戏，没有短视频，午饭吃沙拉，认真工作…虽然不是第一次了但还是希望这次可以坚持下去，毕竟身边出现了很棒的人！真的会带来希望！</p>
-<p>ps：今天晚上知道的铁人三项进决赛啦，4月底去福州打比赛！！</p>
-<h2 id="4-4-4-8"><a href="#4-4-4-8" class="headerlink" title="4.4-4.8"></a>4.4-4.8</h2><p>这几天的主要内容还是了解若依，另外就是这两天最终的毕设任务下来了，最终要做一个数据管理处理的系统出来，这两天的主要内容就是把各个模块所在位置都了解一下，在原有的系统上加入自己的页面，给新的页面配置数据层的方法。目前可以进行基本的任务创建等工作了，后续的话还需要跟leader商量一下具体的需求</p>
-<h2 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h2><p>今天没做太多，大概还是从若依里面学习，注释了一个controller，加深理解，也方便学习，其他的就是丰富底下的开发要点</p>
-<h2 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h2><p>今天把若依的Vue3前端替换了原本的Vue2前端，仔细读了一下ruoyi的源码，发现有很多之前自己没有注意到的后端的功能，大多是为了系统的安全性和可用性，不禁感叹自己经验太少了，这个稍微记录一下</p>
-<h3 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h3><p>每个controller有自己的logger</p>
-<p>作为一个系统应该对系统所在的主机性能进行监测</p>
-<p>每次操作需要有日志留存</p>
-<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>验证码生成与验证（先生成随机数，然后转化为图片，接收到传回来的值再与初始值对比）</p>
-<p>用户的记住登录，通过cookie实现</p>
-<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载文件前对输入的文件名进行检测是否合法</p>
-<h3 id="敏感内容查看"><a href="#敏感内容查看" class="headerlink" title="敏感内容查看"></a>敏感内容查看</h3><p>在调用后端的查询函数前，先使用@PreAuthorize关键字预先对请求信息的用户进行身份验证，判断其是否具有相应的权限</p>
-<h3 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h3><p>在查询时，优先使用redis缓存，避免对数据库造成过大压力</p>
-<h2 id="3-30"><a href="#3-30" class="headerlink" title="3.30"></a>3.30</h2><p>今天来了发现Idea更新了，这次比较大的更新是把页面给更了，尝试了一下感觉还不错，比原来更简洁了，但是好像有时候会突然报个错，看来还是beta版，多少有点问题</p>
-<p>毕设进度的话知道了一个叫若依的项目，这个项目是一个写好的前后端系统，不过现在前端只有Vue2写的和后端集成了，这两天可以看看能不能把Vue3版本也加上去</p>
-<h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p>
-<p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p>
-<h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p>
-<p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p>
-<p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p>
-<p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p>
-<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
-<p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
-<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
-<p>开了改进AFL的组会</p>
-<p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p>
-<h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p>
-<p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p>
-<p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p>
-<p>晚上出去喝酒</p>
-<h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p>
-<p>晚上做网络实验，继续看论文</p>
-<h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p>
-<h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p>
-<p>晚上上安全系统实验，正常背单词</p>
-<h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
-<p>晚上挺凉快的</p>
-<h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>NKCTF2023 Reverse PMKF Writeup</title>
-    <url>/2023/03/28/NKCTF2023%20Reverse%20PMKF%20Writeup/</url>
-    <content><![CDATA[<h1 id="NKCTF2023-Reverse-PMKF-Writeup"><a href="#NKCTF2023-Reverse-PMKF-Writeup" class="headerlink" title="NKCTF2023 Reverse PMKF Writeup"></a>NKCTF2023 Reverse PMKF Writeup</h1><p>拿到题目以后发现是一个exe文件，我们直接运行一下看看，会闪过一个命令行窗口，没什么有用的信息，然后我们用Exeinfo PE打开看一看，发现没有壳，是个32位的C++程序</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230326213237616.png" alt="image-20230326213237616"></p>
-<p>所以我们直接扔进x32dbg里面看看</p>
-<p>进去以后右键点击任意代码区域，然后选择搜索当前区域的字符串，发现以下字样</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326213438742.png" alt="image-20230326213438742"></p>
-<p>其中很明显有wrong、you found it这种明显提示结果的字符串，这个我们一会来看。</p>
-<p>注意到最开始有一个明显是文件路径的东西，所以我们可以猜测这个程序会从C:\nk.ctf这个文件里读出数据，所以我们就创建一个这个文件，注意C盘的根目录是不能直接创建文件的，需要从别的地方创建然后复制过来，创建之后我们随便往里面写点东西，因为题目提示写了，flag是输入的十六进制，所以我们往里面写的时候也用010editor直接写十六进制到文件里</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215627939.png" alt="image-20230326215627939"></p>
-<p>写好以后我们重新加载文件，再到搜索字符串的位置，这次我们来看怎么才能到Congratulations所在的位置，所以我们直接双击点进去，如下图</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214521307.png" alt="image-20230326214521307"></p>
-<p>然后我们从这里往上翻，就看注释和函数名即可，发现果然有一些readfile函数，而且每一次readfile后都会进行判断，都有可能会导致wrong所以我们先在第一个readfile的地方下断点看看第一次读取文件都要进行什么操作</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214755114.png" alt="image-20230326214755114"></p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214740216.png" alt="image-20230326214740216"></p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214709714.png" alt="image-20230326214709714"></p>
-<p>下断点以后点击几次运行，就会运行到断点处了</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215044222.png" alt="image-20230326215044222"></p>
-<p>大致看一下，如果不想运行到wrong，就需要在0x781113的位置跳转，而要跳转就需要eax的值为0x5，知道这些以后我们就按F8单步运行，看看eax里面的值是哪来的</p>
-<p>运行到<code>cmp eax,5</code>后我们查看eax中的值发现是<img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215805912.png" alt="image-20230326215805912">，正好是我们刚刚随便输入的第一个字节，因此我们猜测这个要求是我们输入的第一个字节是0x05，但这里我们先记下来，先直接双击这个值，把他改成0x5，然后继续运行</p>
-<p>一直按F8运行，一路无事发生，一直到运行到下一个readfile</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220203759.png" alt="image-20230326220203759"></p>
-<p>这次还是中间会遇到wrong，只不过这次是要让eax和ecx进行比较所以我们直接运行到cmp这行，这时我们查看eax和ecx的值</p>
-<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220335730.png" alt="image-20230326220335730"></p>
-<p>发现eax是0xFFFFFFFA，而ecx是0x6E，但给出了一个对应的字母是n，这里我们还是看不出跟我们的输入有什么关系，于是我们继续改eax，改成0x6E，先通过这次判断</p>
-<p>通过以后发现eax被赋予了内存中的一个值，然后加了个1，这个比较容易想到应该是for循环里面的变量++操作，所以之后也是又跳回到上面了这次再运行到cmp的时候，继续看eax和ecx的值，发现一个是0xFFFFFFAE一个是0x6B对应的字母是k，这里我们发现，这个AE和刚刚的FA好像分别是我们之前输入到文件里的第二三个字节的数据，至于之前的FFFF应该是在进行右移的时候高位是1补位导致的，而进行比对的nk两个字母，可以再回去看看我们之前搜索字符串时候看到的字符串，有一个是nkman，猜测也许这里就是要输入一个，我们继续运行几轮之后发现果然就是这几个字符</p>
-<p>到这我们可以去</p>
+    <title>CodeAlchemist</title>
+    <url>/2022/04/22/CodeAlchemist/</url>
+    <content><![CDATA[<h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol>
+<li><p>LangFuzz</p>
+<p>通过解析最初的作为种子的JS文件，将其中的语句拆分成代码段，任何重新组合片段生成测试用例。</p>
+<p>由于LangFuzz在关联代码的时候不考虑JS的语义，所以会很快发生运行时错误。</p>
+</li>
+<li><p>jsfunfuzz</p>
+<p>不需要初始的JS文件，而是通过引用手动编写的JS语料库随机产生语法正确的JS语句。</p>
+<p>超过99%的生成用例会在执行三条语句后就发生运行错误。</p>
+</li>
+<li><p>Skyfire/TreeFuzz</p>
+<p>通过从JS种子文件的语料库构建概率语言模型，来学习JS语义，再使用模型来生成用例。</p>
+<p>但这种方式依赖于语言模型的准确性。鉴于JS的复杂类型系统，这种方式也不能完全解决语义问题</p>
+</li>
+<li><p>CodeAlchemist</p>
+<p>将种子文件中的代码分解，并约束每个碎片，使之仅在特定的情况下可以被使用</p>
+<p>使用数据流分析，计算每个代码块中，使用和定义的变量，并动态获取他们的类型，只有当对应的类型可以匹配上的时候，才会进行拼接</p>
+<p>在一些情况下，也会引发语义错误，但已经大幅降低了</p>
+<p>CodeAlchemist会按照JavaScript 语句的粒度分解种子文件, 针对每个块语句生成多种变体提升代码块的丰富性, 通过对多个代码块组合产生嵌套循环等结构。</p>
+<p>CodeAlchemist提出使用数据流分析技术确定未定义变量和已定义变量, 并结合运行时插桩技术探测已执行变量的类型。 CodeAlchemist在JavaScript代码生成过程中, 不断向代码尾部扩展代码片段, 每次扩展代码片段都会确保其中的变量在之前已经被定义并且具备正确的 类 型</p>
+</li>
+</ol>
+<h2 id="2-JS语言问题"><a href="#2-JS语言问题" class="headerlink" title="2. JS语言问题"></a>2. JS语言问题</h2><h3 id="1-面向原型的语言"><a href="#1-面向原型的语言" class="headerlink" title="1. 面向原型的语言"></a>1. 面向原型的语言</h3><p>一个对象实例A只需要将另一个对象实例B设置为自己的原型，就可以在运行是继承B的属性。可以通过<code>_proto_</code>属性来确定对象实例在运行时使用哪个原型。而由于一个对象的类型可以动态更改，所以很有可能会发生语义错误</p>
+<h3 id="2-错误类型"><a href="#2-错误类型" class="headerlink" title="2. 错误类型"></a>2. 错误类型</h3><p>五种运行时错误类型</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;break&#x27;</span>);      			<span class="comment">//语法错误</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> <span class="title class_">Array</span> (<span class="number">4294967296</span>); <span class="comment">//范围错误</span></span><br><span class="line">u;								<span class="comment">//引用错误</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="number">10</span>; <span class="title function_">t</span>();				<span class="comment">//类型错误</span></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%&#x27;</span>);		<span class="comment">//URI错误</span></span><br></pre></td></tr></table></figure>
+
+<p>对于第一行的eval函数，语句本身在语法上是正确的，但在实际运行时会引发语法错误</p>
+<h2 id="3-CodeAlchemist架构"><a href="#3-CodeAlchemist架构" class="headerlink" title="3. CodeAlchemist架构"></a>3. CodeAlchemist架构</h2><img src="https://img1.3s78.com/codercto/97d8a767902c2febf1786c0e63b5506a" alt="CodeAlchemist：用于在JavasScript引擎中查找漏洞的代码生成工具" style="zoom:150%;">
+
+<p>其主要包含三个部分：Seed Parser 模块将 JS seeds 分解为不同的代码块，Constraint analyzer 模块为每个代码块推断出其组合约束条件，Engine fuzzer 则根据组件约束条件池中的代码块，生成测试用例并针对目标 JS 引擎执行生成的测试用例。如果引擎崩溃，它会在文件系统上存储相应的测试用例。</p>
+<h2 id="4-语义感知组件"><a href="#4-语义感知组件" class="headerlink" title="4. 语义感知组件"></a>4. 语义感知组件</h2><p>是一种用于JS引擎的测试用例生成算法，将JS种子碎片化成若干可以组合的代码块，一个代码块就是一小段有效的JS抽象语法树.</p>
+<p>具体而言，组合约束条件包含两种：先决条件和后置条件。先决条件是一组变量及其类型，需要预先定义这些符号从而可以在没有运行时错误的情况下执行代码块。后置条件描述了在代码块的末尾定义了哪种变量，并在后面可被其他代码块使用。</p>
 ]]></content>
       <categories>
-        <category>逆向实践</category>
+        <category>论文笔记</category>
       </categories>
       <tags>
-        <tag>Reverse</tag>
-        <tag>CTF</tag>
+        <tag>CodeAlchenmist</tag>
+        <tag>Fuzzing</tag>
       </tags>
   </entry>
   <entry>
-    <title>New 160 Crackme 6-10</title>
-    <url>/2023/03/21/New%20160%20Crackme%206-10/</url>
-    <content><![CDATA[<h1 id="New-160-Crackme-6-Reg"><a href="#New-160-Crackme-6-Reg" class="headerlink" title="New 160 Crackme-6 Reg"></a>New 160 Crackme-6 Reg</h1><p>算法 ：★</p>
-<p>爆破 ：★</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>拖进PEID发现没壳，但依然是没见过的编程语言</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215405148.png" alt="image-20230221215405148"></p>
-<p>然后我们直接打开程序看看，发现让我们填用户名和SN，随便填一个以后，会自己生成一个dll文件，这个dll文件里面会存起来我们输进去的username和SN，然后我们要重启程序来验证注册码</p>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>大概知道程序能干什么之后，还是直接拖进OllyDBG，老规矩先搜字符串，然后在最底下，发现了这样一段话<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215749432.png" alt="image-20230221215749432"></p>
-<p>猜测告知有效期了应该就是注册成功了，所以我们跟进看一看。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223165907229.png" alt="image-20230223165907229"></p>
-<p>注意到“有效期至”和未注册之间的命令是顺序执行的，而下面会有一个跳转，所以猜测应该是两个输出结果都放进内存里面，之后由程序决定输出哪个。而之后的跳转，如果跳转成功，会直接跳转到结尾部分，所以不能让其正常跳转。经过几次尝试之后。发现这个跳转应该是用来检测是否有dll文件的，所以正常来说这个跳转不用去管它。</p>
-<p>接下来几行执行完之后发现堆栈基本上没有太有价值的变化，所以我们继续往下执行，接下来到reg.dll之后又出现了Username和SN猜测接下来三个函数应该是打开dll并从中读取Username和SN。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204637015.png" alt="image-20230223204637015"></p>
-<p>执行完第二个函数后果然把之前输入的用户名读出来了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204927665.png" alt="image-20230223204927665"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205025878.png" alt="image-20230223205025878"></p>
-<p>继续执行完第三个函数，发现把SN码也读出来了</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205103081.png" alt="image-20230223205103081"></p>
-<p>接下来把我们输入的两个值分别赋给EAX和EDX，底下又是一个函数，这个显然是要传参了，而这个函数以我们输入的值为参数，不出意外的话应该就是验证算法所在的函数了，所以我们在这里用f7进入函数看一下究竟是怎么验证的。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205511142.png" alt="image-20230223205511142"></p>
-<p>进入这个函数之后，前几行都是用来开辟栈空间的，我们不用管，然后看到程序将ECX清零，然后又把0x0019FD74-0x0019FD6C的位置都清0，接下来又把0x0019FD88和0x0019FD90清零了，然后把我们输入的SN放在0x0019FD94，把用户名放在0x0019FD98。接下来两个函数，一个以用户名为参数，一个以SN为参数，需要注意一下</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205836081.png" alt="image-20230223205836081"></p>
-<p>但其实进去看了以下并没有发生什么，所以我们继续往下走。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223212113728.png" alt="image-20230223212113728"></p>
-<p>接下来看到一个函数，紧接着一个跳转，查看一下这个跳转目标地址发现如果发生跳转就会跳到几乎要结束的位置，所以不能跳，而如果不跳就需要让EAX为0x10，所以而函数执行前EAX的值是我们输入的SN码，因此这个函数应该会决定EAX的值，我们进去看一看。发现是eax-0x4这个位置的值，我试了几次以后发现这个值应该是SN码的长度，也就是说SN码需要是16位的。</p>
-<p>然后接下来是对序列码进行一轮检验，应该是要求序列码只能有十六进制字符。</p>
-<p>接下来继续运行获得了一个日期和一个字符串，发现正好是一个十六位的字符串，猜测这个就是正确的序列号，试验后果然可以，至此结束。</p>
-<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><p>这道题爆破可以从算法Call后面的关键函数下手，把那个je指令nop掉就可以了</p>
-<p>或者可以把算法Call的入口改为让eax返回我们需要的值然后直接retn</p>
-<h1 id="New-160-Crackme-7"><a href="#New-160-Crackme-7" class="headerlink" title="New 160 Crackme-7"></a>New 160 Crackme-7</h1><p>算法 ：★★</p>
-<p>爆破 ：★</p>
-<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2>]]></content>
-      <categories>
-        <category>逆向实践</category>
-      </categories>
-      <tags>
-        <tag>Reverse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux内核完全注释</title>
-    <url>/2023/03/18/Linux0.11/</url>
-    <content><![CDATA[<h1 id="Linux内核完全注释（1）"><a href="#Linux内核完全注释（1）" class="headerlink" title="Linux内核完全注释（1）"></a>Linux内核完全注释（1）</h1><p>赵博士这本书是一本很厚实的书，涉及到Linux的各个方面，早就想要一读，可惜一直没有找到时间，现在大四了终于有时间读一读，也是复习和进一步理解Linux系统内核的好机会。这个系列可能会断断续续更新很久，希望不会烂尾。</p>
-<h2 id="第2章-微型计算机组成结构"><a href="#第2章-微型计算机组成结构" class="headerlink" title="第2章 微型计算机组成结构"></a>第2章 微型计算机组成结构</h2><p>由于操作系统是应用程序与硬件沟通的桥梁，我们在学习操作系统时，必不可少地需要先具备一定的硬件知识。</p>
-<blockquote>
-<p>除了CPU以外，现代PC机主板主要使用两个超大规模芯片构成的芯片组组成：北桥芯片和南桥芯片。北桥芯片用于与CPU、内存和AGP视频接口，这些接口具有很高的传输速率。北桥芯片还起着存储器控制作用，因此Intel把该芯片标号为MCH芯片。南桥芯片用于管理低、中速的组件，例如PCI总线、IDE硬盘接口、USB端口等，因此南桥芯片的名称为ICH芯片。</p>
-</blockquote>
-<h2 id="第3章-内核编程语言和环境"><a href="#第3章-内核编程语言和环境" class="headerlink" title="第3章 内核编程语言和环境"></a>第3章 内核编程语言和环境</h2><p>在Linux 0.1系统中使用两种汇编器，一个是能产生16位代码的as86汇编器和ld86链接器，在Linux中被用来创建16位的引导扇区程序boot/bootsect.s和实模式下初始设置程序boot/setup.s的二进制代码，主要特点是小巧快速，有宏和错误检测功能。另一个是GNU的汇编器gas，使用GNU ld链接器。</p>
-<p>as86汇编器和Intel的汇编语言语法是不兼容的，其操作数的次序与GNU as相反。</p>
-<p>as86接收的汇编语言语句可以是只包含空格、制表符和换行符的空行，也可以是赋值语句或定义语句、伪操作语句和机器指令语句。每个操作码都以一个“.”字符开始，点字符本身是一个特殊的符号，代表着编译过程中的位置计数器，其值是点符号出现处机器指令第一个字节的地址。</p>
-<p>机器指令语句是可执行机器指令的助记符，由操作码和0个或多个操作数构成。在任何语句之前都可以有标号，标号是由一个标识符后跟一个冒号：组成，在编译过程中，汇编器遇到一个标号后，会将当前位置计数器的值赋给这个标号</p>
-]]></content>
+    <title>DOM启蒙</title>
+    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
+    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
+<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
+<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
       <categories>
         <category>啃书笔记</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
-        <tag>Binary</tag>
+        <tag>Web</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Coverage-based Greybox Fuzzing as Markov Chain</title>
+    <url>/2021/12/14/Coverage-based-Greybox-Fuzzing-as-Markov-Chain/</url>
+    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们发现多数测试检测相同且小量的“高频”路径，发展很多策略，通过向低频路径倾斜，用相同数量的测试样例来探索更多“低频”路径</p>
+<p>马尔可夫链模型指出模糊测试一个执行路径i的种子生成执行路径j的输入的可能性。</p>
+<p>每个种子有“能量”用于指出这个种子生成的输入数</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>最主要的问题就是测试程序的不同路径</p>
+<p>如果发现了新路径，就在此基础上进行修改，否则丢弃</p>
+<p>我们让每一个seed都有一个energy，然后energy指定下一次生成的输入</p>
+<p>将低能量分配给执行高频路径的种子，而把高能量分配给执行低频路径的种子</p>
+<p><a href="https://blog.csdn.net/u014578266/article/details/89042473">https://blog.csdn.net/u014578266/article/details/89042473</a></p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>AFLFAST</tag>
       </tags>
   </entry>
   <entry>
@@ -473,91 +406,197 @@
       </categories>
   </entry>
   <entry>
-    <title>SSLGuard A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders</title>
-    <url>/2023/02/27/SSLGuard%20A%20Watermarking%20Scheme%20for%20Self-supervised%20Learning%20Pre-trained%20Encoders/</url>
-    <content><![CDATA[<h1 id="SSLGuard-A-Watermarking-Scheme-for-Self-supervised-Learning-Pre-trained-Encoders"><a href="#SSLGuard-A-Watermarking-Scheme-for-Self-supervised-Learning-Pre-trained-Encoders" class="headerlink" title="SSLGuard: A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders"></a><strong>SSLGuard: A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders</strong></h1><p>作者：Tianshuo Cong    Xinlei He    Yang Zhang</p>
-<p>清华大学高等研究院</p>
-<p>亥姆霍兹信息安全中心</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在图像分类任务中，以监督学习(Supervised learning)为主的深度学习模型在过去几年里取得巨大成功，但是监督学习依赖高质量的有标签的数据，且泛化能力较差。与此同时，无标签的数据随时随地都能生成，自监督学习(Self-supervised learning)试图解决如何利用没有标签的数据预训练出和监督学习性能相当的编码器，预训练好的编码器可以被下游任务使用。对比学习(Contrastive learning)是自监督学习的经典范式，其核心是构建正负样本集来产生“标签”，从而指导模型进行训练。SimCLR, MoCo和BYOL是近年来最经典的对比学习算法。</p>
-<p>由于自监督预训练编码器可以在多个下游任务场景中使用，并且训练成本昂贵，模型的基本信息(结构，参数等)通常被视为模型持有者的知识产权。在实际生活中，想使用自监督编码器的个体通常难以承受训练成本，因此AI公司可以将自监督学习编码器部署在云端使其商业化，即Encoder-as-a-Service (EaaS)，如GPT-3。EaaS通常向客户提供API来上传数据和返回计算结果(embedding)。但是，敌手可以同样访问此API来发起模型窃取攻击，进而在本地训练出性能相当的编码器，并且训练成本极低。敌手可以生成盗版模型(surrogate encoders)以本地使用来减少访问费用，甚至可以部署到云端形成商业竞品，侵犯原模型持有者的知识产权。因此，本文通过向自监督学习编码器嵌入水印来保护模型的知识产权。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215104005814.png" alt="image-20221215104005814"></p>
-<h2 id="工作概述"><a href="#工作概述" class="headerlink" title="工作概述"></a>工作概述</h2><p>本文提出SSLGuard框架，通过在预训练编码器中嵌入水印，来保护模型的知识产权。SSLGuard是首个针对自监督学习模型的水印算法。同时，针对自监督学习模型的模型窃取攻击也是被首次研究。以往针对监督学习模型的水印算法被证明很难抵抗模型窃取攻击(知识蒸馏)，SSLGuard通过引入shadow encoder来本地模拟模型窃取攻击，从而保证SSLGuard可以在surrogate encoder中提取出水印信息。另外，SSLGuard不受下游任务限制，仅从embbeding层面进行水印的嵌入与提取。</p>
-<p>SSLGuard的工作流程如下图所示。给定一个要保护的目标编码器(绿色)，SSLGuard可以生成一个嵌有水印的编码器(黄色)以及水印验证组件(key-tuple)。模型持有者能够利用key-tuple完成模型水印的提取，以及将水印编码器部署到云端来抵抗模型窃取攻击。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215104653972.png" alt="image-20221215104653972"></p>
-<h2 id="工作细节"><a href="#工作细节" class="headerlink" title="工作细节"></a>工作细节</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>SSLGuard的设计需要满足以下5条性质：</p>
+    <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
+    <url>/2022/04/22/FuzzIL/</url>
+    <content><![CDATA[<h1 id="FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines"><a href="#FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines" class="headerlink" title="FuzzIL：Coverage Guided Fuzzing for JavaScript Engines"></a>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>工作目标是引导测试工具来测试脚本解释器，这需要在代码上定义在语义上有效的突变。然而，与现有的突变语法方式不同（如代码的文本形式或语法树），突变是在新设计的中间语言（IL）上进行的。基于其形式，其可以轻松执行控制流和数据流突变。<strong>这反映了，程序的句法属性无关紧要</strong>。此外，该系统可以以高概率生成语义上有效的样本。这避免了将生成的代码包装到try-catch结构中。</p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>总的来说是为了开发一款工具，该工具还是基于覆盖率的。</p>
+<p>首先，语法上无效的程序一般无法通过解析阶段，所以生成的代码需要在语法上是合法的。</p>
+<p>其次，鉴于基于覆盖率进行指导模糊测试，我们需要定义合理的突变，以在突变时能够保留样本的大多数interesting features，以突变出更多的interesting cases。因此有必要定义能够改变程序控制流和数据流的突变，因为这是组件最终处理的内容。</p>
+<blockquote>
+<p>程序是从上到下顺序执行的，同时可以通过一些控制语句来改变执行的路线，受控制语句影响下，程序最终的执行路线就是控制流。</p>
+<p>js 里面的控制语句有 if、for、while、try-catch 等，它们都会改变程序的走向。</p>
+<p>程序是操作数据的，随着程序的运行，也就是控制流的前进而改变的数据叫做数据流。</p>
+<p>很明显，数据流是依赖控制流的，程序分析里面的数据流分析也是要先做控制流分析。</p>
+<p>比如这样一段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> (a === <span class="number">1</span>) &#123;</span><br><span class="line">    b = <span class="string">&#x27;1111&#x27;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    b = <span class="string">&#x27;2222&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为 a 为 1，所以会执行到 <code>b = &#39;1111&#39;;</code>，这就是控制流，也就是程序最终执行的代码，可以用来分析程序的走向，做一些死代码删除之类的优化。</p>
+<p>而随着控制流的执行，b 会被赋值为 2222，这就是数据流，也就是值的变化的过程，可以用来分析某个语句的变量的值。</p>
+</blockquote>
+<p>最后，还有处理语义上无效的程序的临时解决方案，我们知道使用try-catch语句会导致漏报一些漏洞，我们的系统需要产生较高比例的语义有效程序，以避免try-catch结构的使用。但是，由于一些漏洞是通过内部异常而发现的，所以完全的语义正确性也是不可取的。</p>
+<blockquote>
+<p>try-catch语句</p>
+<p>try/catch/finally语句是JS中的异常处理机制。try子句用于定义要处理其中异常的代码块，catch子句是在try块中的语句发生异常后会被调用的语句。（finally块中是清理代码）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//正常情况下，这里的代码会从头到尾执行，</span></span><br><span class="line">	<span class="comment">//不会出现问题。但有时候也可能抛出异常：</span></span><br><span class="line">	<span class="comment">//直接通过throw语句抛出，或者由于调用</span></span><br><span class="line">	<span class="comment">//了一个抛出异常的方法而抛出</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(e)&#123;</span><br><span class="line">    <span class="comment">//当且仅当try块抛出异常时，才会执行这个</span></span><br><span class="line">    <span class="comment">//块中的语句。这里的语句可以使局部变量e</span></span><br><span class="line">    <span class="comment">//引用被抛出的Error对象。这个块可以以</span></span><br><span class="line">    <span class="comment">//某种方式来处理异常，也可以什么也不做</span></span><br><span class="line">    <span class="comment">//以忽略异常，还可以通过throw重新抛出异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个具体的例子</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//请用户输入一个数值</span></span><br><span class="line">	<span class="keyword">let</span> n = <span class="title class_">Number</span>(<span class="title function_">prompt</span>(<span class="string">&quot;Please enter a positive integer&quot;</span>,<span class="string">&quot;&quot;</span>));</span><br><span class="line">	<span class="comment">//假设输入有效，继续计算该数值的阶乘</span></span><br><span class="line">	<span class="keyword">let</span> f = <span class="title function_">factorial</span>(n);</span><br><span class="line">	<span class="comment">//显示结果</span></span><br><span class="line">	<span class="title function_">alart</span>(n + <span class="string">&quot;!=&quot;</span> + f);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(ex)&#123;			<span class="comment">//如果用户的输入无效，则会跳转到这里</span></span><br><span class="line">	<span class="title function_">alart</span>(ex);		<span class="comment">//告诉用户发生了什么错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>总到来说，我们有三条需求：</p>
+<ol>
+<li>产生语法上有效的样本</li>
+<li>定义影响程序控制流和数据流的突变类型</li>
+<li>产生高比例的语义有效样本</li>
+</ol>
+<h2 id="Coverage-Guide-JavaScript-Fuzzing"><a href="#Coverage-Guide-JavaScript-Fuzzing" class="headerlink" title="Coverage Guide JavaScript Fuzzing"></a>Coverage Guide JavaScript Fuzzing</h2><h3 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h3><p>在更接近引擎内部表示的“字节码”级别上进行突变，而不是突变AST或者文本代码段等表示的句法结构。本质上，字节码级别类似于控制和数据流图，这是大多数攻击最终所需要的到达的级别，而语法信息（如AST）则在解析过程中很大程度上会被丢弃。</p>
+<p><img src="/.com//1.jpg" alt="1"></p>
+<p>因此我们定义了一种名为FuzzIL的中间语言，这样我们可以定义一些在AST层面上不容易实现的突变策略。</p>
+<p>为了满足第三条需求，我们首先注意到，由于每个突变执行的变化相对较小，所以改变语义有效性的概率也就较小。此外，所有突变都必须遵守IL的一套语义正确性的规则，在变量使用前要先进行定义等操作。最后可以将变异出的语义上无效的程序百分比维持在一个可以接受的程度上。</p>
+<h3 id="FuzzIL"><a href="#FuzzIL" class="headerlink" title="FuzzIL"></a>FuzzIL</h3><p>易于突变，同时允许直接转换为JS代码</p>
+<p>FuzzIL程序由指令列表组成,每个指令列表又由一个操作以及输入和输出变量列表组成</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">v0 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;0&#x27;</span>							<span class="comment">//const v0 = 0;</span></span><br><span class="line">v1 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;10&#x27;</span>							<span class="comment">//const v1 = 10;</span></span><br><span class="line">v2 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;1&#x27;</span>							<span class="comment">//const v2 = 1;</span></span><br><span class="line">v3 &lt;- <span class="title class_">Phi</span> v0								<span class="comment">//let v3 = v0;</span></span><br><span class="line"><span class="title class_">BeginFor</span> v0, <span class="string">&#x27;&lt;&#x27;</span>, v1, <span class="string">&#x27;+&#x27;</span>, v2 -&gt; v4			<span class="comment">//for(let v4 = v0; v4 &lt; v1; v4 = v4 + v2)&#123;</span></span><br><span class="line">		v6 &lt;- <span class="title class_">BinaryOperation</span> v3, <span class="string">&#x27;+&#x27;</span>, v4	<span class="comment">//		const v6 = v3 + v4;</span></span><br><span class="line">		<span class="title class_">Copy</span> v3, v6							<span class="comment">//		v3 = v6;</span></span><br><span class="line"><span class="title class_">EndFor</span>										<span class="comment">//&#125;</span></span><br><span class="line">v7 &lt;- <span class="title class_">LoadString</span> <span class="string">&#x27;Result: &#x27;</span>					<span class="comment">//const v7 = &quot;Result: &quot;;</span></span><br><span class="line">v8 &lt;- <span class="title class_">BinaryOperation</span> v7, <span class="string">&#x27;+&#x27;</span>, v3			<span class="comment">//const v8 = v7 + v3;</span></span><br><span class="line">v9 &lt;- <span class="title class_">LoadGlobal</span> <span class="string">&#x27;console&#x27;</span>					<span class="comment">//const v9 = console;</span></span><br><span class="line">v10 &lt;- <span class="title class_">CallMethod</span> v9, <span class="string">&#x27;log&#x27;</span>, [v8]			<span class="comment">//const v10 = v9.log(v8);</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>let</code>命令，用来声明变量。它的用法类似于<code>var</code>，但是所声明的变量，只在<code>let</code>命令所在的代码块内有效。</p>
+<p><img src="../AppData/Roaming/Typora/typora-user-images/image-20220128195045584.png" alt="image-20220128195045584"></p>
+<p>JavaScript 原生中默认是没有 Console 对象,这是宿主对象（也就是浏览器）提供的内置对象。用于访问调试控制台, 在不同的浏览器里效果可能不同。</p>
+</blockquote>
+<p>显示了由12个指令组成的程序实例,计算数字从0到9的总和并输出,变量通过整数识别,并且需要在每个单独的程序中从0开始依次连续编号</p>
+<h3 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h3><p>突变的目的是将已有的程序转化为不同的程序，但要保存其有趣的特征</p>
 <ul>
-<li>保真性 (Fidelity)：SSLGuard需最小化对原模型性能的影响，即原模型的预测准确率基本保持不变</li>
-<li>有效性 (Effectiveness)：模型拥有者可以成功地从嵌有水印的模型中提取出水印信息</li>
-<li>不可检测性 (Undetectability)：非模型拥有者无法谎称模型的版权拥有，即无法从水印模型中成功提取出水印</li>
-<li>高效性 (Efficiency)：SSLGuard嵌入水印所需计算成本要低</li>
-<li>鲁棒性 (Robustness)：SSLGuard需抵抗多种水印擦除攻击</li>
+<li>输入突变器：改变输入的参数变量</li>
+<li>操作突变器：改变操作参数</li>
+<li>插入突变器：将新生成的代码插入到程序</li>
+<li>组合突变器：将现有的两个程序组合到一起</li>
+<li>拼接突变器：将现有程序的一部分插入另一个程序</li>
 </ul>
-<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><h4 id="1-水印嵌入"><a href="#1-水印嵌入" class="headerlink" title="1. 水印嵌入"></a>1. 水印嵌入</h4><p>文中为达到以上目标设计了三个基本损失函数：</p>
-<p><em>Lcorr</em>函数的目标是计算𝐷𝑣中所有元素提取出的向量与秘密向量的平均相似度，并使得这个相似度在训练的过程中越来越高</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215111938656.png" alt="image-20221215111938656"></p>
-<p><em>Luncorr</em>函数的目标是计算𝐷中所有元素提取出的向量与秘密向量的平均相似度，并使得这个相似度在训练的过程中越来越低</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215111945252.png" alt="image-20221215111945252"></p>
-<p><em>Lmatch</em>函数的目标是计算𝐷中所有元素输入模型后得到的两个embedding的相似度，并使得这个相似度在训练的过程中越来越高</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215112020029.png" alt="image-20221215112020029"></p>
-<p>（1）训练shadow encoder：此部分是用来模拟模型窃取攻击。通过把来自shadow dataset的同一张图片分别输入clean encoder和shadow encoder，使其embedding的相似度变高来训练shadow encoder。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105400086.png" alt="image-20221215105400086"></p>
-<p>其中<em>Ls</em> 定义为：</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215122733142.png" alt="image-20221215122733142"></p>
-<p>目标是提高通过<em>Ds</em>窃取的水印模型的输出和水印模型本身的输出的相似度。</p>
-<p>（2）训练trigger和decoder：SSLGuard的目标是把𝐷𝑣的图片编码到事先指定的秘钥sk附近（cosine similarity较高），而来自非𝐷𝑣的图片产生的embedding都远离sk。同样需保证此性质在shadow encoder中成立。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105610436.png" alt="image-20221215105610436"></p>
-<p>其中𝐷𝑣由下面的方法构成。其中M是一个掩码，用于确定在新的数据集𝐷𝑣中，原数据集元素与插入的Trigger的权重。即M的值越大，新数据集中的元素相对于原数据集中的元素的更改越大。在本轮训练过程中，目标是训练T和G，使得G能够从模型输出的embedding中解码出T的特征</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215110901749.png" alt="image-20221215110901749"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215110914858.png" alt="image-20221215110914858"></p>
-<p>而<em>LTD</em>由以下方式定义：</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215122954694.png" alt="image-20221215122954694"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123001004.png" alt="image-20221215123001004"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123007516.png" alt="image-20221215123007516"></p>
-<p>(3) 训练水印模型：嵌入水印的模型首先要保证保真性，即对于来自𝐷𝑡(与预训练数据集的分布相同)数据集的图片产生的embedding，需与原模型的embedding相似，同时还需保证可以成功提取出sk。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105658637.png" alt="image-20221215105658637"></p>
-<h4 id="2-水印提取"><a href="#2-水印提取" class="headerlink" title="2. 水印提取"></a>2. 水印提取</h4><p>本文中的水印提取其实并非将打入模型中的水印真的提取出来，因为文中的水印指的是使得模型具有区分验证数据集的能力，这种能力本身无法提取出来，文中水印提取指的是通过使用验证数据集进行验证，目标模型是否具有这种区分特殊数据集的能力，以验证水印的存在。</p>
-<p>具体来讲，SSLGuard利用key-tuple中的验证数据集，以及解码器G，从待验证的编码器中获得解码向量sk’，若sk’与sk的余弦相似度大于设定阈值 (如文中设置的0.5)，即可判断模型的归属权。作者利用watermark rate (WR) 作为判断模型所有权的检测值，即验证数据集中的图片被编码到sk附近的比率。需要说明的是，在高维空间中，两个随机向量几乎是正交的，即其夹角的余弦值分布近似成均值为0的高斯分布，且维度越高，余弦值为0的概率越大。此条性质可以保证提取出与sk余弦值靠近的sk‘是证明模型所有权的“强信号”，且可保证SSLGuard性质中的不可检测性。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215110028888.png" alt="image-20221215110028888"></p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><h4 id="原模型的下游任务准确率"><a href="#原模型的下游任务准确率" class="headerlink" title="原模型的下游任务准确率"></a>原模型的下游任务准确率</h4><p>给定三个干净的SSL预训练编码器（即，由SimCLR、MoCo v2和MmageNet上的BYOL预训练），作者首先测量它们的下游精度(表示为干净下游精度（CDA）。作者考虑了4个下游分类任务，即STL-10、CIFAR-10、MNIST和F-MNIST。准确率如表2所示。我们观察到，SSL预训练的编码器可以在不同的下游任务上取得显著的性能，这意味着SSL预训练的编码器可以从一个任务（即ImageNet）学习高级语义信息，而信息嵌入可以推广到其他任务（即STL-10和CIFAR-10）。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215181628950.png" alt="image-20221215181628950"></p>
-<h4 id="训练自监督模型的成本"><a href="#训练自监督模型的成本" class="headerlink" title="训练自监督模型的成本"></a>训练自监督模型的成本</h4><p>表3显示了SSL预训练SSL编码器的成本比，这说明了SSL模型的成本保护SSL预训练编码器的版权的必要性。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123817335.png" alt="image-20221215123817335"></p>
-<h4 id="模型窃取攻击过程中的影响因素"><a href="#模型窃取攻击过程中的影响因素" class="headerlink" title="模型窃取攻击过程中的影响因素"></a>模型窃取攻击过程中的影响因素</h4><p>图4显示了对于使用不同的体系结构，即ResNet-18、ResNet-34、ResNet-50或ResNet-101进行窃取。最后在结果中观察到，如果输出维度不同于ResNet-50（受害者编码器的体系结构），例如，ResNet-18/ResNet-34输出512维嵌入，作者利用一个额外的线性层将它们转换为2048维。代理编码器的DA总结如图4所示。一般的趋势是，代理编码器的体系结构越深，它在下游任务上可以实现的性能就越好。</p>
-<p>图5显示了对于使用STL-10训练的SimCLR、MoCo v2、BYOL模型，使用STL-10、CIFAR-10、FashionMNIST、MNIST四个数据集进行窃取攻击所获得的下游任务准确率，这显示了当查询数据集与训练前数据集相同时，模型窃取攻击更有效。另一个观察结果是，窃取数据集的分布也可能影响不同任务上的准确率。</p>
-<p>图6显示了在窃取攻击中使用不同的相似性函数，对窃取到的模型的下游任务准确率的影响，在这里，作者假设窃取者利用ResNet-50作为代理模型的架构，而STL-10作为查询数据集。结果显示，余弦相似性在大多数设置下优于MAE和MSE。<strong>这可能归功于余弦相似度的归一化效应，这有助于更好地学习嵌入。</strong></p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123800541.png" alt="image-20221215123800541"></p>
-<h4 id="SSLGuard"><a href="#SSLGuard" class="headerlink" title="SSLGuard"></a>SSLGuard</h4><h4 id="有效性"><a href="#有效性" class="headerlink" title="有效性"></a>有效性</h4><p>然后作者评估了SSLGuard的有效性。具体地说，作者检查模型所有者是否可以从水印编码器中提取水印。模型所有者应该能够从水印编码器和窃取编码器中验证出水印，而从原始编码器中，不能得到水印信息。实验结果如表4所示，F∗和Fs的WR均为1.00，这意味着编码器F∗和Fs都包含了Dv和sk的信息。同时，F的WR为0.00，SSLGuard并不会将一个干净的编码器识别为水印编码器</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215205658176.png"></p>
-<h4 id="性能干扰"><a href="#性能干扰" class="headerlink" title="性能干扰"></a>性能干扰</h4><p>随后作者检测了SSLGuard是否会对原编码器的结果造成干扰，作者以BYOL为例，使用t-分布式邻域嵌入（t-SNE）将Fbyol（由BYOL预训练的干净编码器）和F∗BYOL的嵌入输出可视化，如图7所示。观察到F byol和F∗byol的t-SNE结果几乎相同，嵌入都被两个编码器成功地分离。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123842845.png" alt="image-20221215123842845"></p>
-<p>表5中则显示了在其他状态下的水印编码器与原编码器的性能差异，结果显示，水印编码器的DA与干净编码器的DA几乎相同。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123853619.png" alt="image-20221215123853619"></p>
-<h4 id="不可检测性"><a href="#不可检测性" class="headerlink" title="不可检测性"></a>不可检测性</h4><p>然后，作者检查水印是否可以通过一个不匹配的键元组来提取。作者通过SSLGuard生成了三个Key向量： κ simclr，κ moco和κ byol。作者使用其中一个K向量来验证其他水印编码器。如表6所示，作者可以看到在无匹配对中的WR都是0.00，这意味着没有与水印相匹配的密钥，无法检测出模型中是否被加入的水印。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123901406.png" alt="image-20221215123901406"></p>
-<h4 id="可操作性"><a href="#可操作性" class="headerlink" title="可操作性"></a>可操作性</h4><p>SSLGuard在只使用了一个GPU的情况下，分别使用17.5小时、17.36小时和10.70小时注入SimCLR、MoCo v2和BYOL，分别占SSL编码器训练前时间成本的29.17%、8.19%和14.86%，水印提取时间分别为1.51s、2.08s和1.82s。这比训练编码器本身所需时间要少得多，这说明这种加入水印的方式是理论可行的。</p>
-<h4 id="鲁棒性"><a href="#鲁棒性" class="headerlink" title="鲁棒性"></a>鲁棒性</h4><p>为了验证SSLGuard具有鲁棒性，作者对每个窃取攻击中使用的输入图像加入高斯噪声，为x0 = x+ε1·N（0,1）。当使用不同的ε1时，作者评估四个下游任务和DA的WR。WR的结果如图8a所示，DA如图9a所示。首先观察到DA随着ε1的增加而下降。而对于SimCLR、MoCo和BYOL上的不同ε1，WR始终为1.00。这可能是因为Dv的分布太特殊了，所以水印编码器可以记住这些特殊的样本，该实验表明对输入噪声攻击是鲁棒性的。</p>
-<p>此外，对手还可以通过在编码器输出的embedding中加入噪声，于是作者设计实验给每个编码器产生的embedding加入高斯噪声，为h0 = h + ε2·N（0,1），其中h为原始embedding，h0为扰动embedding，ε2为控制噪声水平的超参数。然后，作者在不同的ε2上评估DA和WR。从图9b中，可以观察到，随着ε2的增加，DA减少。然而，所有水印编码器的WR都保持在0.50以上（见图8b），这意味着将噪声嵌入到解码器时，仍然可以成功提取秘密向量。因此，即使对手以降低模型的性能为代价，向embedding中添加随机噪声，也不能删除水印。</p>
-<p>对手可能会通过利用截断embedding中的小数位数来降低embedding的精度。于是作者设计实验为嵌入中的每个值保留k个小数位。图8c和图9c显示了不同k下的WR和DA。可以观察到，当k从1减小到0时，DA会急剧下降。同时，除MoCo以外，其他编码器的WR均在0.5以上，虽然当k=为0时，MoCo的WR下降到0.00，但此时STL-10上的DA仅为0.10。因此，对手不能从编码器中删除水印，同时保留其功能</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123913078.png" alt="image-20221215123913078"></p>
-<p>对手还可以利用SSLGuard向SSL编码器注入新的水印，不管他们是否知道编码器已经注入了水印。作者希望确认在水印叠加的情况下依然可以有效提取水印。在表7中观察到，虽然用一个新的键元组覆盖水印编码器来生成一个新的编码器，但原始水印仍然保留，即新编码器中原始水印的WR为1.00。这表明，即使对手在模型中覆盖一个新的水印，仍然可以保留原始的水印。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123923572.png" alt="image-20221215123923572"></p>
-<p>剪枝技术是一种水印去除攻击，因为许多神经元可能被禁用，这降低了水印的有效性。在这一部分中，作者利用全局和局部的非结构化剪枝方法来处理水标编码器。在全局剪枝设置中，作者将卷积层中绝对值最小的卷积层中权重的r个分数设为0。局部剪枝的目的是在同一层中修剪绝对值最小的连接比例。图10和图11的前两个子图中显示了该组WR和DA。可以观察到，随着全局修剪比例的增加，DA和WR略有下降。而在局部修剪方面，DA有较大的下降趋势。</p>
-<p>在修剪后，对手可以在受害者编码器的监督下微调代理编码器。这个过程也被称为精细修剪。微调的目标是重新获得DA的下降。作者通过MSE损失函数来微调修剪过的编码器的所有权重（全局和局部）。我们注意到，WR如图10c和图10d所示，DA如图11c和图11d所示。这意味着SSLGuard对微调是健壮的。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123940867.png" alt="image-20221215123940867"></p>
-<p>然后，作者通过模型窃取攻击的镜头来量化SSLGuard的鲁棒性。请注意，作者只考虑最有效的代理编码器的架构和最有效的查询数据集。具体来讲，作者将ResNet-50和ResNet-101作为代理编码器的架构，将STL-10作为查询数据集。作者命名为三个攻击Steal1，Steal2，和Steal3。每次攻击的细节如表8所示。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123931603.png" alt="image-20221215123931603"></p>
-<p>不同攻击的WR和DA如表9所示。可以观察到，虽然模型窃取攻击窃取到了水印编码器，但我们可以通过验证窃取到的模型的所有权。SSLGuard注入的水印仍然可以保留在被对手窃取的代理编码器中。我们对窃取-1和窃取-3也有类似的观察，这证明了SSLGuard在模型窃取攻击下的鲁棒性。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123950223.png" alt="image-20221215123950223"></p>
+<h4 id="Input-Mutator"><a href="#Input-Mutator" class="headerlink" title="Input Mutator"></a>Input Mutator</h4><p>用于突变数据流，在FuzzIL中，指令的所有输入都是变量，所有突变器需要在原始程序中选择一个或者多个指令，并将其输入替换为不同的随机变量来运行</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># <span class="title class_">Before</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v6, v9, v3</span><br><span class="line"></span><br><span class="line"># <span class="title class_">After</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v12, v9, v3</span><br></pre></td></tr></table></figure>
+
+<h4 id="Operation-Mutator"><a href="#Operation-Mutator" class="headerlink" title="Operation Mutator"></a>Operation Mutator</h4><p>用于突变操作参数，例如LoadString操作使用的常量，以及比较中使用的比较器，属性操作和方法调用中使用的属性或方法名称，以及二进制或一元操作中的实际操作</p>
+<h4 id="Insertion-Mutator"><a href="#Insertion-Mutator" class="headerlink" title="Insertion Mutator"></a>Insertion Mutator</h4><p>本质上是一个小型代码生成组件，使用一系列预定义的代码生成器（一个将FuzzIL代码发送到突变程序中的函数）来进行工作</p>
+<h4 id="Combine-Mutator"><a href="#Combine-Mutator" class="headerlink" title="Combine Mutator"></a>Combine Mutator</h4><p>比较简单，将一个程序插入到另一个当中</p>
+<h4 id="Splice-Mutator"><a href="#Splice-Mutator" class="headerlink" title="Splice Mutator"></a>Splice Mutator</h4><p>插入一组被称为切片的指令，切片的关键属性是其中任何指令使用的每个变量也由切片中的指令定义</p>
+<h3 id="Refinement"><a href="#Refinement" class="headerlink" title="Refinement"></a>Refinement</h3><p>在将新发现的样本加入语料库或保存触发crash的样本前，先进行精细化操作</p>
+<ol>
+<li>检查样本的deterministic behavior</li>
+<li>minimization</li>
+<li>normalization</li>
+</ol>
+<h4 id="Determinism"><a href="#Determinism" class="headerlink" title="Determinism"></a>Determinism</h4>]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>FuzzIL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
+    <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
+    <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>方法：使用80台移动设备、包含56种强磁计进行试验，</p>
+<p>实验结果：在实验的设备上，90%的设备被正确检测出打开的应用和网站</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>智能手机上的CPU的峰值活动会对磁传感器造成干扰，由此通过对峰值状态下和空闲状态下的CPU对磁传感器造成的干扰进行分析，建立隐蔽通道。</p>
+<p>强磁计被扰动程度与CPU的工作量密切相关，因此这样可以对浏览器和应用程序进行唯一识别。而且该方法不需要任何额外的用户权限，可以通过任意应用程序实现，而通过通用传感器API在网页种访问强磁计，这样攻击者不需要使用恶意应用程序，而是通过网页直接获取其他应用的指纹</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Magnetometers"><a href="#Magnetometers" class="headerlink" title="Magnetometers"></a>Magnetometers</h3><p>强磁计即磁传感器，可以用于指向</p>
+<h3 id="Sensitivity-of-magnetometers-to-CPU-activity"><a href="#Sensitivity-of-magnetometers-to-CPU-activity" class="headerlink" title="Sensitivity of magnetometers to CPU activity"></a>Sensitivity of magnetometers to CPU activity</h3><p>高负载的CPU需要更大的功率，从而产生更高的电磁场</p>
+<p>高负载的CPU会导致强磁计测量值出现明显的峰值</p>
+<p>对于每个应用程序，CPU和传感器测量的数据所绘制的图像相互关联，并且对于CPU运行不同的应用程序图像有显著差异。</p>
+<p>同时，不同的应用程序或网站在运行时需要不同数量的CPU资源。因此，CPU利用率跟踪以及相应的传感器受干扰程度可以唯一标识正在运行的应用、网页。</p>
+<h2 id="Attack-Scenario"><a href="#Attack-Scenario" class="headerlink" title="Attack Scenario"></a>Attack Scenario</h2><p>在应用程序场景下，恶意程序可以通过沙盒处理，只能访问零权限传感器信息</p>
+<p>在浏览器场景下，网页要么完全属于攻击者，要么包含来自攻击者控制的服务器的组件。</p>
+<p>攻击者需要执行一个培训阶段，为每个网站和应用收集足够的标记，还可以发送受害者的设备型号，以提高成功率</p>
 ]]></content>
       <categories>
         <category>论文笔记</category>
       </categories>
       <tags>
-        <tag>SSLGuard</tag>
-        <tag>Watermark</tag>
+        <tag>侧信道攻击</tag>
+        <tag>移动设备</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript学习记录</title>
+    <url>/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="交互式网络"><a href="#交互式网络" class="headerlink" title="交互式网络"></a>交互式网络</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>要通过事件来触发函数，要添加事件处理器，比如载入网页时触发，使用<code>onload</code>，然后通过<code>alert()</code>函数列出信息。</p>
+<p>事件由用户触发，但最终还是来源于浏览器，是一个被用户触发的事件，但浏览器必须包装关于事件的信息，再传递给负责相应这个事件的函数</p>
+<p>无论事件会不会被相应，都不会影响网页的载入</p>
+<p>Javascript的代码可以放在<code>&lt;script&gt;</code>标签里，也可以直接放在事件处理器中</p>
+<p>事件以JavaScript代码相应网页里发生的动静</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="prompt函数"><a href="#prompt函数" class="headerlink" title="prompt函数"></a>prompt函数</h3><p><code>prompt()</code>负责制作弹出窗口，用于显示可提示用户进行输入的对话框。函数返回值为字符串。当用户输入为数字或布尔类型时，一律返回string型，若想使类型不变，则需要进行类型转换。</p>
+<h3 id="document-getElementById函数"><a href="#document-getElementById函数" class="headerlink" title="document.getElementById函数"></a>document.getElementById函数</h3><p>顾明思义，get-Element-By-Id，就是通过ID来设置/返回HTML标签的属性及调用其事件与方法。用这个方法基本上可以控制页面所有标签，条件很简单就是给每个标签分配一个ID号</p>
+<h1 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h1><p>三种基本数据类型：text、number、boolean</p>
+<p>number用于存储数值数据、text用于存储字符串、boolean用于存储逻辑值</p>
+<p>alart框只能显示文本，不能显示数字，所以要进行类型转换</p>
+<p>在重新载入网页时，脚本的数据被重新设为初始值</p>
+<h2 id="函数-1"><a href="#函数-1" class="headerlink" title="函数"></a>函数</h2><h3 id="parseInt-函数"><a href="#parseInt-函数" class="headerlink" title="parseInt()函数"></a>parseInt()函数</h3><p>把字符串传给函数，函数把字符串转化为整数</p>
+<h3 id="parseFloat-函数"><a href="#parseFloat-函数" class="headerlink" title="parseFloat()函数"></a>parseFloat()函数</h3><p>把字符串传给函数，函数把字符串转化为浮点数</p>
+<p>使用这两个函数应该只包含数字的字符串</p>
+<p>NaN表示非数字，也用于某段数据不是数字，但被期待是数字的时候</p>
+<h3 id="indexOf-函数"><a href="#indexOf-函数" class="headerlink" title="indexOf()函数"></a>indexOf()函数</h3><p>indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。<br>indexOf() 方法对大小写敏感！</p>
+<p>string.indexOf(“xxx”)表示在string中搜索字符串xxx</p>
+<h1 id="探索客户端"><a href="#探索客户端" class="headerlink" title="探索客户端"></a>探索客户端</h1><h2 id="函数-2"><a href="#函数-2" class="headerlink" title="函数"></a>函数</h2><h3 id="refresh-函数"><a href="#refresh-函数" class="headerlink" title="refresh()函数"></a>refresh()函数</h3><p>重新整理网页</p>
+<h3 id="setTimeout-函数"><a href="#setTimeout-函数" class="headerlink" title="setTimeout()函数"></a>setTimeout()函数</h3><p>单次定时器函数</p>
+<p>函数有两段参数，分别是时间延迟和想要运行的程序代码，两个参数顺序无所谓</p>
+<p>时间单位为毫秒</p>
+<h3 id="setInterval-函数"><a href="#setInterval-函数" class="headerlink" title="setInterval()函数"></a>setInterval()函数</h3><p>间隔定时器函数，格式与setTimeout函数相同，以对应的时间间隔重复执行代码</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux内核完全注释</title>
+    <url>/2023/03/18/Linux0.11/</url>
+    <content><![CDATA[<h1 id="Linux内核完全注释（1）"><a href="#Linux内核完全注释（1）" class="headerlink" title="Linux内核完全注释（1）"></a>Linux内核完全注释（1）</h1><p>赵博士这本书是一本很厚实的书，涉及到Linux的各个方面，早就想要一读，可惜一直没有找到时间，现在大四了终于有时间读一读，也是复习和进一步理解Linux系统内核的好机会。这个系列可能会断断续续更新很久，希望不会烂尾。</p>
+<h2 id="第2章-微型计算机组成结构"><a href="#第2章-微型计算机组成结构" class="headerlink" title="第2章 微型计算机组成结构"></a>第2章 微型计算机组成结构</h2><p>由于操作系统是应用程序与硬件沟通的桥梁，我们在学习操作系统时，必不可少地需要先具备一定的硬件知识。</p>
+<blockquote>
+<p>除了CPU以外，现代PC机主板主要使用两个超大规模芯片构成的芯片组组成：北桥芯片和南桥芯片。北桥芯片用于与CPU、内存和AGP视频接口，这些接口具有很高的传输速率。北桥芯片还起着存储器控制作用，因此Intel把该芯片标号为MCH芯片。南桥芯片用于管理低、中速的组件，例如PCI总线、IDE硬盘接口、USB端口等，因此南桥芯片的名称为ICH芯片。</p>
+</blockquote>
+<h2 id="第3章-内核编程语言和环境"><a href="#第3章-内核编程语言和环境" class="headerlink" title="第3章 内核编程语言和环境"></a>第3章 内核编程语言和环境</h2><p>在Linux 0.1系统中使用两种汇编器，一个是能产生16位代码的as86汇编器和ld86链接器，在Linux中被用来创建16位的引导扇区程序boot/bootsect.s和实模式下初始设置程序boot/setup.s的二进制代码，主要特点是小巧快速，有宏和错误检测功能。另一个是GNU的汇编器gas，使用GNU ld链接器。</p>
+<p>as86汇编器和Intel的汇编语言语法是不兼容的，其操作数的次序与GNU as相反。</p>
+<p>as86接收的汇编语言语句可以是只包含空格、制表符和换行符的空行，也可以是赋值语句或定义语句、伪操作语句和机器指令语句。每个操作码都以一个“.”字符开始，点字符本身是一个特殊的符号，代表着编译过程中的位置计数器，其值是点符号出现处机器指令第一个字节的地址。</p>
+<p>机器指令语句是可执行机器指令的助记符，由操作码和0个或多个操作数构成。在任何语句之前都可以有标号，标号是由一个标识符后跟一个冒号：组成，在编译过程中，汇编器遇到一个标号后，会将当前位置计数器的值赋给这个标号</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Binary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NKCTF2023 Reverse PMKF Writeup</title>
+    <url>/2023/03/28/NKCTF2023%20Reverse%20PMKF%20Writeup/</url>
+    <content><![CDATA[<h1 id="NKCTF2023-Reverse-PMKF-Writeup"><a href="#NKCTF2023-Reverse-PMKF-Writeup" class="headerlink" title="NKCTF2023 Reverse PMKF Writeup"></a>NKCTF2023 Reverse PMKF Writeup</h1><p>拿到题目以后发现是一个exe文件，我们直接运行一下看看，会闪过一个命令行窗口，没什么有用的信息，然后我们用Exeinfo PE打开看一看，发现没有壳，是个32位的C++程序</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230326213237616.png" alt="image-20230326213237616"></p>
+<p>所以我们直接扔进x32dbg里面看看</p>
+<p>进去以后右键点击任意代码区域，然后选择搜索当前区域的字符串，发现以下字样</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326213438742.png" alt="image-20230326213438742"></p>
+<p>其中很明显有wrong、you found it这种明显提示结果的字符串，这个我们一会来看。</p>
+<p>注意到最开始有一个明显是文件路径的东西，所以我们可以猜测这个程序会从C:\nk.ctf这个文件里读出数据，所以我们就创建一个这个文件，注意C盘的根目录是不能直接创建文件的，需要从别的地方创建然后复制过来，创建之后我们随便往里面写点东西，因为题目提示写了，flag是输入的十六进制，所以我们往里面写的时候也用010editor直接写十六进制到文件里</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215627939.png" alt="image-20230326215627939"></p>
+<p>写好以后我们重新加载文件，再到搜索字符串的位置，这次我们来看怎么才能到Congratulations所在的位置，所以我们直接双击点进去，如下图</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214521307.png" alt="image-20230326214521307"></p>
+<p>然后我们从这里往上翻，就看注释和函数名即可，发现果然有一些readfile函数，而且每一次readfile后都会进行判断，都有可能会导致wrong所以我们先在第一个readfile的地方下断点看看第一次读取文件都要进行什么操作</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214755114.png" alt="image-20230326214755114"></p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214740216.png" alt="image-20230326214740216"></p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326214709714.png" alt="image-20230326214709714"></p>
+<p>下断点以后点击几次运行，就会运行到断点处了</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215044222.png" alt="image-20230326215044222"></p>
+<p>大致看一下，如果不想运行到wrong，就需要在0x781113的位置跳转，而要跳转就需要eax的值为0x5，知道这些以后我们就按F8单步运行，看看eax里面的值是哪来的</p>
+<p>运行到<code>cmp eax,5</code>后我们查看eax中的值发现是<img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326215805912.png" alt="image-20230326215805912">，正好是我们刚刚随便输入的第一个字节，因此我们猜测这个要求是我们输入的第一个字节是0x05，但这里我们先记下来，先直接双击这个值，把他改成0x5，然后继续运行</p>
+<p>一直按F8运行，一路无事发生，一直到运行到下一个readfile</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220203759.png" alt="image-20230326220203759"></p>
+<p>这次还是中间会遇到wrong，只不过这次是要让eax和ecx进行比较所以我们直接运行到cmp这行，这时我们查看eax和ecx的值</p>
+<p><img src="C:/Users/qikey/AppData/Roaming/Typora/typora-user-images/image-20230326220335730.png" alt="image-20230326220335730"></p>
+<p>发现eax是0xFFFFFFFA，而ecx是0x6E，但给出了一个对应的字母是n，这里我们还是看不出跟我们的输入有什么关系，于是我们继续改eax，改成0x6E，先通过这次判断</p>
+<p>通过以后发现eax被赋予了内存中的一个值，然后加了个1，这个比较容易想到应该是for循环里面的变量++操作，所以之后也是又跳回到上面了这次再运行到cmp的时候，继续看eax和ecx的值，发现一个是0xFFFFFFAE一个是0x6B对应的字母是k，这里我们发现，这个AE和刚刚的FA好像分别是我们之前输入到文件里的第二三个字节的数据，至于之前的FFFF应该是在进行右移的时候高位是1补位导致的，而进行比对的nk两个字母，可以再回去看看我们之前搜索字符串时候看到的字符串，有一个是nkman，猜测也许这里就是要输入一个，我们继续运行几轮之后发现果然就是这几个字符</p>
+<p>到这我们可以去</p>
+]]></content>
+      <categories>
+        <category>逆向实践</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>Reverse</tag>
       </tags>
   </entry>
   <entry>
@@ -810,65 +849,37 @@
       </tags>
   </entry>
   <entry>
-    <title>植物大战僵尸外挂笔记</title>
-    <url>/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="植物大战僵尸外挂笔记"><a href="#植物大战僵尸外挂笔记" class="headerlink" title="植物大战僵尸外挂笔记"></a>植物大战僵尸外挂笔记</h1><h2 id="0x00-CE初步"><a href="#0x00-CE初步" class="headerlink" title="0x00 CE初步"></a>0x00 CE初步</h2><blockquote>
-<p>CE修改器(Cheat Engine)是一款内存修改编辑工具,CE修改器它允许你修改你的游戏,所以你将总是赢.它包括16进制编辑,反汇编程序,内存查找工具.CE修改器与同类修改工具相比,它具有强大的反汇编功能,且自身附带了修改器制作工具,可以用它直接生成修改器。</p>
-</blockquote>
-<p>总之，CE可以帮助我们搜索看到的程序效果在内存中的表示，比如搜索一个数据存在哪块内存上，而写游戏外挂的本质就是修改游戏中的数据，来实现一些爽操作</p>
-<h2 id="0x01-找阳光"><a href="#0x01-找阳光" class="headerlink" title="0x01 找阳光"></a>0x01 找阳光</h2><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630105800050.png" alt="image-20220630105800050" style="zoom:50%;">
-
-<p>从这里我们可以看到，目前的阳光值是50，所以直接在CE里面first scan</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630105915395.png" alt="image-20220630105915395" style="zoom: 50%;">
-
-<p>这是在对植物大战僵尸所有的内存块进行搜索，寻找当前值为50的内存块，左边是搜索结果，目前来看有很多，其中黑色地址的是动态地址，绿色地址的是静态地址，区别在于每次打开游戏时，动态地址会变，而静态地址是不变的</p>
-<p>这时我们为了找到究竟哪一个地址存放着阳光，对阳光进行一次改变，</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110211461.png" alt="image-20220630110211461" style="zoom: 50%;">
-
-<p>改变的时候有个 小技巧，尽量不要让阳光为0，因为一个程序里面为0的值很多，筛选效率比较低</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110318023.png" alt="image-20220630110318023" style="zoom:50%;">
-
-<p>我们收集一个阳光，令阳光达到75，再次scan就直接找到了阳光的动态地址0x1BFF3550</p>
-<p>但是找到动态地址还不够，这个地址每次打开游戏都不一样，不能用外挂程序直接操控，所以我们要去找静态地址</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110718825.png" alt="image-20220630110718825" style="zoom:50%;">
-
-<p>右键点击这个地址，选择“Find out what writes to the address”，</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630111032492.png" alt="image-20220630111032492" style="zoom:50%;">
-
-<p>在下次收集到阳光时，CE会找到修改了这个值的汇编语句，从这条语句我们发现，eax+0x00005578这个位置的值加上了ecx的值，我们选中这条语句，点击“more information”</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630111243260.png" alt="image-20220630111243260" style="zoom:50%;">
-
-<p>发现ecx=0x19，也就是十进制的25，刚好是一个阳光的数量，那么被加的地址应该就是存储阳光的地址了，也就是刚刚我们看到的阳光的动态地址0x1BFF3550的来历，看一下eax的值是0x1BFEDFD8</p>
-<p>但是这个值依然不是一个静态地址，我们要找到这个地址是怎么来的，于是继续搜索这个地址</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630115525849.png" alt="image-20220630115525849" style="zoom:50%;">
-
-<p>可以看到搜出来有很多地址，其中0x0019开头的都是堆栈的地址，找到下面的0x03EAB958</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120119461.png" alt="image-20220630120119461" style="zoom:50%;">
-
-<p>右键点击这个地址，选择“Find out what accesses this address”，</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120214904.png" alt="image-20220630120214904" style="zoom:50%;">
-
-<p>可以看到改变eax的值的语句</p>
-<p>我们分别看一下两条改变eax的语句</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120544438.png" alt="image-20220630120544438" style="zoom:50%;">
-
-<p>发现无论从ecx改还是从esi改，实际上都是用的0x03EAB0F0这个地址＋0x868</p>
-<p>于是继续搜索0x03EAB0F0</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120708455.png" alt="image-20220630120708455" style="zoom:50%;">
-
-<p>终于看到了绿色的静态地址，随便选一个就行</p>
-<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630121011471.png" alt="image-20220630121011471" style="zoom:50%;">
-
-<p>双击这个地址，设置一下指针，注意两个偏移值顺序不能换，因为实际上这是两层的指针</p>
-<p>即静态地址是第一层指针p1，其中存的值为0x03EAB0F0</p>
-<p>p1指向的地址是第二层指针的基址，所以+0x868得到了第二层指针p2</p>
-<p>图中可以看到p2应该是的0x1BFEDFD8，这个指针再加0x5578得到了最终实际存储阳光的地址</p>
-<p>这个时候找基址的部分就结束了，然后就需要进行自动化修改</p>
-<h2 id="0x02-自动化修改阳光"><a href="#0x02-自动化修改阳光" class="headerlink" title="0x02 自动化修改阳光"></a>0x02 自动化修改阳光</h2><p>参考这篇博客<a href="https://blog.csdn.net/weixin_43752471/article/details/84445871?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-2-84445871-blog-117117813.pc_relevant_vip_default&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-2-84445871-blog-117117813.pc_relevant_vip_default&amp;utm_relevant_index=3%E5%AD%A6%E4%B9%A0%E4%BA%86%E4%B8%80%E4%B8%8BC++%E4%BF%AE%E6%94%B9%E5%85%B6%E4%BB%96%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98">https://blog.csdn.net/weixin_43752471/article/details/84445871?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2-84445871-blog-117117813.pc_relevant_vip_default&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2-84445871-blog-117117813.pc_relevant_vip_default&amp;utm_relevant_index=3学习了一下C++修改其他程序内存</a></p>
-<p>然后把相关的参数改一下，大概就拿这篇代码直接用了，顺便还一块做了修改金币的功能，道理是一样的，只不过金币的存储是数量/10存储的，直接搜金币数搜不出来，要/10才能搜出来，最后获取的静态地址和阳光的一样就不用两个地址了</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> gameaddress = <span class="number">0x00731C50</span>; <span class="comment">//游戏基址；</span></span><br><span class="line">HANDLE gameprocess; <span class="comment">//句柄类型 获取</span></span><br><span class="line"><span class="comment">//2次偏移</span></span><br><span class="line"><span class="function"><span class="type">int</span> *<span class="title">get5point</span><span class="params">(<span class="type">int</span> gameaddress,<span class="type">int</span> p1,<span class="type">int</span> p2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> iBase, iP1, *iP2;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">ReadProcessMemory</span>(gameprocess, (LPVOID)gameaddress, &amp;iBase, <span class="number">4</span>, <span class="literal">NULL</span>))<span class="comment">//初地址赋值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">ReadProcessMemory</span>(gameprocess, (LPVOID)(iBase + p1), &amp;iP1, <span class="number">4</span>, <span class="literal">NULL</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    iP2=(<span class="type">int</span> *)(iP1+p2);</span><br><span class="line">	<span class="keyword">return</span> iP2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//修改阳光</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rwyg</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *pwx=<span class="built_in">get5point</span>(gameaddress,<span class="number">0x868</span>,<span class="number">0x5578</span>);</span><br><span class="line">	<span class="type">int</span>  wx = <span class="number">0x2710</span>;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;pwd=&quot;</span>&lt;&lt;pwx&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(gameprocess, pwx,&amp;wx, <span class="number">4</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rwjb</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *pwx=<span class="built_in">get5point</span>(gameaddress,<span class="number">0x94c</span>,<span class="number">0x54</span>);</span><br><span class="line">	<span class="type">int</span>  wx = <span class="number">0x186a0</span>;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;pwd=&quot;</span>&lt;&lt;pwx&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(gameprocess, pwx,&amp;wx, <span class="number">4</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//获取游戏窗口所在进程的进程ID，也就是PID</span></span><br><span class="line">    HWND hWnd = <span class="built_in">FindWindow</span>(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">&quot;Plants vs. Zombies&quot;</span>));</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == hWnd)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;查找窗口失败\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    DWORD dwProcessId;</span><br><span class="line">    <span class="built_in">GetWindowThreadProcessId</span>(hWnd, &amp;dwProcessId);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;进程ID:%d\n&quot;</span>, dwProcessId);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取进程句柄</span></span><br><span class="line">    gameprocess = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS, FALSE, dwProcessId);</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == gameprocess)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;打开进程失败\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">rwyg</span>();</span><br><span class="line">    <span class="built_in">rwjb</span>();</span><br><span class="line">    <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
+    <title>New 160 Crackme 6-10</title>
+    <url>/2023/03/21/New%20160%20Crackme%206-10/</url>
+    <content><![CDATA[<h1 id="New-160-Crackme-6-Reg"><a href="#New-160-Crackme-6-Reg" class="headerlink" title="New 160 Crackme-6 Reg"></a>New 160 Crackme-6 Reg</h1><p>算法 ：★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>拖进PEID发现没壳，但依然是没见过的编程语言</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215405148.png" alt="image-20230221215405148"></p>
+<p>然后我们直接打开程序看看，发现让我们填用户名和SN，随便填一个以后，会自己生成一个dll文件，这个dll文件里面会存起来我们输进去的username和SN，然后我们要重启程序来验证注册码</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>大概知道程序能干什么之后，还是直接拖进OllyDBG，老规矩先搜字符串，然后在最底下，发现了这样一段话<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230221215749432.png" alt="image-20230221215749432"></p>
+<p>猜测告知有效期了应该就是注册成功了，所以我们跟进看一看。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223165907229.png" alt="image-20230223165907229"></p>
+<p>注意到“有效期至”和未注册之间的命令是顺序执行的，而下面会有一个跳转，所以猜测应该是两个输出结果都放进内存里面，之后由程序决定输出哪个。而之后的跳转，如果跳转成功，会直接跳转到结尾部分，所以不能让其正常跳转。经过几次尝试之后。发现这个跳转应该是用来检测是否有dll文件的，所以正常来说这个跳转不用去管它。</p>
+<p>接下来几行执行完之后发现堆栈基本上没有太有价值的变化，所以我们继续往下执行，接下来到reg.dll之后又出现了Username和SN猜测接下来三个函数应该是打开dll并从中读取Username和SN。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204637015.png" alt="image-20230223204637015"></p>
+<p>执行完第二个函数后果然把之前输入的用户名读出来了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223204927665.png" alt="image-20230223204927665"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205025878.png" alt="image-20230223205025878"></p>
+<p>继续执行完第三个函数，发现把SN码也读出来了</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205103081.png" alt="image-20230223205103081"></p>
+<p>接下来把我们输入的两个值分别赋给EAX和EDX，底下又是一个函数，这个显然是要传参了，而这个函数以我们输入的值为参数，不出意外的话应该就是验证算法所在的函数了，所以我们在这里用f7进入函数看一下究竟是怎么验证的。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205511142.png" alt="image-20230223205511142"></p>
+<p>进入这个函数之后，前几行都是用来开辟栈空间的，我们不用管，然后看到程序将ECX清零，然后又把0x0019FD74-0x0019FD6C的位置都清0，接下来又把0x0019FD88和0x0019FD90清零了，然后把我们输入的SN放在0x0019FD94，把用户名放在0x0019FD98。接下来两个函数，一个以用户名为参数，一个以SN为参数，需要注意一下</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223205836081.png" alt="image-20230223205836081"></p>
+<p>但其实进去看了以下并没有发生什么，所以我们继续往下走。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20230223212113728.png" alt="image-20230223212113728"></p>
+<p>接下来看到一个函数，紧接着一个跳转，查看一下这个跳转目标地址发现如果发生跳转就会跳到几乎要结束的位置，所以不能跳，而如果不跳就需要让EAX为0x10，所以而函数执行前EAX的值是我们输入的SN码，因此这个函数应该会决定EAX的值，我们进去看一看。发现是eax-0x4这个位置的值，我试了几次以后发现这个值应该是SN码的长度，也就是说SN码需要是16位的。</p>
+<p>然后接下来是对序列码进行一轮检验，应该是要求序列码只能有十六进制字符。</p>
+<p>接下来继续运行获得了一个日期和一个字符串，发现正好是一个十六位的字符串，猜测这个就是正确的序列号，试验后果然可以，至此结束。</p>
+<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><p>这道题爆破可以从算法Call后面的关键函数下手，把那个je指令nop掉就可以了</p>
+<p>或者可以把算法Call的入口改为让eax返回我们需要的值然后直接retn</p>
+<h1 id="New-160-Crackme-7"><a href="#New-160-Crackme-7" class="headerlink" title="New 160 Crackme-7"></a>New 160 Crackme-7</h1><p>算法 ：★★</p>
+<p>爆破 ：★</p>
+<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2>]]></content>
       <categories>
         <category>逆向实践</category>
       </categories>
@@ -877,130 +888,198 @@
       </tags>
   </entry>
   <entry>
+    <title>SSLGuard A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders</title>
+    <url>/2023/02/27/SSLGuard%20A%20Watermarking%20Scheme%20for%20Self-supervised%20Learning%20Pre-trained%20Encoders/</url>
+    <content><![CDATA[<h1 id="SSLGuard-A-Watermarking-Scheme-for-Self-supervised-Learning-Pre-trained-Encoders"><a href="#SSLGuard-A-Watermarking-Scheme-for-Self-supervised-Learning-Pre-trained-Encoders" class="headerlink" title="SSLGuard: A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders"></a><strong>SSLGuard: A Watermarking Scheme for Self-supervised Learning Pre-trained Encoders</strong></h1><p>作者：Tianshuo Cong    Xinlei He    Yang Zhang</p>
+<p>清华大学高等研究院</p>
+<p>亥姆霍兹信息安全中心</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在图像分类任务中，以监督学习(Supervised learning)为主的深度学习模型在过去几年里取得巨大成功，但是监督学习依赖高质量的有标签的数据，且泛化能力较差。与此同时，无标签的数据随时随地都能生成，自监督学习(Self-supervised learning)试图解决如何利用没有标签的数据预训练出和监督学习性能相当的编码器，预训练好的编码器可以被下游任务使用。对比学习(Contrastive learning)是自监督学习的经典范式，其核心是构建正负样本集来产生“标签”，从而指导模型进行训练。SimCLR, MoCo和BYOL是近年来最经典的对比学习算法。</p>
+<p>由于自监督预训练编码器可以在多个下游任务场景中使用，并且训练成本昂贵，模型的基本信息(结构，参数等)通常被视为模型持有者的知识产权。在实际生活中，想使用自监督编码器的个体通常难以承受训练成本，因此AI公司可以将自监督学习编码器部署在云端使其商业化，即Encoder-as-a-Service (EaaS)，如GPT-3。EaaS通常向客户提供API来上传数据和返回计算结果(embedding)。但是，敌手可以同样访问此API来发起模型窃取攻击，进而在本地训练出性能相当的编码器，并且训练成本极低。敌手可以生成盗版模型(surrogate encoders)以本地使用来减少访问费用，甚至可以部署到云端形成商业竞品，侵犯原模型持有者的知识产权。因此，本文通过向自监督学习编码器嵌入水印来保护模型的知识产权。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215104005814.png" alt="image-20221215104005814"></p>
+<h2 id="工作概述"><a href="#工作概述" class="headerlink" title="工作概述"></a>工作概述</h2><p>本文提出SSLGuard框架，通过在预训练编码器中嵌入水印，来保护模型的知识产权。SSLGuard是首个针对自监督学习模型的水印算法。同时，针对自监督学习模型的模型窃取攻击也是被首次研究。以往针对监督学习模型的水印算法被证明很难抵抗模型窃取攻击(知识蒸馏)，SSLGuard通过引入shadow encoder来本地模拟模型窃取攻击，从而保证SSLGuard可以在surrogate encoder中提取出水印信息。另外，SSLGuard不受下游任务限制，仅从embbeding层面进行水印的嵌入与提取。</p>
+<p>SSLGuard的工作流程如下图所示。给定一个要保护的目标编码器(绿色)，SSLGuard可以生成一个嵌有水印的编码器(黄色)以及水印验证组件(key-tuple)。模型持有者能够利用key-tuple完成模型水印的提取，以及将水印编码器部署到云端来抵抗模型窃取攻击。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215104653972.png" alt="image-20221215104653972"></p>
+<h2 id="工作细节"><a href="#工作细节" class="headerlink" title="工作细节"></a>工作细节</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>SSLGuard的设计需要满足以下5条性质：</p>
+<ul>
+<li>保真性 (Fidelity)：SSLGuard需最小化对原模型性能的影响，即原模型的预测准确率基本保持不变</li>
+<li>有效性 (Effectiveness)：模型拥有者可以成功地从嵌有水印的模型中提取出水印信息</li>
+<li>不可检测性 (Undetectability)：非模型拥有者无法谎称模型的版权拥有，即无法从水印模型中成功提取出水印</li>
+<li>高效性 (Efficiency)：SSLGuard嵌入水印所需计算成本要低</li>
+<li>鲁棒性 (Robustness)：SSLGuard需抵抗多种水印擦除攻击</li>
+</ul>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><h4 id="1-水印嵌入"><a href="#1-水印嵌入" class="headerlink" title="1. 水印嵌入"></a>1. 水印嵌入</h4><p>文中为达到以上目标设计了三个基本损失函数：</p>
+<p><em>Lcorr</em>函数的目标是计算𝐷𝑣中所有元素提取出的向量与秘密向量的平均相似度，并使得这个相似度在训练的过程中越来越高</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215111938656.png" alt="image-20221215111938656"></p>
+<p><em>Luncorr</em>函数的目标是计算𝐷中所有元素提取出的向量与秘密向量的平均相似度，并使得这个相似度在训练的过程中越来越低</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215111945252.png" alt="image-20221215111945252"></p>
+<p><em>Lmatch</em>函数的目标是计算𝐷中所有元素输入模型后得到的两个embedding的相似度，并使得这个相似度在训练的过程中越来越高</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215112020029.png" alt="image-20221215112020029"></p>
+<p>（1）训练shadow encoder：此部分是用来模拟模型窃取攻击。通过把来自shadow dataset的同一张图片分别输入clean encoder和shadow encoder，使其embedding的相似度变高来训练shadow encoder。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105400086.png" alt="image-20221215105400086"></p>
+<p>其中<em>Ls</em> 定义为：</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215122733142.png" alt="image-20221215122733142"></p>
+<p>目标是提高通过<em>Ds</em>窃取的水印模型的输出和水印模型本身的输出的相似度。</p>
+<p>（2）训练trigger和decoder：SSLGuard的目标是把𝐷𝑣的图片编码到事先指定的秘钥sk附近（cosine similarity较高），而来自非𝐷𝑣的图片产生的embedding都远离sk。同样需保证此性质在shadow encoder中成立。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105610436.png" alt="image-20221215105610436"></p>
+<p>其中𝐷𝑣由下面的方法构成。其中M是一个掩码，用于确定在新的数据集𝐷𝑣中，原数据集元素与插入的Trigger的权重。即M的值越大，新数据集中的元素相对于原数据集中的元素的更改越大。在本轮训练过程中，目标是训练T和G，使得G能够从模型输出的embedding中解码出T的特征</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215110901749.png" alt="image-20221215110901749"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215110914858.png" alt="image-20221215110914858"></p>
+<p>而<em>LTD</em>由以下方式定义：</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215122954694.png" alt="image-20221215122954694"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123001004.png" alt="image-20221215123001004"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123007516.png" alt="image-20221215123007516"></p>
+<p>(3) 训练水印模型：嵌入水印的模型首先要保证保真性，即对于来自𝐷𝑡(与预训练数据集的分布相同)数据集的图片产生的embedding，需与原模型的embedding相似，同时还需保证可以成功提取出sk。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105658637.png" alt="image-20221215105658637"></p>
+<h4 id="2-水印提取"><a href="#2-水印提取" class="headerlink" title="2. 水印提取"></a>2. 水印提取</h4><p>本文中的水印提取其实并非将打入模型中的水印真的提取出来，因为文中的水印指的是使得模型具有区分验证数据集的能力，这种能力本身无法提取出来，文中水印提取指的是通过使用验证数据集进行验证，目标模型是否具有这种区分特殊数据集的能力，以验证水印的存在。</p>
+<p>具体来讲，SSLGuard利用key-tuple中的验证数据集，以及解码器G，从待验证的编码器中获得解码向量sk’，若sk’与sk的余弦相似度大于设定阈值 (如文中设置的0.5)，即可判断模型的归属权。作者利用watermark rate (WR) 作为判断模型所有权的检测值，即验证数据集中的图片被编码到sk附近的比率。需要说明的是，在高维空间中，两个随机向量几乎是正交的，即其夹角的余弦值分布近似成均值为0的高斯分布，且维度越高，余弦值为0的概率越大。此条性质可以保证提取出与sk余弦值靠近的sk‘是证明模型所有权的“强信号”，且可保证SSLGuard性质中的不可检测性。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215105409465.png" alt="image-20221215105409465"></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215110028888.png" alt="image-20221215110028888"></p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><h4 id="原模型的下游任务准确率"><a href="#原模型的下游任务准确率" class="headerlink" title="原模型的下游任务准确率"></a>原模型的下游任务准确率</h4><p>给定三个干净的SSL预训练编码器（即，由SimCLR、MoCo v2和MmageNet上的BYOL预训练），作者首先测量它们的下游精度(表示为干净下游精度（CDA）。作者考虑了4个下游分类任务，即STL-10、CIFAR-10、MNIST和F-MNIST。准确率如表2所示。我们观察到，SSL预训练的编码器可以在不同的下游任务上取得显著的性能，这意味着SSL预训练的编码器可以从一个任务（即ImageNet）学习高级语义信息，而信息嵌入可以推广到其他任务（即STL-10和CIFAR-10）。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215181628950.png" alt="image-20221215181628950"></p>
+<h4 id="训练自监督模型的成本"><a href="#训练自监督模型的成本" class="headerlink" title="训练自监督模型的成本"></a>训练自监督模型的成本</h4><p>表3显示了SSL预训练SSL编码器的成本比，这说明了SSL模型的成本保护SSL预训练编码器的版权的必要性。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123817335.png" alt="image-20221215123817335"></p>
+<h4 id="模型窃取攻击过程中的影响因素"><a href="#模型窃取攻击过程中的影响因素" class="headerlink" title="模型窃取攻击过程中的影响因素"></a>模型窃取攻击过程中的影响因素</h4><p>图4显示了对于使用不同的体系结构，即ResNet-18、ResNet-34、ResNet-50或ResNet-101进行窃取。最后在结果中观察到，如果输出维度不同于ResNet-50（受害者编码器的体系结构），例如，ResNet-18/ResNet-34输出512维嵌入，作者利用一个额外的线性层将它们转换为2048维。代理编码器的DA总结如图4所示。一般的趋势是，代理编码器的体系结构越深，它在下游任务上可以实现的性能就越好。</p>
+<p>图5显示了对于使用STL-10训练的SimCLR、MoCo v2、BYOL模型，使用STL-10、CIFAR-10、FashionMNIST、MNIST四个数据集进行窃取攻击所获得的下游任务准确率，这显示了当查询数据集与训练前数据集相同时，模型窃取攻击更有效。另一个观察结果是，窃取数据集的分布也可能影响不同任务上的准确率。</p>
+<p>图6显示了在窃取攻击中使用不同的相似性函数，对窃取到的模型的下游任务准确率的影响，在这里，作者假设窃取者利用ResNet-50作为代理模型的架构，而STL-10作为查询数据集。结果显示，余弦相似性在大多数设置下优于MAE和MSE。<strong>这可能归功于余弦相似度的归一化效应，这有助于更好地学习嵌入。</strong></p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123800541.png" alt="image-20221215123800541"></p>
+<h4 id="SSLGuard"><a href="#SSLGuard" class="headerlink" title="SSLGuard"></a>SSLGuard</h4><h4 id="有效性"><a href="#有效性" class="headerlink" title="有效性"></a>有效性</h4><p>然后作者评估了SSLGuard的有效性。具体地说，作者检查模型所有者是否可以从水印编码器中提取水印。模型所有者应该能够从水印编码器和窃取编码器中验证出水印，而从原始编码器中，不能得到水印信息。实验结果如表4所示，F∗和Fs的WR均为1.00，这意味着编码器F∗和Fs都包含了Dv和sk的信息。同时，F的WR为0.00，SSLGuard并不会将一个干净的编码器识别为水印编码器</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215205658176.png"></p>
+<h4 id="性能干扰"><a href="#性能干扰" class="headerlink" title="性能干扰"></a>性能干扰</h4><p>随后作者检测了SSLGuard是否会对原编码器的结果造成干扰，作者以BYOL为例，使用t-分布式邻域嵌入（t-SNE）将Fbyol（由BYOL预训练的干净编码器）和F∗BYOL的嵌入输出可视化，如图7所示。观察到F byol和F∗byol的t-SNE结果几乎相同，嵌入都被两个编码器成功地分离。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123842845.png" alt="image-20221215123842845"></p>
+<p>表5中则显示了在其他状态下的水印编码器与原编码器的性能差异，结果显示，水印编码器的DA与干净编码器的DA几乎相同。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123853619.png" alt="image-20221215123853619"></p>
+<h4 id="不可检测性"><a href="#不可检测性" class="headerlink" title="不可检测性"></a>不可检测性</h4><p>然后，作者检查水印是否可以通过一个不匹配的键元组来提取。作者通过SSLGuard生成了三个Key向量： κ simclr，κ moco和κ byol。作者使用其中一个K向量来验证其他水印编码器。如表6所示，作者可以看到在无匹配对中的WR都是0.00，这意味着没有与水印相匹配的密钥，无法检测出模型中是否被加入的水印。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123901406.png" alt="image-20221215123901406"></p>
+<h4 id="可操作性"><a href="#可操作性" class="headerlink" title="可操作性"></a>可操作性</h4><p>SSLGuard在只使用了一个GPU的情况下，分别使用17.5小时、17.36小时和10.70小时注入SimCLR、MoCo v2和BYOL，分别占SSL编码器训练前时间成本的29.17%、8.19%和14.86%，水印提取时间分别为1.51s、2.08s和1.82s。这比训练编码器本身所需时间要少得多，这说明这种加入水印的方式是理论可行的。</p>
+<h4 id="鲁棒性"><a href="#鲁棒性" class="headerlink" title="鲁棒性"></a>鲁棒性</h4><p>为了验证SSLGuard具有鲁棒性，作者对每个窃取攻击中使用的输入图像加入高斯噪声，为x0 = x+ε1·N（0,1）。当使用不同的ε1时，作者评估四个下游任务和DA的WR。WR的结果如图8a所示，DA如图9a所示。首先观察到DA随着ε1的增加而下降。而对于SimCLR、MoCo和BYOL上的不同ε1，WR始终为1.00。这可能是因为Dv的分布太特殊了，所以水印编码器可以记住这些特殊的样本，该实验表明对输入噪声攻击是鲁棒性的。</p>
+<p>此外，对手还可以通过在编码器输出的embedding中加入噪声，于是作者设计实验给每个编码器产生的embedding加入高斯噪声，为h0 = h + ε2·N（0,1），其中h为原始embedding，h0为扰动embedding，ε2为控制噪声水平的超参数。然后，作者在不同的ε2上评估DA和WR。从图9b中，可以观察到，随着ε2的增加，DA减少。然而，所有水印编码器的WR都保持在0.50以上（见图8b），这意味着将噪声嵌入到解码器时，仍然可以成功提取秘密向量。因此，即使对手以降低模型的性能为代价，向embedding中添加随机噪声，也不能删除水印。</p>
+<p>对手可能会通过利用截断embedding中的小数位数来降低embedding的精度。于是作者设计实验为嵌入中的每个值保留k个小数位。图8c和图9c显示了不同k下的WR和DA。可以观察到，当k从1减小到0时，DA会急剧下降。同时，除MoCo以外，其他编码器的WR均在0.5以上，虽然当k=为0时，MoCo的WR下降到0.00，但此时STL-10上的DA仅为0.10。因此，对手不能从编码器中删除水印，同时保留其功能</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123913078.png" alt="image-20221215123913078"></p>
+<p>对手还可以利用SSLGuard向SSL编码器注入新的水印，不管他们是否知道编码器已经注入了水印。作者希望确认在水印叠加的情况下依然可以有效提取水印。在表7中观察到，虽然用一个新的键元组覆盖水印编码器来生成一个新的编码器，但原始水印仍然保留，即新编码器中原始水印的WR为1.00。这表明，即使对手在模型中覆盖一个新的水印，仍然可以保留原始的水印。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123923572.png" alt="image-20221215123923572"></p>
+<p>剪枝技术是一种水印去除攻击，因为许多神经元可能被禁用，这降低了水印的有效性。在这一部分中，作者利用全局和局部的非结构化剪枝方法来处理水标编码器。在全局剪枝设置中，作者将卷积层中绝对值最小的卷积层中权重的r个分数设为0。局部剪枝的目的是在同一层中修剪绝对值最小的连接比例。图10和图11的前两个子图中显示了该组WR和DA。可以观察到，随着全局修剪比例的增加，DA和WR略有下降。而在局部修剪方面，DA有较大的下降趋势。</p>
+<p>在修剪后，对手可以在受害者编码器的监督下微调代理编码器。这个过程也被称为精细修剪。微调的目标是重新获得DA的下降。作者通过MSE损失函数来微调修剪过的编码器的所有权重（全局和局部）。我们注意到，WR如图10c和图10d所示，DA如图11c和图11d所示。这意味着SSLGuard对微调是健壮的。<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123940867.png" alt="image-20221215123940867"></p>
+<p>然后，作者通过模型窃取攻击的镜头来量化SSLGuard的鲁棒性。请注意，作者只考虑最有效的代理编码器的架构和最有效的查询数据集。具体来讲，作者将ResNet-50和ResNet-101作为代理编码器的架构，将STL-10作为查询数据集。作者命名为三个攻击Steal1，Steal2，和Steal3。每次攻击的细节如表8所示。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123931603.png" alt="image-20221215123931603"></p>
+<p>不同攻击的WR和DA如表9所示。可以观察到，虽然模型窃取攻击窃取到了水印编码器，但我们可以通过验证窃取到的模型的所有权。SSLGuard注入的水印仍然可以保留在被对手窃取的代理编码器中。我们对窃取-1和窃取-3也有类似的观察，这证明了SSLGuard在模型窃取攻击下的鲁棒性。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20221215123950223.png" alt="image-20221215123950223"></p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>SSLGuard</tag>
+        <tag>Watermark</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Smart Greybox Fuzzing</title>
+    <url>/2021/12/13/Smart-Greybox-Fuzzing/</url>
+    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
+<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>SGF通过现实文件级别的变异操作来保证文件的有效性，这样产生的文件更加容易通过程序的解析阶段，可以暴露更深层的问题</p>
+<h3 id="P3"><a href="#P3" class="headerlink" title="P3"></a>P3</h3><p>探索了更多的路径，并暴露了更多的问题</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="P1-1"><a href="#P1-1" class="headerlink" title="P1"></a>P1</h3><p>灰盒测试只需使用轻量级的instrumentation</p>
+<h3 id="P2-1"><a href="#P2-1" class="headerlink" title="P2"></a>P2</h3><p>被变异的输入执行的控制流通过考察来确定他们是否是有趣的，而CGF帮助进行评价控制流的新颖性，随后，被认为值得继续探索的输入会产生更多的输入</p>
+<h3 id="P3-1"><a href="#P3-1" class="headerlink" title="P3"></a>P3</h3><p>而CGF的问题在于缺乏对于文件结构的认识，位级变异会在被处理之前就被程序拒绝</p>
+<h3 id="P4"><a href="#P4" class="headerlink" title="P4"></a>P4</h3><p>有两个方法可以解决这个问题，一个是基于字典，另一个是基于动态污点分析。</p>
+<p>对于字典，可能牺牲AFL的效率和可用性，当AFL要探索新路径时字典是很好的选择</p>
+<p>但两种方法都不能变异出高度结构化的文件</p>
+<h3 id="P5"><a href="#P5" class="headerlink" title="P5"></a>P5</h3><p>智能黑盒测试工具比如peach已经有了文件结构意识，而且能基于有效文件构建新的有效文件</p>
+<p>peach通过一个输入模型来反汇编有效文件，再重汇编成为新的文件</p>
+<h3 id="P6"><a href="#P6" class="headerlink" title="P6"></a>P6</h3><p>SGF可以基于高度结构化的种子文件产生新的文件，这使得其可以在保证文件有效的前提下探索全新的输入领域，可以花费更多时间在探索更深的漏洞</p>
+<h3 id="P7"><a href="#P7" class="headerlink" title="P7"></a>P7</h3><p>24小时内，AFLSMART发现的0day漏洞增加了一倍；还提高了20%的代码覆盖率；</p>
+<h3 id="P8"><a href="#P8" class="headerlink" title="P8"></a>P8</h3><p>文件格式规格可以被跨程序使用，也可以在不同版本的程序使用</p>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>之前用过一小段时间的peach，peach的测试方式是编写好一个pit文件，该文件中已经设计好需要的格式，只需要将需要测试的数据进行标记，变异时，peach会自动地随机填充数据，所以以前以为所有的seed都是这样的结构，但从这篇论文来看，AFL的seed结构本身并不具备文件的结构，对于这一点，可以尝试基于AFLSMART进一步提高变异出的文件的过解析率</p>
+<p>刚刚又看了<a href="https://www.sohu.com/a/305377300_354899%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%8F%90%E5%88%B0">https://www.sohu.com/a/305377300_354899这篇文章，其中提到</a></p>
+<p>在 AFL 的 bit 级别的变异的基础上，AFLSmart 增加了对 chunk 级别的变异操作，主要包括三种操作：</p>
+<p><strong>smart deletion：</strong></p>
+<p>在这种方法中，会对给定的种子文件，随机选取 chunk 进行删除。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/1fc4f80b9d3147d88ef4c4a0fc39d3ec.jpeg" alt="img"></p>
+<p><strong>smart addition：</strong></p>
+<p>在这种方法中，给定一个种子文件 S1，随机选取一个种子文件 S2，在 S2 中随机选取一个 chunk C2，将 C2 插入到 S1 中和 C2 具有相同父节点的 chunk C1 的后面（C1.parent.type ==C2.parent.type）</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/508bc05fbfca4395a860c49e42df6d74.jpeg" alt="img"></p>
+<p><strong>smart splicing：</strong></p>
+<p>这种方法中，对于给定的种子文件 S1，随机选取 chunk C1，随机选取种子文件 S2，找到 S2 中与 C1 类型相同的 chunk C2，将 C2 替换到 C1 的位置上。</p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/c45624de24b04d7289f775a978af9863.jpeg" alt="img"></p>
+<p>关于peach pit的博客<a href="http://blog.nsfocus.net/peach-fuzz/">http://blog.nsfocus.net/peach-fuzz/</a></p>
+]]></content>
+      <categories>
+        <category>论文笔记</category>
+      </categories>
+      <tags>
+        <tag>Fuzzing</tag>
+        <tag>AFLSMART</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WebKit</title>
+    <url>/2022/01/16/WebKit/</url>
+    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
+<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
+<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
+<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
+<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
+<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
+<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
+<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
+<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
+<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
+<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
+<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
+<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
+<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
+<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
+<p>数字表示基本顺序，但也不是严格一致。</p>
+<p>具体的过程如下：</p>
+<ol>
+<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
+<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
+<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
+<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
+<li>解释器根据词语构建节点（Node），形成DOM树</li>
+<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
+<li>JavaScript代码可能会修改DOM树结构</li>
+<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
+</ol>
+<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
+<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
+<p>这一段的具体过程如下：</p>
+<ol>
+<li>CSS文件被CSS解释器解释成内部表示结构</li>
+<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
+<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
+</ol>
+<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
+<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
+<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
+<p>这一阶段对应的具体过程如下：</p>
+<ol>
+<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
+<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
+<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
+</ol>
+<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
+<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
+<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
+<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
+]]></content>
+      <categories>
+        <category>啃书笔记</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello</title>
     <url>/2022/04/22/hello-world/</url>
     <content><![CDATA[<p>Welcome to Kery’s blog! </p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</title>
-    <url>/2022/04/22/FuzzIL/</url>
-    <content><![CDATA[<h1 id="FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines"><a href="#FuzzIL：Coverage-Guided-Fuzzing-for-JavaScript-Engines" class="headerlink" title="FuzzIL：Coverage Guided Fuzzing for JavaScript Engines"></a>FuzzIL：Coverage Guided Fuzzing for JavaScript Engines</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>工作目标是引导测试工具来测试脚本解释器，这需要在代码上定义在语义上有效的突变。然而，与现有的突变语法方式不同（如代码的文本形式或语法树），突变是在新设计的中间语言（IL）上进行的。基于其形式，其可以轻松执行控制流和数据流突变。<strong>这反映了，程序的句法属性无关紧要</strong>。此外，该系统可以以高概率生成语义上有效的样本。这避免了将生成的代码包装到try-catch结构中。</p>
-<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>总的来说是为了开发一款工具，该工具还是基于覆盖率的。</p>
-<p>首先，语法上无效的程序一般无法通过解析阶段，所以生成的代码需要在语法上是合法的。</p>
-<p>其次，鉴于基于覆盖率进行指导模糊测试，我们需要定义合理的突变，以在突变时能够保留样本的大多数interesting features，以突变出更多的interesting cases。因此有必要定义能够改变程序控制流和数据流的突变，因为这是组件最终处理的内容。</p>
-<blockquote>
-<p>程序是从上到下顺序执行的，同时可以通过一些控制语句来改变执行的路线，受控制语句影响下，程序最终的执行路线就是控制流。</p>
-<p>js 里面的控制语句有 if、for、while、try-catch 等，它们都会改变程序的走向。</p>
-<p>程序是操作数据的，随着程序的运行，也就是控制流的前进而改变的数据叫做数据流。</p>
-<p>很明显，数据流是依赖控制流的，程序分析里面的数据流分析也是要先做控制流分析。</p>
-<p>比如这样一段代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> (a === <span class="number">1</span>) &#123;</span><br><span class="line">    b = <span class="string">&#x27;1111&#x27;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    b = <span class="string">&#x27;2222&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为 a 为 1，所以会执行到 <code>b = &#39;1111&#39;;</code>，这就是控制流，也就是程序最终执行的代码，可以用来分析程序的走向，做一些死代码删除之类的优化。</p>
-<p>而随着控制流的执行，b 会被赋值为 2222，这就是数据流，也就是值的变化的过程，可以用来分析某个语句的变量的值。</p>
-</blockquote>
-<p>最后，还有处理语义上无效的程序的临时解决方案，我们知道使用try-catch语句会导致漏报一些漏洞，我们的系统需要产生较高比例的语义有效程序，以避免try-catch结构的使用。但是，由于一些漏洞是通过内部异常而发现的，所以完全的语义正确性也是不可取的。</p>
-<blockquote>
-<p>try-catch语句</p>
-<p>try/catch/finally语句是JS中的异常处理机制。try子句用于定义要处理其中异常的代码块，catch子句是在try块中的语句发生异常后会被调用的语句。（finally块中是清理代码）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//正常情况下，这里的代码会从头到尾执行，</span></span><br><span class="line">	<span class="comment">//不会出现问题。但有时候也可能抛出异常：</span></span><br><span class="line">	<span class="comment">//直接通过throw语句抛出，或者由于调用</span></span><br><span class="line">	<span class="comment">//了一个抛出异常的方法而抛出</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(e)&#123;</span><br><span class="line">    <span class="comment">//当且仅当try块抛出异常时，才会执行这个</span></span><br><span class="line">    <span class="comment">//块中的语句。这里的语句可以使局部变量e</span></span><br><span class="line">    <span class="comment">//引用被抛出的Error对象。这个块可以以</span></span><br><span class="line">    <span class="comment">//某种方式来处理异常，也可以什么也不做</span></span><br><span class="line">    <span class="comment">//以忽略异常，还可以通过throw重新抛出异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一个具体的例子</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">//请用户输入一个数值</span></span><br><span class="line">	<span class="keyword">let</span> n = <span class="title class_">Number</span>(<span class="title function_">prompt</span>(<span class="string">&quot;Please enter a positive integer&quot;</span>,<span class="string">&quot;&quot;</span>));</span><br><span class="line">	<span class="comment">//假设输入有效，继续计算该数值的阶乘</span></span><br><span class="line">	<span class="keyword">let</span> f = <span class="title function_">factorial</span>(n);</span><br><span class="line">	<span class="comment">//显示结果</span></span><br><span class="line">	<span class="title function_">alart</span>(n + <span class="string">&quot;!=&quot;</span> + f);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(ex)&#123;			<span class="comment">//如果用户的输入无效，则会跳转到这里</span></span><br><span class="line">	<span class="title function_">alart</span>(ex);		<span class="comment">//告诉用户发生了什么错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>总到来说，我们有三条需求：</p>
-<ol>
-<li>产生语法上有效的样本</li>
-<li>定义影响程序控制流和数据流的突变类型</li>
-<li>产生高比例的语义有效样本</li>
-</ol>
-<h2 id="Coverage-Guide-JavaScript-Fuzzing"><a href="#Coverage-Guide-JavaScript-Fuzzing" class="headerlink" title="Coverage Guide JavaScript Fuzzing"></a>Coverage Guide JavaScript Fuzzing</h2><h3 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h3><p>在更接近引擎内部表示的“字节码”级别上进行突变，而不是突变AST或者文本代码段等表示的句法结构。本质上，字节码级别类似于控制和数据流图，这是大多数攻击最终所需要的到达的级别，而语法信息（如AST）则在解析过程中很大程度上会被丢弃。</p>
-<p><img src="/.com//1.jpg" alt="1"></p>
-<p>因此我们定义了一种名为FuzzIL的中间语言，这样我们可以定义一些在AST层面上不容易实现的突变策略。</p>
-<p>为了满足第三条需求，我们首先注意到，由于每个突变执行的变化相对较小，所以改变语义有效性的概率也就较小。此外，所有突变都必须遵守IL的一套语义正确性的规则，在变量使用前要先进行定义等操作。最后可以将变异出的语义上无效的程序百分比维持在一个可以接受的程度上。</p>
-<h3 id="FuzzIL"><a href="#FuzzIL" class="headerlink" title="FuzzIL"></a>FuzzIL</h3><p>易于突变，同时允许直接转换为JS代码</p>
-<p>FuzzIL程序由指令列表组成,每个指令列表又由一个操作以及输入和输出变量列表组成</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">v0 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;0&#x27;</span>							<span class="comment">//const v0 = 0;</span></span><br><span class="line">v1 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;10&#x27;</span>							<span class="comment">//const v1 = 10;</span></span><br><span class="line">v2 &lt;- <span class="title class_">LoadInt</span> <span class="string">&#x27;1&#x27;</span>							<span class="comment">//const v2 = 1;</span></span><br><span class="line">v3 &lt;- <span class="title class_">Phi</span> v0								<span class="comment">//let v3 = v0;</span></span><br><span class="line"><span class="title class_">BeginFor</span> v0, <span class="string">&#x27;&lt;&#x27;</span>, v1, <span class="string">&#x27;+&#x27;</span>, v2 -&gt; v4			<span class="comment">//for(let v4 = v0; v4 &lt; v1; v4 = v4 + v2)&#123;</span></span><br><span class="line">		v6 &lt;- <span class="title class_">BinaryOperation</span> v3, <span class="string">&#x27;+&#x27;</span>, v4	<span class="comment">//		const v6 = v3 + v4;</span></span><br><span class="line">		<span class="title class_">Copy</span> v3, v6							<span class="comment">//		v3 = v6;</span></span><br><span class="line"><span class="title class_">EndFor</span>										<span class="comment">//&#125;</span></span><br><span class="line">v7 &lt;- <span class="title class_">LoadString</span> <span class="string">&#x27;Result: &#x27;</span>					<span class="comment">//const v7 = &quot;Result: &quot;;</span></span><br><span class="line">v8 &lt;- <span class="title class_">BinaryOperation</span> v7, <span class="string">&#x27;+&#x27;</span>, v3			<span class="comment">//const v8 = v7 + v3;</span></span><br><span class="line">v9 &lt;- <span class="title class_">LoadGlobal</span> <span class="string">&#x27;console&#x27;</span>					<span class="comment">//const v9 = console;</span></span><br><span class="line">v10 &lt;- <span class="title class_">CallMethod</span> v9, <span class="string">&#x27;log&#x27;</span>, [v8]			<span class="comment">//const v10 = v9.log(v8);</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>let</code>命令，用来声明变量。它的用法类似于<code>var</code>，但是所声明的变量，只在<code>let</code>命令所在的代码块内有效。</p>
-<p><img src="../AppData/Roaming/Typora/typora-user-images/image-20220128195045584.png" alt="image-20220128195045584"></p>
-<p>JavaScript 原生中默认是没有 Console 对象,这是宿主对象（也就是浏览器）提供的内置对象。用于访问调试控制台, 在不同的浏览器里效果可能不同。</p>
-</blockquote>
-<p>显示了由12个指令组成的程序实例,计算数字从0到9的总和并输出,变量通过整数识别,并且需要在每个单独的程序中从0开始依次连续编号</p>
-<h3 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h3><p>突变的目的是将已有的程序转化为不同的程序，但要保存其有趣的特征</p>
-<ul>
-<li>输入突变器：改变输入的参数变量</li>
-<li>操作突变器：改变操作参数</li>
-<li>插入突变器：将新生成的代码插入到程序</li>
-<li>组合突变器：将现有的两个程序组合到一起</li>
-<li>拼接突变器：将现有程序的一部分插入另一个程序</li>
-</ul>
-<h4 id="Input-Mutator"><a href="#Input-Mutator" class="headerlink" title="Input Mutator"></a>Input Mutator</h4><p>用于突变数据流，在FuzzIL中，指令的所有输入都是变量，所有突变器需要在原始程序中选择一个或者多个指令，并将其输入替换为不同的随机变量来运行</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># <span class="title class_">Before</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v6, v9, v3</span><br><span class="line"></span><br><span class="line"># <span class="title class_">After</span> <span class="title class_">Mutation</span></span><br><span class="line">...</span><br><span class="line">v16 &lt;- <span class="title class_">CallFunction</span> v1, v12, v9, v3</span><br></pre></td></tr></table></figure>
-
-<h4 id="Operation-Mutator"><a href="#Operation-Mutator" class="headerlink" title="Operation Mutator"></a>Operation Mutator</h4><p>用于突变操作参数，例如LoadString操作使用的常量，以及比较中使用的比较器，属性操作和方法调用中使用的属性或方法名称，以及二进制或一元操作中的实际操作</p>
-<h4 id="Insertion-Mutator"><a href="#Insertion-Mutator" class="headerlink" title="Insertion Mutator"></a>Insertion Mutator</h4><p>本质上是一个小型代码生成组件，使用一系列预定义的代码生成器（一个将FuzzIL代码发送到突变程序中的函数）来进行工作</p>
-<h4 id="Combine-Mutator"><a href="#Combine-Mutator" class="headerlink" title="Combine Mutator"></a>Combine Mutator</h4><p>比较简单，将一个程序插入到另一个当中</p>
-<h4 id="Splice-Mutator"><a href="#Splice-Mutator" class="headerlink" title="Splice Mutator"></a>Splice Mutator</h4><p>插入一组被称为切片的指令，切片的关键属性是其中任何指令使用的每个变量也由切片中的指令定义</p>
-<h3 id="Refinement"><a href="#Refinement" class="headerlink" title="Refinement"></a>Refinement</h3><p>在将新发现的样本加入语料库或保存触发crash的样本前，先进行精细化操作</p>
-<ol>
-<li>检查样本的deterministic behavior</li>
-<li>minimization</li>
-<li>normalization</li>
-</ol>
-<h4 id="Determinism"><a href="#Determinism" class="headerlink" title="Determinism"></a>Determinism</h4>]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-        <tag>FuzzIL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CodeAlchemist</title>
-    <url>/2022/04/22/CodeAlchemist/</url>
-    <content><![CDATA[<h1 id="CodeAlchemist"><a href="#CodeAlchemist" class="headerlink" title="CodeAlchemist"></a>CodeAlchemist</h1><h2 id="1-与其他同类型fuzzer对比"><a href="#1-与其他同类型fuzzer对比" class="headerlink" title="1.与其他同类型fuzzer对比"></a>1.与其他同类型fuzzer对比</h2><ol>
-<li><p>LangFuzz</p>
-<p>通过解析最初的作为种子的JS文件，将其中的语句拆分成代码段，任何重新组合片段生成测试用例。</p>
-<p>由于LangFuzz在关联代码的时候不考虑JS的语义，所以会很快发生运行时错误。</p>
-</li>
-<li><p>jsfunfuzz</p>
-<p>不需要初始的JS文件，而是通过引用手动编写的JS语料库随机产生语法正确的JS语句。</p>
-<p>超过99%的生成用例会在执行三条语句后就发生运行错误。</p>
-</li>
-<li><p>Skyfire/TreeFuzz</p>
-<p>通过从JS种子文件的语料库构建概率语言模型，来学习JS语义，再使用模型来生成用例。</p>
-<p>但这种方式依赖于语言模型的准确性。鉴于JS的复杂类型系统，这种方式也不能完全解决语义问题</p>
-</li>
-<li><p>CodeAlchemist</p>
-<p>将种子文件中的代码分解，并约束每个碎片，使之仅在特定的情况下可以被使用</p>
-<p>使用数据流分析，计算每个代码块中，使用和定义的变量，并动态获取他们的类型，只有当对应的类型可以匹配上的时候，才会进行拼接</p>
-<p>在一些情况下，也会引发语义错误，但已经大幅降低了</p>
-<p>CodeAlchemist会按照JavaScript 语句的粒度分解种子文件, 针对每个块语句生成多种变体提升代码块的丰富性, 通过对多个代码块组合产生嵌套循环等结构。</p>
-<p>CodeAlchemist提出使用数据流分析技术确定未定义变量和已定义变量, 并结合运行时插桩技术探测已执行变量的类型。 CodeAlchemist在JavaScript代码生成过程中, 不断向代码尾部扩展代码片段, 每次扩展代码片段都会确保其中的变量在之前已经被定义并且具备正确的 类 型</p>
-</li>
-</ol>
-<h2 id="2-JS语言问题"><a href="#2-JS语言问题" class="headerlink" title="2. JS语言问题"></a>2. JS语言问题</h2><h3 id="1-面向原型的语言"><a href="#1-面向原型的语言" class="headerlink" title="1. 面向原型的语言"></a>1. 面向原型的语言</h3><p>一个对象实例A只需要将另一个对象实例B设置为自己的原型，就可以在运行是继承B的属性。可以通过<code>_proto_</code>属性来确定对象实例在运行时使用哪个原型。而由于一个对象的类型可以动态更改，所以很有可能会发生语义错误</p>
-<h3 id="2-错误类型"><a href="#2-错误类型" class="headerlink" title="2. 错误类型"></a>2. 错误类型</h3><p>五种运行时错误类型</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;break&#x27;</span>);      			<span class="comment">//语法错误</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> <span class="title class_">Array</span> (<span class="number">4294967296</span>); <span class="comment">//范围错误</span></span><br><span class="line">u;								<span class="comment">//引用错误</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="number">10</span>; <span class="title function_">t</span>();				<span class="comment">//类型错误</span></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">&#x27;%&#x27;</span>);		<span class="comment">//URI错误</span></span><br></pre></td></tr></table></figure>
-
-<p>对于第一行的eval函数，语句本身在语法上是正确的，但在实际运行时会引发语法错误</p>
-<h2 id="3-CodeAlchemist架构"><a href="#3-CodeAlchemist架构" class="headerlink" title="3. CodeAlchemist架构"></a>3. CodeAlchemist架构</h2><img src="https://img1.3s78.com/codercto/97d8a767902c2febf1786c0e63b5506a" alt="CodeAlchemist：用于在JavasScript引擎中查找漏洞的代码生成工具" style="zoom:150%;">
-
-<p>其主要包含三个部分：Seed Parser 模块将 JS seeds 分解为不同的代码块，Constraint analyzer 模块为每个代码块推断出其组合约束条件，Engine fuzzer 则根据组件约束条件池中的代码块，生成测试用例并针对目标 JS 引擎执行生成的测试用例。如果引擎崩溃，它会在文件系统上存储相应的测试用例。</p>
-<h2 id="4-语义感知组件"><a href="#4-语义感知组件" class="headerlink" title="4. 语义感知组件"></a>4. 语义感知组件</h2><p>是一种用于JS引擎的测试用例生成算法，将JS种子碎片化成若干可以组合的代码块，一个代码块就是一小段有效的JS抽象语法树.</p>
-<p>具体而言，组合约束条件包含两种：先决条件和后置条件。先决条件是一组变量及其类型，需要预先定义这些符号从而可以在没有运行时错误的情况下执行代码块。后置条件描述了在代码块的末尾定义了哪种变量，并在后面可被其他代码块使用。</p>
-]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-        <tag>CodeAlchenmist</tag>
-      </tags>
   </entry>
   <entry>
     <title>使用Fuzzilli测试JS引擎</title>
@@ -1073,207 +1152,120 @@
       </tags>
   </entry>
   <entry>
-    <title>WebKit</title>
-    <url>/2022/01/16/WebKit/</url>
-    <content><![CDATA[<h1 id="HTML网页和结构"><a href="#HTML网页和结构" class="headerlink" title="HTML网页和结构"></a>HTML网页和结构</h1><p>HTML的结构特征可以分为三种：树状结构、层次结构、框结构</p>
-<h2 id="1-网页构成"><a href="#1-网页构成" class="headerlink" title="1. 网页构成"></a>1. 网页构成</h2><h3 id="1-1-基本元素和树状结构"><a href="#1-1-基本元素和树状结构" class="headerlink" title="1.1 基本元素和树状结构"></a>1.1 基本元素和树状结构</h3><p>整个网页可以看成一种树形结构</p>
-<p>一个完整的网页包括HTML文本，JavaScript代码，CSS代码以及各种各样的资源文件。网络上的每个资源都是由URL标记的，它是URI的一种实现，这表明对于浏览器来讲，区分两个资源是否一致的唯一标准就是他们的URL是否相同</p>
-<h3 id="1-2-HTML5新特性"><a href="#1-2-HTML5新特性" class="headerlink" title="1.2 HTML5新特性"></a>1.2 HTML5新特性</h3><p>HTML5最主要的新能力是对2D和3D图形以及多媒体方面的支持。包括但不限于HTML5视频、Canvas 2D、WebGL，以及CSS3 3D变换和转换。HTML5定义了新的video元素，支持在网页中播放视频。Canvas2D定义了新的canvas元素，可以利用该元素的2D绘图上下文调用标准定义的接口，绘制2D图形。webGL可以类似地绘制3D图形。CSS3 3D的变换和转换可以作用于任何可视元素，做出3D效果。</p>
-<h2 id="2-网页结构"><a href="#2-网页结构" class="headerlink" title="2. 网页结构"></a>2. 网页结构</h2><h3 id="2-1-框结构"><a href="#2-1-框结构" class="headerlink" title="2.1 框结构"></a>2.1 框结构</h3><p>在HTML语法中，“framset”、“frame”、“iframe”可以用啦在当前网页中嵌入新的框结构。</p>
-<p>多框结构不适用于移动领域，但依然存在，在传统桌面系统中被广泛使用。</p>
-<h3 id="2-2-层次结构"><a href="#2-2-层次结构" class="headerlink" title="2.2 层次结构"></a>2.2 层次结构</h3><p>网页的层次结构指网页中的元素可能分布在不同的层次中，也就是说某些元素可能不同于他的父元素所在的层次，因为某些原因，Webkit需要为该元素和它的子女建立一个新层。</p>
-<p>例如，对于video元素，需要新建一个层，因为video元素用来播放视频，为它创建一个新的层可以更有效地处理视频解码器和浏览器之间的交互和渲染问题，见11章</p>
-<p>需要3D变换的元素也需要单独建立一个层，还有需要2D和3D的绘图操作的元素。</p>
-<p>对于需要复杂变换和处理的元素，它们需要新层，所以WebKit为它们构建新层其实是为了渲染引擎在处理上的方柏霓和高效。</p>
-<p>那么哪些元素或者说哪些情况下会产生新的层呢？对于不同的渲染引擎，策略可能是不一样的，即使都是WebKit渲染引擎，对于不同的基于webKit的浏览器，分层策略也有可能不一样。</p>
-<h2 id="3-webKit的网页渲染过程"><a href="#3-webKit的网页渲染过程" class="headerlink" title="3. webKit的网页渲染过程"></a>3. webKit的网页渲染过程</h2><h3 id="3-1-加载和渲染"><a href="#3-1-加载和渲染" class="headerlink" title="3.1 加载和渲染"></a>3.1 加载和渲染</h3><p>浏览器的主要作用就是将用户输入的URL装换成可视化的图像。这其中包含着两个过程，其一是网页加载过程，就是从URL到构建DOM树；其二是网页渲染过程，从DOM树到生成可视化图像。两个过程也会有所交叉，统称为网页的渲染过程。</p>
-<p>网页渲染还有一个特性，就是网页通常要比屏幕可视面积要大，尤其是在移动端。而当前可见的区域我们称为视图，因为网页面积要比可视区域大，所以浏览器在渲染网页的时候，一般会加入滚动条以帮助翻滚网页。</p>
-<h3 id="3-2-WebKit的渲染过程"><a href="#3-2-WebKit的渲染过程" class="headerlink" title="3.2 WebKit的渲染过程"></a>3.2 WebKit的渲染过程</h3><p>数据包括网页内容，DOM，内部表示和图像，模块则包括HTML解释器，CSS解释器，JavaScript引擎以及布局和绘图模块。</p>
-<p>根据数据的流向，这里将渲染部分分成三个阶段，第一个阶段是从网页的URL到构建完DOM树，第二个阶段是从DOM树到构建完WebKit的绘图上下文，第三阶段是从绘图上下文到生成最终的图像。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w1.png" alt="w1"></p>
-<p>数字表示基本顺序，但也不是严格一致。</p>
-<p>具体的过程如下：</p>
-<ol>
-<li>当用户输入网页URL时，WebKit调用其资源加载器加载该URL对应的网页</li>
-<li>加载器依赖网络模块建立连接，发送请求并接收答复。</li>
-<li>WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的</li>
-<li>网页被交给HTML解释器转变成一系列的词语（Token）</li>
-<li>解释器根据词语构建节点（Node），形成DOM树</li>
-<li>如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行</li>
-<li>JavaScript代码可能会修改DOM树结构</li>
-<li>如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载它们，但它们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL，则需要停止当前DOM树的创建，知道JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
-</ol>
-<p>在上述的过程中，网页在加载和渲染过程中会发出“DOMCount”事件和DOM的“onload”事件，分别在DOM树构建完之后，以及DOM树建完并且网页所依赖的资源都加载完之后发生。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w2.png" alt="w2"></p>
-<p>WebKit利用CSS和DOM树构建RenderObject树直到绘图上下文。</p>
-<p>这一段的具体过程如下：</p>
-<ol>
-<li>CSS文件被CSS解释器解释成内部表示结构</li>
-<li>CSS解释器工作完成之后，在DOM树上附加解释后的样式信息，这就是RenderObject树。</li>
-<li>RenderObject节点在创建的同时，WebKit会根据网页的层次结构创建RenderLayer树，同时创建一个虚拟的绘图上下文。</li>
-</ol>
-<p>RenderObject树的建立并不意味着DOM树会被销毁，事实上，上图中的四个内部表示结构一直存在，直到网页被销毁。</p>
-<p>最后是根据绘图上下文来生成最终的图像，这一过程主要依赖于2D和3D图形库。</p>
-<p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w3.png" alt="w3"></p>
-<p>这一阶段对应的具体过程如下：</p>
-<ol>
-<li>绘图上下文是一个与平台无关的抽象类，他将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类。</li>
-<li>绘图具体实现类也可能有简单的实现，也可能有复杂的实现。在Chromium中，它的实现相当复杂，需要Chromium的合成器来完成复杂的多进程和GPU加速机制。</li>
-<li>绘图实现类将2D图形库或者3D图形库绘制的结果保存下来，交给浏览器来同浏览器界面一起显示。</li>
-</ol>
-<p>现代浏览器为了绘图上的高效性和安全性，这一过程可能实际上不会这么简单，可能会引入复杂的机制。而且，绘图也从之前单纯的软件渲染到现在的GPU硬件渲染、混合渲染模型等方式。浏览器其实在随着动画或与用户的交互在不停地重复执行渲染过程。</p>
-<h1 id="WebKit架构和模块"><a href="#WebKit架构和模块" class="headerlink" title="WebKit架构和模块"></a>WebKit架构和模块</h1><h2 id="1-WebKit架构及模块"><a href="#1-WebKit架构及模块" class="headerlink" title="1. WebKit架构及模块"></a>1. WebKit架构及模块</h2><h3 id="1-1-获取WebKit"><a href="#1-1-获取WebKit" class="headerlink" title="1.1 获取WebKit"></a>1.1 获取WebKit</h3><p><a href="http://www.webkit.org/">www.webkit.org</a></p>
-<h3 id="1-2-WebKit架构"><a href="#1-2-WebKit架构" class="headerlink" title="1.2 WebKit架构"></a>1.2 WebKit架构</h3><p><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/w4.png" alt="w4"></p>
-<p>虚线框表示该部分模块在不同浏览器使用的WebKit内核中实现是不一样的，不是普遍共享的。实线框表示基本上是共享的，但仍然有一些特性可能不是共享的，而且可以通过不同的编译配置来改变它们的行为。</p>
+    <title>周报/日记</title>
+    <url>/2022/01/13/%E5%91%A8%E6%8A%A5/</url>
+    <content><![CDATA[<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="4-12"><a href="#4-12" class="headerlink" title="4.12"></a>4.12</h2><p>el-select和输入框的问题都解决了，明天搞一下项目获取的问题，然后考虑一下这些用户选择的东西要怎么处理，后端的逻辑还需要明确一下。这些弄好就开始最后的重头戏了，把分库做了，目前还不确定这个要不要去改sqlsessionfactory，如果需要那就是大工程了…到时候再说吧</p>
+<p>晚上看专业课，大概是操作系统和数据结构，还有背单词。</p>
+<h2 id="4-11"><a href="#4-11" class="headerlink" title="4.11"></a>4.11</h2><p>昨天的问题解决了，但是也出现了新的问题，el-select的选项选择后不能同步显示，但应该不是什么大问题，明天找时间处理一下就行，另外今天也是正式拥有chatgpt账号了，不用再用国内的接口了，正式和前沿技术接轨</p>
+<p>晚上去打台球，还要把ismart的作业做了，以及今天的背50个单词</p>
+<h2 id="4-10"><a href="#4-10" class="headerlink" title="4.10"></a>4.10</h2><p>今天主要是继续开发备份列表的界面，然后遇到了一个小问题就是后端传回来的值能接收到，但是不能回显到el-element里面，明天再研究一下吧</p>
+<p>之后的话不知道还要做多少，慢慢来吧</p>
+<p>今天听到了两首很好听的歌《好想爱这个世界啊》和《逝爱的刺客》，心情变得好了不少，终于明白为什么说华晨宇关爱抑郁症患者）哈哈哈哈哈很感谢生命中出现的一些人，谢谢你们，爱我的每个人</p>
+<p>今天也是低多巴胺生活的第一天，没有游戏，没有短视频，午饭吃沙拉，认真工作…虽然不是第一次了但还是希望这次可以坚持下去，毕竟身边出现了很棒的人！真的会带来希望！</p>
+<p>ps：今天晚上知道的铁人三项进决赛啦，4月底去福州打比赛！！</p>
+<h2 id="4-4-4-8"><a href="#4-4-4-8" class="headerlink" title="4.4-4.8"></a>4.4-4.8</h2><p>这几天的主要内容还是了解若依，另外就是这两天最终的毕设任务下来了，最终要做一个数据管理处理的系统出来，这两天的主要内容就是把各个模块所在位置都了解一下，在原有的系统上加入自己的页面，给新的页面配置数据层的方法。目前可以进行基本的任务创建等工作了，后续的话还需要跟leader商量一下具体的需求</p>
+<h2 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h2><p>今天没做太多，大概还是从若依里面学习，注释了一个controller，加深理解，也方便学习，其他的就是丰富底下的开发要点</p>
+<h2 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h2><p>今天把若依的Vue3前端替换了原本的Vue2前端，仔细读了一下ruoyi的源码，发现有很多之前自己没有注意到的后端的功能，大多是为了系统的安全性和可用性，不禁感叹自己经验太少了，这个稍微记录一下</p>
+<h3 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h3><p>每个controller有自己的logger</p>
+<p>作为一个系统应该对系统所在的主机性能进行监测</p>
+<p>每次操作需要有日志留存</p>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>验证码生成与验证（先生成随机数，然后转化为图片，接收到传回来的值再与初始值对比）</p>
+<p>用户的记住登录，通过cookie实现</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载文件前对输入的文件名进行检测是否合法</p>
+<h3 id="敏感内容查看"><a href="#敏感内容查看" class="headerlink" title="敏感内容查看"></a>敏感内容查看</h3><p>在调用后端的查询函数前，先使用@PreAuthorize关键字预先对请求信息的用户进行身份验证，判断其是否具有相应的权限</p>
+<h3 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h3><p>在查询时，优先使用redis缓存，避免对数据库造成过大压力</p>
+<h2 id="3-30"><a href="#3-30" class="headerlink" title="3.30"></a>3.30</h2><p>今天来了发现Idea更新了，这次比较大的更新是把页面给更了，尝试了一下感觉还不错，比原来更简洁了，但是好像有时候会突然报个错，看来还是beta版，多少有点问题</p>
+<p>毕设进度的话知道了一个叫若依的项目，这个项目是一个写好的前后端系统，不过现在前端只有Vue2写的和后端集成了，这两天可以看看能不能把Vue3版本也加上去</p>
+<h2 id="3-29"><a href="#3-29" class="headerlink" title="3.29"></a>3.29</h2><p>昨天的问题解决了，原来是因为后端传给前端数据的时候会默认使用小驼峰命名法，但是前端使用的是大驼峰命名法，所以数据一直显示不出来，也是一个小坑吧，以后开发的时候要注意</p>
+<p>今天下午主要是想了想之后多校联合CTF的出题，大概写了第一道题的思路，这两天完善一下</p>
+<h3 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h3><p>时隔一年，又开始尝试写写日记，大概就是每天简单写两笔，希望能记得坚持</p>
+<p>这段时间在搞毕设，用Java开发，现在东西做的差不多了，学到了Spring boot和Mybatisplus两个后端框架的用法，还学了学Vue，不过前端脚本语言感觉有点难上手，分不清什么时候用KV什么时候用赋值，之后有机会仔细了解一下吧。</p>
+<p>下午帮芦孟宇搞了一下她的毕设，后端还算可以，前端还是卡住了，不知道为什么获取的数据不能绑定到el-table表格，明天看看能不能解决</p>
+<p>晚上要带女篮训练，训练完有空的话看一下cache lab，争取这周搞定，还有大英要复习</p>
+<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="3-8-3-14"><a href="#3-8-3-14" class="headerlink" title="3.8-3.14"></a>3.8-3.14</h2><h3 id="3-8"><a href="#3-8" class="headerlink" title="3.8"></a>3.8</h3><p>组会，做PPT前一天晚上通宵搞fuzzilli、CodeAlchemist的docker结果晚上连不上github</p>
+<p>跟吴越交流了一下，之后一起看一下us-19-Feng-The-Most-Secure-Browser-Pwning-Chrome-From-2016-To-2019，可以交流一下</p>
+<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>成功打包fuzzilli</p>
+<p>开了改进AFL的组会</p>
+<p>开始阅读《<a href="https://mboehme.github.io/paper/CCS21.pdf"><strong>Regression Greybox Fuzzing</strong></a>》[笔记地址](.\CCS21\Regression Greybox Fuzzing.md)</p>
+<h3 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h3><p>白天上课</p>
+<p>中午超哥说要在不插装的情况下检测crash，查到了一种定时器检测心跳的方式（<a href="https://www.juhe.cn/news/index/id/2010%EF%BC%89">https://www.juhe.cn/news/index/id/2010）</a></p>
+<p>进而查到了这样一种方式<a href="https://zhuanlan.zhihu.com/p/40273861">https://zhuanlan.zhihu.com/p/40273861</a></p>
+<p>晚上出去喝酒</p>
+<h3 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h3><p>睡了一上午，起床以后阳光明媚，天气极好，感觉世界又明亮了</p>
+<p>晚上做网络实验，继续看论文</p>
+<h3 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h3><p>今天天气也还不错，上午起床中午来院楼开组会，下午去图书馆自习</p>
+<h3 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h3><p>上午起床去给孩子上课，</p>
+<p>晚上上安全系统实验，正常背单词</p>
+<h3 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h3><p>睡到中午才起，下午来图书馆，看了一个小时机组，一个小时数据结构，两个小时高数，晚上去跑个步，回去继续背单词</p>
+<p>晚上挺凉快的</p>
+<h2 id="3-15-4-22"><a href="#3-15-4-22" class="headerlink" title="3.15-4.22"></a>3.15-4.22</h2><p>最近一段时间一直忘了写周报，大概就是做课内实验，开始fuzz JSC了，开发了一个调度工具，下周开始写周报</p>
 ]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>浏览器</tag>
-      </tags>
   </entry>
   <entry>
-    <title>JavaScript学习记录</title>
-    <url>/2022/01/13/JavaScript%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="交互式网络"><a href="#交互式网络" class="headerlink" title="交互式网络"></a>交互式网络</h1><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>要通过事件来触发函数，要添加事件处理器，比如载入网页时触发，使用<code>onload</code>，然后通过<code>alert()</code>函数列出信息。</p>
-<p>事件由用户触发，但最终还是来源于浏览器，是一个被用户触发的事件，但浏览器必须包装关于事件的信息，再传递给负责相应这个事件的函数</p>
-<p>无论事件会不会被相应，都不会影响网页的载入</p>
-<p>Javascript的代码可以放在<code>&lt;script&gt;</code>标签里，也可以直接放在事件处理器中</p>
-<p>事件以JavaScript代码相应网页里发生的动静</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="prompt函数"><a href="#prompt函数" class="headerlink" title="prompt函数"></a>prompt函数</h3><p><code>prompt()</code>负责制作弹出窗口，用于显示可提示用户进行输入的对话框。函数返回值为字符串。当用户输入为数字或布尔类型时，一律返回string型，若想使类型不变，则需要进行类型转换。</p>
-<h3 id="document-getElementById函数"><a href="#document-getElementById函数" class="headerlink" title="document.getElementById函数"></a>document.getElementById函数</h3><p>顾明思义，get-Element-By-Id，就是通过ID来设置/返回HTML标签的属性及调用其事件与方法。用这个方法基本上可以控制页面所有标签，条件很简单就是给每个标签分配一个ID号</p>
-<h1 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h1><p>三种基本数据类型：text、number、boolean</p>
-<p>number用于存储数值数据、text用于存储字符串、boolean用于存储逻辑值</p>
-<p>alart框只能显示文本，不能显示数字，所以要进行类型转换</p>
-<p>在重新载入网页时，脚本的数据被重新设为初始值</p>
-<h2 id="函数-1"><a href="#函数-1" class="headerlink" title="函数"></a>函数</h2><h3 id="parseInt-函数"><a href="#parseInt-函数" class="headerlink" title="parseInt()函数"></a>parseInt()函数</h3><p>把字符串传给函数，函数把字符串转化为整数</p>
-<h3 id="parseFloat-函数"><a href="#parseFloat-函数" class="headerlink" title="parseFloat()函数"></a>parseFloat()函数</h3><p>把字符串传给函数，函数把字符串转化为浮点数</p>
-<p>使用这两个函数应该只包含数字的字符串</p>
-<p>NaN表示非数字，也用于某段数据不是数字，但被期待是数字的时候</p>
-<h3 id="indexOf-函数"><a href="#indexOf-函数" class="headerlink" title="indexOf()函数"></a>indexOf()函数</h3><p>indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。<br>indexOf() 方法对大小写敏感！</p>
-<p>string.indexOf(“xxx”)表示在string中搜索字符串xxx</p>
-<h1 id="探索客户端"><a href="#探索客户端" class="headerlink" title="探索客户端"></a>探索客户端</h1><h2 id="函数-2"><a href="#函数-2" class="headerlink" title="函数"></a>函数</h2><h3 id="refresh-函数"><a href="#refresh-函数" class="headerlink" title="refresh()函数"></a>refresh()函数</h3><p>重新整理网页</p>
-<h3 id="setTimeout-函数"><a href="#setTimeout-函数" class="headerlink" title="setTimeout()函数"></a>setTimeout()函数</h3><p>单次定时器函数</p>
-<p>函数有两段参数，分别是时间延迟和想要运行的程序代码，两个参数顺序无所谓</p>
-<p>时间单位为毫秒</p>
-<h3 id="setInterval-函数"><a href="#setInterval-函数" class="headerlink" title="setInterval()函数"></a>setInterval()函数</h3><p>间隔定时器函数，格式与setTimeout函数相同，以对应的时间间隔重复执行代码</p>
-]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DOM启蒙</title>
-    <url>/2022/01/13/DOM%E5%90%AF%E8%92%99/</url>
-    <content><![CDATA[<h1 id="第一章-节点概览"><a href="#第一章-节点概览" class="headerlink" title="第一章 节点概览"></a>第一章 节点概览</h1><h2 id="1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树"><a href="#1-1-文本对象模型（Document-Object-Model，亦称DOM）是个由Javascript节点对象组成的层次结构-树" class="headerlink" title="1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树"></a>1.1 文本对象模型（Document Object Model，亦称DOM）是个由Javascript节点对象组成的层次结构/树</h2><p>将HTML内容封装到其他HTML中，通过这种方式，构造了一个可以表述为一棵树的层次结构。浏览器加载这份HTML文档时，中断并解析这一层次结构以创建一棵节点对象树。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--在此处加入你的内容--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>植物大战僵尸外挂笔记</title>
+    <url>/2022/06/30/%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%98%E5%83%B5%E5%B0%B8%E5%A4%96%E6%8C%82%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="植物大战僵尸外挂笔记"><a href="#植物大战僵尸外挂笔记" class="headerlink" title="植物大战僵尸外挂笔记"></a>植物大战僵尸外挂笔记</h1><h2 id="0x00-CE初步"><a href="#0x00-CE初步" class="headerlink" title="0x00 CE初步"></a>0x00 CE初步</h2><blockquote>
+<p>CE修改器(Cheat Engine)是一款内存修改编辑工具,CE修改器它允许你修改你的游戏,所以你将总是赢.它包括16进制编辑,反汇编程序,内存查找工具.CE修改器与同类修改工具相比,它具有强大的反汇编功能,且自身附带了修改器制作工具,可以用它直接生成修改器。</p>
+</blockquote>
+<p>总之，CE可以帮助我们搜索看到的程序效果在内存中的表示，比如搜索一个数据存在哪块内存上，而写游戏外挂的本质就是修改游戏中的数据，来实现一些爽操作</p>
+<h2 id="0x01-找阳光"><a href="#0x01-找阳光" class="headerlink" title="0x01 找阳光"></a>0x01 找阳光</h2><img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630105800050.png" alt="image-20220630105800050" style="zoom:50%;">
 
-<p>浏览器解析上述代码时，会创建一个文档，包含以树形格式（即DOM）为结构的的许多节点，</p>
-<p>HTML文档，被浏览器解析并转换为一个由节点对象组成以体现当前文档的树状结构。DOM的目的是使用JavaScript操作为当前文档提供一个编程接口。</p>
-<h2 id="1-2-节点对象类型"><a href="#1-2-节点对象类型" class="headerlink" title="1.2 节点对象类型"></a>1.2 节点对象类型</h2>]]></content>
-      <categories>
-        <category>啃书笔记</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>软件安全与质量保证的模糊测试</title>
-    <url>/2021/12/29/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E4%B8%8E%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="软件安全与质量保证的模糊测试（翻译）"><a href="#软件安全与质量保证的模糊测试（翻译）" class="headerlink" title="软件安全与质量保证的模糊测试（翻译）"></a>软件安全与质量保证的模糊测试（翻译）</h1><h2 id="第一章-介绍"><a href="#第一章-介绍" class="headerlink" title="第一章 介绍"></a>第一章 介绍</h2><p>欢迎来到模糊测试的世界！</p>
-<p>总的来说，模糊测试的目的是输入一个自动生成的数据到一个系统中，并尝试破坏掉这个系统，由此来揭露程序的可靠性问题。尽管有些人依然对于模糊测试的能力、有效性、实用性有所误解，模糊测试还是被广泛用于安全和质量保证的研究。模糊测试可以被理解为</p>
-<p>一种高度自动化的测试技术。它使用非法数据作为程序的输入覆盖了众多的边界情况，以此来更好地确认没有容易被进攻的危险点。fuzzing这个名字来自现代程序常常因为电话线上随机化的线路噪声而崩溃。</p>
-<p>在你探索模糊测试更远之前，我们希望你知道你为什么对模糊测试感兴趣。鉴于你正在读这本书，有一点是明确的：你喜欢寻找软件的错误，喜欢那些对软件安全造成影响的漏洞。为什么你想找到这些漏洞？总的来说，寻找这些漏洞是为了三个不同的目标：</p>
-<p>1.质量保证：测试和保卫你的内部开发的软件</p>
-<p>2.系统管理：测试和保卫软件依赖的使用环境</p>
-<p>3.脆弱性评估：测试并尝试侵入他人的软件或系统</p>
-<p>在这本书里，我们会从所有这些视角来考虑模糊测试。我们会从开发者的角度考虑模糊测试，也会从企业端用户的角度观察。我们也会考虑第三方评估团队的需求，无论他们是测试顾问还是黑客。本书的目的在于让软件公司（测试者）和漏洞分析家（黑客）有相同的起点。软件测试者可以向有天赋的黑客学习，反之亦然。</p>
-<p>模糊测试是最强大的用于发现软件安全问题的自动化测试工具。一个人可以认为代码审计工具能从代码中找到更多的漏洞，但在比较智能模糊测试和代码审计的成果之后，结果显然模糊测试更胜一筹。在代码审计工具中发现的很多漏洞都是假阳性的，对此进行警告并不会对安全有什么正面影响。模糊测试则没有这样的问题。模糊测试不会报告假阳性的漏洞。漏洞就是漏洞，错误就是错误。大多数模糊测试所发现的漏洞在一定程度上都是可以被利用的，至少会导致拒绝服务。鉴于模糊测试通常是黑盒测试，很明显，每个漏洞都是可以远程利用的、依赖于你测试的接口的，并且一定程度上在你对利用的定义中。模糊测试在测试闭源的、现成的程序和私有系统中是非常有用的，因为在大部分情况下模糊测试不需要接触任何源码。</p>
-<p>在本章中，我们会对模糊测试以及有关的技术进行综述。我们关注安全问题发生的原因以及为什么当前的安全方法面对这些安全问题时并不能保护我们。我们会通过介绍这种有前瞻性的、每个人都可以使用其发现与剔除安全漏洞的工具探索其如何对于安全问题有所帮助。接着，我们看哪里已经了使用模糊测试，并考虑原因。最后，我们会收获一些技术并回顾模糊测试的历史，在此过程中，我们专注于理解有多么多的模糊测试技术得以存在。不变的是，记住我们这一章的目的仅仅是提供一个概述，让你为这本书之后介绍的做好准备。随后的章节会为这些简述提供更多的细节。</p>
-<h3 id="1-1-软件安全"><a href="#1-1-软件安全" class="headerlink" title="1.1 软件安全"></a>1.1 软件安全</h3><p>对于在软件中发现安全漏洞，模糊测试是一种快速并低耗能的工具。不幸的是，模糊测试并不经常在需要它的地方被用到，因此，从安全的视角来看，很多我们依赖的系统都是不成熟的。安全领域有一件事是很清晰的：软件总是有安全问题的。几乎所有的软件都可以被很容易地入侵。但是有如果你对于软件安全问题以及相关技术很熟悉，你可能会能够知道实际上软件中到底寄生了多少安全问题。这就是软件安全研究的问题。</p>
-<p>今天，很少有人真的知道什么是软件安全，即使他们被称为安全专家。就像古时候地图用于警示，地图外的危险区域，有时候最好不要去干涉。没有被记载的领土被称为“此处有恶龙”，意思是你不应该到此处冒险。这太可怕了，或者说太具有挑战性了。幸运的是，在软件安全领域，黑暗的岁月结束了，因为最初的探索者为探索侵入的神秘领地奉献了毕生心血。他们尝试为普通的软件开发者解释软件安全。最开始， 因为他们的新技术，他们受到人们的敬畏；之后他们就被指责有了太多的危险发现。即使是今天，他们还在被认为拥有很多让他们变得特殊的艺术品。然而，毕竟他们发现的没有那么复杂。</p>
-<p>软件安全测试可以被使用在各种组织中，从研发到测试实验室环境，再到企业。<br>    <img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/1.png" alt="1"></p>
-<pre><code>&lt;center&gt;
-模糊测试的使用场景：开发，第三方测试实验室和企业运营
-&lt;/center&gt;
-</code></pre>
-<p>在研发过程中，模糊测试可以被用于多数编程过程的的早期的原型阶段和实施阶段。事实上，在最开始的原型做好之后，就可以立刻使用模糊测试。自动化测试经常集成到持续集成、自动化构建程序、回归测试的过程中。源代码审计工具经常在软件开发时被用于剔除编程错误导致的简单的漏洞。研发过程包括测试，特别是在系统集成之前进行的测试。</p>
-<p>在一个系统继承完毕后，通常测试实验室中的专门的测试团队会执行大部分剩余的测试工作。限于软件开发进程，一些测试会更加贴近于集成在开发之中。剩余的在测试实验室中完成的测试工作会与在研发环境中进行的测试工作有很大不同。在系统开发中，测试实验室非常常见，例如在电信、金融和工业网络中都会涉及，并且其规模十分庞大。在一个安全实验室中，一个系统可能被任何有效的工具测试，而测试结果会被使用所有可能的被选择的软件度量来分析。一个测试实验室可能控制着昂贵的、专门性的工具来进行装载和性能以及模糊测试。实际上，一些商业的模糊测试工具在传统的测试实验室环境中已经被作为一种固定测试设备来部署了。</p>
-<p>在企业中，使用很多后期部署的技术来提高软件安全性。像Nessus一样的漏洞扫描器和安全扫描器在实际环境中经常被用到。对于测试工具，一个很重要的准则就是测试正常运转的系统时，不能妨碍其正常服务。渗透测试服务仍然经常对抗在线系统，因为他们需要通过真实的入侵威胁来确认实际环境的安全有效性。这是因为不是所有的问题都能在实验室环境下被发现。相似的，模糊测试也应该谨慎地考虑企业环境。有可能在实际环境中会比实验室环境中发现更多的漏洞，但也有可能会妨碍当前的服务。</p>
-<p>永远不要忘记安全领域是没有必杀武器的：即使是模糊测试也不能保证软件中没有遗留任何漏洞。不管怎样，快节奏下的社会下，技术正在改变、发展，并不断地进化变得更好。这对于测试者来说是个好消息：人们在可预见的未来会写出新的软件。而新的软件不可避免地会带有一些漏洞。你未来的职业生涯获得了担保。软件不断地变复杂，软件中的漏洞数量也会和代码行数成正比地增加。而你所拥有的安全测试工具也在不断提升，就像你看到的，过去20年中模糊测试工具也一直在不断地进化。</p>
-<h4 id="1-1-1-安全事故"><a href="#1-1-1-安全事故" class="headerlink" title="1.1.1 安全事故"></a>1.1.1 安全事故</h4><p>对于软件安全最主要的目的是避免安全事故：比如有人可以通过主动攻击损害系统安全性，以及由于人们的错误或由于洪水或龙卷风等自然灾害而引起的泄露或破坏数据的事件。</p>
+<p>从这里我们可以看到，目前的阳光值是50，所以直接在CE里面first scan</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630105915395.png" alt="image-20220630105915395" style="zoom: 50%;">
+
+<p>这是在对植物大战僵尸所有的内存块进行搜索，寻找当前值为50的内存块，左边是搜索结果，目前来看有很多，其中黑色地址的是动态地址，绿色地址的是静态地址，区别在于每次打开游戏时，动态地址会变，而静态地址是不变的</p>
+<p>这时我们为了找到究竟哪一个地址存放着阳光，对阳光进行一次改变，</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110211461.png" alt="image-20220630110211461" style="zoom: 50%;">
+
+<p>改变的时候有个 小技巧，尽量不要让阳光为0，因为一个程序里面为0的值很多，筛选效率比较低</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110318023.png" alt="image-20220630110318023" style="zoom:50%;">
+
+<p>我们收集一个阳光，令阳光达到75，再次scan就直接找到了阳光的动态地址0x1BFF3550</p>
+<p>但是找到动态地址还不够，这个地址每次打开游戏都不一样，不能用外挂程序直接操控，所以我们要去找静态地址</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630110718825.png" alt="image-20220630110718825" style="zoom:50%;">
+
+<p>右键点击这个地址，选择“Find out what writes to the address”，</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630111032492.png" alt="image-20220630111032492" style="zoom:50%;">
+
+<p>在下次收集到阳光时，CE会找到修改了这个值的汇编语句，从这条语句我们发现，eax+0x00005578这个位置的值加上了ecx的值，我们选中这条语句，点击“more information”</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630111243260.png" alt="image-20220630111243260" style="zoom:50%;">
+
+<p>发现ecx=0x19，也就是十进制的25，刚好是一个阳光的数量，那么被加的地址应该就是存储阳光的地址了，也就是刚刚我们看到的阳光的动态地址0x1BFF3550的来历，看一下eax的值是0x1BFEDFD8</p>
+<p>但是这个值依然不是一个静态地址，我们要找到这个地址是怎么来的，于是继续搜索这个地址</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630115525849.png" alt="image-20220630115525849" style="zoom:50%;">
+
+<p>可以看到搜出来有很多地址，其中0x0019开头的都是堆栈的地址，找到下面的0x03EAB958</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120119461.png" alt="image-20220630120119461" style="zoom:50%;">
+
+<p>右键点击这个地址，选择“Find out what accesses this address”，</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120214904.png" alt="image-20220630120214904" style="zoom:50%;">
+
+<p>可以看到改变eax的值的语句</p>
+<p>我们分别看一下两条改变eax的语句</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120544438.png" alt="image-20220630120544438" style="zoom:50%;">
+
+<p>发现无论从ecx改还是从esi改，实际上都是用的0x03EAB0F0这个地址＋0x868</p>
+<p>于是继续搜索0x03EAB0F0</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630120708455.png" alt="image-20220630120708455" style="zoom:50%;">
+
+<p>终于看到了绿色的静态地址，随便选一个就行</p>
+<img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/image-20220630121011471.png" alt="image-20220630121011471" style="zoom:50%;">
+
+<p>双击这个地址，设置一下指针，注意两个偏移值顺序不能换，因为实际上这是两层的指针</p>
+<p>即静态地址是第一层指针p1，其中存的值为0x03EAB0F0</p>
+<p>p1指向的地址是第二层指针的基址，所以+0x868得到了第二层指针p2</p>
+<p>图中可以看到p2应该是的0x1BFEDFD8，这个指针再加0x5578得到了最终实际存储阳光的地址</p>
+<p>这个时候找基址的部分就结束了，然后就需要进行自动化修改</p>
+<h2 id="0x02-自动化修改阳光"><a href="#0x02-自动化修改阳光" class="headerlink" title="0x02 自动化修改阳光"></a>0x02 自动化修改阳光</h2><p>参考这篇博客<a href="https://blog.csdn.net/weixin_43752471/article/details/84445871?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-2-84445871-blog-117117813.pc_relevant_vip_default&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-2-84445871-blog-117117813.pc_relevant_vip_default&amp;utm_relevant_index=3%E5%AD%A6%E4%B9%A0%E4%BA%86%E4%B8%80%E4%B8%8BC++%E4%BF%AE%E6%94%B9%E5%85%B6%E4%BB%96%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98">https://blog.csdn.net/weixin_43752471/article/details/84445871?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2-84445871-blog-117117813.pc_relevant_vip_default&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2-84445871-blog-117117813.pc_relevant_vip_default&amp;utm_relevant_index=3学习了一下C++修改其他程序内存</a></p>
+<p>然后把相关的参数改一下，大概就拿这篇代码直接用了，顺便还一块做了修改金币的功能，道理是一样的，只不过金币的存储是数量/10存储的，直接搜金币数搜不出来，要/10才能搜出来，最后获取的静态地址和阳光的一样就不用两个地址了</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> gameaddress = <span class="number">0x00731C50</span>; <span class="comment">//游戏基址；</span></span><br><span class="line">HANDLE gameprocess; <span class="comment">//句柄类型 获取</span></span><br><span class="line"><span class="comment">//2次偏移</span></span><br><span class="line"><span class="function"><span class="type">int</span> *<span class="title">get5point</span><span class="params">(<span class="type">int</span> gameaddress,<span class="type">int</span> p1,<span class="type">int</span> p2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> iBase, iP1, *iP2;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">ReadProcessMemory</span>(gameprocess, (LPVOID)gameaddress, &amp;iBase, <span class="number">4</span>, <span class="literal">NULL</span>))<span class="comment">//初地址赋值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">ReadProcessMemory</span>(gameprocess, (LPVOID)(iBase + p1), &amp;iP1, <span class="number">4</span>, <span class="literal">NULL</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    iP2=(<span class="type">int</span> *)(iP1+p2);</span><br><span class="line">	<span class="keyword">return</span> iP2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//修改阳光</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rwyg</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *pwx=<span class="built_in">get5point</span>(gameaddress,<span class="number">0x868</span>,<span class="number">0x5578</span>);</span><br><span class="line">	<span class="type">int</span>  wx = <span class="number">0x2710</span>;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;pwd=&quot;</span>&lt;&lt;pwx&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(gameprocess, pwx,&amp;wx, <span class="number">4</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rwjb</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *pwx=<span class="built_in">get5point</span>(gameaddress,<span class="number">0x94c</span>,<span class="number">0x54</span>);</span><br><span class="line">	<span class="type">int</span>  wx = <span class="number">0x186a0</span>;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;pwd=&quot;</span>&lt;&lt;pwx&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">WriteProcessMemory</span>(gameprocess, pwx,&amp;wx, <span class="number">4</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//获取游戏窗口所在进程的进程ID，也就是PID</span></span><br><span class="line">    HWND hWnd = <span class="built_in">FindWindow</span>(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">&quot;Plants vs. Zombies&quot;</span>));</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == hWnd)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;查找窗口失败\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    DWORD dwProcessId;</span><br><span class="line">    <span class="built_in">GetWindowThreadProcessId</span>(hWnd, &amp;dwProcessId);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;进程ID:%d\n&quot;</span>, dwProcessId);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取进程句柄</span></span><br><span class="line">    gameprocess = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS, FALSE, dwProcessId);</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == gameprocess)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;打开进程失败\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">rwyg</span>();</span><br><span class="line">    <span class="built_in">rwjb</span>();</span><br><span class="line">    <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>书籍翻译</category>
+        <category>逆向实践</category>
       </categories>
       <tags>
-        <tag>Fuzzing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Coverage-based Greybox Fuzzing as Markov Chain</title>
-    <url>/2021/12/14/Coverage-based-Greybox-Fuzzing-as-Markov-Chain/</url>
-    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>我们发现多数测试检测相同且小量的“高频”路径，发展很多策略，通过向低频路径倾斜，用相同数量的测试样例来探索更多“低频”路径</p>
-<p>马尔可夫链模型指出模糊测试一个执行路径i的种子生成执行路径j的输入的可能性。</p>
-<p>每个种子有“能量”用于指出这个种子生成的输入数</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>最主要的问题就是测试程序的不同路径</p>
-<p>如果发现了新路径，就在此基础上进行修改，否则丢弃</p>
-<p>我们让每一个seed都有一个energy，然后energy指定下一次生成的输入</p>
-<p>将低能量分配给执行高频路径的种子，而把高能量分配给执行低频路径的种子</p>
-<p><a href="https://blog.csdn.net/u014578266/article/details/89042473">https://blog.csdn.net/u014578266/article/details/89042473</a></p>
-]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-        <tag>AFLFAST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Smart Greybox Fuzzing</title>
-    <url>/2021/12/13/Smart-Greybox-Fuzzing/</url>
-    <content><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>CGF通过随机的翻转、删除、分成小块来产生新文件，但是这样产生的很多文件相对于应用程序所需要的复杂文件格式是无效的</p>
-<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>SGF通过现实文件级别的变异操作来保证文件的有效性，这样产生的文件更加容易通过程序的解析阶段，可以暴露更深层的问题</p>
-<h3 id="P3"><a href="#P3" class="headerlink" title="P3"></a>P3</h3><p>探索了更多的路径，并暴露了更多的问题</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="P1-1"><a href="#P1-1" class="headerlink" title="P1"></a>P1</h3><p>灰盒测试只需使用轻量级的instrumentation</p>
-<h3 id="P2-1"><a href="#P2-1" class="headerlink" title="P2"></a>P2</h3><p>被变异的输入执行的控制流通过考察来确定他们是否是有趣的，而CGF帮助进行评价控制流的新颖性，随后，被认为值得继续探索的输入会产生更多的输入</p>
-<h3 id="P3-1"><a href="#P3-1" class="headerlink" title="P3"></a>P3</h3><p>而CGF的问题在于缺乏对于文件结构的认识，位级变异会在被处理之前就被程序拒绝</p>
-<h3 id="P4"><a href="#P4" class="headerlink" title="P4"></a>P4</h3><p>有两个方法可以解决这个问题，一个是基于字典，另一个是基于动态污点分析。</p>
-<p>对于字典，可能牺牲AFL的效率和可用性，当AFL要探索新路径时字典是很好的选择</p>
-<p>但两种方法都不能变异出高度结构化的文件</p>
-<h3 id="P5"><a href="#P5" class="headerlink" title="P5"></a>P5</h3><p>智能黑盒测试工具比如peach已经有了文件结构意识，而且能基于有效文件构建新的有效文件</p>
-<p>peach通过一个输入模型来反汇编有效文件，再重汇编成为新的文件</p>
-<h3 id="P6"><a href="#P6" class="headerlink" title="P6"></a>P6</h3><p>SGF可以基于高度结构化的种子文件产生新的文件，这使得其可以在保证文件有效的前提下探索全新的输入领域，可以花费更多时间在探索更深的漏洞</p>
-<h3 id="P7"><a href="#P7" class="headerlink" title="P7"></a>P7</h3><p>24小时内，AFLSMART发现的0day漏洞增加了一倍；还提高了20%的代码覆盖率；</p>
-<h3 id="P8"><a href="#P8" class="headerlink" title="P8"></a>P8</h3><p>文件格式规格可以被跨程序使用，也可以在不同版本的程序使用</p>
-<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>之前用过一小段时间的peach，peach的测试方式是编写好一个pit文件，该文件中已经设计好需要的格式，只需要将需要测试的数据进行标记，变异时，peach会自动地随机填充数据，所以以前以为所有的seed都是这样的结构，但从这篇论文来看，AFL的seed结构本身并不具备文件的结构，对于这一点，可以尝试基于AFLSMART进一步提高变异出的文件的过解析率</p>
-<p>刚刚又看了<a href="https://www.sohu.com/a/305377300_354899%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%8F%90%E5%88%B0">https://www.sohu.com/a/305377300_354899这篇文章，其中提到</a></p>
-<p>在 AFL 的 bit 级别的变异的基础上，AFLSmart 增加了对 chunk 级别的变异操作，主要包括三种操作：</p>
-<p><strong>smart deletion：</strong></p>
-<p>在这种方法中，会对给定的种子文件，随机选取 chunk 进行删除。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/1fc4f80b9d3147d88ef4c4a0fc39d3ec.jpeg" alt="img"></p>
-<p><strong>smart addition：</strong></p>
-<p>在这种方法中，给定一个种子文件 S1，随机选取一个种子文件 S2，在 S2 中随机选取一个 chunk C2，将 C2 插入到 S1 中和 C2 具有相同父节点的 chunk C1 的后面（C1.parent.type ==C2.parent.type）</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/508bc05fbfca4395a860c49e42df6d74.jpeg" alt="img"></p>
-<p><strong>smart splicing：</strong></p>
-<p>这种方法中，对于给定的种子文件 S1，随机选取 chunk C1，随机选取种子文件 S2，找到 S2 中与 C1 类型相同的 chunk C2，将 C2 替换到 C1 的位置上。</p>
-<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190402/c45624de24b04d7289f775a978af9863.jpeg" alt="img"></p>
-<p>关于peach pit的博客<a href="http://blog.nsfocus.net/peach-fuzz/">http://blog.nsfocus.net/peach-fuzz/</a></p>
-]]></content>
-      <categories>
-        <category>论文笔记</category>
-      </categories>
-      <tags>
-        <tag>Fuzzing</tag>
-        <tag>AFLSMART</tag>
+        <tag>Reverse</tag>
       </tags>
   </entry>
   <entry>
@@ -1337,28 +1329,36 @@
       </tags>
   </entry>
   <entry>
-    <title>Exploiting Magnetometer in Mobile Devices for Website and Application Fingerprinting</title>
-    <url>/2021/12/12/Exploiting-Magnetometer-in-Mobile-Devices-for-Website-and-Application-Fingerprinting/</url>
-    <content><![CDATA[<p>使用移动设备的强磁计采集网站、应用数字指纹</p>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>方法：使用80台移动设备、包含56种强磁计进行试验，</p>
-<p>实验结果：在实验的设备上，90%的设备被正确检测出打开的应用和网站</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>智能手机上的CPU的峰值活动会对磁传感器造成干扰，由此通过对峰值状态下和空闲状态下的CPU对磁传感器造成的干扰进行分析，建立隐蔽通道。</p>
-<p>强磁计被扰动程度与CPU的工作量密切相关，因此这样可以对浏览器和应用程序进行唯一识别。而且该方法不需要任何额外的用户权限，可以通过任意应用程序实现，而通过通用传感器API在网页种访问强磁计，这样攻击者不需要使用恶意应用程序，而是通过网页直接获取其他应用的指纹</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Magnetometers"><a href="#Magnetometers" class="headerlink" title="Magnetometers"></a>Magnetometers</h3><p>强磁计即磁传感器，可以用于指向</p>
-<h3 id="Sensitivity-of-magnetometers-to-CPU-activity"><a href="#Sensitivity-of-magnetometers-to-CPU-activity" class="headerlink" title="Sensitivity of magnetometers to CPU activity"></a>Sensitivity of magnetometers to CPU activity</h3><p>高负载的CPU需要更大的功率，从而产生更高的电磁场</p>
-<p>高负载的CPU会导致强磁计测量值出现明显的峰值</p>
-<p>对于每个应用程序，CPU和传感器测量的数据所绘制的图像相互关联，并且对于CPU运行不同的应用程序图像有显著差异。</p>
-<p>同时，不同的应用程序或网站在运行时需要不同数量的CPU资源。因此，CPU利用率跟踪以及相应的传感器受干扰程度可以唯一标识正在运行的应用、网页。</p>
-<h2 id="Attack-Scenario"><a href="#Attack-Scenario" class="headerlink" title="Attack Scenario"></a>Attack Scenario</h2><p>在应用程序场景下，恶意程序可以通过沙盒处理，只能访问零权限传感器信息</p>
-<p>在浏览器场景下，网页要么完全属于攻击者，要么包含来自攻击者控制的服务器的组件。</p>
-<p>攻击者需要执行一个培训阶段，为每个网站和应用收集足够的标记，还可以发送受害者的设备型号，以提高成功率</p>
+    <title>软件安全与质量保证的模糊测试</title>
+    <url>/2021/12/29/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E4%B8%8E%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="软件安全与质量保证的模糊测试（翻译）"><a href="#软件安全与质量保证的模糊测试（翻译）" class="headerlink" title="软件安全与质量保证的模糊测试（翻译）"></a>软件安全与质量保证的模糊测试（翻译）</h1><h2 id="第一章-介绍"><a href="#第一章-介绍" class="headerlink" title="第一章 介绍"></a>第一章 介绍</h2><p>欢迎来到模糊测试的世界！</p>
+<p>总的来说，模糊测试的目的是输入一个自动生成的数据到一个系统中，并尝试破坏掉这个系统，由此来揭露程序的可靠性问题。尽管有些人依然对于模糊测试的能力、有效性、实用性有所误解，模糊测试还是被广泛用于安全和质量保证的研究。模糊测试可以被理解为</p>
+<p>一种高度自动化的测试技术。它使用非法数据作为程序的输入覆盖了众多的边界情况，以此来更好地确认没有容易被进攻的危险点。fuzzing这个名字来自现代程序常常因为电话线上随机化的线路噪声而崩溃。</p>
+<p>在你探索模糊测试更远之前，我们希望你知道你为什么对模糊测试感兴趣。鉴于你正在读这本书，有一点是明确的：你喜欢寻找软件的错误，喜欢那些对软件安全造成影响的漏洞。为什么你想找到这些漏洞？总的来说，寻找这些漏洞是为了三个不同的目标：</p>
+<p>1.质量保证：测试和保卫你的内部开发的软件</p>
+<p>2.系统管理：测试和保卫软件依赖的使用环境</p>
+<p>3.脆弱性评估：测试并尝试侵入他人的软件或系统</p>
+<p>在这本书里，我们会从所有这些视角来考虑模糊测试。我们会从开发者的角度考虑模糊测试，也会从企业端用户的角度观察。我们也会考虑第三方评估团队的需求，无论他们是测试顾问还是黑客。本书的目的在于让软件公司（测试者）和漏洞分析家（黑客）有相同的起点。软件测试者可以向有天赋的黑客学习，反之亦然。</p>
+<p>模糊测试是最强大的用于发现软件安全问题的自动化测试工具。一个人可以认为代码审计工具能从代码中找到更多的漏洞，但在比较智能模糊测试和代码审计的成果之后，结果显然模糊测试更胜一筹。在代码审计工具中发现的很多漏洞都是假阳性的，对此进行警告并不会对安全有什么正面影响。模糊测试则没有这样的问题。模糊测试不会报告假阳性的漏洞。漏洞就是漏洞，错误就是错误。大多数模糊测试所发现的漏洞在一定程度上都是可以被利用的，至少会导致拒绝服务。鉴于模糊测试通常是黑盒测试，很明显，每个漏洞都是可以远程利用的、依赖于你测试的接口的，并且一定程度上在你对利用的定义中。模糊测试在测试闭源的、现成的程序和私有系统中是非常有用的，因为在大部分情况下模糊测试不需要接触任何源码。</p>
+<p>在本章中，我们会对模糊测试以及有关的技术进行综述。我们关注安全问题发生的原因以及为什么当前的安全方法面对这些安全问题时并不能保护我们。我们会通过介绍这种有前瞻性的、每个人都可以使用其发现与剔除安全漏洞的工具探索其如何对于安全问题有所帮助。接着，我们看哪里已经了使用模糊测试，并考虑原因。最后，我们会收获一些技术并回顾模糊测试的历史，在此过程中，我们专注于理解有多么多的模糊测试技术得以存在。不变的是，记住我们这一章的目的仅仅是提供一个概述，让你为这本书之后介绍的做好准备。随后的章节会为这些简述提供更多的细节。</p>
+<h3 id="1-1-软件安全"><a href="#1-1-软件安全" class="headerlink" title="1.1 软件安全"></a>1.1 软件安全</h3><p>对于在软件中发现安全漏洞，模糊测试是一种快速并低耗能的工具。不幸的是，模糊测试并不经常在需要它的地方被用到，因此，从安全的视角来看，很多我们依赖的系统都是不成熟的。安全领域有一件事是很清晰的：软件总是有安全问题的。几乎所有的软件都可以被很容易地入侵。但是有如果你对于软件安全问题以及相关技术很熟悉，你可能会能够知道实际上软件中到底寄生了多少安全问题。这就是软件安全研究的问题。</p>
+<p>今天，很少有人真的知道什么是软件安全，即使他们被称为安全专家。就像古时候地图用于警示，地图外的危险区域，有时候最好不要去干涉。没有被记载的领土被称为“此处有恶龙”，意思是你不应该到此处冒险。这太可怕了，或者说太具有挑战性了。幸运的是，在软件安全领域，黑暗的岁月结束了，因为最初的探索者为探索侵入的神秘领地奉献了毕生心血。他们尝试为普通的软件开发者解释软件安全。最开始， 因为他们的新技术，他们受到人们的敬畏；之后他们就被指责有了太多的危险发现。即使是今天，他们还在被认为拥有很多让他们变得特殊的艺术品。然而，毕竟他们发现的没有那么复杂。</p>
+<p>软件安全测试可以被使用在各种组织中，从研发到测试实验室环境，再到企业。<br>    <img src="http://kery-blog.oss-cn-beijing.aliyuncs.com/img/1.png" alt="1"></p>
+<pre><code>&lt;center&gt;
+模糊测试的使用场景：开发，第三方测试实验室和企业运营
+&lt;/center&gt;
+</code></pre>
+<p>在研发过程中，模糊测试可以被用于多数编程过程的的早期的原型阶段和实施阶段。事实上，在最开始的原型做好之后，就可以立刻使用模糊测试。自动化测试经常集成到持续集成、自动化构建程序、回归测试的过程中。源代码审计工具经常在软件开发时被用于剔除编程错误导致的简单的漏洞。研发过程包括测试，特别是在系统集成之前进行的测试。</p>
+<p>在一个系统继承完毕后，通常测试实验室中的专门的测试团队会执行大部分剩余的测试工作。限于软件开发进程，一些测试会更加贴近于集成在开发之中。剩余的在测试实验室中完成的测试工作会与在研发环境中进行的测试工作有很大不同。在系统开发中，测试实验室非常常见，例如在电信、金融和工业网络中都会涉及，并且其规模十分庞大。在一个安全实验室中，一个系统可能被任何有效的工具测试，而测试结果会被使用所有可能的被选择的软件度量来分析。一个测试实验室可能控制着昂贵的、专门性的工具来进行装载和性能以及模糊测试。实际上，一些商业的模糊测试工具在传统的测试实验室环境中已经被作为一种固定测试设备来部署了。</p>
+<p>在企业中，使用很多后期部署的技术来提高软件安全性。像Nessus一样的漏洞扫描器和安全扫描器在实际环境中经常被用到。对于测试工具，一个很重要的准则就是测试正常运转的系统时，不能妨碍其正常服务。渗透测试服务仍然经常对抗在线系统，因为他们需要通过真实的入侵威胁来确认实际环境的安全有效性。这是因为不是所有的问题都能在实验室环境下被发现。相似的，模糊测试也应该谨慎地考虑企业环境。有可能在实际环境中会比实验室环境中发现更多的漏洞，但也有可能会妨碍当前的服务。</p>
+<p>永远不要忘记安全领域是没有必杀武器的：即使是模糊测试也不能保证软件中没有遗留任何漏洞。不管怎样，快节奏下的社会下，技术正在改变、发展，并不断地进化变得更好。这对于测试者来说是个好消息：人们在可预见的未来会写出新的软件。而新的软件不可避免地会带有一些漏洞。你未来的职业生涯获得了担保。软件不断地变复杂，软件中的漏洞数量也会和代码行数成正比地增加。而你所拥有的安全测试工具也在不断提升，就像你看到的，过去20年中模糊测试工具也一直在不断地进化。</p>
+<h4 id="1-1-1-安全事故"><a href="#1-1-1-安全事故" class="headerlink" title="1.1.1 安全事故"></a>1.1.1 安全事故</h4><p>对于软件安全最主要的目的是避免安全事故：比如有人可以通过主动攻击损害系统安全性，以及由于人们的错误或由于洪水或龙卷风等自然灾害而引起的泄露或破坏数据的事件。</p>
 ]]></content>
       <categories>
-        <category>论文笔记</category>
+        <category>书籍翻译</category>
       </categories>
       <tags>
-        <tag>侧信道攻击</tag>
-        <tag>移动设备</tag>
+        <tag>Fuzzing</tag>
       </tags>
   </entry>
 </search>
